@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
+		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249624C553F000701F5B /* AppDelegate.swift */; };
 		9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249824C553F000701F5B /* SceneDelegate.swift */; };
 		9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DEF249324C553F000701F5B /* HexaCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexaCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEF249624C553F000701F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DEF249824C553F000701F5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9DAE268B24C68C090070B965 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		9DEF248A24C553F000701F5B = {
 			isa = PBXGroup;
 			children = (
@@ -85,14 +97,16 @@
 		9DEF249524C553F000701F5B /* HexaCalc */ = {
 			isa = PBXGroup;
 			children = (
+				9DAE268B24C68C090070B965 /* Extensions */,
 				9DEF249624C553F000701F5B /* AppDelegate.swift */,
 				9DEF249824C553F000701F5B /* SceneDelegate.swift */,
 				9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */,
 				9DEF249C24C553F000701F5B /* BinaryViewController.swift */,
 				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
+				9DAE268924C68BEB0070B965 /* RoundButton.swift */,
 				9DEF249E24C553F000701F5B /* Main.storyboard */,
-				9DEF24A424C553F100701F5B /* Assets.xcassets */,
 				9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */,
+				9DEF24A424C553F100701F5B /* Assets.xcassets */,
 				9DEF24A924C553F100701F5B /* Info.plist */,
 				9DEF24A124C553F000701F5B /* HexaCalc.xcdatamodeld */,
 			);
@@ -211,8 +225,10 @@
 			files = (
 				9DEF249D24C553F000701F5B /* BinaryViewController.swift in Sources */,
 				9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */,
+				9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
+				9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */,
 				9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */,
 				9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */,
 			);

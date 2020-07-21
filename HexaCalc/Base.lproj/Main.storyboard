@@ -46,7 +46,19 @@
                     <view key="view" contentMode="scaleToFill" id="9Vu-NR-tEg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gC-fg-Gz8">
+                                <rect key="frame" x="0.0" y="44" width="375" height="685"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2gC-fg-Gz8" firstAttribute="top" secondItem="Dtc-nC-bDt" secondAttribute="top" id="6Pi-SM-VC9"/>
+                            <constraint firstItem="2gC-fg-Gz8" firstAttribute="leading" secondItem="Dtc-nC-bDt" secondAttribute="leading" id="SPR-Fp-bF7"/>
+                            <constraint firstItem="Dtc-nC-bDt" firstAttribute="trailing" secondItem="2gC-fg-Gz8" secondAttribute="trailing" id="dmF-eR-tI5"/>
+                            <constraint firstItem="Dtc-nC-bDt" firstAttribute="bottom" secondItem="2gC-fg-Gz8" secondAttribute="bottom" id="z0i-Am-mU0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Dtc-nC-bDt"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Decimal" image="dot.square" catalog="system" id="MSz-RZ-ybu"/>
