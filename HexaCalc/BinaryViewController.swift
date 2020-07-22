@@ -10,6 +10,8 @@ import UIKit
 
 class BinaryViewController: UIViewController {
 
+    var stateController: StateController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -18,3 +20,9 @@ class BinaryViewController: UIViewController {
 
 }
 
+//Adds state controller to the view controller
+extension BinaryViewController: StateControllerProtocol {
+  func setState(state: StateController) {
+    self.stateController = state
+  }
+}

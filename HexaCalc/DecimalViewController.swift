@@ -18,6 +18,8 @@ enum Operation:String {
 
 class DecimalViewController: UIViewController {
     
+    var stateController: StateController?
+    
     //MARK: Properties
     @IBOutlet weak var outputLabel: UILabel!
     
@@ -171,6 +173,7 @@ class DecimalViewController: UIViewController {
                 }
                 
                 leftValue = result
+                stateController?.convValues.decimalVal = result
                 
                 if (Double(result)! > 999999999 || Double(result)! < -999999999){
                     //Need to use scientific notation for this
@@ -235,4 +238,11 @@ class DecimalViewController: UIViewController {
     }
     */
 
+}
+
+//Adds state controller to the view controller
+extension DecimalViewController: StateControllerProtocol {
+  func setState(state: StateController) {
+    self.stateController = state
+  }
 }
