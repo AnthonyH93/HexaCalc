@@ -39,7 +39,15 @@ class DecimalViewController: UIViewController {
     //Load the current converted value from either of the other calculator screens
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        outputLabel.text = stateController?.convValues.decimalVal
+        
+        var decimalLabelText = stateController?.convValues.decimalVal
+        
+        //Check if a conversion to scientific notation is necessary
+        if (Double(decimalLabelText ?? "0")! > 999999999 || Double(decimalLabelText ?? "0")! < -999999999) {
+            decimalLabelText = "\(Double(decimalLabelText ?? "0")!.scientificFormatted)"
+        }
+        
+        outputLabel.text = decimalLabelText
     }
     
     //MARK: Button Actions
@@ -55,6 +63,9 @@ class DecimalViewController: UIViewController {
                 runningNumber += "\(sender.tag)"
                 outputLabel.text = runningNumber
             }
+            
+            quickUpdateStateController()
+            
         }
     }
     
@@ -87,6 +98,9 @@ class DecimalViewController: UIViewController {
             }
             outputLabel.text = runningNumber
         }
+        
+        quickUpdateStateController()
+        
     }
     
     @IBAction func deletePressed(_ sender: RoundButton) {
@@ -105,6 +119,9 @@ class DecimalViewController: UIViewController {
                 outputLabel.text = runningNumber
             }
         }
+        
+        quickUpdateStateController()
+        
     }
     
     @IBAction func dotPressed(_ sender: RoundButton) {
@@ -120,6 +137,9 @@ class DecimalViewController: UIViewController {
                 runningNumber += "."
                 outputLabel.text = runningNumber
             }
+            
+            quickUpdateStateController()
+            
         }
     }
     
@@ -179,13 +199,7 @@ class DecimalViewController: UIViewController {
                 }
                 
                 leftValue = result
-                
-                //Setup the values for the state controller in case user changes tabs
-                stateController?.convValues.decimalVal = result
-                let hexConversion = String(Int(Double(result)!), radix: 16)
-                let binConversion = String(Int(Double(result)!), radix: 2)
-                stateController?.convValues.hexVal = hexConversion
-                stateController?.convValues.binVal = binConversion
+                setupStateControllerValues()
                 
                 if (Double(result)! > 999999999 || Double(result)! < -999999999){
                     //Need to use scientific notation for this
@@ -194,35 +208,7 @@ class DecimalViewController: UIViewController {
                     currentOperation = operation
                     return
                 }
-                //Find out if result is an integer
-                if(Double(result)!.truncatingRemainder(dividingBy: 1) == 0) {
-                    if Double(result)! > Double(Int.max) || Double(result)! < Double(Int.min) {
-                        //Cannot convert to integer in this casse
-                    }
-                    else {
-                        result = "\(Int(Double(result)!))"
-                    }
-                }
-                else {
-                    if (result.count > 9){
-                        //Need to round to 9 digits
-                        //First find how many digits the decimal portion is
-                        var num = Double(result)!
-                        var counter = 1
-                        while (num > 1){
-                            counter *= 10
-                            num = num/10
-                        }
-                        var roundVal = 0
-                        if (counter == 1){
-                            roundVal = 100000000/(counter)
-                        }
-                        else {
-                            roundVal = 1000000000/(counter)
-                        }
-                        result = "\(Double(round(Double(roundVal) * Double(result)!)/Double(roundVal)))"
-                    }
-                }
+                formatResult()
                 outputLabel.text = result
             }
             currentOperation = operation
@@ -238,6 +224,67 @@ class DecimalViewController: UIViewController {
             runningNumber = ""
             currentOperation = operation
         }
+    }
+    
+    //Used to round and choose double or int representation
+    private func formatResult(){
+        //Find out if result is an integer
+        if(Double(result)!.truncatingRemainder(dividingBy: 1) == 0) {
+            if Double(result)! > Double(Int.max) || Double(result)! < Double(Int.min) {
+                //Cannot convert to integer in this casse
+            }
+            else {
+                result = "\(Int(Double(result)!))"
+            }
+        }
+        else {
+            if (result.count > 9){
+                //Need to round to 9 digits
+                //First find how many digits the decimal portion is
+                var num = Double(result)!
+                var counter = 1
+                while (num > 1){
+                    counter *= 10
+                    num = num/10
+                }
+                var roundVal = 0
+                if (counter == 1){
+                    roundVal = 100000000/(counter)
+                }
+                else {
+                    roundVal = 1000000000/(counter)
+                }
+                result = "\(Double(round(Double(roundVal) * Double(result)!)/Double(roundVal)))"
+            }
+        }
+    }
+    
+    //Perform a full state controller update when a new result is calculated via an operation key
+    private func setupStateControllerValues() {
+        var currentVal = outputLabel.text
+        //Means we have scientific notation
+        if (currentVal!.contains("+")){
+            currentVal = result
+        }
+        
+        //Want to be sure that the onscreen format is matched when tabs are changed
+        formatResult()
+        
+        stateController?.convValues.decimalVal = result
+        let hexConversion = String(Int(Double(result)!), radix: 16)
+        let binConversion = String(Int(Double(result)!), radix: 2)
+        stateController?.convValues.hexVal = hexConversion
+        stateController?.convValues.binVal = binConversion
+    }
+    
+    //Perform a quick update to keep the state controller variables in sync with the calculator label
+    private func quickUpdateStateController() {
+        //Need to keep the state controller updated with what is on the screen
+        stateController?.convValues.decimalVal = runningNumber
+        let hexCurrentVal = String(Int(Double(runningNumber)!), radix: 16)
+        let binCurrentVal = String(Int(Double(runningNumber)!), radix: 2)
+        stateController?.convValues.hexVal = hexCurrentVal
+        stateController?.convValues.binVal = binCurrentVal
     }
     
     /*
