@@ -20,8 +20,7 @@ class HexadecimalViewController: UIViewController {
     //Load the current converted value from either of the other calculator screens
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         print(stateController?.convValues.decimalVal)
-        TESTlabel.text = stateController?.convValues.decimalVal
+        TESTlabel.text = stateController?.convValues.hexVal
     }
 
 }

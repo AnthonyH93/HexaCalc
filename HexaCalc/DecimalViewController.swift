@@ -36,6 +36,12 @@ class DecimalViewController: UIViewController {
         outputLabel.text = "0"
     }
     
+    //Load the current converted value from either of the other calculator screens
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        outputLabel.text = stateController?.convValues.decimalVal
+    }
+    
     //MARK: Button Actions
     @IBAction func numberPressed(_ sender: RoundButton) {
         
@@ -173,7 +179,13 @@ class DecimalViewController: UIViewController {
                 }
                 
                 leftValue = result
+                
+                //Setup the values for the state controller in case user changes tabs
                 stateController?.convValues.decimalVal = result
+                let hexConversion = String(Int(Double(result)!), radix: 16)
+                let binConversion = String(Int(Double(result)!), radix: 2)
+                stateController?.convValues.hexVal = hexConversion
+                stateController?.convValues.binVal = binConversion
                 
                 if (Double(result)! > 999999999 || Double(result)! < -999999999){
                     //Need to use scientific notation for this

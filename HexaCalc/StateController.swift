@@ -10,9 +10,11 @@ import Foundation
 
 struct convVals{
     var decimalVal:String = "0"
+    var hexVal:String = "0"
+    var binVal:String = "0"
+    var largerThan64Bits:Bool = false
 }
 
-//@JA - Protocol that view controllers should have that defines that it should have a function to setState
 protocol StateControllerProtocol {
   func setState(state: StateController)
 }

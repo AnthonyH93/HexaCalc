@@ -19,20 +19,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        self.window = self.window ?? UIWindow()//@JA- If this scene's self.window is nil then set a new UIWindow object to it.
+        self.window = self.window ?? UIWindow()
 
-        //@Grab the storyboard and ensure that the tab bar controller is reinstantiated with the details below.
+        //Grab the storyboard and ensure that the tab bar controller is reinstantiated with the details below.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
 
         for child in tabBarController.viewControllers ?? [] {
             if let top = child as? StateControllerProtocol {
-                print("State Controller Passed To:")
                 top.setState(state: stateController)
             }
         }
 
-        self.window!.rootViewController = tabBarController //Set the rootViewController to our modified version with the StateController instances
+        //Set the rootViewController to our modified version with the StateController instances
+        self.window!.rootViewController = tabBarController
         self.window!.makeKeyAndVisible()
 
         print("Finished scene setting code")
