@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aar-xu-Oft">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aar-xu-Oft">
                                 <rect key="frame" x="44" y="327" width="293" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
@@ -393,10 +393,10 @@
                                                 <rect key="frame" x="0.0" y="340" width="350" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jt-QL-6HL" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="80"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="170" height="80"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="160" id="41h-kH-q6c"/>
+                                                            <constraint firstAttribute="width" constant="170" id="41h-kH-q6c"/>
                                                             <constraint firstAttribute="height" constant="80" id="geB-9m-Plu"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
@@ -411,7 +411,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDP-oH-8mG" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="175" y="0.0" width="80" height="80"/>
+                                                        <rect key="frame" x="180" y="0.0" width="80" height="80"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="KPh-G3-9yq"/>
