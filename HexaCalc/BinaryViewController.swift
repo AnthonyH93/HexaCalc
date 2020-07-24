@@ -12,6 +12,8 @@ class BinaryViewController: UIViewController {
 
     var stateController: StateController?
     
+    @IBOutlet weak var outputLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

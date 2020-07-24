@@ -76,6 +76,10 @@ class DecimalViewController: UIViewController {
         result = ""
         currentOperation = .NULL
         outputLabel.text = "0"
+        
+        stateController?.convValues.decimalVal = "0"
+        stateController?.convValues.hexVal = "0"
+        stateController?.convValues.binVal = "0"
     }
     
     @IBAction func signPressed(_ sender: RoundButton) {
