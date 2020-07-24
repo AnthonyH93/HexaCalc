@@ -12,7 +12,7 @@ class BinaryViewController: UIViewController {
     
     var stateController: StateController?
     
-    let binaryDefaultLabel:String = "0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000"
+    let binaryDefaultLabel:String = "0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000"
     
     @IBOutlet weak var outputLabel: UILabel!
     
@@ -33,13 +33,21 @@ class BinaryViewController: UIViewController {
         }
         //Need to format for binary representation
         else {
-            
+            newLabelValue = formatBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
         }
         outputLabel.text = newLabelValue
     }
 
 
     //MARK: Private Functions
+    
+    func formatBinaryString(stringToConvert: String) -> String {
+        var manipulatedStringToConvert = stringToConvert
+        while (manipulatedStringToConvert.count < 64){
+            manipulatedStringToConvert = "0" + manipulatedStringToConvert
+        }
+        return manipulatedStringToConvert.separate(every: 4, with: " ")
+    }
 }
 
 //Adds state controller to the view controller

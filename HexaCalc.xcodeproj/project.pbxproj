@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */; };
 		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
 		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */,
+				9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
+				9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */,
 				9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */,
 				9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */,
 				9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */,
