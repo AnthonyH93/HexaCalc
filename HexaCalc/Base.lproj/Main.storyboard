@@ -295,7 +295,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3IF-xw-PqV">
                                                 <rect key="frame" x="0.0" y="255" width="350" height="80"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gl7-nE-VdG" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gl7-nE-VdG" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="80"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>

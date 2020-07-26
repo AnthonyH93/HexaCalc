@@ -39,9 +39,16 @@ class BinaryViewController: UIViewController {
         var newLabelValue = stateController?.convValues.binVal
         if (newLabelValue == "0") {
             newLabelValue = binaryDefaultLabel
+            runningNumber = ""
+            leftValue = ""
+            rightValue = ""
+            result = ""
+            currentOperation = .NULL
         }
         //Need to format for binary representation
         else {
+            runningNumber = newLabelValue ?? ""
+            currentOperation = .NULL
             newLabelValue = formatBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
         }
         outputLabel.text = newLabelValue
@@ -50,6 +57,21 @@ class BinaryViewController: UIViewController {
     //MARK: Button Actions
     @IBAction func numberPressed(_ sender: RoundButton) {
         
+        //Limit number of bits to 64
+        //TODO: only 63 bits allowed for signed mode and be careful about integer overflow
+        if runningNumber.count <= 62 {
+            let digit = "\(sender.tag)"
+            if ((digit == "0") && (outputLabel.text == binaryDefaultLabel)){
+                //if 0 is pressed and calculator is showing 0 then do nothing
+            }
+            else {
+                runningNumber += "\(sender.tag)"
+                var newLabelValue = runningNumber
+                newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
+                outputLabel.text = newLabelValue
+                quickUpdateStateController()
+            }
+        }
     }
     
     @IBAction func ACPressed(_ sender: RoundButton) {
@@ -92,6 +114,7 @@ class BinaryViewController: UIViewController {
         
     }
     
+    //WILL PROBABLY REMOVE THIS
     @IBAction func signedModeClicked(_ sender: RoundButton) {
         
         //Need to set the state controller variable as well as the button colour
@@ -139,6 +162,20 @@ class BinaryViewController: UIViewController {
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
         return manipulatedStringToConvert.separate(every: 4, with: " ")
+    }
+    
+    //Perform a full state controller update when a new result is calculated via an operation key
+    private func setupStateControllerValues() {
+    }
+    
+    //Perform a quick update to keep the state controller variables in sync with the calculator label
+    private func quickUpdateStateController() {
+        //Need to keep the state controller updated with what is on the screen
+        stateController?.convValues.binVal = runningNumber
+        let hexCurrentVal = String(Int(runningNumber, radix: 2)!, radix: 16)
+        let decCurrentVal = String(Int(runningNumber, radix: 2)!)
+        stateController?.convValues.hexVal = hexCurrentVal
+        stateController?.convValues.decimalVal = decCurrentVal
     }
 }
 

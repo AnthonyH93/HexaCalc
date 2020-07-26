@@ -47,6 +47,19 @@ class DecimalViewController: UIViewController {
         
         var decimalLabelText = stateController?.convValues.decimalVal
         
+        //Need to set runningNumber to the current calculation value and reset the current operation
+        if (decimalLabelText != "0"){
+            runningNumber = decimalLabelText ?? ""
+            currentOperation = .NULL
+        }
+        else {
+            runningNumber = ""
+            leftValue = ""
+            rightValue = ""
+            result = ""
+            currentOperation = .NULL
+        }
+        
         //Check if a conversion to scientific notation is necessary
         if (Double(decimalLabelText ?? "0")! > 999999999 || Double(decimalLabelText ?? "0")! < -999999999) {
             decimalLabelText = "\(Double(decimalLabelText ?? "0")!.scientificFormatted)"
@@ -240,7 +253,7 @@ class DecimalViewController: UIViewController {
         //Find out if result is an integer
         if(Double(result)!.truncatingRemainder(dividingBy: 1) == 0) {
             if Double(result)! > Double(Int.max) || Double(result)! < Double(Int.min) {
-                //Cannot convert to integer in this casse
+                //Cannot convert to integer in this case
             }
             else {
                 result = "\(Int(Double(result)!))"
