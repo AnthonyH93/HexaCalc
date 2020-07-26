@@ -13,14 +13,19 @@ enum Operation:String {
     case Subtract = "-"
     case Divide = "/"
     case Multiply = "*"
+    case LeftShift = "<<"
+    case RightShift = ">>"
+    case AND = "&"
+    case OR = "|"
+    case XOR = "^"
     case NULL = "Empty"
 }
 
 class DecimalViewController: UIViewController {
     
+    //MARK: Properties
     var stateController: StateController?
     
-    //MARK: Properties
     @IBOutlet weak var outputLabel: UILabel!
     
     //MARK: Variables
@@ -101,10 +106,8 @@ class DecimalViewController: UIViewController {
                 runningNumber = "\(number)"
             }
             outputLabel.text = runningNumber
+            quickUpdateStateController()
         }
-        
-        quickUpdateStateController()
-        
     }
     
     @IBAction func deletePressed(_ sender: RoundButton) {
@@ -117,15 +120,17 @@ class DecimalViewController: UIViewController {
             if (runningNumber.count == 1){
                 runningNumber = ""
                 outputLabel.text = "0"
+                
+                stateController?.convValues.binVal = "0"
+                stateController?.convValues.hexVal = "0"
+                stateController?.convValues.decimalVal = "0"
             }
             else {
                 runningNumber.removeLast()
                 outputLabel.text = runningNumber
+                quickUpdateStateController()
             }
         }
-        
-        quickUpdateStateController()
-        
     }
     
     @IBAction func dotPressed(_ sender: RoundButton) {

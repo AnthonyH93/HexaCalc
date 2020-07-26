@@ -17,6 +17,13 @@ class BinaryViewController: UIViewController {
     
     @IBOutlet weak var outputLabel: UILabel!
     
+    //MARK: Variables
+    var runningNumber = ""
+    var leftValue = ""
+    var rightValue = ""
+    var result = ""
+    var currentOperation:Operation = .NULL
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
