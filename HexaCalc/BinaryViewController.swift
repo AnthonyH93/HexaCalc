@@ -16,6 +16,7 @@ class BinaryViewController: UIViewController {
     let binaryDefaultLabel:String = "0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000"
     
     @IBOutlet weak var outputLabel: UILabel!
+    @IBOutlet weak var signedModeButton: RoundButton!
     
     //MARK: Variables
     var runningNumber = ""
@@ -93,6 +94,22 @@ class BinaryViewController: UIViewController {
     
     @IBAction func signedModeClicked(_ sender: RoundButton) {
         
+        //Need to set the state controller variable as well as the button colour
+        let currentState = stateController?.convValues.signedMode ?? false
+        
+        //We are turning signed mode ON
+        if (currentState) {
+            signedModeButton.backgroundColor = .lightGray
+            signedModeButton.setTitleColor(#colorLiteral(red: 0.119968541, green: 0.1294856966, blue: 0.1424103975, alpha: 1), for: .normal)
+            stateController?.convValues.signedMode = false
+        }
+        //We are turning signed mode OFF
+        else {
+            //Button should be set to green
+            signedModeButton.backgroundColor = .systemGreen
+            signedModeButton.setTitleColor(.white, for: .normal)
+            stateController?.convValues.signedMode = true
+        }
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {

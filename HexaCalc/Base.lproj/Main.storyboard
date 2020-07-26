@@ -455,6 +455,7 @@
                     <tabBarItem key="tabBarItem" title="Binary" image="01.square" catalog="system" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="outputLabel" destination="c3H-nl-HbE" id="Ika-ID-pHJ"/>
+                        <outlet property="signedModeButton" destination="ckg-ug-m1d" id="dwL-JX-pWP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
