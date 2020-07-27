@@ -47,6 +47,11 @@ class BinaryViewController: UIViewController {
         }
         //Need to format for binary representation
         else {
+            //Check if the binary string is negative
+            if (newLabelValue!.contains("-")) {
+                //Need to convert to signed binary notation
+                newLabelValue = formatNegativeBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
+            }
             runningNumber = newLabelValue ?? ""
             currentOperation = .NULL
             newLabelValue = formatBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
@@ -114,25 +119,8 @@ class BinaryViewController: UIViewController {
         
     }
     
-    //WILL PROBABLY REMOVE THIS
-    @IBAction func signedModeClicked(_ sender: RoundButton) {
+    @IBAction func NOTPressed(_ sender: RoundButton) {
         
-        //Need to set the state controller variable as well as the button colour
-        let currentState = stateController?.convValues.signedMode ?? false
-        
-        //We are turning signed mode ON
-        if (currentState) {
-            signedModeButton.backgroundColor = .lightGray
-            signedModeButton.setTitleColor(#colorLiteral(red: 0.119968541, green: 0.1294856966, blue: 0.1424103975, alpha: 1), for: .normal)
-            stateController?.convValues.signedMode = false
-        }
-        //We are turning signed mode OFF
-        else {
-            //Button should be set to green
-            signedModeButton.backgroundColor = .systemGreen
-            signedModeButton.setTitleColor(.white, for: .normal)
-            stateController?.convValues.signedMode = true
-        }
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {
@@ -162,6 +150,46 @@ class BinaryViewController: UIViewController {
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
         return manipulatedStringToConvert.separate(every: 4, with: " ")
+    }
+    
+    func formatNegativeBinaryString(stringToConvert: String) -> String {
+        var manipulatedStringToConvert = stringToConvert
+        print(manipulatedStringToConvert)
+        manipulatedStringToConvert.removeFirst()
+        var newString = ""
+        
+        //Flip all bits
+        for i in 0..<manipulatedStringToConvert.count {
+            print(newString)
+            if (manipulatedStringToConvert[manipulatedStringToConvert.index(manipulatedStringToConvert.startIndex, offsetBy: i)] == "0"){
+                newString += "1"
+            }
+            else {
+                newString += "0"
+            }
+        }
+        
+        //Add 1 to the string
+        let index = newString.lastIndex(of: "0") ?? (newString.endIndex)
+        var newSubString = String(newString.prefix(upTo: index))
+        
+        print(newString)
+        print(newSubString)
+        
+        if (newSubString.count < newString.count) {
+            newSubString = newSubString + "1"
+        }
+        
+        while (newSubString.count < newString.count) {
+            newSubString = newSubString + "0"
+        }
+        
+        //Sign extend
+        while (newSubString.count < 64) {
+            newSubString = "1" + newSubString
+        }
+        
+        return newSubString
     }
     
     //Perform a full state controller update when a new result is calculated via an operation key

@@ -384,14 +384,14 @@
                                                             <constraint firstAttribute="height" constant="80" id="fhB-cm-qjj"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
-                                                        <state key="normal" title="SIGN">
+                                                        <state key="normal" title="NOT">
                                                             <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="signedModeClicked:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="U7i-KC-2ZY"/>
+                                                            <action selector="NOTPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="Wxl-dX-e1J"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb5-ih-FLz" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">

@@ -13,7 +13,6 @@ struct convVals{
     var hexVal:String = "0"
     var binVal:String = "0"
     var largerThan64Bits:Bool = false
-    var signedMode:Bool = false
 }
 
 protocol StateControllerProtocol {
