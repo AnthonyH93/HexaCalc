@@ -53,11 +53,11 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKC-3T-8cx" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="170" height="80"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="80" id="Kf4-BO-qWj"/>
-                                                            <constraint firstAttribute="width" constant="80" id="NYJ-9X-jkc"/>
+                                                            <constraint firstAttribute="width" constant="170" id="NYJ-9X-jkc"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="AC">
@@ -68,24 +68,6 @@
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="ACPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="vZq-Hg-64V"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NeH-TQ-yhC" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="90" y="0.0" width="80" height="80"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="80" id="93L-fS-TsY"/>
-                                                            <constraint firstAttribute="height" constant="80" id="Gd0-5i-eJi"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
-                                                        <state key="normal" title="±">
-                                                            <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="plusMinusPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="I2h-Iq-qxY"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sij-Yn-oNW" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">

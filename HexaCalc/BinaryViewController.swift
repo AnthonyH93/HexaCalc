@@ -91,30 +91,6 @@ class BinaryViewController: UIViewController {
         stateController?.convValues.binVal = "0"
     }
     
-    @IBAction func plusMinusPressed(_ sender: RoundButton) {
-        //Just flip all the bits
-        let currLabel = outputLabel.text
-        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
-        var newString = ""
-        //Flip all bits
-        for i in 0..<spacesRemoved.count {
-            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
-                newString += "1"
-            }
-            else {
-                newString += "0"
-            }
-        }
-        let asInt = Int(newString)
-        let removedLeadingZeroes = "\(asInt ?? 0)"
-        runningNumber = removedLeadingZeroes
-        var newLabelValue = newString
-        newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-        outputLabel.text = newLabelValue
-        
-        quickUpdateStateController()
-    }
-    
     @IBAction func deletePressed(_ sender: RoundButton) {
         
     }
