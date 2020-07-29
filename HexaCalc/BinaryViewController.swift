@@ -93,6 +93,26 @@ class BinaryViewController: UIViewController {
     
     @IBAction func deletePressed(_ sender: RoundButton) {
         
+        var currentLabel = outputLabel.text
+        if (currentLabel == binaryDefaultLabel){
+            //Do nothing
+        }
+        else {
+            runningNumber.removeLast()
+            //Need to be careful if runningNumber becomes NIL
+            if (runningNumber == ""){
+                stateController?.convValues.decimalVal = "0"
+                stateController?.convValues.hexVal = "0"
+                stateController?.convValues.binVal = "0"
+                outputLabel.text = binaryDefaultLabel
+            }
+            else {
+                currentLabel = runningNumber
+                currentLabel = formatBinaryString(stringToConvert: currentLabel ?? binaryDefaultLabel)
+                outputLabel.text = currentLabel
+                quickUpdateStateController()
+            }
+        }
     }
     
     @IBAction func leftShiftPressed(_ sender: RoundButton) {
