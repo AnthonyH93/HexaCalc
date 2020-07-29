@@ -123,7 +123,7 @@
                                                             <constraint firstAttribute="height" constant="80" id="l1A-Gv-TnH"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
-                                                        <state key="normal" title="&lt;&lt;">
+                                                        <state key="normal" title="&lt;&lt;1">
                                                             <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -141,7 +141,7 @@
                                                             <constraint firstAttribute="width" constant="80" id="nji-50-tLf"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
-                                                        <state key="normal" title="&gt;&gt;">
+                                                        <state key="normal" title="&gt;&gt;1">
                                                             <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>

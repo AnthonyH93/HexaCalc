@@ -13,8 +13,6 @@ enum Operation:String {
     case Subtract = "-"
     case Divide = "/"
     case Multiply = "*"
-    case LeftShift = "<<"
-    case RightShift = ">>"
     case AND = "&"
     case OR = "|"
     case XOR = "^"

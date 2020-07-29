@@ -132,15 +132,15 @@ class BinaryViewController: UIViewController {
     }
     
     @IBAction func XORPressed(_ sender: RoundButton) {
-        
+        operation(operation: .XOR)
     }
     
     @IBAction func ORPressed(_ sender: RoundButton) {
-        
+        operation(operation: .OR)
     }
     
     @IBAction func ANDPressed(_ sender: RoundButton) {
-        
+        operation(operation: .AND)
     }
     
     @IBAction func NOTPressed(_ sender: RoundButton) {
@@ -221,6 +221,15 @@ class BinaryViewController: UIViewController {
                         result = "\(Int(leftValue)! / Int(rightValue)!)"
                     }
                     
+                case .AND:
+                result = "\(Int(leftValue)! & Int(rightValue)!)"
+                    
+                case .OR:
+                result = "\(Int(leftValue)! | Int(rightValue)!)"
+                    
+                case .XOR:
+                result = "\(Int(leftValue)! ^ Int(rightValue)!)"
+                
                 //Should not occur
                 default:
                     fatalError("Unexpected Operation...")
