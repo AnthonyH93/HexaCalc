@@ -168,26 +168,96 @@ class BinaryViewController: UIViewController {
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {
-        
+        operation(operation: .Divide)
     }
     
     @IBAction func multiplyPressed(_ sender: RoundButton) {
-        
+        operation(operation: .Multiply)
     }
     
     @IBAction func minusPressed(_ sender: RoundButton) {
-        
+        operation(operation: .Subtract)
     }
     
     @IBAction func addPressed(_ sender: RoundButton) {
-        
+        operation(operation: .Add)
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        
+        operation(operation: currentOperation)
     }
     
     //MARK: Private Functions
+    private func operation(operation: Operation) {
+        if currentOperation != .NULL {
+            if runningNumber != "" {
+                if (runningNumber.first == "1" && runningNumber.count == 64){
+                    rightValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
+                }
+                else {
+                    rightValue = String(Int(runningNumber, radix: 2)!)
+                }
+                runningNumber = ""
+                
+                switch (currentOperation) {
+                case .Add:
+                    result = "\(Int(leftValue)! + Int(rightValue)!)"
+                    
+                case .Subtract:
+                result = "\(Int(leftValue)! - Int(rightValue)!)"
+                    
+                case .Multiply:
+                    result = "\(Int(leftValue)! * Int(rightValue)!)"
+
+                case .Divide:
+                    //Output Error! if division by 0
+                    if Int(rightValue)! == 0 {
+                        result = "Error!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        return
+                    }
+                    else {
+                        result = "\(Int(leftValue)! / Int(rightValue)!)"
+                    }
+                    
+                //Should not occur
+                default:
+                    fatalError("Unexpected Operation...")
+                }
+                
+                leftValue = result
+                setupStateControllerValues()
+                
+                let binaryRepresentation = stateController?.convValues.binVal ?? binaryDefaultLabel
+                var newLabelValue = binaryRepresentation
+                if ((binaryRepresentation.contains("-"))){
+                    print("here")
+                    newLabelValue = formatNegativeBinaryString(stringToConvert: binaryRepresentation)
+                }
+                newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
+                outputLabel.text = newLabelValue
+            }
+            currentOperation = operation
+        }
+        else {
+            //If string is empty it should be interpreted as a 0
+            if runningNumber == "" {
+                leftValue = "0"
+            }
+            else {
+                if (runningNumber.first == "1" && runningNumber.count == 64){
+                leftValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
+                }
+                else {
+                    leftValue = String(Int(runningNumber, radix: 2)!)
+                }
+            }
+            runningNumber = ""
+            currentOperation = operation
+        }
+    }
+    
     func formatBinaryString(stringToConvert: String) -> String {
         var manipulatedStringToConvert = stringToConvert
         while (manipulatedStringToConvert.count < 64){
@@ -234,6 +304,11 @@ class BinaryViewController: UIViewController {
     
     //Perform a full state controller update when a new result is calculated via an operation key
     private func setupStateControllerValues() {
+        stateController?.convValues.decimalVal = result
+        let hexConversion = String(Int(Double(result)!), radix: 16)
+        let binConversion = String(Int(Double(result)!), radix: 2)
+        stateController?.convValues.hexVal = hexConversion
+        stateController?.convValues.binVal = binConversion
     }
     
     //Perform a quick update to keep the state controller variables in sync with the calculator label
@@ -244,7 +319,6 @@ class BinaryViewController: UIViewController {
         var hexCurrentVal = ""
         var decCurrentVal = ""
         if (outputLabel.text?.first == "1"){
-            print("here")
             let currLabel = outputLabel.text
             let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
             stateController?.convValues.binVal = spacesRemoved
