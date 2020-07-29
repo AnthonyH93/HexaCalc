@@ -115,12 +115,64 @@ class BinaryViewController: UIViewController {
         }
     }
     
+    //Instead of making left shift an operation, just complete it whenever it is pressed the first time (doesn't need 2 arguments)
     @IBAction func leftShiftPressed(_ sender: RoundButton) {
-        
+        //If running number is empty then it will just stay as 0
+        var currentValue = ""
+        if runningNumber != "" {
+        if (runningNumber.first == "1" && runningNumber.count == 64){
+            currentValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
+        }
+        else {
+            currentValue = String(Int(runningNumber, radix: 2)!)
+        }
+            currentValue = "\(Int(currentValue)! << 1)"
+            
+            //Update the state controller
+            stateController?.convValues.decimalVal = currentValue
+            let hexConversion = String(Int(Double(currentValue)!), radix: 16)
+            let binConversion = String(Int(Double(currentValue)!), radix: 2)
+            stateController?.convValues.hexVal = hexConversion
+            stateController?.convValues.binVal = binConversion
+            
+            var newLabelValue = binConversion
+            if ((binConversion.contains("-"))){
+                newLabelValue = formatNegativeBinaryString(stringToConvert: binConversion)
+            }
+            runningNumber = newLabelValue
+            newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
+            outputLabel.text = newLabelValue
+        }
     }
     
+    //Instead of making right shift an operation, just complete it whenever it is pressed the first time (doesn't need 2 arguments)
     @IBAction func rightShiftPressed(_ sender: RoundButton) {
-        
+        //If running number is empty then it will just stay as 0
+        var currentValue = ""
+        if runningNumber != "" {
+        if (runningNumber.first == "1" && runningNumber.count == 64){
+            currentValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
+        }
+        else {
+            currentValue = String(Int(runningNumber, radix: 2)!)
+        }
+            currentValue = "\(Int(currentValue)! >> 1)"
+            
+            //Update the state controller
+            stateController?.convValues.decimalVal = currentValue
+            let hexConversion = String(Int(Double(currentValue)!), radix: 16)
+            let binConversion = String(Int(Double(currentValue)!), radix: 2)
+            stateController?.convValues.hexVal = hexConversion
+            stateController?.convValues.binVal = binConversion
+            
+            var newLabelValue = binConversion
+            if ((binConversion.contains("-"))){
+                newLabelValue = formatNegativeBinaryString(stringToConvert: binConversion)
+            }
+            runningNumber = newLabelValue
+            newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
+            outputLabel.text = newLabelValue
+        }
     }
     
     @IBAction func onesCompPressed(_ sender: RoundButton) {
@@ -241,7 +293,6 @@ class BinaryViewController: UIViewController {
                 let binaryRepresentation = stateController?.convValues.binVal ?? binaryDefaultLabel
                 var newLabelValue = binaryRepresentation
                 if ((binaryRepresentation.contains("-"))){
-                    print("here")
                     newLabelValue = formatNegativeBinaryString(stringToConvert: binaryRepresentation)
                 }
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
