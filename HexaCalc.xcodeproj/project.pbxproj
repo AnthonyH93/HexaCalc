@@ -72,6 +72,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D6DE93024D3CCD4005018E5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */,
+				9DEF249C24C553F000701F5B /* BinaryViewController.swift */,
+				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9D6DE93124D3CCFB005018E5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9DAE269424C7F77A0070B965 /* StateController.swift */,
+				9DAE268924C68BEB0070B965 /* RoundButton.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9DAE268B24C68C090070B965 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,14 +121,11 @@
 		9DEF249524C553F000701F5B /* HexaCalc */ = {
 			isa = PBXGroup;
 			children = (
+				9D6DE93024D3CCD4005018E5 /* Controllers */,
 				9DAE268B24C68C090070B965 /* Extensions */,
+				9D6DE93124D3CCFB005018E5 /* Model */,
 				9DEF249624C553F000701F5B /* AppDelegate.swift */,
 				9DEF249824C553F000701F5B /* SceneDelegate.swift */,
-				9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */,
-				9DAE269424C7F77A0070B965 /* StateController.swift */,
-				9DEF249C24C553F000701F5B /* BinaryViewController.swift */,
-				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
-				9DAE268924C68BEB0070B965 /* RoundButton.swift */,
 				9DEF249E24C553F000701F5B /* Main.storyboard */,
 				9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */,
 				9DEF24A424C553F100701F5B /* Assets.xcassets */,

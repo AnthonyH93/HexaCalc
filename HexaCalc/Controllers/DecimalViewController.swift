@@ -133,6 +133,7 @@ class DecimalViewController: UIViewController {
                 runningNumber = ""
                 outputLabel.text = "0"
                 
+                stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.binVal = "0"
                 stateController?.convValues.hexVal = "0"
                 stateController?.convValues.decimalVal = "0"
@@ -314,22 +315,19 @@ class DecimalViewController: UIViewController {
         //Need to keep the state controller updated with what is on the screen
         stateController?.convValues.decimalVal = runningNumber
         
-        let hexCurrentVal = String(Int(Double(runningNumber)!), radix: 16)
-        let binCurrentVal = String(Int(Double(runningNumber)!), radix: 2)
-        stateController?.convValues.hexVal = hexCurrentVal
-        stateController?.convValues.binVal = binCurrentVal
+        //Cannot convert to binary or hexadecimal in this case -- overflow
+        if (Double(runningNumber)! >= Double(INT64_MAX) || Double(runningNumber)! <= Double((INT64_MAX * -1) - 1)){
+            stateController?.convValues.largerThan64Bits = true
+            stateController?.convValues.binVal = "0"
+            stateController?.convValues.hexVal = "0"
+        }
+        else {
+            let hexCurrentVal = String(Int(Double(runningNumber)!), radix: 16)
+            let binCurrentVal = String(Int(Double(runningNumber)!), radix: 2)
+            stateController?.convValues.hexVal = hexCurrentVal
+            stateController?.convValues.binVal = binCurrentVal
+        }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 //Adds state controller to the view controller

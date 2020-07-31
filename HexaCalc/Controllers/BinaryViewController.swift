@@ -110,6 +110,7 @@ class BinaryViewController: UIViewController {
             }
             //Need to be careful if runningNumber becomes NIL
             if (runningNumber == ""){
+                stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.decimalVal = "0"
                 stateController?.convValues.hexVal = "0"
                 stateController?.convValues.binVal = "0"
