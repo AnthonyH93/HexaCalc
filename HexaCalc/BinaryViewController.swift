@@ -36,27 +36,33 @@ class BinaryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        var newLabelValue = stateController?.convValues.binVal
-        if (newLabelValue == "0") {
-            newLabelValue = binaryDefaultLabel
-            runningNumber = ""
-            leftValue = ""
-            rightValue = ""
-            result = ""
-            currentOperation = .NULL
+        //Check for integer overflow first
+        if ((stateController?.convValues.largerThan64Bits)!) {
+            outputLabel.text = "Error! Integer overflow!"
         }
-        //Need to format for binary representation
         else {
-            //Check if the binary string is negative
-            if (newLabelValue!.contains("-")) {
-                //Need to convert to signed binary notation
-                newLabelValue = formatNegativeBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
+            var newLabelValue = stateController?.convValues.binVal
+            if (newLabelValue == "0") {
+                newLabelValue = binaryDefaultLabel
+                runningNumber = ""
+                leftValue = ""
+                rightValue = ""
+                result = ""
+                currentOperation = .NULL
             }
-            runningNumber = newLabelValue ?? ""
-            currentOperation = .NULL
-            newLabelValue = formatBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
+                //Need to format for binary representation
+            else {
+                //Check if the binary string is negative
+                if (newLabelValue!.contains("-")) {
+                    //Need to convert to signed binary notation
+                    newLabelValue = formatNegativeBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
+                }
+                runningNumber = newLabelValue ?? ""
+                currentOperation = .NULL
+                newLabelValue = formatBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
+            }
+            outputLabel.text = newLabelValue
         }
-        outputLabel.text = newLabelValue
     }
 
     //MARK: Button Actions
@@ -86,6 +92,7 @@ class BinaryViewController: UIViewController {
         currentOperation = .NULL
         outputLabel.text = binaryDefaultLabel
         
+        stateController?.convValues.largerThan64Bits = false
         stateController?.convValues.decimalVal = "0"
         stateController?.convValues.hexVal = "0"
         stateController?.convValues.binVal = "0"

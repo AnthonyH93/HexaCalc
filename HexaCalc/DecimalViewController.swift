@@ -93,6 +93,7 @@ class DecimalViewController: UIViewController {
         currentOperation = .NULL
         outputLabel.text = "0"
         
+        stateController?.convValues.largerThan64Bits = false
         stateController?.convValues.decimalVal = "0"
         stateController?.convValues.hexVal = "0"
         stateController?.convValues.binVal = "0"
@@ -219,7 +220,17 @@ class DecimalViewController: UIViewController {
                 }
                 
                 leftValue = result
-                setupStateControllerValues()
+                
+                //Cannot convert to binary or hexadecimal in this case -- overflow
+                if (Double(result)! > Double(INT64_MAX) || Double(result)! < Double((INT64_MAX * -1) - 1)){
+                    stateController?.convValues.largerThan64Bits = true
+                    stateController?.convValues.decimalVal = result
+                    stateController?.convValues.binVal = "0"
+                    stateController?.convValues.hexVal = "0"
+                }
+                else {
+                    setupStateControllerValues()
+                }
                 
                 if (Double(result)! > 999999999 || Double(result)! < -999999999){
                     //Need to use scientific notation for this
@@ -290,6 +301,7 @@ class DecimalViewController: UIViewController {
         //Want to be sure that the onscreen format is matched when tabs are changed
         formatResult()
         
+        stateController?.convValues.largerThan64Bits = false
         stateController?.convValues.decimalVal = result
         let hexConversion = String(Int(Double(result)!), radix: 16)
         let binConversion = String(Int(Double(result)!), radix: 2)
@@ -301,6 +313,7 @@ class DecimalViewController: UIViewController {
     private func quickUpdateStateController() {
         //Need to keep the state controller updated with what is on the screen
         stateController?.convValues.decimalVal = runningNumber
+        
         let hexCurrentVal = String(Int(Double(runningNumber)!), radix: 16)
         let binCurrentVal = String(Int(Double(runningNumber)!), radix: 2)
         stateController?.convValues.hexVal = hexCurrentVal
