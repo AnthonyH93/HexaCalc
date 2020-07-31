@@ -91,6 +91,25 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9D6DE93224D3CF21005018E5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D6DE93324D3CF62005018E5 /* Storyboards */,
+				9DEF24A424C553F100701F5B /* Assets.xcassets */,
+				9DEF24A124C553F000701F5B /* HexaCalc.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9D6DE93324D3CF62005018E5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				9DEF249E24C553F000701F5B /* Main.storyboard */,
+				9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		9DAE268B24C68C090070B965 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,13 +143,10 @@
 				9D6DE93024D3CCD4005018E5 /* Controllers */,
 				9DAE268B24C68C090070B965 /* Extensions */,
 				9D6DE93124D3CCFB005018E5 /* Model */,
+				9D6DE93224D3CF21005018E5 /* Resources */,
 				9DEF249624C553F000701F5B /* AppDelegate.swift */,
 				9DEF249824C553F000701F5B /* SceneDelegate.swift */,
-				9DEF249E24C553F000701F5B /* Main.storyboard */,
-				9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */,
-				9DEF24A424C553F100701F5B /* Assets.xcassets */,
 				9DEF24A924C553F100701F5B /* Info.plist */,
-				9DEF24A124C553F000701F5B /* HexaCalc.xcdatamodeld */,
 			);
 			path = HexaCalc;
 			sourceTree = "<group>";
