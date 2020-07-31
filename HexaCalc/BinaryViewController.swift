@@ -105,7 +105,9 @@ class BinaryViewController: UIViewController {
             //Do nothing
         }
         else {
-            runningNumber.removeLast()
+            if (runningNumber != ""){
+                runningNumber.removeLast()
+            }
             //Need to be careful if runningNumber becomes NIL
             if (runningNumber == ""){
                 stateController?.convValues.decimalVal = "0"

@@ -222,7 +222,7 @@ class DecimalViewController: UIViewController {
                 leftValue = result
                 
                 //Cannot convert to binary or hexadecimal in this case -- overflow
-                if (Double(result)! > Double(INT64_MAX) || Double(result)! < Double((INT64_MAX * -1) - 1)){
+                if (Double(result)! >= Double(INT64_MAX) || Double(result)! <= Double((INT64_MAX * -1) - 1)){
                     stateController?.convValues.largerThan64Bits = true
                     stateController?.convValues.decimalVal = result
                     stateController?.convValues.binVal = "0"
@@ -261,7 +261,7 @@ class DecimalViewController: UIViewController {
     private func formatResult(){
         //Find out if result is an integer
         if(Double(result)!.truncatingRemainder(dividingBy: 1) == 0) {
-            if Double(result)! > Double(Int.max) || Double(result)! < Double(Int.min) {
+            if Double(result)! >= Double(Int.max) || Double(result)! <= Double(Int.min) {
                 //Cannot convert to integer in this case
             }
             else {
