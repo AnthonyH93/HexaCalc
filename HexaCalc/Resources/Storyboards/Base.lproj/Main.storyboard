@@ -19,10 +19,10 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="685"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="e8g-mp-jBB">
-                                        <rect key="frame" x="12.666666666666657" y="257" width="350" height="420"/>
+                                        <rect key="frame" x="15" y="262" width="345" height="415"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="35y-Ac-0Gl">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="65"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="65"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myN-cA-UId" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="205" height="65"/>
@@ -38,12 +38,9 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="tcU-Vw-wCk"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Pw-L1-6hK" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="215" y="0.0" width="135" height="65"/>
+                                                        <rect key="frame" x="210" y="0.0" width="135" height="65"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="135" id="1bU-EP-7MO"/>
@@ -61,13 +58,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="65" id="OOx-Lm-hDa"/>
-                                                    <constraint firstAttribute="width" constant="350" id="kHp-Ue-26n"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oxv-2j-paj">
-                                                <rect key="frame" x="0.0" y="71" width="350" height="65"/>
+                                                <rect key="frame" x="0.0" y="70" width="345" height="65"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orD-ym-tCe" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -88,7 +81,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3d-yL-2Bv" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="71" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="70" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="TgP-XH-viA"/>
@@ -106,7 +99,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eom-pu-5Jp" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="142.33333333333334" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="140" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="0I6-gk-ABF"/>
@@ -124,7 +117,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mn8-rC-aGV" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="213.66666666666669" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="210" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="EeA-pg-mvk"/>
@@ -142,7 +135,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qR-TY-uyZ" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="285" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="280" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="2tT-WR-93V"/>
@@ -160,13 +153,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="65" id="2vd-rS-rXo"/>
-                                                    <constraint firstAttribute="width" constant="350" id="Btj-U0-by4"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vZb-vh-zDY">
-                                                <rect key="frame" x="0.0" y="142" width="350" height="65"/>
+                                                <rect key="frame" x="0.0" y="140" width="345" height="65"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smO-xS-RkX" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -187,7 +176,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKx-jy-StE" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="71" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="70" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="VCg-Ob-NQh"/>
@@ -205,7 +194,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-Jp-Iwf" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="142.33333333333334" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="140" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="Acc-Ne-Fdt"/>
@@ -223,7 +212,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjF-4y-iCl" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="213.66666666666669" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="210" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="ftm-dx-IMk"/>
@@ -241,7 +230,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diM-XB-4lV" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="285" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="280" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="BgJ-DR-x9a"/>
@@ -259,13 +248,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="350" id="AHR-Gq-xev"/>
-                                                    <constraint firstAttribute="height" constant="65" id="UAp-ko-3DB"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7tZ-hM-ixL">
-                                                <rect key="frame" x="0.0" y="213" width="350" height="65"/>
+                                                <rect key="frame" x="0.0" y="210" width="345" height="65"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4o4-aX-KfG" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -286,7 +271,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPa-Ui-a7P" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="71" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="70" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="I08-M4-5To"/>
@@ -304,7 +289,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ty1-ux-gmg" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="142.33333333333334" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="140" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="ElI-Rq-tB4"/>
@@ -322,7 +307,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHa-5E-F5t" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="213.66666666666669" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="210" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="0D4-5t-Nb1"/>
@@ -340,7 +325,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gez-Xo-Kz8" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="285" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="280" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="Ui8-QK-udU"/>
@@ -358,13 +343,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="65" id="il3-CY-6Lv"/>
-                                                    <constraint firstAttribute="width" constant="350" id="qJB-fM-JCH"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Uxn-g6-081">
-                                                <rect key="frame" x="0.0" y="284" width="350" height="65"/>
+                                                <rect key="frame" x="0.0" y="280" width="345" height="65"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2r-eu-AmU" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -385,7 +366,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iD-VD-Nfg" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="71" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="70" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="BIC-yM-Fit"/>
@@ -403,7 +384,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3I-sD-UOM" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="142.33333333333334" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="140" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="5jz-qk-r9S"/>
@@ -421,7 +402,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20M-zv-LsB" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="213.66666666666669" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="210" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="EPd-rR-S4j"/>
@@ -439,7 +420,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0R-SQ-pp9" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="285" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="280" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="6j4-aZ-BJi"/>
@@ -457,13 +438,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="350" id="A1e-ur-Lu4"/>
-                                                    <constraint firstAttribute="height" constant="65" id="OO0-vO-fc0"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1cX-aU-Qkl">
-                                                <rect key="frame" x="0.0" y="355" width="350" height="65"/>
+                                                <rect key="frame" x="0.0" y="350" width="345" height="65"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIS-kh-BsJ" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -484,7 +461,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fd9-3O-EiD" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="71" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="70" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="TME-lW-J6C"/>
@@ -502,7 +479,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7tu-Vi-hcn" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="142.33333333333334" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="140" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="cb2-ei-GRp"/>
@@ -520,7 +497,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="100-1S-VjQ" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="213.66666666666669" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="210" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="0UN-KY-U48"/>
@@ -538,7 +515,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1A-va-aP4" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="285" y="0.0" width="65" height="65"/>
+                                                        <rect key="frame" x="280" y="0.0" width="65" height="65"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="65" id="6e4-7x-vIS"/>
@@ -556,19 +533,11 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="65" id="OlX-Mp-GmH"/>
-                                                    <constraint firstAttribute="width" constant="350" id="o4H-kx-UeE"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="350" id="KhN-z1-HGI"/>
-                                            <constraint firstAttribute="height" constant="420" id="ZCg-MF-Bue"/>
-                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7g-zo-MXa">
-                                        <rect key="frame" x="12.666666666666657" y="170" width="350" height="64"/>
+                                        <rect key="frame" x="12.666666666666657" y="175" width="350" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="LPl-Iv-hQn"/>
                                             <constraint firstAttribute="width" constant="350" id="qQ5-VR-0qi"/>
@@ -597,6 +566,43 @@
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Hexadecimal" image="hexagon" catalog="system" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="ABtn" destination="ty1-ux-gmg" id="fpp-t3-RPQ"/>
+                        <outlet property="ACBtn" destination="myN-cA-UId" id="AFf-d7-K0C"/>
+                        <outlet property="ANDBtn" destination="Eom-pu-5Jp" id="Hca-Eg-rgs"/>
+                        <outlet property="BBtn" destination="IHa-5E-F5t" id="xjT-1X-ger"/>
+                        <outlet property="Btn0" destination="eIS-kh-BsJ" id="5tc-E7-kKy"/>
+                        <outlet property="Btn1" destination="Fd9-3O-EiD" id="aiz-HM-sB4"/>
+                        <outlet property="Btn2" destination="7tu-Vi-hcn" id="fsg-W5-zFS"/>
+                        <outlet property="Btn3" destination="100-1S-VjQ" id="fkb-cI-sYG"/>
+                        <outlet property="Btn4" destination="D2r-eu-AmU" id="27m-u9-JGm"/>
+                        <outlet property="Btn5" destination="4iD-VD-Nfg" id="5bR-kL-zbo"/>
+                        <outlet property="Btn6" destination="Y3I-sD-UOM" id="uum-Jr-9LA"/>
+                        <outlet property="Btn7" destination="20M-zv-LsB" id="pEB-ay-U24"/>
+                        <outlet property="Btn8" destination="4o4-aX-KfG" id="1BR-BT-hQd"/>
+                        <outlet property="Btn9" destination="LPa-Ui-a7P" id="GXg-L0-eLO"/>
+                        <outlet property="CBtn" destination="smO-xS-RkX" id="3pi-Q0-G81"/>
+                        <outlet property="DBtn" destination="GKx-jy-StE" id="4c6-6F-UMg"/>
+                        <outlet property="DELBtn" destination="6Pw-L1-6hK" id="OGR-g4-oDl"/>
+                        <outlet property="DIVBtn" destination="7qR-TY-uyZ" id="9RJ-vb-LFT"/>
+                        <outlet property="EBtn" destination="Vu7-Jp-Iwf" id="b5W-vc-iWG"/>
+                        <outlet property="EQUALSBtn" destination="U1A-va-aP4" id="0Dh-k0-BOG"/>
+                        <outlet property="FBtn" destination="jjF-4y-iCl" id="e6t-Pv-ScO"/>
+                        <outlet property="MULTBtn" destination="diM-XB-4lV" id="R97-Os-nWp"/>
+                        <outlet property="NOTBtn" destination="Mn8-rC-aGV" id="WZG-aQ-gSG"/>
+                        <outlet property="ORBtn" destination="l3d-yL-2Bv" id="mYz-0O-m6J"/>
+                        <outlet property="PLUSBtn" destination="H0R-SQ-pp9" id="38k-RZ-H5d"/>
+                        <outlet property="SUBBtn" destination="Gez-Xo-Kz8" id="JXu-j1-fKf"/>
+                        <outlet property="XORBtn" destination="orD-ym-tCe" id="hTE-nX-WMP"/>
+                        <outlet property="hexHStack1" destination="35y-Ac-0Gl" id="O1P-My-I3M"/>
+                        <outlet property="hexHStack2" destination="oxv-2j-paj" id="Uha-eo-59l"/>
+                        <outlet property="hexHStack3" destination="vZb-vh-zDY" id="CjJ-4F-tDk"/>
+                        <outlet property="hexHStack4" destination="7tZ-hM-ixL" id="d7D-cf-0Fj"/>
+                        <outlet property="hexHStack5" destination="Uxn-g6-081" id="uXi-BF-VQl"/>
+                        <outlet property="hexHStack6" destination="1cX-aU-Qkl" id="yXN-f6-iMf"/>
+                        <outlet property="hexVStack" destination="e8g-mp-jBB" id="wcQ-oH-hCy"/>
+                        <outlet property="outputLabel" destination="Z7g-zo-MXa" id="qet-PS-mwE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
