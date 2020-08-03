@@ -185,12 +185,66 @@ class BinaryViewController: UIViewController {
         }
     }
     
+    //Ones compliment involves flipping all the bits
     @IBAction func onesCompPressed(_ sender: RoundButton) {
+        let currLabel = outputLabel.text
+        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+        var newString = ""
+        //Flip all bits
+        for i in 0..<spacesRemoved.count {
+            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
+                newString += "1"
+            }
+            else {
+                newString += "0"
+            }
+        }
+        let asInt = Int(newString)
+        let removedLeadingZeroes = "\(asInt ?? 0)"
+        runningNumber = removedLeadingZeroes
+        var newLabelValue = newString
+        newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
+        outputLabel.text = newLabelValue
         
+        quickUpdateStateController()
     }
     
+    //Twos complement involves flipping all the bits and then adding 1
     @IBAction func twosCompPressed(_ sender: RoundButton) {
+        //First flip all the bits
+        let currLabel = outputLabel.text
+        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+        var newString = ""
         
+        for i in 0..<spacesRemoved.count {
+            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
+                newString += "1"
+            }
+            else {
+                newString += "0"
+            }
+        }
+        
+        //Add 1 to the current value
+        let index = newString.lastIndex(of: "0") ?? (newString.endIndex)
+        var newSubString = String(newString.prefix(upTo: index))
+        
+        if (newSubString.count < newString.count) {
+            newSubString = newSubString + "1"
+        }
+        
+        while (newSubString.count < newString.count) {
+            newSubString = newSubString + "0"
+        }
+        
+        let asInt = Int(newSubString)
+        let removedLeadingZeroes = "\(asInt ?? 0)"
+        runningNumber = removedLeadingZeroes
+        var newLabelValue = newSubString
+        newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
+        outputLabel.text = newLabelValue
+        
+        quickUpdateStateController()
     }
     
     @IBAction func XORPressed(_ sender: RoundButton) {
