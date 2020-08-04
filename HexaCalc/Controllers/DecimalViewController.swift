@@ -293,15 +293,6 @@ class DecimalViewController: UIViewController {
     
     //Perform a full state controller update when a new result is calculated via an operation key
     private func setupStateControllerValues() {
-        var currentVal = outputLabel.text
-        //Means we have scientific notation
-        if (currentVal!.contains("+")){
-            currentVal = result
-        }
-        
-        //Want to be sure that the onscreen format is matched when tabs are changed
-        formatResult()
-        
         stateController?.convValues.largerThan64Bits = false
         stateController?.convValues.decimalVal = result
         let hexConversion = String(Int(Double(result)!), radix: 16)
@@ -322,8 +313,8 @@ class DecimalViewController: UIViewController {
             stateController?.convValues.hexVal = "0"
         }
         else {
-            let hexCurrentVal = String(Int(Double(runningNumber)!), radix: 16)
-            let binCurrentVal = String(Int(Double(runningNumber)!), radix: 2)
+            let hexCurrentVal = String(Int64(Double(runningNumber)!), radix: 16)
+            let binCurrentVal = String(Int64(Double(runningNumber)!), radix: 2)
             stateController?.convValues.hexVal = hexCurrentVal
             stateController?.convValues.binVal = binCurrentVal
         }

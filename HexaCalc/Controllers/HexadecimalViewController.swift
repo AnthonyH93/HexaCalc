@@ -191,13 +191,13 @@ class HexadecimalViewController: UIViewController {
         
         for button in buttons {
             button!.layer.cornerRadius = 0
-            button!.titleLabel!.font = UIFont(name: "Avenir Next Demi Bold", size: 22)
+            button!.titleLabel!.font = UIFont(name: "Avenir Next", size: 22)
         }
         
         
         let constraints = [
             hexVStack.widthAnchor.constraint(equalToConstant: 295),
-            hexVStack.heightAnchor.constraint(equalToConstant: 350),
+            hexVStack.heightAnchor.constraint(equalToConstant: 330),
             outputLabel.widthAnchor.constraint(equalToConstant: 295),
             outputLabel.heightAnchor.constraint(equalToConstant: 64),
             ACBtn.widthAnchor.constraint(equalToConstant: 175),
