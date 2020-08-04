@@ -620,7 +620,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="685"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="55i-hd-IgX">
-                                        <rect key="frame" x="12.666666666666657" y="257" width="350" height="420"/>
+                                        <rect key="frame" x="12.666666666666657" y="277" width="350" height="400"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ijy-Iy-URI">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="80"/>
@@ -680,13 +680,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="cbW-sB-OaQ"/>
-                                                    <constraint firstAttribute="width" constant="350" id="pBQ-oN-XRn"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mUt-5U-1Xp">
-                                                <rect key="frame" x="0.0" y="85" width="350" height="80"/>
+                                                <rect key="frame" x="0.0" y="80" width="350" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDN-r5-ppP" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -761,13 +757,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="lgS-W4-UTf"/>
-                                                    <constraint firstAttribute="width" constant="350" id="xqK-XF-0fB"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WRl-Ii-Yij">
-                                                <rect key="frame" x="0.0" y="170" width="350" height="80"/>
+                                                <rect key="frame" x="0.0" y="160" width="350" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ydo-vE-RTm" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -842,13 +834,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="350" id="OEj-H7-ccN"/>
-                                                    <constraint firstAttribute="height" constant="80" id="Xup-QC-Stp"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3IF-xw-PqV">
-                                                <rect key="frame" x="0.0" y="255" width="350" height="80"/>
+                                                <rect key="frame" x="0.0" y="240" width="350" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gl7-nE-VdG" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="80"/>
@@ -905,13 +893,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="350" id="X7k-vl-Zgt"/>
-                                                    <constraint firstAttribute="height" constant="80" id="kkl-SW-DIs"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-ns-mmy">
-                                                <rect key="frame" x="0.0" y="340" width="350" height="80"/>
+                                                <rect key="frame" x="0.0" y="320" width="350" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZk-z6-Dqu" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="80"/>
@@ -968,18 +952,11 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="5gV-2J-CcG"/>
-                                                    <constraint firstAttribute="width" constant="350" id="iUQ-25-Ess"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="420" id="b5S-p3-u7Y"/>
-                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3H-nl-HbE">
-                                        <rect key="frame" x="12.666666666666657" y="170" width="350" height="64"/>
+                                        <rect key="frame" x="12.666666666666657" y="190" width="350" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="350" id="7n1-Hl-eOh"/>
                                             <constraint firstAttribute="height" constant="64" id="d2A-IT-qyb"/>
@@ -1009,8 +986,30 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Binary" image="01.square" catalog="system" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="ACBtn" destination="SKC-3T-8cx" id="jji-GA-O2t"/>
+                        <outlet property="ANDBtn" destination="Uxe-EP-a1f" id="xEz-aX-b8k"/>
+                        <outlet property="Btn0" destination="uZk-z6-Dqu" id="Xwa-IR-LjI"/>
+                        <outlet property="Btn1" destination="Gl7-nE-VdG" id="wRq-pC-heN"/>
+                        <outlet property="DELBtn" destination="Sij-Yn-oNW" id="AVF-vM-3WP"/>
+                        <outlet property="DIVBtn" destination="i3q-Dh-2ps" id="IMN-wF-0rM"/>
+                        <outlet property="EQUALSBtn" destination="nb5-ih-FLz" id="dEf-sA-7Lq"/>
+                        <outlet property="LSBtn" destination="JDN-r5-ppP" id="I4F-ht-Tje"/>
+                        <outlet property="MULTBtn" destination="fws-FY-nc0" id="pw7-hF-qvA"/>
+                        <outlet property="NOTBtn" destination="ckg-ug-m1d" id="iRt-qd-koc"/>
+                        <outlet property="ONESBtn" destination="Ydo-vE-RTm" id="RGH-Zo-NYW"/>
+                        <outlet property="ORBtn" destination="39t-2m-b1f" id="Q5s-Yr-QaN"/>
+                        <outlet property="PLUSBtn" destination="bSG-bo-Kqa" id="yTy-oe-7lQ"/>
+                        <outlet property="RSBtn" destination="IxU-Uv-ERW" id="O9f-Ee-dLA"/>
+                        <outlet property="SUBBtn" destination="tBV-dh-STG" id="thr-Rz-i4D"/>
+                        <outlet property="TWOSBtn" destination="sDe-dc-EtK" id="3u1-oF-vrp"/>
+                        <outlet property="XORBtn" destination="Y5d-XQ-8me" id="mgf-Ol-jD7"/>
+                        <outlet property="binHStack1" destination="ijy-Iy-URI" id="ZvP-02-I5X"/>
+                        <outlet property="binHStack2" destination="mUt-5U-1Xp" id="2Fl-cz-cq2"/>
+                        <outlet property="binHStack3" destination="WRl-Ii-Yij" id="Ejh-6J-QxB"/>
+                        <outlet property="binHStack4" destination="3IF-xw-PqV" id="xKI-CL-fgm"/>
+                        <outlet property="binHStack5" destination="ggU-ns-mmy" id="nUn-z6-iCS"/>
+                        <outlet property="binVStack" destination="55i-hd-IgX" id="fLD-4O-4fn"/>
                         <outlet property="outputLabel" destination="c3H-nl-HbE" id="Ika-ID-pHJ"/>
-                        <outlet property="signedModeButton" destination="ckg-ug-m1d" id="dwL-JX-pWP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
