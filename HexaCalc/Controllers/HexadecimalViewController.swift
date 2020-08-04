@@ -191,7 +191,7 @@ class HexadecimalViewController: UIViewController {
         
         for button in buttons {
             button!.layer.cornerRadius = 0
-            button!.titleLabel!.font = UIFont(name: "Avenir Next", size: 22)
+            button!.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         }
         
         
