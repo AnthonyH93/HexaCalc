@@ -578,7 +578,7 @@ class BinaryViewController: UIViewController {
         
         for button in buttons {
             button!.layer.cornerRadius = 0
-            button!.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+            button!.titleLabel?.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
         }
         
         //Need to change the font size of the text label for smaller screen

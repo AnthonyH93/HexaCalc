@@ -194,6 +194,9 @@ class HexadecimalViewController: UIViewController {
             button!.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         }
         
+        //Need to change the font size of the text label for smaller screen
+        outputLabel?.font = UIFont(name: "Avenir Next", size: 50)
+        
         
         let constraints = [
             hexVStack.widthAnchor.constraint(equalToConstant: 295),
