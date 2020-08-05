@@ -1106,10 +1106,6 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="Qdf-Rb-8oT"/>
-                                                    <constraint firstAttribute="width" constant="350" id="i5b-97-S1r"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VS6-jf-MsZ">
                                                 <rect key="frame" x="0.0" y="85" width="350" height="80"/>
@@ -1187,10 +1183,6 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="FZl-k3-ZHa"/>
-                                                    <constraint firstAttribute="width" constant="350" id="Hb7-Fb-Fby"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9os-7c-VOg">
                                                 <rect key="frame" x="0.0" y="170" width="350" height="80"/>
@@ -1268,10 +1260,6 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="R6o-DG-z0g"/>
-                                                    <constraint firstAttribute="width" constant="350" id="biY-tg-kC4"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FlW-yi-Lcq">
                                                 <rect key="frame" x="0.0" y="255" width="350" height="80"/>
@@ -1349,10 +1337,6 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="6zz-hE-qt2"/>
-                                                    <constraint firstAttribute="width" constant="350" id="AsS-mL-sGh"/>
-                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LTM-03-4nc">
                                                 <rect key="frame" x="0.0" y="340" width="350" height="80"/>
@@ -1412,16 +1396,8 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="350" id="BYr-1b-JXI"/>
-                                                    <constraint firstAttribute="height" constant="80" id="ILU-dD-b2x"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="420" id="8xH-20-hAV"/>
-                                            <constraint firstAttribute="width" constant="350" id="zja-Co-kDe"/>
-                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-4m-Np0">
                                         <rect key="frame" x="12.666666666666657" y="170" width="350" height="64"/>
@@ -1454,6 +1430,31 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Decimal" image="dot.square" catalog="system" id="MSz-RZ-ybu"/>
                     <connections>
+                        <outlet property="ACBtn" destination="lFW-Xu-MGc" id="cSF-W0-3dI"/>
+                        <outlet property="Btn0" destination="2jt-QL-6HL" id="vFQ-Xf-UUM"/>
+                        <outlet property="Btn1" destination="zC8-mX-mk0" id="oGM-oI-cre"/>
+                        <outlet property="Btn2" destination="rAv-IB-DwS" id="0Ed-FX-HtO"/>
+                        <outlet property="Btn3" destination="XYA-Dk-uvT" id="SIh-XV-Cwk"/>
+                        <outlet property="Btn4" destination="zCK-9B-i1G" id="rle-3f-Jza"/>
+                        <outlet property="Btn5" destination="4x4-Cz-LL6" id="yba-iG-Y5o"/>
+                        <outlet property="Btn6" destination="9fm-vl-7ec" id="Ac3-rb-nqd"/>
+                        <outlet property="Btn7" destination="d46-2F-KNS" id="Jtr-EY-Yml"/>
+                        <outlet property="Btn8" destination="riD-mq-Hgo" id="l9m-pO-fbj"/>
+                        <outlet property="Btn9" destination="fDE-6X-Dgl" id="19Y-Vw-3Cu"/>
+                        <outlet property="DELBtn" destination="lSD-iO-cST" id="neD-q4-0ng"/>
+                        <outlet property="DIVBtn" destination="gf0-fY-7VF" id="rUK-Ep-NQN"/>
+                        <outlet property="DOTBtn" destination="pDP-oH-8mG" id="jui-c8-kLT"/>
+                        <outlet property="EQUALSBtn" destination="EJa-MM-1Zh" id="QZp-HX-LEN"/>
+                        <outlet property="MULTBtn" destination="3Zk-72-2JA" id="FMg-6V-dTw"/>
+                        <outlet property="PLUSBtn" destination="FR4-Tm-oSL" id="UIb-PI-jJH"/>
+                        <outlet property="PLUSMINUSBtn" destination="0jA-8e-5dW" id="VeA-yx-764"/>
+                        <outlet property="SUBBtn" destination="dLL-MC-QGn" id="Edy-KV-upM"/>
+                        <outlet property="decHStack1" destination="iy6-EE-Ni3" id="EwX-kn-7h6"/>
+                        <outlet property="decHStack2" destination="VS6-jf-MsZ" id="txb-dV-zXZ"/>
+                        <outlet property="decHStack3" destination="9os-7c-VOg" id="L7v-NX-f58"/>
+                        <outlet property="decHStack4" destination="FlW-yi-Lcq" id="oti-qF-Sqg"/>
+                        <outlet property="decHStack5" destination="LTM-03-4nc" id="4c4-f2-aUd"/>
+                        <outlet property="decVStack" destination="YRn-jp-boy" id="0CW-Xw-Imw"/>
                         <outlet property="outputLabel" destination="a2J-4m-Np0" id="XnH-LW-htg"/>
                     </connections>
                 </viewController>
