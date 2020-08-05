@@ -51,8 +51,16 @@ class HexadecimalViewController: UIViewController {
     @IBOutlet weak var EQUALSBtn: RoundButton!
     
     //MARK: Variables
+    var runningNumber = ""
+    var leftValue = ""
+    var rightValue = ""
+    var result = ""
+    var currentOperation:Operation = .NULL
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        outputLabel.text = "0"
     }
     
     override func viewDidLayoutSubviews() {
@@ -88,10 +96,135 @@ class HexadecimalViewController: UIViewController {
     //Load the current converted value from either of the other calculator screens
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        outputLabel.text = stateController?.convValues.hexVal.uppercased()
+        
+        if ((stateController?.convValues.largerThan64Bits)!) {
+            outputLabel.text = "Error! Integer overflow!"
+        }
+        else {
+            var newLabelValue = stateController?.convValues.hexVal.uppercased()
+            
+            if (newLabelValue == "0"){
+                outputLabel.text = "0"
+                runningNumber = ""
+                leftValue = ""
+                rightValue = ""
+                currentOperation = .NULL
+            }
+            else {
+                //Need special case to convert negative values
+                if (newLabelValue!.contains("-")){
+                    
+                }
+                runningNumber = newLabelValue ?? "0"
+                currentOperation = .NULL
+                outputLabel.text = newLabelValue
+            }
+        }
+    }
+    
+    //MARK: Button Actions
+    @IBAction func ACPressed(_ sender: RoundButton) {
+        runningNumber = ""
+        leftValue = ""
+        rightValue = ""
+        result = ""
+        currentOperation = .NULL
+        outputLabel.text = "0"
+        
+        stateController?.convValues.largerThan64Bits = false
+        stateController?.convValues.decimalVal = "0"
+        stateController?.convValues.hexVal = "0"
+        stateController?.convValues.binVal = "0"
+    }
+    
+    @IBAction func deletePressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func digitPressed(_ sender: RoundButton) {
+        //Need to keep the hex value under 64 bits
+        if (runningNumber.count <= 16) {
+            let digit = "\(sender.tag)"
+            if ((digit == "0") && (outputLabel.text == "0")) {
+                //if 0 is pressed and calculator is showing 0 then do nothing
+            }
+            else {
+                let convertedDigit = tagToHex(digitToConvert: digit)
+                runningNumber += convertedDigit
+                outputLabel.text = runningNumber
+            }
+        }
+    }
+    
+    @IBAction func XORPressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func ORPressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func ANDPressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func NOTPressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func dividePressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func multiplyPressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func minusPressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func addPressed(_ sender: RoundButton) {
+        
+    }
+    
+    @IBAction func equalsPressed(_ sender: RoundButton) {
+        
     }
     
     //MARK: Private Functions
+    
+    //Helper function to convert the button tags to hex digits
+    func tagToHex(digitToConvert: String) -> String {
+        var result = ""
+        if (Int(digitToConvert)! < 10){
+            result = digitToConvert
+        }
+        else {
+            if (Int(digitToConvert)! == 10) {
+                result = "A"
+            }
+            else if (Int(digitToConvert)! == 11) {
+                result = "B"
+            }
+            else if (Int(digitToConvert)! == 12) {
+                result = "C"
+            }
+            else if (Int(digitToConvert)! == 13) {
+                result = "D"
+            }
+            else if (Int(digitToConvert)! == 14) {
+                result = "E"
+            }
+            else if (Int(digitToConvert)! == 15) {
+                result = "F"
+            }
+            else {
+                //Should not occur ...
+            }
+        }
+        return result
+    }
     
     //Helper function to set custon layout for iPhone SE screen size
     func setupSEConstraints(){

@@ -38,6 +38,9 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="ACPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="qrn-3d-Vl3"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Pw-L1-6hK" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="210" y="0.0" width="135" height="65"/>
@@ -54,7 +57,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="Ykl-Hw-SzV"/>
+                                                            <action selector="deletePressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="3cr-A8-51c"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -77,7 +80,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="8Nr-uw-XsU"/>
+                                                            <action selector="XORPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="JpU-Y2-cgA"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3d-yL-2Bv" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -95,7 +98,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="DNM-M5-d6a"/>
+                                                            <action selector="ORPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="rkt-TF-6cR"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eom-pu-5Jp" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -113,7 +116,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="35l-nQ-wK4"/>
+                                                            <action selector="ANDPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="HJy-X7-37b"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mn8-rC-aGV" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -131,7 +134,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="EbI-SF-YSm"/>
+                                                            <action selector="NOTPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="HZP-Zx-JjS"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qR-TY-uyZ" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -149,7 +152,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="12F-vt-nac"/>
+                                                            <action selector="dividePressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="mb6-pr-u7T"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -172,7 +175,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="6kg-DD-gOb"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="9H8-lm-t24"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKx-jy-StE" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -190,7 +193,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="wJw-fK-VpQ"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Ve7-3y-1df"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-Jp-Iwf" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -208,7 +211,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="IBU-Qi-JmS"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="XcK-15-ARQ"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjF-4y-iCl" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -226,7 +229,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="jj3-Zv-NfO"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="TmP-Ml-E8a"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diM-XB-4lV" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -244,7 +247,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="j8P-PD-nSf"/>
+                                                            <action selector="multiplyPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="K8z-pE-nN3"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -267,7 +270,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="nKt-By-OqQ"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="zwe-dm-0A2"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPa-Ui-a7P" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -285,7 +288,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="9DM-sN-4m3"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Vsv-SG-dms"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ty1-ux-gmg" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -303,7 +306,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="Ien-nB-SEA"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Tmu-0m-HY8"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHa-5E-F5t" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -321,7 +324,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="DF8-fG-PZ3"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="MMu-CG-1dj"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gez-Xo-Kz8" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -339,7 +342,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="HJA-a0-c1Y"/>
+                                                            <action selector="subtractPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="EMc-rs-ffc"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -362,7 +365,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="BHX-Yt-mrw"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="wxp-gJ-9vN"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iD-VD-Nfg" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -380,7 +383,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="XNo-V0-DVO"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="fWY-Co-Obb"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3I-sD-UOM" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -398,7 +401,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="CVp-dn-Ei0"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="0HP-69-nfH"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20M-zv-LsB" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -416,7 +419,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="faB-su-w78"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="MMo-Rr-Wqr"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0R-SQ-pp9" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -434,7 +437,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="HPm-Za-btO"/>
+                                                            <action selector="plusPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="SZK-T5-B7x"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -457,7 +460,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="8Zj-th-JcY"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Dlx-Gk-zZn"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fd9-3O-EiD" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -475,7 +478,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="kYi-Ye-iZq"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="8jd-fY-jqf"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7tu-Vi-hcn" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -493,7 +496,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="Vks-k1-Cyu"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="nYs-ea-6xV"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="100-1S-VjQ" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -511,7 +514,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="kDL-l1-Ml9"/>
+                                                            <action selector="digitPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="eLL-1F-KH5"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1A-va-aP4" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
@@ -529,7 +532,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="allClearPressed:" destination="G05-w2-BtH" eventType="touchUpInside" id="S8E-Ar-mmL"/>
+                                                            <action selector="equalsPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="hHK-cX-WXd"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
