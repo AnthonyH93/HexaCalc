@@ -113,7 +113,7 @@ class HexadecimalViewController: UIViewController {
             else {
                 //Need special case to convert negative values
                 if (newLabelValue!.contains("-")){
-                    
+                    newLabelValue = formatNegativeHex(hexToConvert: newLabelValue ?? "0").uppercased()
                 }
                 runningNumber = newLabelValue ?? "0"
                 currentOperation = .NULL
@@ -224,6 +224,92 @@ class HexadecimalViewController: UIViewController {
             }
         }
         return result
+    }
+    
+    //Helper function to convert negative hexadecimal number to sign extended equivalent
+    func formatNegativeHex(hexToConvert: String) -> String {
+        var manipulatedString = hexToConvert
+        manipulatedString.removeFirst()
+        
+        //Need to convert the binary, then flip all the bits, add 1 and convert back to hex
+        let binaryInitial = String(Int(manipulatedString, radix:16)!, radix: 2)
+        var invertedBinary = ""
+        
+        //Flip all bits
+        for i in 0..<binaryInitial.count {
+            if (binaryInitial[binaryInitial.index(binaryInitial.startIndex, offsetBy: i)] == "0"){
+                invertedBinary += "1"
+            }
+            else {
+                invertedBinary += "0"
+            }
+        }
+        
+        //Add 1 to the string
+        let index = invertedBinary.lastIndex(of: "0") ?? (invertedBinary.endIndex)
+        var newSubString = String(invertedBinary.prefix(upTo: index))
+        
+        
+        if (newSubString.count < invertedBinary.count) {
+            newSubString = newSubString + "1"
+        }
+        
+        while (newSubString.count < invertedBinary.count) {
+            newSubString = newSubString + "0"
+        }
+        
+        //Sign extend
+        while (newSubString.count < 64) {
+            newSubString = "1" + newSubString
+        }
+        
+        //Finally, convert to hexadecimal manually
+        var hexResult = ""
+        for i in 0..<16 {
+            //Take last 4 bits and convert to hex
+            let currentIndex = newSubString.index(newSubString.endIndex, offsetBy: -4)
+            let currentBinary = String(newSubString.suffix(from: currentIndex))
+            newSubString.removeLast(4)
+            
+            switch currentBinary {
+            case "0000":
+                hexResult = "0" + hexResult
+            case "0001":
+                hexResult = "1" + hexResult
+            case "0010":
+                hexResult = "2" + hexResult
+            case "0011":
+                hexResult = "3" + hexResult
+            case "0100":
+                hexResult = "4" + hexResult
+            case "0101":
+                hexResult = "5" + hexResult
+            case "0110":
+                hexResult = "6" + hexResult
+            case "0111":
+                hexResult = "7" + hexResult
+            case "1000":
+                hexResult = "8" + hexResult
+            case "1001":
+                hexResult = "9" + hexResult
+            case "1010":
+                hexResult = "a" + hexResult
+            case "1011":
+                hexResult = "b" + hexResult
+            case "1100":
+                hexResult = "c" + hexResult
+            case "1101":
+                hexResult = "d" + hexResult
+            case "1110":
+                hexResult = "e" + hexResult
+            case "1111":
+                hexResult = "f" + hexResult
+            default:
+                fatalError("Unexpected Operation...")
+            }
+        }
+        
+        return hexResult
     }
     
     //Helper function to set custon layout for iPhone SE screen size
