@@ -185,7 +185,7 @@ class DecimalViewController: UIViewController {
         }
         else {
             //Need to set label to 0 when we remove last digit
-            if (runningNumber.count == 1){
+            if (runningNumber.count == 1 || ((runningNumber.first == "-") && (runningNumber.count == 2))){
                 runningNumber = ""
                 outputLabel.text = "0"
                 
