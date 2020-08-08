@@ -143,7 +143,7 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func digitPressed(_ sender: RoundButton) {
         //Need to keep the hex value under 64 bits
-        if (runningNumber.count <= 16) {
+        if (runningNumber.count < 16) {
             let digit = "\(sender.tag)"
             if ((digit == "0") && (outputLabel.text == "0")) {
                 //if 0 is pressed and calculator is showing 0 then do nothing
@@ -152,6 +152,7 @@ class HexadecimalViewController: UIViewController {
                 let convertedDigit = tagToHex(digitToConvert: digit)
                 runningNumber += convertedDigit
                 outputLabel.text = runningNumber
+                quickUpdateStateController()
             }
         }
     }
@@ -193,6 +194,25 @@ class HexadecimalViewController: UIViewController {
     }
     
     //MARK: Private Functions
+    
+    //Perform a quick update to keep the state controller variables in sync with the calculator label
+    private func quickUpdateStateController() {
+        //Need to keep the state controller updated with what is on the screen
+        stateController?.convValues.hexVal = runningNumber
+        //Need to convert differently if binary is positive or negative
+        var binCurrentVal = ""
+        var decCurrentVal = ""
+        //We are dealing with a negative number
+        if (outputLabel.text?.first == "F" && outputLabel.text?.count == 16){
+            //Need to perform special operation here
+        }
+        else {
+            binCurrentVal = String(Int(runningNumber, radix: 16)!, radix: 2)
+            decCurrentVal = String(Int(runningNumber, radix: 16)!)
+        }
+        stateController?.convValues.binVal = binCurrentVal
+        stateController?.convValues.decimalVal = decCurrentVal
+    }
     
     //Helper function to convert the button tags to hex digits
     func tagToHex(digitToConvert: String) -> String {
