@@ -224,6 +224,10 @@ class HexadecimalViewController: UIViewController {
         //We are dealing with a negative number
         if ((!outputLabel.text!.first!.isNumber || ((outputLabel.text!.first == "9") || (outputLabel.text!.first == "8"))) && (outputLabel.text!.count == 16)){
             //Need to perform special operation here
+            var currentLabel = runningNumber
+            currentLabel = hexToBin(hexToConvert: currentLabel)
+            binCurrentVal = currentLabel
+            decCurrentVal = String(Int64(bitPattern: UInt64(currentLabel, radix: 2)!))
         }
         else {
             binCurrentVal = String(Int(runningNumber, radix: 16)!, radix: 2)
@@ -265,6 +269,56 @@ class HexadecimalViewController: UIViewController {
         return result
     }
     
+    //Helper function to convert hex to binary
+    func hexToBin(hexToConvert: String) -> String {
+        var result = ""
+        var copy = hexToConvert
+        
+        for _ in 0..<hexToConvert.count {
+            let currentDigit = copy.first
+            copy.removeFirst()
+            
+            switch currentDigit {
+            case "0":
+                result += "0000"
+            case "1":
+                result += "0001"
+            case "2":
+                result += "0010"
+            case "3":
+                result += "0011"
+            case "4":
+                result += "0100"
+            case "5":
+                result += "0101"
+            case "6":
+                result += "0110"
+            case "7":
+                result += "0111"
+            case "8":
+                result += "1000"
+            case "9":
+                result += "1001"
+            case "A":
+                result += "1010"
+            case "B":
+                result += "1011"
+            case "C":
+                result += "1100"
+            case "D":
+                result += "1101"
+            case "E":
+                result += "1110"
+            case "F":
+                result += "1111"
+            default:
+                fatalError("Unexpected Operation...")
+                
+            }
+        }
+        
+        return result
+    }
     //Helper function to convert negative hexadecimal number to sign extended equivalent
     func formatNegativeHex(hexToConvert: String) -> String {
         var manipulatedString = hexToConvert
