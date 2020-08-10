@@ -121,8 +121,8 @@ class BinaryViewController: UIViewController {
     //MARK: Button Actions
     @IBAction func numberPressed(_ sender: RoundButton) {
         
-        //Limit number of bits to 63 - will be 64 if NOT pressed or negative decimal/hex value brought over
-        if runningNumber.count <= 62 {
+        //Limit number of bits to 64
+        if runningNumber.count <= 63 {
             let digit = "\(sender.tag)"
             if ((digit == "0") && (outputLabel.text == binaryDefaultLabel)){
                 //if 0 is pressed and calculator is showing 0 then do nothing

@@ -138,12 +138,41 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func deletePressed(_ sender: RoundButton) {
-        
+        if (runningNumber == "0"){
+            //Do nothing
+        }
+        else {
+            if (runningNumber != ""){
+                runningNumber.removeLast()
+            }
+            //Need to be careful if runningNumber becomes NIL
+            if (runningNumber == ""){
+                stateController?.convValues.largerThan64Bits = false
+                stateController?.convValues.decimalVal = "0"
+                stateController?.convValues.hexVal = "0"
+                stateController?.convValues.binVal = "0"
+                outputLabel.text = "0"
+            }
+            else {
+                outputLabel.text = runningNumber
+                quickUpdateStateController()
+            }
+        }
     }
     
     @IBAction func digitPressed(_ sender: RoundButton) {
         //Need to keep the hex value under 64 bits
-        if (runningNumber.count < 16) {
+        if (runningNumber.count == 15){
+            //Can only allow 16 digits if the first is not above 8
+            if (runningNumber.first!.isNumber && (runningNumber.first != "9" || runningNumber.first != "8")){
+                let digit = "\(sender.tag)"
+                let convertedDigit = tagToHex(digitToConvert: digit)
+                runningNumber += convertedDigit
+                outputLabel.text = runningNumber
+                quickUpdateStateController()
+            }
+        }
+        if (runningNumber.count < 15) {
             let digit = "\(sender.tag)"
             if ((digit == "0") && (outputLabel.text == "0")) {
                 //if 0 is pressed and calculator is showing 0 then do nothing
