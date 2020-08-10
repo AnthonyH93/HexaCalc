@@ -121,6 +121,10 @@ class BinaryViewController: UIViewController {
     //MARK: Button Actions
     @IBAction func numberPressed(_ sender: RoundButton) {
         
+        if (stateController?.convValues.largerThan64Bits == true){
+            runningNumber = ""
+        }
+        
         //Limit number of bits to 64
         if runningNumber.count <= 63 {
             let digit = "\(sender.tag)"
@@ -153,6 +157,11 @@ class BinaryViewController: UIViewController {
     
     @IBAction func deletePressed(_ sender: RoundButton) {
         
+        //Button not available during error state
+        if (stateController?.convValues.largerThan64Bits == true){
+            return
+        }
+        
         var currentLabel = outputLabel.text
         if (currentLabel == binaryDefaultLabel){
             //Do nothing
@@ -180,6 +189,12 @@ class BinaryViewController: UIViewController {
     
     //Instead of making left shift an operation, just complete it whenever it is pressed the first time (doesn't need 2 arguments)
     @IBAction func leftShiftPressed(_ sender: RoundButton) {
+        
+        //Button not available during error state
+        if (stateController?.convValues.largerThan64Bits == true){
+            return
+        }
+        
         //If running number is empty then it will just stay as 0
         var currentValue = ""
         if runningNumber != "" {
@@ -210,6 +225,12 @@ class BinaryViewController: UIViewController {
     
     //Instead of making right shift an operation, just complete it whenever it is pressed the first time (doesn't need 2 arguments)
     @IBAction func rightShiftPressed(_ sender: RoundButton) {
+        
+        //Button not available during error state
+        if (stateController?.convValues.largerThan64Bits == true){
+            return
+        }
+        
         //If running number is empty then it will just stay as 0
         var currentValue = ""
         if runningNumber != "" {
@@ -240,6 +261,12 @@ class BinaryViewController: UIViewController {
     
     //Ones compliment involves flipping all the bits
     @IBAction func onesCompPressed(_ sender: RoundButton) {
+        
+        //Button not available during error state
+        if (stateController?.convValues.largerThan64Bits == true){
+            return
+        }
+        
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
         var newString = ""
@@ -264,6 +291,12 @@ class BinaryViewController: UIViewController {
     
     //Twos complement involves flipping all the bits and then adding 1
     @IBAction func twosCompPressed(_ sender: RoundButton) {
+        
+        //Button not available during error state
+        if (stateController?.convValues.largerThan64Bits == true){
+            return
+        }
+        
         //First flip all the bits
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
@@ -313,6 +346,12 @@ class BinaryViewController: UIViewController {
     }
     
     @IBAction func NOTPressed(_ sender: RoundButton) {
+        
+        //Button not available during error state
+        if (stateController?.convValues.largerThan64Bits == true){
+            return
+        }
+        
         //Just flip all the bits
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
@@ -490,6 +529,11 @@ class BinaryViewController: UIViewController {
     
     //Perform a quick update to keep the state controller variables in sync with the calculator label
     private func quickUpdateStateController() {
+        
+        if (runningNumber.count < 65) {
+            stateController?.convValues.largerThan64Bits = false
+        }
+        
         //Need to keep the state controller updated with what is on the screen
         stateController?.convValues.binVal = runningNumber
         //Need to convert differently if binary is positive or negative

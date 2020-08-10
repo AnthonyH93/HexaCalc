@@ -138,6 +138,12 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func deletePressed(_ sender: RoundButton) {
+        
+        //Button not available during error state
+        if (stateController?.convValues.largerThan64Bits == true){
+            return
+        }
+        
         if (runningNumber == "0"){
             //Do nothing
         }
@@ -161,6 +167,11 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func digitPressed(_ sender: RoundButton) {
+        
+        if (stateController?.convValues.largerThan64Bits == true){
+            runningNumber = ""
+        }
+        
         //Need to keep the hex value under 64 bits
         if (runningNumber.count <= 15) {
             let digit = "\(sender.tag)"
@@ -190,9 +201,11 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func NOTPressed(_ sender: RoundButton) {
         
+        //Button not available during error state
         if (stateController?.convValues.largerThan64Bits == true){
             return
         }
+        
         //Need to flip every bit
         var currentValue = runningNumber
         if (runningNumber == ""){
@@ -270,6 +283,11 @@ class HexadecimalViewController: UIViewController {
     
     //Perform a quick update to keep the state controller variables in sync with the calculator label
     private func quickUpdateStateController() {
+        
+        if (runningNumber.count < 17){
+            stateController?.convValues.largerThan64Bits = false
+        }
+        
         //Need to keep the state controller updated with what is on the screen
         stateController?.convValues.hexVal = runningNumber
         //Need to convert differently if binary is positive or negative
