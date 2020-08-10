@@ -162,17 +162,7 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func digitPressed(_ sender: RoundButton) {
         //Need to keep the hex value under 64 bits
-        if (runningNumber.count == 15){
-            //Can only allow 16 digits if the first is not above 8
-            if (runningNumber.first!.isNumber && (runningNumber.first != "9" || runningNumber.first != "8")){
-                let digit = "\(sender.tag)"
-                let convertedDigit = tagToHex(digitToConvert: digit)
-                runningNumber += convertedDigit
-                outputLabel.text = runningNumber
-                quickUpdateStateController()
-            }
-        }
-        if (runningNumber.count < 15) {
+        if (runningNumber.count <= 15) {
             let digit = "\(sender.tag)"
             if ((digit == "0") && (outputLabel.text == "0")) {
                 //if 0 is pressed and calculator is showing 0 then do nothing
@@ -232,7 +222,7 @@ class HexadecimalViewController: UIViewController {
         var binCurrentVal = ""
         var decCurrentVal = ""
         //We are dealing with a negative number
-        if (outputLabel.text?.first == "F" && outputLabel.text?.count == 16){
+        if ((!outputLabel.text!.first!.isNumber || ((outputLabel.text!.first == "9") || (outputLabel.text!.first == "8"))) && (outputLabel.text!.count == 16)){
             //Need to perform special operation here
         }
         else {
@@ -314,7 +304,7 @@ class HexadecimalViewController: UIViewController {
         
         //Finally, convert to hexadecimal manually
         var hexResult = ""
-        for i in 0..<16 {
+        for _ in 0..<16 {
             //Take last 4 bits and convert to hex
             let currentIndex = newSubString.index(newSubString.endIndex, offsetBy: -4)
             let currentBinary = String(newSubString.suffix(from: currentIndex))
