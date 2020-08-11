@@ -180,7 +180,7 @@ class DecimalViewController: UIViewController {
     
     @IBAction func deletePressed(_ sender: RoundButton) {
         
-        if (runningNumber.count == 0) {
+        if (runningNumber.count == 0 || abs(Int(runningNumber) ?? 0) > 999999999) {
             //Nothing to delete
         }
         else {
