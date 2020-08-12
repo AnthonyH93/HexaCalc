@@ -188,15 +188,15 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func XORPressed(_ sender: RoundButton) {
-        
+        operation(operation: .XOR)
     }
     
     @IBAction func ORPressed(_ sender: RoundButton) {
-        
+        operation(operation: .OR)
     }
     
     @IBAction func ANDPressed(_ sender: RoundButton) {
-        
+        operation(operation: .AND)
     }
     
     @IBAction func NOTPressed(_ sender: RoundButton) {
@@ -260,27 +260,112 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {
-        
+        operation(operation: .Divide)
     }
     
     @IBAction func multiplyPressed(_ sender: RoundButton) {
-        
+        operation(operation: .Multiply)
     }
     
     @IBAction func minusPressed(_ sender: RoundButton) {
-        
+        operation(operation: .Subtract)
     }
     
-    @IBAction func addPressed(_ sender: RoundButton) {
-        
+    @IBAction func plusPressed(_ sender: RoundButton) {
+        operation(operation: .Add)
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        
+        operation(operation: currentOperation)
     }
     
     //MARK: Private Functions
     
+    private func operation(operation: Operation) {
+        if currentOperation != .NULL {
+            let binRightValue = hexToBin(hexToConvert: runningNumber)
+            if binRightValue != "" {
+                if (binRightValue.first == "1" && binRightValue.count == 64){
+                    rightValue = String(Int64(bitPattern: UInt64(binRightValue, radix: 2)!))
+                }
+                else {
+                    rightValue = String(Int(binRightValue, radix: 2)!)
+                }
+                runningNumber = ""
+                
+                switch (currentOperation) {
+                case .Add:
+                    result = "\(Int(leftValue)! + Int(rightValue)!)"
+                    
+                case .Subtract:
+                    result = "\(Int(leftValue)! - Int(rightValue)!)"
+                    
+                case .Multiply:
+                    result = "\(Int(leftValue)! * Int(rightValue)!)"
+                    
+                case .Divide:
+                    //Output Error! if division by 0
+                    if Int(rightValue)! == 0 {
+                        result = "Error!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        return
+                    }
+                    else {
+                        result = "\(Int(leftValue)! / Int(rightValue)!)"
+                    }
+                    
+                case .AND:
+                    result = "\(Int(leftValue)! & Int(rightValue)!)"
+                    
+                case .OR:
+                    result = "\(Int(leftValue)! | Int(rightValue)!)"
+                    
+                case .XOR:
+                    result = "\(Int(leftValue)! ^ Int(rightValue)!)"
+                    
+                //Should not occur
+                default:
+                    fatalError("Unexpected Operation...")
+                }
+                
+                leftValue = result
+                setupStateControllerValues()
+                
+                let hexRepresentation = stateController?.convValues.hexVal ?? "0"
+                var newLabelValue = hexRepresentation.uppercased()
+                if ((hexRepresentation.contains("-"))){
+                    newLabelValue = formatNegativeHex(hexToConvert: newLabelValue).uppercased()
+                }
+                outputLabel.text = newLabelValue
+            }
+            currentOperation = operation
+        }
+        else {
+            //If string is empty it should be interpreted as a 0
+            let binLeftValue = hexToBin(hexToConvert: runningNumber)
+            if runningNumber == "" {
+                leftValue = "0"
+            }
+            else {
+                if (binLeftValue.first == "1" && binLeftValue.count == 64){
+                leftValue = String(Int64(bitPattern: UInt64(binLeftValue, radix: 2)!))
+                }
+                else {
+                    leftValue = String(Int(binLeftValue, radix: 2)!)
+                }
+            }
+            runningNumber = ""
+            currentOperation = operation
+        }
+    }
+    private func setupStateControllerValues() {
+        stateController?.convValues.decimalVal = result
+        let hexConversion = String(Int(Double(result)!), radix: 16)
+        let binConversion = String(Int(Double(result)!), radix: 2)
+        stateController?.convValues.hexVal = hexConversion
+        stateController?.convValues.binVal = binConversion
+    }
     //Perform a quick update to keep the state controller variables in sync with the calculator label
     private func quickUpdateStateController() {
         
@@ -310,7 +395,7 @@ class HexadecimalViewController: UIViewController {
     }
     
     //Helper function to convert the button tags to hex digits
-    func tagToHex(digitToConvert: String) -> String {
+    private func tagToHex(digitToConvert: String) -> String {
         var result = ""
         if (Int(digitToConvert)! < 10){
             result = digitToConvert
@@ -342,9 +427,13 @@ class HexadecimalViewController: UIViewController {
     }
     
     //Helper function to convert hex to binary
-    func hexToBin(hexToConvert: String) -> String {
+    private func hexToBin(hexToConvert: String) -> String {
         var result = ""
         var copy = hexToConvert
+        
+        if (hexToConvert == ""){
+            return hexToConvert
+        }
         
         for _ in 0..<hexToConvert.count {
             let currentDigit = copy.first
@@ -391,7 +480,7 @@ class HexadecimalViewController: UIViewController {
         return result
     }
     //Helper function to convert negative hexadecimal number to sign extended equivalent
-    func formatNegativeHex(hexToConvert: String) -> String {
+    private func formatNegativeHex(hexToConvert: String) -> String {
         var manipulatedString = hexToConvert
         manipulatedString.removeFirst()
         
@@ -477,7 +566,7 @@ class HexadecimalViewController: UIViewController {
     }
     
     //Helper function to set custon layout for iPhone SE screen size
-    func setupSEConstraints(){
+    private func setupSEConstraints(){
         let oldConstraints = [
             outputLabel.widthAnchor.constraint(equalToConstant: 350),
             outputLabel.heightAnchor.constraint(equalToConstant: 64),
