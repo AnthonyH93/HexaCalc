@@ -521,8 +521,8 @@ class BinaryViewController: UIViewController {
     //Perform a full state controller update when a new result is calculated via an operation key
     private func setupStateControllerValues() {
         stateController?.convValues.decimalVal = result
-        let hexConversion = String(Int(Double(result)!), radix: 16)
-        let binConversion = String(Int(Double(result)!), radix: 2)
+        let hexConversion = String(Int(result)!, radix: 16)
+        let binConversion = String(Int(result)!, radix: 2)
         stateController?.convValues.hexVal = hexConversion
         stateController?.convValues.binVal = binConversion
     }
