@@ -19,10 +19,26 @@ This app is optimized to run and look amazing on all iPhones which are supported
 * iPhone SE (1st and 2nd generations)
 * iPhone 6s
 
+## Operations
+
+### Hexadecimal Calculator
+* Addition, subtraction, multiplication, division
+* AND, OR, XOR, NOT
+* All clear, delete
+
+### Binary Calculator
+* Addition, subtraction, multiplication, division
+* AND, OR, XOR, NOT
+* 1's compliment, 2's compliment, left shift, right shift
+* All clear, delete
+
+### Decimal Calculator
+* Addition, subtraction, multiplication, division
+* All clear, delete, plus/minus, dot
+
 ## Currently In Development
 
 This app is currently being worked on, it is close to being completed, work is being done on:
-* Completing hexadecimal calculator operations
 * Settings menu for user customization with data persistance
 * Creating an app icon
 * Submitting to Apple for app store approval and release
