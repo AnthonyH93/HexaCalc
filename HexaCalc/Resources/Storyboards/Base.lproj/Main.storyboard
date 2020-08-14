@@ -1547,6 +1547,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="xVO-Tn-NC4"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCQ-0L-wgO" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="39.999999999999993" y="0.0" width="30.000000000000007" height="30"/>
@@ -1554,6 +1557,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="ba5-57-LGE"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeE-ea-efn" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="80" y="0.0" width="30" height="30"/>
@@ -1561,6 +1567,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="T3D-eI-d0b"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hd-uI-dan" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="120" y="0.0" width="30" height="30"/>
@@ -1568,6 +1577,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="S5f-mP-ua1"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaL-Lf-Eon" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="160" y="0.0" width="30" height="30"/>
@@ -1575,6 +1587,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="Zn7-YM-xjt"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5E-v9-apF" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="200" y="0.0" width="30" height="30"/>
@@ -1582,6 +1597,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="gYp-LH-mL6"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6Q-e1-Zim" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="239.99999999999997" y="0.0" width="30.000000000000028" height="30"/>
@@ -1589,6 +1607,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="99j-lE-88J"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ube-zZ-MPu" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="280" y="0.0" width="30" height="30"/>
@@ -1596,6 +1617,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="ePN-ug-NdM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -1612,7 +1636,7 @@
                                         <state key="normal" title="View Privacy Policy"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czb-tV-wxX">
-                                        <rect key="frame" x="57" y="384" width="261" height="30"/>
+                                        <rect key="frame" x="57" y="384" width="260.66666666666669" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="fOy-ED-HDr"/>
                                         </constraints>
@@ -1632,7 +1656,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNS-Br-2is">
-                                        <rect key="frame" x="96.999999999999986" y="492" width="180.66666666666663" height="29"/>
+                                        <rect key="frame" x="96.999999999999986" y="498" width="180.66666666666663" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="HYo-8q-iuj"/>
                                         </constraints>
@@ -1661,7 +1685,7 @@
                                     <constraint firstItem="cRz-p8-Cgq" firstAttribute="top" secondItem="to9-n5-F3Z" secondAttribute="bottom" constant="37.670000000000002" id="jzf-uw-qX4"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leadingMargin" constant="13" id="mXx-v5-dWq"/>
                                     <constraint firstItem="R8S-Cz-Vjt" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="top" constant="556" id="njl-SG-CTl"/>
-                                    <constraint firstItem="GNS-Br-2is" firstAttribute="top" secondItem="TrE-52-IHo" secondAttribute="bottom" constant="1.6666666666666856" id="so3-Ur-bu6"/>
+                                    <constraint firstItem="GNS-Br-2is" firstAttribute="top" secondItem="TrE-52-IHo" secondAttribute="bottom" constant="7.6666666666666856" id="so3-Ur-bu6"/>
                                     <constraint firstItem="BNe-bG-HfZ" firstAttribute="top" secondItem="zc4-uA-nPu" secondAttribute="bottom" constant="8" id="tHS-Kt-eMc"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="top" constant="241" id="uFv-Lu-wBi"/>
                                     <constraint firstItem="czb-tV-wxX" firstAttribute="top" secondItem="cRz-p8-Cgq" secondAttribute="bottom" constant="8" id="vB9-Cb-8is"/>
@@ -1682,6 +1706,14 @@
                         <viewLayoutGuide key="safeArea" id="Prf-Kb-rUx"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="rj5-x7-Ssg"/>
+                    <connections>
+                        <outlet property="binLabel" destination="j1E-AG-BOO" id="mPi-Ga-l9w"/>
+                        <outlet property="decLabel" destination="hPu-qc-Vo9" id="D88-xy-8Hf"/>
+                        <outlet property="hexLabel" destination="d49-Da-Gue" id="kEC-JP-pPe"/>
+                        <outlet property="thanksLabel" destination="TrE-52-IHo" id="aEY-cN-woF"/>
+                        <outlet property="viewPPBtn" destination="cRz-p8-Cgq" id="CgQ-nM-YWV"/>
+                        <outlet property="viewTCBtn" destination="czb-tV-wxX" id="ppS-pg-oPh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-Ra-cND" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
