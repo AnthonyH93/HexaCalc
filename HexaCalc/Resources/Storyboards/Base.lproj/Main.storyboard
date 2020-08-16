@@ -342,7 +342,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundButton" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="subtractPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="EMc-rs-ffc"/>
+                                                            <action selector="minusPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="1Ot-ky-g9b"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
