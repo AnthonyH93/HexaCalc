@@ -1708,9 +1708,14 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="rj5-x7-Ssg"/>
                     <connections>
-                        <outlet property="binLabel" destination="j1E-AG-BOO" id="mPi-Ga-l9w"/>
+                        <outlet property="binLabel" destination="JFd-8t-ZUC" id="3jX-IH-GLN"/>
+                        <outlet property="binSwitch" destination="ZCu-em-ZE4" id="HfI-AN-4h1"/>
+                        <outlet property="colourLabel" destination="vcL-1E-7Ug" id="VJ5-Td-yZx"/>
                         <outlet property="decLabel" destination="hPu-qc-Vo9" id="D88-xy-8Hf"/>
+                        <outlet property="decSwitch" destination="0Fe-oE-9ds" id="XWf-lR-xHN"/>
                         <outlet property="hexLabel" destination="d49-Da-Gue" id="kEC-JP-pPe"/>
+                        <outlet property="hexSwitch" destination="D3k-rE-IG4" id="QE3-V7-2HK"/>
+                        <outlet property="tabBarLabel" destination="zc4-uA-nPu" id="t4K-EO-UH7"/>
                         <outlet property="thanksLabel" destination="TrE-52-IHo" id="aEY-cN-woF"/>
                         <outlet property="viewPPBtn" destination="cRz-p8-Cgq" id="CgQ-nM-YWV"/>
                         <outlet property="viewTCBtn" destination="czb-tV-wxX" id="ppS-pg-oPh"/>
