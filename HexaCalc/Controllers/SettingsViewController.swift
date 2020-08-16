@@ -12,6 +12,8 @@ import os.log
 class SettingsViewController: UIViewController {
 
     //MARK: Properties
+    var stateController: StateController?
+    
     @IBOutlet weak var hexLabel: UILabel!
     @IBOutlet weak var binLabel: UILabel!
     @IBOutlet weak var decLabel: UILabel!
@@ -62,6 +64,10 @@ class SettingsViewController: UIViewController {
         
         //Set tab bar icon colour to new colour
         tabBarController?.tabBar.tintColor = colourClicked
+        
+        //Set state controller such that all calculators know the new colour without a reload
+        stateController?.convValues.colour = colourClicked!
+        
         savePreferences(userPreferences: userPreferences)
     }
     
@@ -78,4 +84,11 @@ class SettingsViewController: UIViewController {
     private func loadPreferences() -> UserPreferences? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: UserPreferences.ArchiveURL.path) as? UserPreferences
     }
+}
+
+//Adds state controller to the view controller
+extension SettingsViewController: StateControllerProtocol {
+  func setState(state: StateController) {
+    self.stateController = state
+  }
 }

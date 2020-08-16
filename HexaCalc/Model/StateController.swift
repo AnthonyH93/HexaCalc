@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 struct convVals{
-    var decimalVal:String = "0"
-    var hexVal:String = "0"
-    var binVal:String = "0"
-    var largerThan64Bits:Bool = false
+    var decimalVal: String = "0"
+    var hexVal: String = "0"
+    var binVal: String = "0"
+    var largerThan64Bits: Bool = false
+    var colour: UIColor?
 }
 
 protocol StateControllerProtocol {

@@ -13,6 +13,7 @@ class HexadecimalViewController: UIViewController {
     
     //MARK: Properties
     var stateController: StateController?
+    
     @IBOutlet weak var outputLabel: UILabel!
     @IBOutlet weak var hexVStack: UIStackView!
     @IBOutlet weak var hexHStack1: UIStackView!
@@ -127,6 +128,15 @@ class HexadecimalViewController: UIViewController {
                 currentOperation = .NULL
                 outputLabel.text = newLabelValue
             }
+        }
+        
+        //Set button colour based on state controller
+        if (stateController?.convValues.colour != nil){
+            PLUSBtn.backgroundColor = stateController?.convValues.colour
+            SUBBtn.backgroundColor = stateController?.convValues.colour
+            MULTBtn.backgroundColor = stateController?.convValues.colour
+            DIVBtn.backgroundColor = stateController?.convValues.colour
+            EQUALSBtn.backgroundColor = stateController?.convValues.colour
         }
     }
     

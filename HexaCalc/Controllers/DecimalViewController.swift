@@ -24,7 +24,6 @@ class DecimalViewController: UIViewController {
     //MARK: Properties
     var stateController: StateController?
     
-    
     @IBOutlet weak var decVStack: UIStackView!
     @IBOutlet weak var decHStack1: UIStackView!
     @IBOutlet weak var decHStack2: UIStackView!
@@ -125,6 +124,15 @@ class DecimalViewController: UIViewController {
         //Check if a conversion to scientific notation is necessary
         if (Double(decimalLabelText ?? "0")! > 999999999 || Double(decimalLabelText ?? "0")! < -999999999) {
             decimalLabelText = "\(Double(decimalLabelText ?? "0")!.scientificFormatted)"
+        }
+        
+        //Set button colour based on state controller
+        if (stateController?.convValues.colour != nil){
+            PLUSBtn.backgroundColor = stateController?.convValues.colour
+            SUBBtn.backgroundColor = stateController?.convValues.colour
+            MULTBtn.backgroundColor = stateController?.convValues.colour
+            DIVBtn.backgroundColor = stateController?.convValues.colour
+            EQUALSBtn.backgroundColor = stateController?.convValues.colour
         }
         
         outputLabel.text = decimalLabelText

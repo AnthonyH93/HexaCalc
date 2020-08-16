@@ -124,6 +124,15 @@ class BinaryViewController: UIViewController {
             }
             outputLabel.text = newLabelValue
         }
+        
+        //Set button colour based on state controller
+        if (stateController?.convValues.colour != nil){
+            PLUSBtn.backgroundColor = stateController?.convValues.colour
+            SUBBtn.backgroundColor = stateController?.convValues.colour
+            MULTBtn.backgroundColor = stateController?.convValues.colour
+            DIVBtn.backgroundColor = stateController?.convValues.colour
+            EQUALSBtn.backgroundColor = stateController?.convValues.colour
+        }
     }
 
     //MARK: Button Actions
