@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var hexLabel: UILabel!
     @IBOutlet weak var binLabel: UILabel!
     @IBOutlet weak var decLabel: UILabel!
-    @IBOutlet weak var tabBarLabel: UILabel!
+    @IBOutlet weak var settingsLabel: UILabel!
     @IBOutlet weak var colourLabel: UILabel!
     @IBOutlet weak var viewPPBtn: UIButton!
     @IBOutlet weak var viewTCBtn: UIButton!
@@ -38,7 +38,7 @@ class SettingsViewController: UIViewController {
             decLabel.textColor = savedPreferences.colour
             thanksLabel.textColor = savedPreferences.colour
             colourLabel.textColor = savedPreferences.colour
-            tabBarLabel.textColor = savedPreferences.colour
+            settingsLabel.textColor = savedPreferences.colour
             hexSwitch.onTintColor = savedPreferences.colour
             binSwitch.onTintColor = savedPreferences.colour
             decSwitch.onTintColor = savedPreferences.colour
@@ -57,7 +57,7 @@ class SettingsViewController: UIViewController {
         decLabel.textColor = colourClicked
         thanksLabel.textColor = colourClicked
         colourLabel.textColor = colourClicked
-        tabBarLabel.textColor = colourClicked
+        settingsLabel.textColor = colourClicked
         hexSwitch.onTintColor = colourClicked
         binSwitch.onTintColor = colourClicked
         decSwitch.onTintColor = colourClicked

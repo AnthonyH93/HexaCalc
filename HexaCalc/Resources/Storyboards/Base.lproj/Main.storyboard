@@ -1476,7 +1476,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ea8-U8-KVu">
                                 <rect key="frame" x="0.0" y="44" width="375" height="685"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tab Bar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc4-uA-nPu">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc4-uA-nPu">
                                         <rect key="frame" x="21" y="36" width="333" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="wSm-39-alv"/>
@@ -1740,7 +1740,7 @@
                         <outlet property="decSwitch" destination="0Fe-oE-9ds" id="XWf-lR-xHN"/>
                         <outlet property="hexLabel" destination="d49-Da-Gue" id="kEC-JP-pPe"/>
                         <outlet property="hexSwitch" destination="D3k-rE-IG4" id="QE3-V7-2HK"/>
-                        <outlet property="tabBarLabel" destination="zc4-uA-nPu" id="t4K-EO-UH7"/>
+                        <outlet property="settingsLabel" destination="zc4-uA-nPu" id="JCD-JS-Zou"/>
                         <outlet property="thanksLabel" destination="TrE-52-IHo" id="aEY-cN-woF"/>
                         <outlet property="viewPPBtn" destination="cRz-p8-Cgq" id="CgQ-nM-YWV"/>
                         <outlet property="viewTCBtn" destination="czb-tV-wxX" id="ppS-pg-oPh"/>
