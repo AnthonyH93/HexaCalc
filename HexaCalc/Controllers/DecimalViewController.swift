@@ -375,6 +375,10 @@ class DecimalViewController: UIViewController {
     
     //Perform a quick update to keep the state controller variables in sync with the calculator label
     private func quickUpdateStateController() {
+        //Safety condition in the case that runningNumber is nil
+        if (runningNumber == ""){
+            return
+        }
         //Need to keep the state controller updated with what is on the screen
         stateController?.convValues.decimalVal = runningNumber
         
