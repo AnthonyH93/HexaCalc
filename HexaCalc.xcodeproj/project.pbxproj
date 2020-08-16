@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */; };
 		9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */; };
+		9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */; };
 		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
 		9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				9DAE269424C7F77A0070B965 /* StateController.swift */,
 				9DAE268924C68BEB0070B965 /* RoundButton.swift */,
+				9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DEF249D24C553F000701F5B /* BinaryViewController.swift in Sources */,
+				9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */,
 				9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */,
 				9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */,
 				9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */,

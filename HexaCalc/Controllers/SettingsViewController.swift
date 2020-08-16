@@ -32,6 +32,7 @@ class SettingsViewController: UIViewController {
     @IBAction func colourPressed(_ sender: RoundButton) {
         let colourClicked = sender.self.backgroundColor
         print(colourClicked!)
+        hexLabel.textColor = colourClicked
     }
     
     //MARK: Private Methods
