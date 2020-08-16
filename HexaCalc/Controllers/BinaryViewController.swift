@@ -54,6 +54,14 @@ class BinaryViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         outputLabel.text = binaryDefaultLabel
+        
+        if let savedPreferences = NSKeyedUnarchiver.unarchiveObject(withFile: UserPreferences.ArchiveURL.path) as? UserPreferences {
+            PLUSBtn.backgroundColor = savedPreferences.colour
+            SUBBtn.backgroundColor = savedPreferences.colour
+            MULTBtn.backgroundColor = savedPreferences.colour
+            DIVBtn.backgroundColor = savedPreferences.colour
+            EQUALSBtn.backgroundColor = savedPreferences.colour
+        }
     }
     
     override func viewDidLayoutSubviews() {
