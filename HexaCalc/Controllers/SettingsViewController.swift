@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController {
     //MARK: Properties
     var stateController: StateController?
     
-    @IBOutlet weak var hexLabel: UILabel!
+    @IBOutlet weak var optionsLabel: UILabel!
     @IBOutlet weak var binLabel: UILabel!
     @IBOutlet weak var decLabel: UILabel!
     @IBOutlet weak var settingsLabel: UILabel!
@@ -23,7 +23,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var viewTCBtn: UIButton!
     @IBOutlet weak var thanksLabel: UILabel!
     
-    @IBOutlet weak var hexSwitch: UISwitch!
     @IBOutlet weak var binSwitch: UISwitch!
     @IBOutlet weak var decSwitch: UISwitch!
     
@@ -33,15 +32,21 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         if let savedPreferences = loadPreferences() {
-            hexLabel.textColor = savedPreferences.colour
+            optionsLabel.textColor = savedPreferences.colour
             binLabel.textColor = savedPreferences.colour
             decLabel.textColor = savedPreferences.colour
             thanksLabel.textColor = savedPreferences.colour
             colourLabel.textColor = savedPreferences.colour
             settingsLabel.textColor = savedPreferences.colour
-            hexSwitch.onTintColor = savedPreferences.colour
             binSwitch.onTintColor = savedPreferences.colour
             decSwitch.onTintColor = savedPreferences.colour
+            
+            if (savedPreferences.binTabState == false){
+                binSwitch.isOn = false
+            }
+            if (savedPreferences.decTabState == false){
+                decSwitch.isOn = false
+            }
         }
     }
     
@@ -49,16 +54,15 @@ class SettingsViewController: UIViewController {
     @IBAction func colourPressed(_ sender: RoundButton) {
         let colourClicked = sender.self.backgroundColor
         let colourTag = "\(sender.tag)"
-        let userPreferences = UserPreferences(colour: colourClicked!, hexTabState: true, binTabState: true, decTabState: false)
+        let userPreferences = UserPreferences(colour: colourClicked!, hexTabState: true, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
         
         //Change elements onscreen to new colour
-        hexLabel.textColor = colourClicked
+        optionsLabel.textColor = colourClicked
         binLabel.textColor = colourClicked
         decLabel.textColor = colourClicked
         thanksLabel.textColor = colourClicked
         colourLabel.textColor = colourClicked
         settingsLabel.textColor = colourClicked
-        hexSwitch.onTintColor = colourClicked
         binSwitch.onTintColor = colourClicked
         decSwitch.onTintColor = colourClicked
         
@@ -95,6 +99,87 @@ class SettingsViewController: UIViewController {
         }
         
         savePreferences(userPreferences: userPreferences)
+    }
+
+    //Function to toggle the binary calculator on or off when the switch is pressed
+    @IBAction func binarySwitchPressed(_ sender: UISwitch) {
+        if sender.isOn {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, hexTabState: true, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
+            savePreferences(userPreferences: userPreferences)
+            
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (barItems[1].title! != "Binary"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                }
+            }
+        }
+        else {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, hexTabState: true, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
+            savePreferences(userPreferences: userPreferences)
+            
+            if let barItems = arrayOfTabBarItems, barItems.count > 2 {
+                if (barItems[1].title! == "Binary"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                }
+            }
+        }
+    }
+    
+    //Function to toggle the decimal calculator on or off when the switch is pressed
+    @IBAction func decimalSwitchPressed(_ sender: UISwitch) {
+        if sender.isOn {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, hexTabState: true, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
+            savePreferences(userPreferences: userPreferences)
+            
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (barItems.count == 2){
+                    if (barItems[1].title! != "Decimal"){
+                        var viewControllers = tabBarController?.viewControllers
+                        viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 1)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                }
+                else if (barItems.count == 3){
+                    if (barItems[1].title! != "Decimal" && barItems[2].title! != "Decimal"){
+                        var viewControllers = tabBarController?.viewControllers
+                        viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 2)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                }
+                else {
+                    //Should not occur since 1 tab must have been off if the switch was off
+                }
+            }
+        }
+        else {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, hexTabState: true, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
+            savePreferences(userPreferences: userPreferences)
+            
+            if let barItems = arrayOfTabBarItems, barItems.count > 2 {
+                if (barItems[2].title! == "Decimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 2)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                if (barItems[1].title! == "Decimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                }
+            }
+        }
     }
     
     //MARK: Private Methods

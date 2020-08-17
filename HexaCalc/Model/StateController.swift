@@ -15,6 +15,7 @@ struct convVals{
     var binVal: String = "0"
     var largerThan64Bits: Bool = false
     var colour: UIColor?
+    var originalTabs: [UIViewController]?
 }
 
 protocol StateControllerProtocol {

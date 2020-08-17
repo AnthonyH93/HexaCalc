@@ -61,9 +61,47 @@ class HexadecimalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let originalViewControllers = tabBarController?.viewControllers
+        stateController?.convValues.originalTabs = originalViewControllers
+        
         outputLabel.text = "0"
         
         if let savedPreferences = NSKeyedUnarchiver.unarchiveObject(withFile: UserPreferences.ArchiveURL.path) as? UserPreferences {
+            
+            //Remove tabs which are disabled by the user
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (savedPreferences.binTabState == false && savedPreferences.decTabState == false){
+                    var viewControllers = tabBarController?.viewControllers
+                    if (barItems[1].title! == "Binary"){
+                        viewControllers?.remove(at: 1)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                    if (barItems[2].title! == "Decimal"){
+                        viewControllers?.remove(at: 1)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                }
+                else if (savedPreferences.binTabState == false && savedPreferences.decTabState == true) {
+                    var viewControllers = tabBarController?.viewControllers
+                    if (barItems[1].title! == "Binary"){
+                        viewControllers?.remove(at: 1)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                }
+                else if (savedPreferences.binTabState == true && savedPreferences.decTabState == false) {
+                    var viewControllers = tabBarController?.viewControllers
+                    if (barItems[2].title! == "Decimal"){
+                        viewControllers?.remove(at: 2)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                }
+                else {
+                    //No tabs to remove
+                }
+            }
+            
+            
             PLUSBtn.backgroundColor = savedPreferences.colour
             SUBBtn.backgroundColor = savedPreferences.colour
             MULTBtn.backgroundColor = savedPreferences.colour
