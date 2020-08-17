@@ -112,14 +112,14 @@ class SettingsViewController: UIViewController {
     }
     
     func changeIcon(to iconName: String) {
-      // 1
+      //First, need to make sure the app can change its icon
       guard UIApplication.shared.supportsAlternateIcons else {
         return
       }
 
-      // 2
+      //Next we can actually work on changing the app icon
       UIApplication.shared.setAlternateIconName(iconName, completionHandler: { (error) in
-        // 3
+        //Output the result of the icon change
         if let error = error {
           print("App icon failed to change due to \(error.localizedDescription)")
         } else {

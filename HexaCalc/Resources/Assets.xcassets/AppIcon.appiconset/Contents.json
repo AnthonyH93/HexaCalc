@@ -31,13 +31,13 @@
       "size" : "40x40"
     },
     {
-      "filename" : "HexaCalcIconGreen120.png",
+      "filename" : "HexaCalcIconGreen@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "HexaCalcIconGreen180.png",
+      "filename" : "HexaCalcIconGreen@3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
