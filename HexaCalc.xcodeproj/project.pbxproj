@@ -10,6 +10,22 @@
 		9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */; };
 		9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */; };
 		9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */; };
+		9D8F9A6124EA033600F32A2C /* HexaCalcIconRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5124EA033500F32A2C /* HexaCalcIconRed@2x.png */; };
+		9D8F9A6224EA033600F32A2C /* HexaCalcIconBlue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5224EA033500F32A2C /* HexaCalcIconBlue@3x.png */; };
+		9D8F9A6324EA033600F32A2C /* HexaCalcIconTeal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5324EA033500F32A2C /* HexaCalcIconTeal@2x.png */; };
+		9D8F9A6424EA033600F32A2C /* HexaCalcIconTeal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5424EA033500F32A2C /* HexaCalcIconTeal@3x.png */; };
+		9D8F9A6524EA033600F32A2C /* HexaCalcIconOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5524EA033500F32A2C /* HexaCalcIconOrange@2x.png */; };
+		9D8F9A6624EA033600F32A2C /* HexaCalcIconIndigo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5624EA033500F32A2C /* HexaCalcIconIndigo@2x.png */; };
+		9D8F9A6724EA033600F32A2C /* HexaCalcIconGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5724EA033500F32A2C /* HexaCalcIconGreen@2x.png */; };
+		9D8F9A6824EA033600F32A2C /* HexaCalcIconOrange@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5824EA033500F32A2C /* HexaCalcIconOrange@3x.png */; };
+		9D8F9A6924EA033600F32A2C /* HexaCalcIconYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5924EA033500F32A2C /* HexaCalcIconYellow@2x.png */; };
+		9D8F9A6A24EA033600F32A2C /* HexaCalcIconBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5A24EA033500F32A2C /* HexaCalcIconBlue@2x.png */; };
+		9D8F9A6B24EA033600F32A2C /* HexaCalcIconGreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5B24EA033500F32A2C /* HexaCalcIconGreen@3x.png */; };
+		9D8F9A6C24EA033600F32A2C /* HexaCalcIconYellow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5C24EA033500F32A2C /* HexaCalcIconYellow@3x.png */; };
+		9D8F9A6D24EA033600F32A2C /* HexaCalcIconPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5D24EA033500F32A2C /* HexaCalcIconPurple@2x.png */; };
+		9D8F9A6E24EA033600F32A2C /* HexaCalcIconPurple@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5E24EA033500F32A2C /* HexaCalcIconPurple@3x.png */; };
+		9D8F9A6F24EA033600F32A2C /* HexaCalcIconIndigo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A5F24EA033500F32A2C /* HexaCalcIconIndigo@3x.png */; };
+		9D8F9A7024EA033600F32A2C /* HexaCalcIconRed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A6024EA033500F32A2C /* HexaCalcIconRed@3x.png */; };
 		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
@@ -39,6 +55,22 @@
 		9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
 		9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		9D8F9A5124EA033500F32A2C /* HexaCalcIconRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconRed@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconRed@2x.png"; sourceTree = "<group>"; };
+		9D8F9A5224EA033500F32A2C /* HexaCalcIconBlue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconBlue@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconBlue@3x.png"; sourceTree = "<group>"; };
+		9D8F9A5324EA033500F32A2C /* HexaCalcIconTeal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconTeal@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconTeal@2x.png"; sourceTree = "<group>"; };
+		9D8F9A5424EA033500F32A2C /* HexaCalcIconTeal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconTeal@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconTeal@3x.png"; sourceTree = "<group>"; };
+		9D8F9A5524EA033500F32A2C /* HexaCalcIconOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconOrange@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconOrange@2x.png"; sourceTree = "<group>"; };
+		9D8F9A5624EA033500F32A2C /* HexaCalcIconIndigo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconIndigo@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconIndigo@2x.png"; sourceTree = "<group>"; };
+		9D8F9A5724EA033500F32A2C /* HexaCalcIconGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconGreen@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconGreen@2x.png"; sourceTree = "<group>"; };
+		9D8F9A5824EA033500F32A2C /* HexaCalcIconOrange@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconOrange@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconOrange@3x.png"; sourceTree = "<group>"; };
+		9D8F9A5924EA033500F32A2C /* HexaCalcIconYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconYellow@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconYellow@2x.png"; sourceTree = "<group>"; };
+		9D8F9A5A24EA033500F32A2C /* HexaCalcIconBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconBlue@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconBlue@2x.png"; sourceTree = "<group>"; };
+		9D8F9A5B24EA033500F32A2C /* HexaCalcIconGreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconGreen@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconGreen@3x.png"; sourceTree = "<group>"; };
+		9D8F9A5C24EA033500F32A2C /* HexaCalcIconYellow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconYellow@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconYellow@3x.png"; sourceTree = "<group>"; };
+		9D8F9A5D24EA033500F32A2C /* HexaCalcIconPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconPurple@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconPurple@2x.png"; sourceTree = "<group>"; };
+		9D8F9A5E24EA033500F32A2C /* HexaCalcIconPurple@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconPurple@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconPurple@3x.png"; sourceTree = "<group>"; };
+		9D8F9A5F24EA033500F32A2C /* HexaCalcIconIndigo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconIndigo@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconIndigo@3x.png"; sourceTree = "<group>"; };
+		9D8F9A6024EA033500F32A2C /* HexaCalcIconRed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconRed@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon/HexaCalcIconRed@3x.png"; sourceTree = "<group>"; };
 		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
@@ -100,6 +132,7 @@
 		9D6DE93224D3CF21005018E5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9D8F9A2C24EA011500F32A2C /* App Icons */,
 				9D6DE93324D3CF62005018E5 /* Storyboards */,
 				9DEF24A424C553F100701F5B /* Assets.xcassets */,
 				9DEF24A124C553F000701F5B /* HexaCalc.xcdatamodeld */,
@@ -114,6 +147,29 @@
 				9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		9D8F9A2C24EA011500F32A2C /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				9D8F9A5724EA033500F32A2C /* HexaCalcIconGreen@2x.png */,
+				9D8F9A5B24EA033500F32A2C /* HexaCalcIconGreen@3x.png */,
+				9D8F9A5A24EA033500F32A2C /* HexaCalcIconBlue@2x.png */,
+				9D8F9A5224EA033500F32A2C /* HexaCalcIconBlue@3x.png */,
+				9D8F9A5624EA033500F32A2C /* HexaCalcIconIndigo@2x.png */,
+				9D8F9A5F24EA033500F32A2C /* HexaCalcIconIndigo@3x.png */,
+				9D8F9A5524EA033500F32A2C /* HexaCalcIconOrange@2x.png */,
+				9D8F9A5824EA033500F32A2C /* HexaCalcIconOrange@3x.png */,
+				9D8F9A5D24EA033500F32A2C /* HexaCalcIconPurple@2x.png */,
+				9D8F9A5E24EA033500F32A2C /* HexaCalcIconPurple@3x.png */,
+				9D8F9A5124EA033500F32A2C /* HexaCalcIconRed@2x.png */,
+				9D8F9A6024EA033500F32A2C /* HexaCalcIconRed@3x.png */,
+				9D8F9A5324EA033500F32A2C /* HexaCalcIconTeal@2x.png */,
+				9D8F9A5424EA033500F32A2C /* HexaCalcIconTeal@3x.png */,
+				9D8F9A5924EA033500F32A2C /* HexaCalcIconYellow@2x.png */,
+				9D8F9A5C24EA033500F32A2C /* HexaCalcIconYellow@3x.png */,
+			);
+			path = "App Icons";
 			sourceTree = "<group>";
 		};
 		9DAE268B24C68C090070B965 /* Extensions */ = {
@@ -247,9 +303,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D8F9A6D24EA033600F32A2C /* HexaCalcIconPurple@2x.png in Resources */,
+				9D8F9A6924EA033600F32A2C /* HexaCalcIconYellow@2x.png in Resources */,
+				9D8F9A7024EA033600F32A2C /* HexaCalcIconRed@3x.png in Resources */,
+				9D8F9A6B24EA033600F32A2C /* HexaCalcIconGreen@3x.png in Resources */,
+				9D8F9A6124EA033600F32A2C /* HexaCalcIconRed@2x.png in Resources */,
+				9D8F9A6C24EA033600F32A2C /* HexaCalcIconYellow@3x.png in Resources */,
+				9D8F9A6424EA033600F32A2C /* HexaCalcIconTeal@3x.png in Resources */,
+				9D8F9A6724EA033600F32A2C /* HexaCalcIconGreen@2x.png in Resources */,
 				9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */,
+				9D8F9A6324EA033600F32A2C /* HexaCalcIconTeal@2x.png in Resources */,
+				9D8F9A6E24EA033600F32A2C /* HexaCalcIconPurple@3x.png in Resources */,
+				9D8F9A6524EA033600F32A2C /* HexaCalcIconOrange@2x.png in Resources */,
 				9DEF24A524C553F100701F5B /* Assets.xcassets in Resources */,
+				9D8F9A6824EA033600F32A2C /* HexaCalcIconOrange@3x.png in Resources */,
+				9D8F9A6624EA033600F32A2C /* HexaCalcIconIndigo@2x.png in Resources */,
+				9D8F9A6224EA033600F32A2C /* HexaCalcIconBlue@3x.png in Resources */,
+				9D8F9A6F24EA033600F32A2C /* HexaCalcIconIndigo@3x.png in Resources */,
 				9DEF24A024C553F000701F5B /* Main.storyboard in Resources */,
+				9D8F9A6A24EA033600F32A2C /* HexaCalcIconBlue@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

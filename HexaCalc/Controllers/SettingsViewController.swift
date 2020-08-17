@@ -48,7 +48,7 @@ class SettingsViewController: UIViewController {
     //MARK: Button Actions
     @IBAction func colourPressed(_ sender: RoundButton) {
         let colourClicked = sender.self.backgroundColor
-        print(colourClicked!)
+        let colourTag = "\(sender.tag)"
         let userPreferences = UserPreferences(colour: colourClicked!, hexTabState: true, binTabState: true, decTabState: false)
         
         //Change elements onscreen to new colour
@@ -68,6 +68,32 @@ class SettingsViewController: UIViewController {
         //Set state controller such that all calculators know the new colour without a reload
         stateController?.convValues.colour = colourClicked!
         
+        //Change the app icon based on which colour was selected
+        if (colourTag == "0") {
+            changeIcon(to: "HexaCalcIconRed")
+        }
+        else if (colourTag == "1") {
+            changeIcon(to: "HexaCalcIconOrange")
+        }
+        else if (colourTag == "2"){
+            changeIcon(to: "HexaCalcIconYellow")
+        }
+        else if (colourTag == "3"){
+            changeIcon(to: "HexaCalcIconGreen")
+        }
+        else if (colourTag == "4"){
+            changeIcon(to: "HexaCalcIconBlue")
+        }
+        else if (colourTag == "5"){
+            changeIcon(to: "HexaCalcIconTeal")
+        }
+        else if (colourTag == "6"){
+            changeIcon(to: "HexaCalcIconIndigo")
+        }
+        else {
+            changeIcon(to: "HexaCalcIconPurple")
+        }
+        
         savePreferences(userPreferences: userPreferences)
     }
     
@@ -83,6 +109,23 @@ class SettingsViewController: UIViewController {
     
     private func loadPreferences() -> UserPreferences? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: UserPreferences.ArchiveURL.path) as? UserPreferences
+    }
+    
+    func changeIcon(to iconName: String) {
+      // 1
+      guard UIApplication.shared.supportsAlternateIcons else {
+        return
+      }
+
+      // 2
+      UIApplication.shared.setAlternateIconName(iconName, completionHandler: { (error) in
+        // 3
+        if let error = error {
+          print("App icon failed to change due to \(error.localizedDescription)")
+        } else {
+          print("App icon changed successfully")
+        }
+      })
     }
 }
 

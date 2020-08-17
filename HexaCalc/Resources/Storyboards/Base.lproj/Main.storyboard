@@ -1552,7 +1552,7 @@
                                                     <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="xVO-Tn-NC4"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCQ-0L-wgO" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCQ-0L-wgO" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="39.999999999999993" y="0.0" width="30.000000000000007" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1562,7 +1562,7 @@
                                                     <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="ba5-57-LGE"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeE-ea-efn" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeE-ea-efn" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="80" y="0.0" width="30" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1572,7 +1572,7 @@
                                                     <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="T3D-eI-d0b"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hd-uI-dan" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hd-uI-dan" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="120" y="0.0" width="30" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1582,7 +1582,7 @@
                                                     <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="S5f-mP-ua1"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaL-Lf-Eon" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaL-Lf-Eon" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="160" y="0.0" width="30" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1592,7 +1592,7 @@
                                                     <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="Zn7-YM-xjt"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5E-v9-apF" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5E-v9-apF" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="200" y="0.0" width="30" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1602,7 +1602,7 @@
                                                     <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="gYp-LH-mL6"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6Q-e1-Zim" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6Q-e1-Zim" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="239.99999999999997" y="0.0" width="30.000000000000028" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1612,7 +1612,7 @@
                                                     <action selector="colourPressed:" destination="E78-IU-jHO" eventType="touchUpInside" id="99j-lE-88J"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ube-zZ-MPu" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
+                                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ube-zZ-MPu" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                 <rect key="frame" x="280" y="0.0" width="30" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
