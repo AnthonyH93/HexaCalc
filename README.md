@@ -36,11 +36,19 @@ This app is optimized to run and look amazing on all iPhones which are supported
 * Addition, subtraction, multiplication, division
 * All clear, delete, plus/minus, dot
 
+## User Customization
+
+This app uses data persistance to implement saved user customization allowing each user to choose their customizations through a settings menu.
+
+### Customization options
+* 8 different system colours which change the colour of buttons and the app icon
+* The ability to disable or enable the binary and decimal calculators should the user not require them
+
+The settings menu also has links to the privacy policy and terms and conditions documents.
+
 ## Currently In Development
 
 This app is currently being worked on, it is close to being completed, work is being done on:
-* Settings menu for user customization with data persistance
-* Creating an app icon
 * Submitting to Apple for app store approval and release
 
 Thanks for looking at this project, screenshots will be added shortly.
