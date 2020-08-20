@@ -1675,34 +1675,16 @@
                                         <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GNS-Br-2is">
-                                        <rect key="frame" x="96.999999999999986" y="498" width="180.66666666666663" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="29" id="HYo-8q-iuj"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Rate This App">
-                                                    <attributes>
-                                                        <font key="NSFont" size="21" name="AvenirNext-Regular"/>
-                                                        <integer key="NSUnderline" value="1"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="vcL-1E-7Ug" secondAttribute="trailing" constant="209" id="8my-eS-OG5"/>
-                                    <constraint firstItem="TrE-52-IHo" firstAttribute="centerX" secondItem="GNS-Br-2is" secondAttribute="centerX" id="AoK-Mt-ydH"/>
                                     <constraint firstItem="zc4-uA-nPu" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leadingMargin" constant="13" id="C0T-sc-P0n"/>
                                     <constraint firstItem="to9-n5-F3Z" firstAttribute="top" secondItem="vcL-1E-7Ug" secondAttribute="bottom" constant="8" id="FWR-qt-hP6"/>
                                     <constraint firstItem="R8S-Cz-Vjt" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="-4" id="FmO-0h-WAD"/>
                                     <constraint firstItem="czb-tV-wxX" firstAttribute="centerX" secondItem="cRz-p8-Cgq" secondAttribute="centerX" id="IM7-69-8hL"/>
                                     <constraint firstItem="zc4-uA-nPu" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="topMargin" constant="28" id="LCM-CG-5xu"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="top" secondItem="BNe-bG-HfZ" secondAttribute="bottom" constant="40" id="O6f-yo-PRE"/>
-                                    <constraint firstItem="GNS-Br-2is" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="97" id="SeK-ip-YXz"/>
                                     <constraint firstItem="cRz-p8-Cgq" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="98" id="TFe-iU-r5m"/>
                                     <constraint firstItem="BNe-bG-HfZ" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="21" id="Tr3-UC-evr"/>
                                     <constraint firstItem="czb-tV-wxX" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="57" id="VNZ-bF-vWe"/>
@@ -1713,7 +1695,6 @@
                                     <constraint firstItem="cRz-p8-Cgq" firstAttribute="top" secondItem="to9-n5-F3Z" secondAttribute="bottom" constant="37.670000000000002" id="jzf-uw-qX4"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leadingMargin" constant="13" id="mXx-v5-dWq"/>
                                     <constraint firstItem="R8S-Cz-Vjt" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="top" constant="556" id="njl-SG-CTl"/>
-                                    <constraint firstItem="GNS-Br-2is" firstAttribute="top" secondItem="TrE-52-IHo" secondAttribute="bottom" constant="7.6666666666666856" id="so3-Ur-bu6"/>
                                     <constraint firstItem="BNe-bG-HfZ" firstAttribute="top" secondItem="zc4-uA-nPu" secondAttribute="bottom" constant="8" id="tHS-Kt-eMc"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="top" constant="241" id="uFv-Lu-wBi"/>
                                     <constraint firstItem="czb-tV-wxX" firstAttribute="top" secondItem="cRz-p8-Cgq" secondAttribute="bottom" constant="8" id="vB9-Cb-8is"/>
