@@ -1646,6 +1646,9 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="viewPrivacyPolicy:" destination="E78-IU-jHO" eventType="touchUpInside" id="YA4-6u-czx"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="czb-tV-wxX">
                                         <rect key="frame" x="57" y="384" width="260.66666666666669" height="30"/>
@@ -1662,6 +1665,9 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="viewTermsAndConditions:" destination="E78-IU-jHO" eventType="touchUpInside" id="QBU-Wx-ftR"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for using this app!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrE-52-IHo">
                                         <rect key="frame" x="42" y="460" width="290.66666666666669" height="30.333333333333314"/>

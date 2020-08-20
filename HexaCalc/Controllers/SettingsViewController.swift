@@ -51,19 +51,19 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-    
-    let screenWidth = UIScreen.main.bounds.width
-    
+        
+        let screenWidth = UIScreen.main.bounds.width
+        
         //iPhone SE (1st generation) special case
         if (screenWidth == 320){
             //Need to edit the font size for this screen width size
             optionsLabel?.font = UIFont(name: "Avenir Next", size: 20)
-             binLabel?.font = UIFont(name: "Avenir Next", size: 20)
-             decLabel?.font = UIFont(name: "Avenir Next", size: 20)
-             thanksLabel?.font = UIFont(name: "Avenir Next", size: 18)
-             thanksLabel?.text = "Thanks for using HexaCalc!"
-             colourLabel?.font = UIFont(name: "Avenir Next", size: 20)
-             settingsLabel?.font = UIFont(name: "Avenir Next", size: 30)
+            binLabel?.font = UIFont(name: "Avenir Next", size: 20)
+            decLabel?.font = UIFont(name: "Avenir Next", size: 20)
+            thanksLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            thanksLabel?.text = "Thanks for using HexaCalc!"
+            colourLabel?.font = UIFont(name: "Avenir Next", size: 20)
+            settingsLabel?.font = UIFont(name: "Avenir Next", size: 30)
         }
     }
     
@@ -198,6 +198,20 @@ class SettingsViewController: UIViewController {
             }
         }
     }
+    
+    //iOS approval requirement to have a hosted privacy policy and a button to open it within the app
+    @IBAction func viewPrivacyPolicy(_ sender: Any) {
+        let privacyPolicyURL = NSURL(string: "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy")! as URL
+        UIApplication.shared.open(privacyPolicyURL, options: [:], completionHandler: nil)
+    }
+    
+    //iOS approval requirement to have a hosted terms and conditions page and a button to open it within the app
+    @IBAction func viewTermsAndConditions(_ sender: Any) {
+        let termsAndConditionsURL = NSURL(string: "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions")! as URL
+        UIApplication.shared.open(termsAndConditionsURL, options: [:], completionHandler: nil)
+    }
+    
+    
     
     //MARK: Private Methods
     private func savePreferences(userPreferences: UserPreferences) {
