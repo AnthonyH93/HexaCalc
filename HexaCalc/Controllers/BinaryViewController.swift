@@ -55,7 +55,7 @@ class BinaryViewController: UIViewController {
         
         outputLabel.text = binaryDefaultLabel
         
-        if let savedPreferences = NSKeyedUnarchiver.unarchiveObject(withFile: UserPreferences.ArchiveURL.path) as? UserPreferences {
+        if let savedPreferences = loadPreferences() {
             PLUSBtn.backgroundColor = savedPreferences.colour
             SUBBtn.backgroundColor = savedPreferences.colour
             MULTBtn.backgroundColor = savedPreferences.colour
@@ -699,6 +699,26 @@ class BinaryViewController: UIViewController {
         for constraint in constraints {
             constraint.isActive = true
         }
+    }
+    
+    private func loadPreferences() -> UserPreferences? {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let fullPath = paths[0].appendingPathComponent("userPreferences")
+        
+        if let nsData = NSData(contentsOf: fullPath) {
+            do {
+                
+                let data = Data(referencing:nsData)
+
+                if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
+                    return loadedPreferences
+                }
+            } catch {
+                print("Couldn't read file.")
+                return nil
+            }
+        }
+        return nil
     }
 }
 
