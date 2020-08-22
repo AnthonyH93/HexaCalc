@@ -215,16 +215,37 @@ class SettingsViewController: UIViewController {
     
     //MARK: Private Methods
     private func savePreferences(userPreferences: UserPreferences) {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(userPreferences, toFile: UserPreferences.ArchiveURL.path)
-        if isSuccessfulSave {
-            os_log("Preferences successfully saved.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Failed to save preferences...", log: OSLog.default, type: .error)
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let fullPath = paths[0].appendingPathComponent("userPreferences")
+
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: userPreferences, requiringSecureCoding: false)
+            try data.write(to: fullPath)
+            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+        } catch {
+            os_log("Failed to save meals...", log: OSLog.default, type: .error)
         }
     }
     
     private func loadPreferences() -> UserPreferences? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: UserPreferences.ArchiveURL.path) as? UserPreferences
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let fullPath = paths[0].appendingPathComponent("userPreferences")
+        
+        if let nsData = NSData(contentsOf: fullPath) {
+            do {
+                
+                let data = Data(referencing:nsData)
+
+                if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
+                    return loadedPreferences
+                }
+            } catch {
+                print("Couldn't read file.")
+                return nil
+            }
+        }
+        return nil
     }
     
     func changeIcon(to iconName: String) {
