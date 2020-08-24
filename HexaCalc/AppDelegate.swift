@@ -15,9 +15,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch
-        if let userPreferences = NSKeyedUnarchiver.unarchiveObject(withFile: UserPreferences.ArchiveURL.path) as? UserPreferences {
-            UITabBar.appearance().tintColor = userPreferences.colour
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let fullPath = paths[0].appendingPathComponent("userPreferences")
+        
+        if let nsData = NSData(contentsOf: fullPath) {
+            do {
+
+                let data = Data(referencing:nsData)
+
+                if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
+                    UITabBar.appearance().tintColor = loadedPreferences.colour
+                }
+            } catch {
+                print("Couldn't read file.")
+            }
         }
         return true
     }
