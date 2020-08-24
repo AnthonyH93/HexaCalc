@@ -26,10 +26,30 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var binSwitch: UISwitch!
     @IBOutlet weak var decSwitch: UISwitch!
     
+    @IBOutlet weak var redBtn: RoundButton!
+    @IBOutlet weak var orangeBtn: RoundButton!
+    @IBOutlet weak var yellowBtn: RoundButton!
+    @IBOutlet weak var greenBtn: RoundButton!
+    @IBOutlet weak var blueBtn: RoundButton!
+    @IBOutlet weak var tealBtn: RoundButton!
+    @IBOutlet weak var indigoBtn: RoundButton!
+    @IBOutlet weak var purpleBtn: RoundButton!
+    
+    
     //MARK: Variables
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setup the button border widths
+        redBtn.layer.borderWidth = 3
+        orangeBtn.layer.borderWidth = 3
+        yellowBtn.layer.borderWidth = 3
+        greenBtn.layer.borderWidth = 3
+        blueBtn.layer.borderWidth = 3
+        tealBtn.layer.borderWidth = 3
+        indigoBtn.layer.borderWidth = 3
+        purpleBtn.layer.borderWidth = 3
         
         if let savedPreferences = loadPreferences() {
             optionsLabel.textColor = savedPreferences.colour
@@ -47,6 +67,18 @@ class SettingsViewController: UIViewController {
             if (savedPreferences.decTabState == false){
                 decSwitch.isOn = false
             }
+        }
+        else {
+            //Default colour is green so outline that button only
+            greenBtn.layer.borderColor = UIColor.white.cgColor
+            
+            redBtn.layer.borderColor = UIColor.darkGray.cgColor
+            orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
+            yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
+            blueBtn.layer.borderColor = UIColor.darkGray.cgColor
+            tealBtn.layer.borderColor = UIColor.darkGray.cgColor
+            indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
+            purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
         }
     }
     

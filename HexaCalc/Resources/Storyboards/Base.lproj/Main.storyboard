@@ -1724,14 +1724,22 @@
                     <connections>
                         <outlet property="binLabel" destination="JFd-8t-ZUC" id="3jX-IH-GLN"/>
                         <outlet property="binSwitch" destination="ZCu-em-ZE4" id="HfI-AN-4h1"/>
+                        <outlet property="blueBtn" destination="MaL-Lf-Eon" id="Ho3-Ih-lw3"/>
                         <outlet property="colourLabel" destination="vcL-1E-7Ug" id="VJ5-Td-yZx"/>
                         <outlet property="decLabel" destination="hPu-qc-Vo9" id="D88-xy-8Hf"/>
                         <outlet property="decSwitch" destination="0Fe-oE-9ds" id="XWf-lR-xHN"/>
+                        <outlet property="greenBtn" destination="3Hd-uI-dan" id="Mwp-kB-zO5"/>
+                        <outlet property="indigoBtn" destination="m6Q-e1-Zim" id="kDB-rR-62w"/>
                         <outlet property="optionsLabel" destination="d49-Da-Gue" id="PuZ-RW-QV4"/>
+                        <outlet property="orangeBtn" destination="xCQ-0L-wgO" id="auC-hj-kBL"/>
+                        <outlet property="purpleBtn" destination="ube-zZ-MPu" id="ZP9-x8-kst"/>
+                        <outlet property="redBtn" destination="5N4-aC-jka" id="C3o-Al-geM"/>
                         <outlet property="settingsLabel" destination="zc4-uA-nPu" id="JCD-JS-Zou"/>
+                        <outlet property="tealBtn" destination="T5E-v9-apF" id="eee-qs-4Qw"/>
                         <outlet property="thanksLabel" destination="TrE-52-IHo" id="aEY-cN-woF"/>
                         <outlet property="viewPPBtn" destination="cRz-p8-Cgq" id="CgQ-nM-YWV"/>
                         <outlet property="viewTCBtn" destination="czb-tV-wxX" id="ppS-pg-oPh"/>
+                        <outlet property="yellowBtn" destination="EeE-ea-efn" id="Zp3-2P-jpG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-Ra-cND" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

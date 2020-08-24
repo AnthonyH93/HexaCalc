@@ -14,9 +14,10 @@ class UserPreferences : NSObject, NSCoding {
     //MARK: Initialization
     
     //Prepares and instance of a class for use
-    init(colour: UIColor, hexTabState: Bool, binTabState: Bool, decTabState: Bool) {
+    init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool) {
         //Initialize stored properties.
         self.colour = colour
+        self.colourNum = colourNum
         self.hexTabState = hexTabState
         self.binTabState = binTabState
         self.decTabState = decTabState
@@ -25,6 +26,7 @@ class UserPreferences : NSObject, NSCoding {
     //MARK: Properties
     
     var colour: UIColor
+    var colourNum: Int64
     var hexTabState: Bool
     var binTabState: Bool
     var decTabState: Bool
@@ -39,6 +41,7 @@ class UserPreferences : NSObject, NSCoding {
     
     struct PropertyKey {
         static let colour = "colour"
+        static let colourNum = "colourNum"
         static let hexTabState = "hexTabState"
         static let binTabState = "binTabState"
         static let decTabState = "decTabState"
@@ -48,6 +51,7 @@ class UserPreferences : NSObject, NSCoding {
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(colour, forKey: PropertyKey.colour)
+        aCoder.encode(colourNum, forKey: PropertyKey.colourNum)
         aCoder.encode(hexTabState, forKey: PropertyKey.hexTabState)
         aCoder.encode(binTabState, forKey: PropertyKey.binTabState)
         aCoder.encode(decTabState, forKey: PropertyKey.decTabState)
@@ -58,6 +62,8 @@ class UserPreferences : NSObject, NSCoding {
         
         let colour = aDecoder.decodeObject(forKey: PropertyKey.colour) as! UIColor
         
+        let colourNum = aDecoder.decodeInt64(forKey: PropertyKey.colourNum)
+        
         let hexTabState = aDecoder.decodeBool(forKey: PropertyKey.hexTabState)
         
         let binTabState = aDecoder.decodeBool(forKey: PropertyKey.binTabState)
@@ -65,7 +71,7 @@ class UserPreferences : NSObject, NSCoding {
         let decTabState = aDecoder.decodeBool(forKey: PropertyKey.decTabState)
         
         //Must call designated initializer.
-        self.init(colour: colour, hexTabState: hexTabState, binTabState: binTabState, decTabState: decTabState)
+        self.init(colour: colour, colourNum: colourNum, hexTabState: hexTabState, binTabState: binTabState, decTabState: decTabState)
     }
 }
 
