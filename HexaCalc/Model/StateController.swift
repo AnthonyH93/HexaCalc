@@ -16,6 +16,7 @@ struct convVals{
     var largerThan64Bits: Bool = false
     var colour: UIColor?
     var originalTabs: [UIViewController]?
+    var colourNum: Int64 = -1
 }
 
 protocol StateControllerProtocol {
