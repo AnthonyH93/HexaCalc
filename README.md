@@ -3,7 +3,7 @@
 ## About
 Three tabbed calculator for decimal, hexadecimal and binary for iOS built in Swift with Xcode. Provides numerous operations and seamless conversion between the three tabs.
 
-With a seperate screen for each of the number systems users can focus on exactly what system they need - many of the apps currently on the app store with similar functionality have all three number systems on the same screen.
+With a seperate screen for each of the number systems users can focus on exactly what system they need - many of the apps currently on the app store with similar functionality have all three number systems on the same screen or they are severely outdated in terms of UI.
 
 Switching tabs will result in instant conversion of the current value on the screen and will allow you to complete operations on that current number on the new screen.
 
