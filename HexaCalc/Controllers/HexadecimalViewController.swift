@@ -341,7 +341,7 @@ class HexadecimalViewController: UIViewController {
         if currentOperation != .NULL {
             let binRightValue = hexToBin(hexToConvert: runningNumber)
             if binRightValue != "" {
-                if (binRightValue.first == "1" && binRightValue.count == 64){
+                if (binRightValue.first == "1" && binRightValue.count == 64) {
                     rightValue = String(Int64(bitPattern: UInt64(binRightValue, radix: 2)!))
                 }
                 else {
@@ -350,14 +350,54 @@ class HexadecimalViewController: UIViewController {
                 runningNumber = ""
                 
                 switch (currentOperation) {
+                    
                 case .Add:
-                    result = "\(Int(leftValue)! + Int(rightValue)!)"
+                    
+                    //Check for an oveflow
+                    let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
+                    if (overCheck.overflow) {
+                        result = "Error! Integer Overflow!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
+                        return
+                    }
+                    else {
+                        result = "\(Int(leftValue)! + Int(rightValue)!)"
+                    }
                     
                 case .Subtract:
-                    result = "\(Int(leftValue)! - Int(rightValue)!)"
+
+                    //Check for an overflow
+                    let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
+                    if (overCheck.overflow) {
+                        result = "Error! Integer Overflow!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
+                        return
+                    }
+                    else {
+                        result = "\(Int(leftValue)! - Int(rightValue)!)"
+                    }
                     
                 case .Multiply:
-                    result = "\(Int(leftValue)! * Int(rightValue)!)"
+                    
+                    //Check for an overflow
+                    let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
+                    if (overCheck.overflow) {
+                        result = "Error! Integer Overflow!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
+                        return
+                    }
+                    else {
+                        result = "\(Int(leftValue)! * Int(rightValue)!)"
+                    }
                     
                 case .Divide:
                     //Output Error! if division by 0
@@ -365,6 +405,15 @@ class HexadecimalViewController: UIViewController {
                         result = "Error!"
                         outputLabel.text = result
                         currentOperation = operation
+                        return
+                    }
+                    let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
+                    if (overCheck.overflow) {
+                        result = "Error! Integer Overflow!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
                         return
                     }
                     else {
@@ -539,6 +588,11 @@ class HexadecimalViewController: UIViewController {
     private func formatNegativeHex(hexToConvert: String) -> String {
         var manipulatedString = hexToConvert
         manipulatedString.removeFirst()
+        
+        //Special hex representation of integer min
+        if (manipulatedString == "8000000000000000"){
+            return manipulatedString
+        }
         
         //Need to convert the binary, then flip all the bits, add 1 and convert back to hex
         let binaryInitial = String(Int(manipulatedString, radix:16)!, radix: 2)

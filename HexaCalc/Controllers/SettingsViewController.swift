@@ -463,9 +463,9 @@ class SettingsViewController: UIViewController {
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: userPreferences, requiringSecureCoding: false)
             try data.write(to: fullPath)
-            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+            os_log("Preferences successfully saved.", log: OSLog.default, type: .debug)
         } catch {
-            os_log("Failed to save meals...", log: OSLog.default, type: .error)
+            os_log("Failed to save preferences...", log: OSLog.default, type: .error)
         }
     }
     
