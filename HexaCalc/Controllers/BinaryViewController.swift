@@ -426,20 +426,68 @@ class BinaryViewController: UIViewController {
                 
                 switch (currentOperation) {
                 case .Add:
-                    result = "\(Int(leftValue)! + Int(rightValue)!)"
+                    
+                    //Check for an oveflow
+                    let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
+                    if (overCheck.overflow) {
+                        result = "Error! Integer Overflow!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
+                        return
+                    }
+                    else {
+                        result = "\(Int(leftValue)! + Int(rightValue)!)"
+                    }
                     
                 case .Subtract:
-                result = "\(Int(leftValue)! - Int(rightValue)!)"
+
+                    //Check for an overflow
+                    let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
+                    if (overCheck.overflow) {
+                        result = "Error! Integer Overflow!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
+                        return
+                    }
+                    else {
+                        result = "\(Int(leftValue)! - Int(rightValue)!)"
+                    }
                     
                 case .Multiply:
-                    result = "\(Int(leftValue)! * Int(rightValue)!)"
-
+                    
+                    //Check for an overflow
+                    let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
+                    if (overCheck.overflow) {
+                        result = "Error! Integer Overflow!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
+                        return
+                    }
+                    else {
+                        result = "\(Int(leftValue)! * Int(rightValue)!)"
+                    }
+                    
                 case .Divide:
                     //Output Error! if division by 0
                     if Int(rightValue)! == 0 {
                         result = "Error!"
                         outputLabel.text = result
                         currentOperation = operation
+                        return
+                    }
+                    let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
+                    if (overCheck.overflow) {
+                        result = "Error! Integer Overflow!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
                         return
                     }
                     else {
