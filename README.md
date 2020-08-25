@@ -34,7 +34,7 @@ This app is optimized to run and look amazing on all iPhones which are supported
 
 ### Device Screenshots for Hexacdecimal Calculator
 
-Green Positive Hexadecimal Output | Green Negative Hexadecimal Output | Red Negative Hexadecimal Output | Indigo Three Tab Hexadecimal Positive Output
+Green Positive Hexadecimal Output | Green Negative Hexadecimal Output | Red Negative Hexadecimal Output | Indigo Three Tab Positive Hexadecimal Output
 ---------------------- | -------------- | --------------------- | -----------------------------------
 ![alt text](iPhoneX_DeviceScreenshots/GreenPositiveHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/IndigoThreeTabPositiveHex.png?raw=true)
 
@@ -44,9 +44,21 @@ Green Positive Hexadecimal Output | Green Negative Hexadecimal Output | Red Nega
 * 1's compliment, 2's compliment, left shift, right shift
 * All clear, delete
 
+### Device Screenshots for Binary Calculator
+
+Green Positive Binary Output | Green Negative Binary Output | Red Negative Binary Output | Teal Three Tab Positive Binary Output
+---------------------- | -------------- | --------------------- | -----------------------------------
+![alt text](iPhoneX_DeviceScreenshots/GreenPositiveBin.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeBin.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeBin.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/TealPositiveThreeTabBin.png?raw=true)
+
 ### Decimal Calculator
 * Addition, subtraction, multiplication, division
 * All clear, delete, plus/minus, dot
+
+### Device Screenshots for Decimal Calculator
+
+Green Positive Decimal Output | Green Negative Decimal Output | Red Negative Decimal Output | Indigo Three Tab Positive Decimal Output
+---------------------- | -------------- | --------------------- | -----------------------------------
+![alt text](iPhoneX_DeviceScreenshots/GreenPositiveDec.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeDec.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeDec.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/IndigoThreeTabPositiveDec.png?raw=true)
 
 ## User Customization
 
@@ -57,6 +69,13 @@ This app uses data persistance to implement saved user customization allowing ea
 * The ability to disable or enable the binary and decimal calculators should the user not require them
 
 The settings menu also has links to the privacy policy and terms and conditions documents.
+
+### Device Screenshots for Settings Tab
+
+Default Settings View | Red Two Tab Settings View | Indigo Three Tab Settings View | Changing Icon to Blue
+---------------------- | -------------- | --------------------- | -----------------------------------
+![alt text](iPhoneX_DeviceScreenshots/DefaultSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedTwoTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/IndigoThreeTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/ChangeIconBlue.png?raw=true)
+
 
 ## Currently In Development
 
