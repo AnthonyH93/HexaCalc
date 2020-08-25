@@ -9,6 +9,8 @@ Switching tabs will result in instant conversion of the current value on the scr
 
 For the hexadecimal and binary calculators there is a limit of 64 bits as they use integer conversion, however the decimal calculator will allow you to work with larger numbers even when the other two calculator screens show an error.
 
+Note: All screenshots shown were taken on an iPhone X simulator.
+
 ## System Requirements
 
 This app is optimized to run and look amazing on all iPhones which are supported by iOS13:
@@ -25,6 +27,12 @@ This app is optimized to run and look amazing on all iPhones which are supported
 * Addition, subtraction, multiplication, division
 * AND, OR, XOR, NOT
 * All clear, delete
+
+### Device Screenshots for Hexacdecimal Calculator
+
+Green Positive Hexadecimal Output | Green Negative Hexadecimal Output | Red Negative Hexadecimal Output | Indigo Three Tab Hexadecimal Positive Output
+---------------------- | -------------- | --------------------- | -----------------------------------
+![alt text](iPhoneX_DeviceScreenshots/GreenPositiveHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/IndigoThreeTabPositiveHex.png?raw=true)
 
 ### Binary Calculator
 * Addition, subtraction, multiplication, division
@@ -51,4 +59,4 @@ The settings menu also has links to the privacy policy and terms and conditions 
 This app is currently being worked on, it is close to being completed, work is being done on:
 * Submitting to Apple for app store approval and release
 
-Thanks for looking at this project, screenshots will be added shortly.
+Thanks for looking at this project!
