@@ -1,5 +1,7 @@
 # HexaCalc
 
+## App Icon
+
 ![alt text](HexaCalcIconGreen1024.png?raw=true)
 
 ## About
