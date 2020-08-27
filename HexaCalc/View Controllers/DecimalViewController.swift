@@ -179,11 +179,28 @@ class DecimalViewController: UIViewController {
     }
     
     @IBAction func signPressed(_ sender: RoundButton) {
-        
+                
         //Essentially need to multiply the number by -1
         if (outputLabel.text == "0" || runningNumber == ""){
-            runningNumber = ""
-            outputLabel.text = "0"
+            if (outputLabel.text != "0"){
+                var currentNumber = Double(outputLabel.text ?? "0")!
+                currentNumber *= -1
+                
+                //Find out if number is an integer
+                if((currentNumber).truncatingRemainder(dividingBy: 1) == 0) {
+                    runningNumber = "\(Int(currentNumber))"
+                }
+                else {
+                    runningNumber = "\(currentNumber)"
+                }
+                outputLabel.text = runningNumber
+                quickUpdateStateController()
+                
+            }
+            else {
+                runningNumber = ""
+                outputLabel.text = "0"
+            }
         }
         else {
             var number = Double(runningNumber)!
@@ -355,6 +372,9 @@ class DecimalViewController: UIViewController {
                 //Need to round to 9 digits
                 //First find how many digits the decimal portion is
                 var num = Double(result)!
+                if (num < 0){
+                    num *= -1
+                }
                 var counter = 1
                 while (num > 1){
                     counter *= 10
