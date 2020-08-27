@@ -125,6 +125,12 @@ class DecimalViewController: UIViewController {
         if (Double(decimalLabelText ?? "0")! > 999999999 || Double(decimalLabelText ?? "0")! < -999999999) {
             decimalLabelText = "\(Double(decimalLabelText ?? "0")!.scientificFormatted)"
         }
+        else {
+            //Check if we need to convert to int
+            if(Double(decimalLabelText ?? "0")!.truncatingRemainder(dividingBy: 1) == 0) {
+                decimalLabelText = "\(Int(Double(decimalLabelText ?? "0")!))"
+            }
+        }
         
         //Set button colour based on state controller
         if (stateController?.convValues.colour != nil){
