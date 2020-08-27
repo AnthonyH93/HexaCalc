@@ -152,6 +152,7 @@ class DecimalViewController: UIViewController {
                 outputLabel.text = runningNumber
             }
             
+            stateController?.convValues.largerThan64Bits = false
             quickUpdateStateController()
             
         }
@@ -232,6 +233,7 @@ class DecimalViewController: UIViewController {
                 outputLabel.text = runningNumber
             }
             
+            stateController?.convValues.largerThan64Bits = false
             quickUpdateStateController()
             
         }
@@ -303,6 +305,7 @@ class DecimalViewController: UIViewController {
                 }
                 else {
                     setupStateControllerValues()
+                    stateController?.convValues.largerThan64Bits = false
                 }
                 
                 if (Double(result)! > 999999999 || Double(result)! < -999999999){

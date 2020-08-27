@@ -108,7 +108,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9D6DE93024D3CCD4005018E5 /* Controllers */ = {
+		9D6DE93024D3CCD4005018E5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */,
@@ -116,7 +116,7 @@
 				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
 				9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */,
 			);
-			path = Controllers;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		9D6DE93124D3CCFB005018E5 /* Model */ = {
@@ -202,7 +202,7 @@
 		9DEF249524C553F000701F5B /* HexaCalc */ = {
 			isa = PBXGroup;
 			children = (
-				9D6DE93024D3CCD4005018E5 /* Controllers */,
+				9D6DE93024D3CCD4005018E5 /* View Controllers */,
 				9DAE268B24C68C090070B965 /* Extensions */,
 				9D6DE93124D3CCFB005018E5 /* Model */,
 				9D6DE93224D3CF21005018E5 /* Resources */,

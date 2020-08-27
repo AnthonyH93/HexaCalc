@@ -148,6 +148,7 @@ class HexadecimalViewController: UIViewController {
             outputLabel.text = "Error! Integer overflow!"
         }
         else {
+            print("here")
             var newLabelValue = stateController?.convValues.hexVal.uppercased()
             
             if (newLabelValue == "0"){
