@@ -182,7 +182,12 @@ class DecimalViewController: UIViewController {
                 
         //Essentially need to multiply the number by -1
         if (outputLabel.text == "0" || runningNumber == ""){
+            //In the case that we want to negate the currently displayed number after a calculation
             if (outputLabel.text != "0"){
+                
+                //Need to reset the current operation as we are overriding a null running number state
+                currentOperation = .NULL
+                
                 var currentNumber = Double(outputLabel.text ?? "0")!
                 currentNumber *= -1
                 
