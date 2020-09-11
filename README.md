@@ -1,5 +1,8 @@
 # HexaCalc
 
+## Available on the iOS App Store
+https://apps.apple.com/ca/app/hexacalc/id1529225315
+
 ## App Icon
 
 ![alt text](HexaCalcIconGreen1024.png?raw=true)
@@ -75,11 +78,5 @@ The settings menu also has links to the privacy policy and terms and conditions 
 Default Settings View | Red Two Tab Settings View | Indigo Three Tab Settings View | Changing Icon to Blue
 ---------------------- | -------------- | --------------------- | -----------------------------------
 ![alt text](iPhoneX_DeviceScreenshots/DefaultSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedTwoTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/IndigoThreeTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/ChangeIconBlue.png?raw=true)
-
-
-## Currently In Development
-
-This app is currently being worked on, it is close to being completed, work is being done on:
-* Submitting to Apple for app store approval and release
 
 Thanks for looking at this project!
