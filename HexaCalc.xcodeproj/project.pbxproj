@@ -26,6 +26,7 @@
 		9D8F9A8E24EA122000F32A2C /* HexaCalcIconPurple@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A7E24EA121F00F32A2C /* HexaCalcIconPurple@3x.png */; };
 		9D8F9A8F24EA122000F32A2C /* HexaCalcIconGreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A7F24EA122000F32A2C /* HexaCalcIconGreen@3x.png */; };
 		9D8F9A9024EA122000F32A2C /* HexaCalcIconOrange@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F9A8024EA122000F32A2C /* HexaCalcIconOrange@3x.png */; };
+		9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA0D7ED250B270800F72051 /* DataPersistence.swift */; };
 		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
@@ -71,6 +72,7 @@
 		9D8F9A7E24EA121F00F32A2C /* HexaCalcIconPurple@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconPurple@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIconFinal/HexaCalcIconPurple@3x.png"; sourceTree = "<group>"; };
 		9D8F9A7F24EA122000F32A2C /* HexaCalcIconGreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconGreen@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIconFinal/HexaCalcIconGreen@3x.png"; sourceTree = "<group>"; };
 		9D8F9A8024EA122000F32A2C /* HexaCalcIconOrange@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconOrange@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIconFinal/HexaCalcIconOrange@3x.png"; sourceTree = "<group>"; };
+		9DA0D7ED250B270800F72051 /* DataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistence.swift; sourceTree = "<group>"; };
 		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				9DAE269424C7F77A0070B965 /* StateController.swift */,
 				9DAE268924C68BEB0070B965 /* RoundButton.swift */,
 				9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */,
+				9DA0D7ED250B270800F72051 /* DataPersistence.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */,
 				9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */,
 				9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */,
+				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
@@ -511,7 +515,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QMBJV5C74X;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -532,7 +536,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QMBJV5C74X;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

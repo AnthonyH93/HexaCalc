@@ -13,6 +13,7 @@ class HexadecimalViewController: UIViewController {
     
     //MARK: Properties
     var stateController: StateController?
+    let dataPersistence = DataPersistence()
     
     @IBOutlet weak var outputLabel: UILabel!
     @IBOutlet weak var hexVStack: UIStackView!
@@ -66,7 +67,7 @@ class HexadecimalViewController: UIViewController {
         
         outputLabel.text = "0"
         
-        if let savedPreferences = loadPreferences() {
+        if let savedPreferences = dataPersistence.loadPreferences() {
             
             //Remove tabs which are disabled by the user
             let arrayOfTabBarItems = tabBarController?.tabBar.items
@@ -855,26 +856,6 @@ class HexadecimalViewController: UIViewController {
         for constraint in constraints {
             constraint.isActive = true
         }
-    }
-    
-    private func loadPreferences() -> UserPreferences? {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let fullPath = paths[0].appendingPathComponent("userPreferences")
-        
-        if let nsData = NSData(contentsOf: fullPath) {
-            do {
-                
-                let data = Data(referencing:nsData)
-                
-                if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
-                    return loadedPreferences
-                }
-            } catch {
-                print("Couldn't read file.")
-                return nil
-            }
-        }
-        return nil
     }
 }
 

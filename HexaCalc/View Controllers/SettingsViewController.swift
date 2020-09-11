@@ -13,6 +13,7 @@ class SettingsViewController: UIViewController {
 
     //MARK: Properties
     var stateController: StateController?
+    let dataPersistence = DataPersistence()
     
     @IBOutlet weak var optionsLabel: UILabel!
     @IBOutlet weak var binLabel: UILabel!
@@ -51,7 +52,7 @@ class SettingsViewController: UIViewController {
         indigoBtn.layer.borderWidth = 3
         purpleBtn.layer.borderWidth = 3
         
-        if let savedPreferences = loadPreferences() {
+        if let savedPreferences = dataPersistence.loadPreferences() {
             optionsLabel.textColor = savedPreferences.colour
             binLabel.textColor = savedPreferences.colour
             decLabel.textColor = savedPreferences.colour
@@ -356,7 +357,7 @@ class SettingsViewController: UIViewController {
             indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
         }
         
-        savePreferences(userPreferences: userPreferences)
+        dataPersistence.savePreferences(userPreferences: userPreferences)
     }
 
     //Function to toggle the binary calculator on or off when the switch is pressed
@@ -365,7 +366,7 @@ class SettingsViewController: UIViewController {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
             let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
-            savePreferences(userPreferences: userPreferences)
+            dataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
                 if (barItems[1].title! != "Binary"){
@@ -379,7 +380,7 @@ class SettingsViewController: UIViewController {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
             let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
-            savePreferences(userPreferences: userPreferences)
+            dataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 2 {
                 if (barItems[1].title! == "Binary"){
@@ -397,7 +398,7 @@ class SettingsViewController: UIViewController {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
             let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
-            savePreferences(userPreferences: userPreferences)
+            dataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
                 if (barItems.count == 2){
@@ -423,7 +424,7 @@ class SettingsViewController: UIViewController {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
             let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn)
-            savePreferences(userPreferences: userPreferences)
+            dataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 2 {
                 if (barItems[2].title! == "Decimal"){
@@ -454,41 +455,9 @@ class SettingsViewController: UIViewController {
     
     
     
-    //MARK: Private Methods
-    private func savePreferences(userPreferences: UserPreferences) {
-        
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let fullPath = paths[0].appendingPathComponent("userPreferences")
-
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: userPreferences, requiringSecureCoding: false)
-            try data.write(to: fullPath)
-            os_log("Preferences successfully saved.", log: OSLog.default, type: .debug)
-        } catch {
-            os_log("Failed to save preferences...", log: OSLog.default, type: .error)
-        }
-    }
+    //MARK: Private Functions
     
-    private func loadPreferences() -> UserPreferences? {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let fullPath = paths[0].appendingPathComponent("userPreferences")
-        
-        if let nsData = NSData(contentsOf: fullPath) {
-            do {
-                
-                let data = Data(referencing:nsData)
-
-                if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
-                    return loadedPreferences
-                }
-            } catch {
-                print("Couldn't read file.")
-                return nil
-            }
-        }
-        return nil
-    }
-    
+    //Function to change the app icon to one of the preloaded options
     func changeIcon(to iconName: String) {
       //First, need to make sure the app can change its icon
       guard UIApplication.shared.supportsAlternateIcons else {
