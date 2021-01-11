@@ -148,11 +148,19 @@ class BinaryViewController: UIViewController {
         //Limit number of bits to 64
         if runningNumber.count <= 63 {
             let digit = "\(sender.tag)"
-            if ((digit == "0") && (outputLabel.text == binaryDefaultLabel)){
+            if ((digit == "0" || digit == "100") && (outputLabel.text == binaryDefaultLabel)){
                 //if 0 is pressed and calculator is showing 0 then do nothing
             }
+            else if ((runningNumber.count == 63) && (digit == "100" || digit == "11")){
+                //if 00 or 11 is pressed and there is only 1 place left to fill then do nothing
+            }
             else {
-                runningNumber += "\(sender.tag)"
+                var stringToAdd = "\(sender.tag)"
+                //special case for 00 as tag is 100
+                if (sender.tag == 100){
+                    stringToAdd = "00"
+                }
+                runningNumber += stringToAdd
                 var newLabelValue = runningNumber
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
                 outputLabel.text = newLabelValue
