@@ -697,7 +697,7 @@
                                                             <constraint firstAttribute="height" constant="80" id="l1A-Gv-TnH"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
-                                                        <state key="normal" title="&lt;&lt;1">
+                                                        <state key="normal" title="&lt;&lt;">
                                                             <color key="titleColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -715,7 +715,7 @@
                                                             <constraint firstAttribute="width" constant="80" id="nji-50-tLf"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
-                                                        <state key="normal" title="&gt;&gt;1">
+                                                        <state key="normal" title="&gt;&gt;">
                                                             <color key="titleColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -1893,10 +1893,10 @@
             <size key="intrinsicContentSize" width="30" height="49"/>
         </designable>
         <designable name="IxU-Uv-ERW">
-            <size key="intrinsicContentSize" width="59" height="53"/>
+            <size key="intrinsicContentSize" width="40" height="53"/>
         </designable>
         <designable name="JDN-r5-ppP">
-            <size key="intrinsicContentSize" width="59" height="53"/>
+            <size key="intrinsicContentSize" width="40" height="53"/>
         </designable>
         <designable name="LPa-Ui-a7P">
             <size key="intrinsicContentSize" width="30" height="49"/>
