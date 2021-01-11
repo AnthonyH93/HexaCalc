@@ -41,6 +41,8 @@ class BinaryViewController: UIViewController {
     @IBOutlet weak var Btn0: RoundButton!
     @IBOutlet weak var NOTBtn: RoundButton!
     @IBOutlet weak var EQUALSBtn: RoundButton!
+    @IBOutlet weak var Btn00: RoundButton!
+    @IBOutlet weak var Btn11: RoundButton!
     
     
     //MARK: Variables
@@ -647,10 +649,14 @@ class BinaryViewController: UIViewController {
             PLUSBtn.heightAnchor.constraint(equalToConstant: 80),
             EQUALSBtn.widthAnchor.constraint(equalToConstant: 80),
             EQUALSBtn.heightAnchor.constraint(equalToConstant: 80),
-            Btn0.widthAnchor.constraint(equalToConstant: 170),
+            Btn0.widthAnchor.constraint(equalToConstant: 80),
             Btn0.heightAnchor.constraint(equalToConstant: 80),
-            Btn1.widthAnchor.constraint(equalToConstant: 170),
+            Btn00.widthAnchor.constraint(equalToConstant: 80),
+            Btn00.heightAnchor.constraint(equalToConstant: 80),
+            Btn1.widthAnchor.constraint(equalToConstant: 80),
             Btn1.heightAnchor.constraint(equalToConstant: 80),
+            Btn11.widthAnchor.constraint(equalToConstant: 80),
+            Btn11.heightAnchor.constraint(equalToConstant: 80),
             ONESBtn.widthAnchor.constraint(equalToConstant: 80),
             ONESBtn.heightAnchor.constraint(equalToConstant: 80),
             TWOSBtn.widthAnchor.constraint(equalToConstant: 80),
@@ -683,7 +689,9 @@ class BinaryViewController: UIViewController {
             LSBtn,
             RSBtn,
             ONESBtn,
-            TWOSBtn
+            TWOSBtn,
+            Btn00,
+            Btn11
         ]
         
         for button in buttons {
@@ -722,10 +730,14 @@ class BinaryViewController: UIViewController {
             PLUSBtn.heightAnchor.constraint(equalToConstant: 62),
             EQUALSBtn.widthAnchor.constraint(equalToConstant: 62),
             EQUALSBtn.heightAnchor.constraint(equalToConstant: 62),
-            Btn0.widthAnchor.constraint(equalToConstant: 139),
+            Btn0.widthAnchor.constraint(equalToConstant: 62),
             Btn0.heightAnchor.constraint(equalToConstant: 62),
-            Btn1.widthAnchor.constraint(equalToConstant: 139),
+            Btn00.widthAnchor.constraint(equalToConstant: 62),
+            Btn00.heightAnchor.constraint(equalToConstant: 62),
+            Btn1.widthAnchor.constraint(equalToConstant: 62),
             Btn1.heightAnchor.constraint(equalToConstant: 62),
+            Btn11.widthAnchor.constraint(equalToConstant: 62),
+            Btn11.heightAnchor.constraint(equalToConstant: 62),
             ONESBtn.widthAnchor.constraint(equalToConstant: 62),
             ONESBtn.heightAnchor.constraint(equalToConstant: 62),
             TWOSBtn.widthAnchor.constraint(equalToConstant: 62),
