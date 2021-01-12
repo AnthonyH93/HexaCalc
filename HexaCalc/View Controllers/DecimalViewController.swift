@@ -152,7 +152,7 @@ class DecimalViewController: UIViewController {
     @objc func labelTapped(_ sender: UITapGestureRecognizer) {
         var currentOutput = runningNumber;
         if (runningNumber == ""){
-            currentOutput = "0"
+            currentOutput = outputLabel.text ?? "0"
         }
 
         let pasteboard = UIPasteboard.general

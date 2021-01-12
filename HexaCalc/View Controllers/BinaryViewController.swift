@@ -145,7 +145,22 @@ class BinaryViewController: UIViewController {
     @objc func labelTapped(_ sender: UITapGestureRecognizer) {
         var currentOutput = runningNumber;
         if (runningNumber == ""){
-            currentOutput = "0"
+            //Need to do some processing as the binary label has extra formatting
+            currentOutput = outputLabel.text ?? binaryDefaultLabel
+            currentOutput = currentOutput.replacingOccurrences(of: " ", with: "")
+            var end = false
+            for char in currentOutput {
+                if (char == "0" && end == false){
+                    currentOutput.remove(at: currentOutput.startIndex)
+                }
+                else {
+                    end = true
+                }
+            }
+            
+            if (currentOutput == ""){
+                currentOutput = "0"
+            }
         }
 
         let pasteboard = UIPasteboard.general

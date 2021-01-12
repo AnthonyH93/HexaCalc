@@ -107,6 +107,7 @@ class HexadecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            //outputLabel.textColor = savedPreferences.colour
         }
         
         //Setup gesture recognizer for user tapping the calculator screen
@@ -185,7 +186,7 @@ class HexadecimalViewController: UIViewController {
     @objc func labelTapped(_ sender: UITapGestureRecognizer) {
         var currentOutput = runningNumber;
         if (runningNumber == ""){
-            currentOutput = "0"
+            currentOutput = outputLabel.text ?? "0"
         }
 
         let pasteboard = UIPasteboard.general
