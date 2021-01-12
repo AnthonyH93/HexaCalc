@@ -102,7 +102,6 @@ class HexadecimalViewController: UIViewController {
                 }
             }
             
-            
             PLUSBtn.backgroundColor = savedPreferences.colour
             SUBBtn.backgroundColor = savedPreferences.colour
             MULTBtn.backgroundColor = savedPreferences.colour
@@ -188,8 +187,7 @@ class HexadecimalViewController: UIViewController {
         if (runningNumber == ""){
             currentOutput = "0"
         }
-        print(currentOutput)
-        
+
         let pasteboard = UIPasteboard.general
         pasteboard.string = currentOutput
         

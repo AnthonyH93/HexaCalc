@@ -72,6 +72,9 @@ class DecimalViewController: UIViewController {
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
         }
+        
+        //Setup gesture recognizer for user tapping the calculator screen
+        self.setupOutputLabelTap()
     }
     
     override func viewDidLayoutSubviews() {
@@ -143,6 +146,31 @@ class DecimalViewController: UIViewController {
         }
         
         outputLabel.text = decimalLabelText
+    }
+    
+    //Function to copy current output label to clipboard when tapped
+    @objc func labelTapped(_ sender: UITapGestureRecognizer) {
+        var currentOutput = runningNumber;
+        if (runningNumber == ""){
+            currentOutput = "0"
+        }
+
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = currentOutput
+        
+        //Alert the user that the output was copied to their clipboard
+        let alert = UIAlertController(title: "Copied to Clipboard", message: currentOutput + " has been added to your clipboard.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+
+        self.present(alert, animated: true)
+    }
+    
+    //Function for setting up an output label tap recognizer
+    func setupOutputLabelTap() {
+        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
+        self.outputLabel.isUserInteractionEnabled = true
+        self.outputLabel.addGestureRecognizer(labelTap)
     }
     
     //MARK: Button Actions
