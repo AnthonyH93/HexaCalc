@@ -179,6 +179,7 @@ class HexadecimalViewController: UIViewController {
             MULTBtn.backgroundColor = stateController?.convValues.colour
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
+            //outputLabel.textColor = stateController?.convValues.colour
         }
     }
     
