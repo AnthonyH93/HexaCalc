@@ -1791,13 +1791,13 @@
                         <outlet property="orangeBtn" destination="xCQ-0L-wgO" id="auC-hj-kBL"/>
                         <outlet property="purpleBtn" destination="ube-zZ-MPu" id="ZP9-x8-kst"/>
                         <outlet property="redBtn" destination="5N4-aC-jka" id="C3o-Al-geM"/>
+                        <outlet property="setCalculatorTextColourLabel" destination="hPu-qc-Vo9" id="jBY-wr-6GL"/>
+                        <outlet property="setCalculatorTextColourSwitch" destination="0Fe-oE-9ds" id="BTc-ei-FfX"/>
                         <outlet property="settingsLabel" destination="zc4-uA-nPu" id="JCD-JS-Zou"/>
                         <outlet property="tealBtn" destination="T5E-v9-apF" id="eee-qs-4Qw"/>
                         <outlet property="thanksLabel" destination="TrE-52-IHo" id="aEY-cN-woF"/>
                         <outlet property="viewPPBtn" destination="cRz-p8-Cgq" id="CgQ-nM-YWV"/>
                         <outlet property="viewTCBtn" destination="czb-tV-wxX" id="ppS-pg-oPh"/>
-                        <outlet property="whiteTextLabel" destination="hPu-qc-Vo9" id="cmK-YD-TZL"/>
-                        <outlet property="whiteTextSwitch" destination="0Fe-oE-9ds" id="8l5-q7-QSx"/>
                         <outlet property="yellowBtn" destination="EeE-ea-efn" id="Zp3-2P-jpG"/>
                     </connections>
                 </viewController>
