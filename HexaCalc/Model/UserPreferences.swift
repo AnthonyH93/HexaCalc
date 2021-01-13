@@ -14,12 +14,13 @@ class UserPreferences : NSObject, NSCoding {
     //MARK: Initialization
     
     //Prepares and instance of a class for use
-    init(colour: UIColor, colourNum: Int64, binTabState: Bool, decTabState: Bool) {
+    init(colour: UIColor, colourNum: Int64, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool) {
         //Initialize stored properties.
         self.colour = colour
         self.colourNum = colourNum
         self.binTabState = binTabState
         self.decTabState = decTabState
+        self.setCalculatorTextColour = setCalculatorTextColour
     }
     
     //MARK: Properties
@@ -28,6 +29,7 @@ class UserPreferences : NSObject, NSCoding {
     var colourNum: Int64
     var binTabState: Bool
     var decTabState: Bool
+    var setCalculatorTextColour: Bool
     
     //MARK: Archiving Paths
     
@@ -42,6 +44,7 @@ class UserPreferences : NSObject, NSCoding {
         static let colourNum = "colourNum"
         static let binTabState = "binTabState"
         static let decTabState = "decTabState"
+        static let setCalculatorTextColour = "setCalculatorTextColour"
     }
     
     //MARK: NSCoding
@@ -51,6 +54,7 @@ class UserPreferences : NSObject, NSCoding {
         aCoder.encode(colourNum, forKey: PropertyKey.colourNum)
         aCoder.encode(binTabState, forKey: PropertyKey.binTabState)
         aCoder.encode(decTabState, forKey: PropertyKey.decTabState)
+        aCoder.encode(setCalculatorTextColour, forKey: PropertyKey.setCalculatorTextColour)
     }
     
     //convenience means it is a secondary initializer (must call designated initializer), the ? means it is failable
@@ -64,8 +68,10 @@ class UserPreferences : NSObject, NSCoding {
         
         let decTabState = aDecoder.decodeBool(forKey: PropertyKey.decTabState)
         
-        //Must call designated initializer.
-        self.init(colour: colour, colourNum: colourNum, binTabState: binTabState, decTabState: decTabState)
+        let setCalculatorTextColour = aDecoder.decodeBool(forKey: PropertyKey.setCalculatorTextColour)
+        
+        //Must call designated initializer
+        self.init(colour: colour, colourNum: colourNum, binTabState: binTabState, decTabState: decTabState, setCalculatorTextColour: setCalculatorTextColour)
     }
 }
 
