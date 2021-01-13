@@ -23,9 +23,11 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var viewPPBtn: UIButton!
     @IBOutlet weak var viewTCBtn: UIButton!
     @IBOutlet weak var thanksLabel: UILabel!
+    @IBOutlet weak var whiteTextLabel: UILabel!
     
     @IBOutlet weak var binSwitch: UISwitch!
     @IBOutlet weak var decSwitch: UISwitch!
+    @IBOutlet weak var whiteTextSwitch: UISwitch!
     
     @IBOutlet weak var redBtn: RoundButton!
     @IBOutlet weak var orangeBtn: RoundButton!
@@ -59,8 +61,10 @@ class SettingsViewController: UIViewController {
             thanksLabel.textColor = savedPreferences.colour
             colourLabel.textColor = savedPreferences.colour
             settingsLabel.textColor = savedPreferences.colour
+            whiteTextLabel.textColor = savedPreferences.colour
             binSwitch.onTintColor = savedPreferences.colour
             decSwitch.onTintColor = savedPreferences.colour
+            whiteTextSwitch.onTintColor = savedPreferences.colour
             
             if (savedPreferences.binTabState == false){
                 binSwitch.isOn = false
@@ -241,8 +245,10 @@ class SettingsViewController: UIViewController {
         thanksLabel.textColor = colourClicked
         colourLabel.textColor = colourClicked
         settingsLabel.textColor = colourClicked
+        whiteTextLabel.textColor = colourClicked
         binSwitch.onTintColor = colourClicked
         decSwitch.onTintColor = colourClicked
+        whiteTextSwitch.onTintColor = colourClicked
         
         //Set tab bar icon colour to new colour
         tabBarController?.tabBar.tintColor = colourClicked

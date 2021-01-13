@@ -107,7 +107,7 @@ class HexadecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
-            //outputLabel.textColor = savedPreferences.colour
+            outputLabel.textColor = savedPreferences.colour
         }
         
         //Setup gesture recognizer for user tapping the calculator screen
@@ -179,7 +179,7 @@ class HexadecimalViewController: UIViewController {
             MULTBtn.backgroundColor = stateController?.convValues.colour
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
-            //outputLabel.textColor = stateController?.convValues.colour
+            outputLabel.textColor = stateController?.convValues.colour
         }
     }
     

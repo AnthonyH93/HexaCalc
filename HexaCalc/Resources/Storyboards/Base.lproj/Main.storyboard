@@ -1726,9 +1726,6 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fe-oE-9ds">
                                                 <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="decimalSwitchPressed:" destination="E78-IU-jHO" eventType="valueChanged" id="8gg-k8-n2Z"/>
-                                                </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
@@ -1786,8 +1783,8 @@
                         <outlet property="binSwitch" destination="ZCu-em-ZE4" id="HfI-AN-4h1"/>
                         <outlet property="blueBtn" destination="MaL-Lf-Eon" id="Ho3-Ih-lw3"/>
                         <outlet property="colourLabel" destination="vcL-1E-7Ug" id="VJ5-Td-yZx"/>
-                        <outlet property="decLabel" destination="hPu-qc-Vo9" id="D88-xy-8Hf"/>
-                        <outlet property="decSwitch" destination="0Fe-oE-9ds" id="XWf-lR-xHN"/>
+                        <outlet property="decLabel" destination="iGg-ya-HGp" id="lDW-6S-syb"/>
+                        <outlet property="decSwitch" destination="wPo-3w-rup" id="uc5-1h-6Iw"/>
                         <outlet property="greenBtn" destination="3Hd-uI-dan" id="Mwp-kB-zO5"/>
                         <outlet property="indigoBtn" destination="m6Q-e1-Zim" id="kDB-rR-62w"/>
                         <outlet property="optionsLabel" destination="d49-Da-Gue" id="PuZ-RW-QV4"/>
@@ -1799,6 +1796,8 @@
                         <outlet property="thanksLabel" destination="TrE-52-IHo" id="aEY-cN-woF"/>
                         <outlet property="viewPPBtn" destination="cRz-p8-Cgq" id="CgQ-nM-YWV"/>
                         <outlet property="viewTCBtn" destination="czb-tV-wxX" id="ppS-pg-oPh"/>
+                        <outlet property="whiteTextLabel" destination="hPu-qc-Vo9" id="cmK-YD-TZL"/>
+                        <outlet property="whiteTextSwitch" destination="0Fe-oE-9ds" id="8l5-q7-QSx"/>
                         <outlet property="yellowBtn" destination="EeE-ea-efn" id="Zp3-2P-jpG"/>
                     </connections>
                 </viewController>
