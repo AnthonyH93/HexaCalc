@@ -64,6 +64,8 @@ class BinaryViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            
+            setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
         
         //Setup gesture recognizer for user tapping the calculator screen
@@ -139,6 +141,9 @@ class BinaryViewController: UIViewController {
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
         }
+        
+        //Set calculator text colour
+        setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }
     
     //Function to copy current output label to clipboard when tapped
@@ -671,6 +676,16 @@ class BinaryViewController: UIViewController {
         }
         stateController?.convValues.hexVal = hexCurrentVal
         stateController?.convValues.decimalVal = decCurrentVal
+    }
+    
+    //Function to check whether the user wants the output text label colour to be the same as the overall theme
+    private func setupCalculatorTextColour(state: Bool, colourToSet: UIColor){
+        if (state) {
+            outputLabel.textColor = colourToSet
+        }
+        else {
+            outputLabel.textColor = UIColor.white
+        }
     }
     
     //Helper function to set custon layout for iPhone SE screen size

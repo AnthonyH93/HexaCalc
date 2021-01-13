@@ -186,6 +186,7 @@ class HexadecimalViewController: UIViewController {
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
             outputLabel.textColor = stateController?.convValues.colour
         }
+        
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }

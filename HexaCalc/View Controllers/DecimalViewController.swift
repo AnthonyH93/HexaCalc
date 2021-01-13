@@ -71,6 +71,8 @@ class DecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            
+            setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
         
         //Setup gesture recognizer for user tapping the calculator screen
@@ -144,6 +146,9 @@ class DecimalViewController: UIViewController {
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
         }
+        
+        //Set calculator text colour
+        setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
         
         outputLabel.text = decimalLabelText
     }
@@ -456,6 +461,16 @@ class DecimalViewController: UIViewController {
             let binCurrentVal = String(Int64(Double(runningNumber)!), radix: 2)
             stateController?.convValues.hexVal = hexCurrentVal
             stateController?.convValues.binVal = binCurrentVal
+        }
+    }
+    
+    //Function to check whether the user wants the output text label colour to be the same as the overall theme
+    private func setupCalculatorTextColour(state: Bool, colourToSet: UIColor){
+        if (state) {
+            outputLabel.textColor = colourToSet
+        }
+        else {
+            outputLabel.textColor = UIColor.white
         }
     }
     
