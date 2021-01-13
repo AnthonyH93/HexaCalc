@@ -107,7 +107,12 @@ class HexadecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
-            outputLabel.textColor = savedPreferences.colour
+            
+            setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
+            
+            stateController?.convValues.setCalculatorTextColour = savedPreferences.setCalculatorTextColour
+            stateController?.convValues.colour = savedPreferences.colour
+            
         }
         
         //Setup gesture recognizer for user tapping the calculator screen
@@ -181,6 +186,8 @@ class HexadecimalViewController: UIViewController {
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
             outputLabel.textColor = stateController?.convValues.colour
         }
+        //Set calculator text colour
+        setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }
     
     //Function to copy current output label to clipboard when tapped
@@ -703,6 +710,16 @@ class HexadecimalViewController: UIViewController {
         }
         
         return hexResult
+    }
+    
+    //Function to check whether the user wants the output text label colour to be the same as the overall theme
+    private func setupCalculatorTextColour(state: Bool, colourToSet: UIColor){
+        if (state) {
+            outputLabel.textColor = colourToSet
+        }
+        else {
+            outputLabel.textColor = UIColor.white
+        }
     }
     
     //Helper function to set custon layout for iPhone SE screen size

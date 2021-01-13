@@ -454,6 +454,14 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    //Function to toggle the optional setting of the calculator text colour
+    @IBAction func setCalculatorTextColourSwitchPressed(_ sender: UISwitch) {
+        //Update the stored user preferences with whatever the current switch values are: to be used in the various calcualtor tabs
+        let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+        dataPersistence.savePreferences(userPreferences: userPreferences)
+        stateController?.convValues.setCalculatorTextColour = setCalculatorTextColourSwitch.isOn
+    }
+    
     //iOS approval requirement to have a hosted privacy policy and a button to open it within the app
     @IBAction func viewPrivacyPolicy(_ sender: Any) {
         let privacyPolicyURL = NSURL(string: "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy")! as URL

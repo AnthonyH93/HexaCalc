@@ -17,6 +17,7 @@ struct convVals{
     var colour: UIColor?
     var originalTabs: [UIViewController]?
     var colourNum: Int64 = -1
+    var setCalculatorTextColour: Bool = false
 }
 
 protocol StateControllerProtocol {

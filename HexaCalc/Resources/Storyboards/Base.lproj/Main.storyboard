@@ -1726,6 +1726,9 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0Fe-oE-9ds">
                                                 <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="setCalculatorTextColourSwitchPressed:" destination="E78-IU-jHO" eventType="valueChanged" id="NS9-sV-fnf"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
