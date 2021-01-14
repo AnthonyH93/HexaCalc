@@ -16,7 +16,7 @@ Switching tabs will result in instant conversion of the current value on the scr
 
 For the hexadecimal and binary calculators there is a limit of 64 bits as they use integer conversion, however the decimal calculator will allow you to work with larger numbers even when the other two calculator screens show an error.
 
-Tapping on the calculator output label causes the correctly displayed number to be copied to your phone's clipboard. This works for any of the three tabs!
+Tapping on the calculator output label causes the currently displayed number to be copied to your phone's clipboard. This works for any of the three tabs!
 
 Note: All screenshots shown were taken on an iPhone X simulator.
 
