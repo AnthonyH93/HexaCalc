@@ -16,6 +16,8 @@ Switching tabs will result in instant conversion of the current value on the scr
 
 For the hexadecimal and binary calculators there is a limit of 64 bits as they use integer conversion, however the decimal calculator will allow you to work with larger numbers even when the other two calculator screens show an error.
 
+Tapping on the calculator output label causes the correctly displayed number to be copied to your phone's clipboard. This works for any of the three tabs!
+
 Note: All screenshots shown were taken on an iPhone X simulator.
 
 ## System Requirements
@@ -71,7 +73,7 @@ This app uses data persistance to implement saved user customization allowing ea
 ### Customization options
 * 8 different system colours which change the colour of buttons and the app icon
 * The ability to disable or enable the binary and decimal calculators should the user not require them
-* The option to change the default calculator text colour from white to the selected colour
+* The option to change the default calculator text colour from white to your selected colour
 
 The settings menu also has links to the privacy policy and terms and conditions documents.
 
