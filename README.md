@@ -71,6 +71,7 @@ This app uses data persistance to implement saved user customization allowing ea
 ### Customization options
 * 8 different system colours which change the colour of buttons and the app icon
 * The ability to disable or enable the binary and decimal calculators should the user not require them
+* The option to change the default calculator text colour from white to the selected colour
 
 The settings menu also has links to the privacy policy and terms and conditions documents.
 
