@@ -228,13 +228,13 @@ class SettingsViewController: UIViewController {
         //iPhone SE (1st generation) special case
         if (screenWidth == 320){
             //Need to edit the font size for this screen width size
-            optionsLabel?.font = UIFont(name: "Avenir Next", size: 20)
-            binLabel?.font = UIFont(name: "Avenir Next", size: 20)
-            decLabel?.font = UIFont(name: "Avenir Next", size: 20)
-            thanksLabel?.font = UIFont(name: "Avenir Next", size: 18)
-            thanksLabel?.text = "Thanks for using HexaCalc!"
-            colourLabel?.font = UIFont(name: "Avenir Next", size: 20)
-            settingsLabel?.font = UIFont(name: "Avenir Next", size: 30)
+            optionsLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            binLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            decLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            thanksLabel?.isHidden = true
+            colourLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            settingsLabel?.font = UIFont(name: "Avenir Next", size: 20)
+            setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
         }
     }
     
