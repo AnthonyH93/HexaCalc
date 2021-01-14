@@ -21,6 +21,7 @@ Note: All screenshots shown were taken on an iPhone X simulator.
 ## System Requirements
 
 This app is optimized to run and look amazing on all iPhones which are supported by iOS13:
+* iPhone 12, 12 Pro, 12 Pro Max, 12 Mini
 * iPhone 11, 11 Pro, 11 Pro Max 
 * iPhone X, XR, XS, XS Max
 * iPhone 8, 8 Plus
