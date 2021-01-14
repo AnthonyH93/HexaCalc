@@ -79,8 +79,8 @@ The settings menu also has links to the privacy policy and terms and conditions 
 
 ### Device Screenshots for Settings Tab
 
-Default Settings View | Red Two Tab Settings View | Indigo Three Tab Settings View | Changing Icon to Blue
+Default Settings View | Red Two Tab Settings View | Changing Icon to Blue | Setting Calculator Text Colour to Green
 ---------------------- | -------------- | --------------------- | -----------------------------------
-![alt text](iPhoneX_DeviceScreenshots/DefaultSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedTwoTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/IndigoThreeTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/ChangeIconBlue.png?raw=true)
+![alt text](iPhoneX_DeviceScreenshots/YellowDefaultSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedTwoTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/ChangeIconBlue.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenColouredCalculatorText.png?raw=true)
 
 Thanks for looking at this project!
