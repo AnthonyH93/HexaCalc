@@ -355,9 +355,16 @@ class BinaryViewController: UIViewController {
                 newString += "0"
             }
         }
-        let asInt = Int(newString)
-        let removedLeadingZeroes = "\(asInt ?? 0)"
-        runningNumber = removedLeadingZeroes
+        
+        //Check if new value is negative or positive
+        if (newString.first == "1" && newString.count == 64){
+            runningNumber = newString
+        }
+        else {
+            let asInt = Int(newString)
+            let removedLeadingZeroes = "\(asInt ?? 0)"
+            runningNumber = removedLeadingZeroes
+        }
         var newLabelValue = newString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
         outputLabel.text = newLabelValue
@@ -399,9 +406,15 @@ class BinaryViewController: UIViewController {
             newSubString = newSubString + "0"
         }
         
-        let asInt = Int(newSubString)
-        let removedLeadingZeroes = "\(asInt ?? 0)"
-        runningNumber = removedLeadingZeroes
+        //Check if new value is negative or positive
+        if (newSubString.first == "1" && newSubString.count == 64){
+            runningNumber = newSubString
+        }
+        else {
+            let asInt = Int(newSubString)
+            let removedLeadingZeroes = "\(asInt ?? 0)"
+            runningNumber = removedLeadingZeroes
+        }
         var newLabelValue = newSubString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
         outputLabel.text = newLabelValue
@@ -441,9 +454,16 @@ class BinaryViewController: UIViewController {
                 newString += "0"
             }
         }
-        let asInt = Int(newString)
-        let removedLeadingZeroes = "\(asInt ?? 0)"
-        runningNumber = removedLeadingZeroes
+        
+        //Check if new value is negative or positive
+        if (newString.first == "1" && newString.count == 64){
+            runningNumber = newString
+        }
+        else {
+            let asInt = Int(newString)
+            let removedLeadingZeroes = "\(asInt ?? 0)"
+            runningNumber = removedLeadingZeroes
+        }
         var newLabelValue = newString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
         outputLabel.text = newLabelValue
