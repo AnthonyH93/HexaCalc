@@ -185,7 +185,7 @@ class DecimalViewController: UIViewController {
     @objc func handleLabelSwipes(_ sender:UISwipeGestureRecognizer) {
         
         //Make sure the label was swiped
-        guard let label = sender.view as? UILabel else { return }
+        guard (sender.view as? UILabel) != nil else { return }
         
         if (sender.direction == .left || sender.direction == .right) {
             deletePressed(DELBtn)
