@@ -117,6 +117,16 @@ class HexadecimalViewController: UIViewController {
         
         //Setup gesture recognizer for user tapping the calculator screen
         self.setupOutputLabelTap()
+        
+        //Setup gesture recognizer of user swiping left or right on the calculator screen
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
+            
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+
+        outputLabel.addGestureRecognizer(leftSwipe)
+        outputLabel.addGestureRecognizer(rightSwipe)
     }
     
     override func viewDidLayoutSubviews() {
@@ -207,6 +217,17 @@ class HexadecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
         self.present(alert, animated: true)
+    }
+    
+    //Function to handle a swipe
+    @objc func handleLabelSwipes(_ sender:UISwipeGestureRecognizer) {
+        
+        //Make sure the label was swiped
+        guard let label = sender.view as? UILabel else { return }
+        
+        if (sender.direction == .left || sender.direction == .right) {
+            deletePressed(DELBtn)
+        }
     }
     
     //Function for setting up an output label tap recognizer
