@@ -13,7 +13,6 @@ class SettingsViewController: UIViewController {
 
     //MARK: Properties
     var stateController: StateController?
-    let dataPersistence = DataPersistence()
     
     @IBOutlet weak var optionsLabel: UILabel!
     @IBOutlet weak var binLabel: UILabel!
@@ -54,7 +53,7 @@ class SettingsViewController: UIViewController {
         indigoBtn.layer.borderWidth = 3
         purpleBtn.layer.borderWidth = 3
         
-        if let savedPreferences = dataPersistence.loadPreferences() {
+        if let savedPreferences = DataPersistence.loadPreferences() {
             optionsLabel.textColor = savedPreferences.colour
             binLabel.textColor = savedPreferences.colour
             decLabel.textColor = savedPreferences.colour
@@ -370,7 +369,7 @@ class SettingsViewController: UIViewController {
             indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
         }
         
-        dataPersistence.savePreferences(userPreferences: userPreferences)
+        DataPersistence.savePreferences(userPreferences: userPreferences)
     }
 
     //Function to toggle the binary calculator on or off when the switch is pressed
@@ -379,7 +378,7 @@ class SettingsViewController: UIViewController {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
             let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
-            dataPersistence.savePreferences(userPreferences: userPreferences)
+            DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
                 if (barItems[1].title! != "Binary"){
@@ -393,7 +392,7 @@ class SettingsViewController: UIViewController {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
             let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
-            dataPersistence.savePreferences(userPreferences: userPreferences)
+            DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 2 {
                 if (barItems[1].title! == "Binary"){
@@ -411,7 +410,7 @@ class SettingsViewController: UIViewController {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
             let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
-            dataPersistence.savePreferences(userPreferences: userPreferences)
+            DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
                 if (barItems.count == 2){
@@ -437,7 +436,7 @@ class SettingsViewController: UIViewController {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
             let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
-            dataPersistence.savePreferences(userPreferences: userPreferences)
+            DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 2 {
                 if (barItems[2].title! == "Decimal"){
@@ -458,7 +457,7 @@ class SettingsViewController: UIViewController {
     @IBAction func setCalculatorTextColourSwitchPressed(_ sender: UISwitch) {
         //Update the stored user preferences with whatever the current switch values are: to be used in the various calcualtor tabs
         let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
-        dataPersistence.savePreferences(userPreferences: userPreferences)
+        DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = setCalculatorTextColourSwitch.isOn
     }
     

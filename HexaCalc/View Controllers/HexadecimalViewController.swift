@@ -13,7 +13,6 @@ class HexadecimalViewController: UIViewController {
     
     //MARK: Properties
     var stateController: StateController?
-    let dataPersistence = DataPersistence()
     
     @IBOutlet weak var outputLabel: UILabel!
     @IBOutlet weak var hexVStack: UIStackView!
@@ -67,7 +66,7 @@ class HexadecimalViewController: UIViewController {
         
         outputLabel.text = "0"
         
-        if let savedPreferences = dataPersistence.loadPreferences() {
+        if let savedPreferences = DataPersistence.loadPreferences() {
             
             //Remove tabs which are disabled by the user
             let arrayOfTabBarItems = tabBarController?.tabBar.items

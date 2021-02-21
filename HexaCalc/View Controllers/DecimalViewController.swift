@@ -23,7 +23,6 @@ class DecimalViewController: UIViewController {
     
     //MARK: Properties
     var stateController: StateController?
-    let dataPersistence = DataPersistence()
     
     @IBOutlet weak var decVStack: UIStackView!
     @IBOutlet weak var decHStack1: UIStackView!
@@ -65,7 +64,7 @@ class DecimalViewController: UIViewController {
         
         outputLabel.text = "0"
         
-        if let savedPreferences = dataPersistence.loadPreferences() {
+        if let savedPreferences = DataPersistence.loadPreferences() {
             PLUSBtn.backgroundColor = savedPreferences.colour
             SUBBtn.backgroundColor = savedPreferences.colour
             MULTBtn.backgroundColor = savedPreferences.colour

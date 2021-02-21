@@ -12,7 +12,6 @@ class BinaryViewController: UIViewController {
     
     //MARK: Properties
     var stateController: StateController?
-    let dataPersistence = DataPersistence()
     
     let binaryDefaultLabel:String = "0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000"
     
@@ -58,7 +57,7 @@ class BinaryViewController: UIViewController {
         
         outputLabel.text = binaryDefaultLabel
         
-        if let savedPreferences = dataPersistence.loadPreferences() {
+        if let savedPreferences = DataPersistence.loadPreferences() {
             PLUSBtn.backgroundColor = savedPreferences.colour
             SUBBtn.backgroundColor = savedPreferences.colour
             MULTBtn.backgroundColor = savedPreferences.colour

@@ -13,7 +13,7 @@ import os.log
 struct DataPersistence {
     
     //Save the user preferences
-    func savePreferences(userPreferences: UserPreferences) {
+    static func savePreferences(userPreferences: UserPreferences) {
         
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let fullPath = paths[0].appendingPathComponent("userPreferences")
@@ -28,7 +28,7 @@ struct DataPersistence {
     }
     
     //Save method to load user preferences from the device if any are saved
-    func loadPreferences() -> UserPreferences? {
+    static func loadPreferences() -> UserPreferences? {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let fullPath = paths[0].appendingPathComponent("userPreferences")
         
