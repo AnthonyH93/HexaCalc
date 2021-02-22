@@ -210,4 +210,44 @@ class UIHelper {
         
         return constraints
     }
+    
+    // Setup calculator label constraints for iPads
+    static func iPadSetupLabelConstraints(label: UILabel, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
+        
+        let labelWidth = screenWidth - 20
+        let labelHeight: CGFloat = 150
+        var labelFontSize: CGFloat = 0
+        
+        var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
+        constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
+        
+        //Adjust label font sizes
+        if (calculator == 2) {
+            switch screenWidth {
+            case 0..<800:
+                labelFontSize = 40
+            case 800..<1000:
+                labelFontSize = 50
+            default:
+                labelFontSize = 60
+            }
+        }
+        else {
+            switch screenWidth {
+            case 0..<800:
+                labelFontSize = 130
+            case 800..<1000:
+                labelFontSize = 140
+            default:
+                labelFontSize = 160
+            }
+        }
+        
+        label.font = UIFont(name: "Avenir Next", size: labelFontSize)
+        print(labelFontSize)
+        
+        return constraints
+    }
 }

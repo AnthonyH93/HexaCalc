@@ -150,7 +150,7 @@ class HexadecimalViewController: UIViewController {
             let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
             NSLayoutConstraint.activate(buttonConstraints)
             
-            let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
+            let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
             NSLayoutConstraint.activate(labelConstraints)
         }
         else {
