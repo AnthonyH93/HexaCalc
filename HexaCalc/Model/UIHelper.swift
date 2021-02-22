@@ -65,12 +65,7 @@ class UIHelper {
             }
             
         }
-        // Binary
-        else if (calculator == 2) {
-            singleButtonSize = (stackWidth - 30)/4.0
-            doubleButtonSize = (singleButtonSize * 2) + 10
-        }
-        // Decimal
+        // Binary or Decimal
         else {
             singleButtonSize = (stackWidth - 30)/4.0
             doubleButtonSize = (singleButtonSize * 2) + 10

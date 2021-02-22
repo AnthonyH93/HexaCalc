@@ -102,7 +102,7 @@ class DecimalViewController: UIViewController {
                              ACBtn!, Btn1!, Btn2!, Btn3!, Btn4!, Btn5!, Btn6!, Btn7!, Btn8!, Btn9!]
         let doubleButtons = [Btn0!]
         
-        let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 3)
+        let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
         NSLayoutConstraint.activate(buttonConstraints)
         
         let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth)

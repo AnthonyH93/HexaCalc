@@ -85,29 +85,20 @@ class BinaryViewController: UIViewController {
         
         let screenWidth = UIScreen.main.bounds.width
         
-        //iPhone SE (1st generation) special case
-        if (screenWidth == 320){
-            setupSEConstraints()
-        }
-            //All other screensizes can use these constraints
-        else {
-            let constraints = [
-                binVStack.widthAnchor.constraint(equalToConstant: 350),
-                binVStack.heightAnchor.constraint(equalToConstant: 420),
-                binHStack1.widthAnchor.constraint(equalToConstant: 350),
-                binHStack1.heightAnchor.constraint(equalToConstant: 80),
-                binHStack2.widthAnchor.constraint(equalToConstant: 350),
-                binHStack2.heightAnchor.constraint(equalToConstant: 80),
-                binHStack3.widthAnchor.constraint(equalToConstant: 350),
-                binHStack3.heightAnchor.constraint(equalToConstant: 80),
-                binHStack4.widthAnchor.constraint(equalToConstant: 350),
-                binHStack4.heightAnchor.constraint(equalToConstant: 80),
-                binHStack5.widthAnchor.constraint(equalToConstant: 350),
-                binHStack5.heightAnchor.constraint(equalToConstant: 80)
-            ]
-            NSLayoutConstraint.activate(constraints)
-        }
+        let hStacks = [binHStack1!, binHStack2!, binHStack3!, binHStack4!, binHStack5!]
         
+        let stackConstraints = UIHelper.setupStackContraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth)
+        NSLayoutConstraint.activate(stackConstraints)
+        
+        let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, XORBtn!, ORBtn!, ANDBtn!, NOTBtn!,
+                             ONESBtn!, TWOSBtn!, LSBtn!, RSBtn!, Btn0!, Btn1!, Btn00!, Btn11!]
+        let doubleButtons = [ACBtn!]
+        
+        let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
+        NSLayoutConstraint.activate(buttonConstraints)
+        
+        let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth)
+        NSLayoutConstraint.activate(labelConstraints)
     }
     
     //Load the current converted value from either of the other calculator screens
@@ -725,146 +716,6 @@ class BinaryViewController: UIViewController {
         }
         else {
             outputLabel.textColor = UIColor.white
-        }
-    }
-    
-    //Helper function to set custon layout for iPhone SE screen size
-    func setupSEConstraints(){
-        let oldConstraints = [
-            outputLabel.widthAnchor.constraint(equalToConstant: 350),
-            outputLabel.heightAnchor.constraint(equalToConstant: 64),
-            ACBtn.widthAnchor.constraint(equalToConstant: 170),
-            ACBtn.heightAnchor.constraint(equalToConstant: 80),
-            DELBtn.widthAnchor.constraint(equalToConstant: 80),
-            DELBtn.heightAnchor.constraint(equalToConstant: 80),
-            XORBtn.widthAnchor.constraint(equalToConstant: 80),
-            XORBtn.heightAnchor.constraint(equalToConstant: 80),
-            ORBtn.widthAnchor.constraint(equalToConstant: 80),
-            ORBtn.heightAnchor.constraint(equalToConstant: 80),
-            ANDBtn.widthAnchor.constraint(equalToConstant: 80),
-            ANDBtn.heightAnchor.constraint(equalToConstant: 80),
-            NOTBtn.widthAnchor.constraint(equalToConstant: 80),
-            NOTBtn.heightAnchor.constraint(equalToConstant: 80),
-            DIVBtn.widthAnchor.constraint(equalToConstant: 80),
-            DIVBtn.heightAnchor.constraint(equalToConstant: 80),
-            MULTBtn.widthAnchor.constraint(equalToConstant: 80),
-            MULTBtn.heightAnchor.constraint(equalToConstant: 80),
-            SUBBtn.widthAnchor.constraint(equalToConstant: 80),
-            SUBBtn.heightAnchor.constraint(equalToConstant: 80),
-            PLUSBtn.widthAnchor.constraint(equalToConstant: 80),
-            PLUSBtn.heightAnchor.constraint(equalToConstant: 80),
-            EQUALSBtn.widthAnchor.constraint(equalToConstant: 80),
-            EQUALSBtn.heightAnchor.constraint(equalToConstant: 80),
-            Btn0.widthAnchor.constraint(equalToConstant: 80),
-            Btn0.heightAnchor.constraint(equalToConstant: 80),
-            Btn00.widthAnchor.constraint(equalToConstant: 80),
-            Btn00.heightAnchor.constraint(equalToConstant: 80),
-            Btn1.widthAnchor.constraint(equalToConstant: 80),
-            Btn1.heightAnchor.constraint(equalToConstant: 80),
-            Btn11.widthAnchor.constraint(equalToConstant: 80),
-            Btn11.heightAnchor.constraint(equalToConstant: 80),
-            ONESBtn.widthAnchor.constraint(equalToConstant: 80),
-            ONESBtn.heightAnchor.constraint(equalToConstant: 80),
-            TWOSBtn.widthAnchor.constraint(equalToConstant: 80),
-            TWOSBtn.heightAnchor.constraint(equalToConstant: 80),
-            RSBtn.widthAnchor.constraint(equalToConstant: 80),
-            RSBtn.heightAnchor.constraint(equalToConstant: 80),
-            LSBtn.widthAnchor.constraint(equalToConstant: 80),
-            LSBtn.heightAnchor.constraint(equalToConstant: 80)
-        ]
-        
-        //NSLayoutConstraint.deactivate(oldConstraints)
-        for oldConstraint in oldConstraints {
-            oldConstraint.isActive = false
-        }
-        
-        let buttons = [
-            Btn0,
-            Btn1,
-            ACBtn,
-            DELBtn,
-            NOTBtn,
-            XORBtn,
-            ORBtn,
-            ANDBtn,
-            DIVBtn,
-            MULTBtn,
-            PLUSBtn,
-            SUBBtn,
-            EQUALSBtn,
-            LSBtn,
-            RSBtn,
-            ONESBtn,
-            TWOSBtn,
-            Btn00,
-            Btn11
-        ]
-        
-        for button in buttons {
-            button!.layer.cornerRadius = 30
-            button!.titleLabel?.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
-        }
-        
-        //Need to change the font size of the text label for smaller screen
-        outputLabel?.font = UIFont(name: "Avenir Next", size: 14.5)
-        
-        
-        let constraints = [
-            binVStack.widthAnchor.constraint(equalToConstant: 295),
-            binVStack.heightAnchor.constraint(equalToConstant: 330),
-            outputLabel.widthAnchor.constraint(equalToConstant: 295),
-            outputLabel.heightAnchor.constraint(equalToConstant: 59),
-            ACBtn.widthAnchor.constraint(equalToConstant: 139),
-            ACBtn.heightAnchor.constraint(equalToConstant: 62),
-            DELBtn.widthAnchor.constraint(equalToConstant: 62),
-            DELBtn.heightAnchor.constraint(equalToConstant: 62),
-            XORBtn.widthAnchor.constraint(equalToConstant: 62),
-            XORBtn.heightAnchor.constraint(equalToConstant: 62),
-            ORBtn.widthAnchor.constraint(equalToConstant: 62),
-            ORBtn.heightAnchor.constraint(equalToConstant: 62),
-            ANDBtn.widthAnchor.constraint(equalToConstant: 62),
-            ANDBtn.heightAnchor.constraint(equalToConstant: 62),
-            NOTBtn.widthAnchor.constraint(equalToConstant: 62),
-            NOTBtn.heightAnchor.constraint(equalToConstant: 62),
-            DIVBtn.widthAnchor.constraint(equalToConstant: 62),
-            DIVBtn.heightAnchor.constraint(equalToConstant: 62),
-            MULTBtn.widthAnchor.constraint(equalToConstant: 62),
-            MULTBtn.heightAnchor.constraint(equalToConstant: 62),
-            SUBBtn.widthAnchor.constraint(equalToConstant: 62),
-            SUBBtn.heightAnchor.constraint(equalToConstant: 62),
-            PLUSBtn.widthAnchor.constraint(equalToConstant: 62),
-            PLUSBtn.heightAnchor.constraint(equalToConstant: 62),
-            EQUALSBtn.widthAnchor.constraint(equalToConstant: 62),
-            EQUALSBtn.heightAnchor.constraint(equalToConstant: 62),
-            Btn0.widthAnchor.constraint(equalToConstant: 62),
-            Btn0.heightAnchor.constraint(equalToConstant: 62),
-            Btn00.widthAnchor.constraint(equalToConstant: 62),
-            Btn00.heightAnchor.constraint(equalToConstant: 62),
-            Btn1.widthAnchor.constraint(equalToConstant: 62),
-            Btn1.heightAnchor.constraint(equalToConstant: 62),
-            Btn11.widthAnchor.constraint(equalToConstant: 62),
-            Btn11.heightAnchor.constraint(equalToConstant: 62),
-            ONESBtn.widthAnchor.constraint(equalToConstant: 62),
-            ONESBtn.heightAnchor.constraint(equalToConstant: 62),
-            TWOSBtn.widthAnchor.constraint(equalToConstant: 62),
-            TWOSBtn.heightAnchor.constraint(equalToConstant: 62),
-            RSBtn.widthAnchor.constraint(equalToConstant: 62),
-            RSBtn.heightAnchor.constraint(equalToConstant: 62),
-            LSBtn.widthAnchor.constraint(equalToConstant: 62),
-            LSBtn.heightAnchor.constraint(equalToConstant: 62),
-            binHStack1.widthAnchor.constraint(equalToConstant: 295),
-            binHStack1.heightAnchor.constraint(equalToConstant: 62),
-            binHStack2.widthAnchor.constraint(equalToConstant: 295),
-            binHStack2.heightAnchor.constraint(equalToConstant: 62),
-            binHStack3.widthAnchor.constraint(equalToConstant: 295),
-            binHStack3.heightAnchor.constraint(equalToConstant: 62),
-            binHStack4.widthAnchor.constraint(equalToConstant: 295),
-            binHStack4.heightAnchor.constraint(equalToConstant: 62),
-            binHStack5.widthAnchor.constraint(equalToConstant: 295),
-            binHStack5.heightAnchor.constraint(equalToConstant: 62)
-        ]
-        for constraint in constraints {
-            constraint.isActive = true
         }
     }
 }
