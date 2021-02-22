@@ -87,7 +87,7 @@ class BinaryViewController: UIViewController {
         
         let hStacks = [binHStack1!, binHStack2!, binHStack3!, binHStack4!, binHStack5!]
         
-        let stackConstraints = UIHelper.setupStackContraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth)
+        let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth)
         NSLayoutConstraint.activate(stackConstraints)
         
         let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, XORBtn!, ORBtn!, ANDBtn!, NOTBtn!,

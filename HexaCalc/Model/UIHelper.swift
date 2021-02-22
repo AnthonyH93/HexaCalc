@@ -13,7 +13,7 @@ import UIKit
 class UIHelper {
     
     // Setup calculator stack constraints
-    static func setupStackContraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat) -> [NSLayoutConstraint] {
+    static func setupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat) -> [NSLayoutConstraint] {
         
         let stackWidth = screenWidth - 20
         var hStackHeight: CGFloat = 0
@@ -92,6 +92,7 @@ class UIHelper {
         return constraints
     }
     
+    // Setup calculator label constraints
     static func setupLabelConstraints(label: UILabel, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
         
         let labelWidth = screenWidth - 20
@@ -112,6 +113,88 @@ class UIHelper {
             if (screenWidth == 320) {
                 label.font = UIFont(name: "Avenir Next", size: 50)
             }
+        }
+        
+        return constraints
+    }
+    
+    // Setup calculator stack constraints for iPad
+    static func iPadSetupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat, screenHeight: CGFloat) -> [NSLayoutConstraint] {
+        
+        let stackWidth = screenWidth - 20
+        let vStackHeight = screenHeight/1.5
+        var hStackHeight: CGFloat = 0
+    
+        var constraints = [NSLayoutConstraint]()
+        
+        // Hexadecimal calculator
+        if (hStacks.count == 6) {
+            hStackHeight = (vStackHeight - 25)/6
+        }
+        // Binary or Decimal calculator
+        else {
+            hStackHeight = (vStackHeight - 20)/5
+        }
+        
+        for hStack in hStacks {
+            constraints.append(hStack.widthAnchor.constraint(equalToConstant: stackWidth))
+            constraints.append(hStack.heightAnchor.constraint(equalToConstant: hStackHeight))
+        }
+        
+        constraints.append(vStack.widthAnchor.constraint(equalToConstant: stackWidth))
+        constraints.append(vStack.heightAnchor.constraint(equalToConstant: vStackHeight))
+        
+        return constraints
+    }
+    
+    // Setup calculator button constraints for iPad
+    static func iPadSetupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], tripleButton: RoundButton?, screenWidth: CGFloat, screenHeight: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
+        
+        let stackWidth = screenWidth - 20
+        let vStackHeight = screenHeight/1.5
+        var buttonHeight: CGFloat = 0
+        var singleButtonWidth: CGFloat = 0
+        var doubleButtonWidth: CGFloat = 0
+        
+        var constraints = [NSLayoutConstraint]()
+        
+        // Hexadecimal
+        if (calculator == 1) {
+            buttonHeight = (vStackHeight - 25)/6
+            singleButtonWidth = (stackWidth - 40)/5.0
+            doubleButtonWidth = (singleButtonWidth * 2) + 10
+            let tripleButtonWidth: CGFloat = (singleButtonWidth * 3) + 20
+            
+            if (tripleButton != nil) {
+                constraints.append(tripleButton!.widthAnchor.constraint(equalToConstant: tripleButtonWidth))
+                constraints.append(tripleButton!.heightAnchor.constraint(equalToConstant: buttonHeight))
+                tripleButton!.layer.cornerRadius = buttonHeight/2
+            }
+            
+        }
+        // Binary or Decimal
+        else {
+            buttonHeight = (vStackHeight - 20)/5
+            singleButtonWidth = (stackWidth - 30)/4.0
+            doubleButtonWidth = (singleButtonWidth * 2) + 10
+        }
+        
+        for button in singleButtons {
+            constraints.append(button.widthAnchor.constraint(equalToConstant: singleButtonWidth))
+            constraints.append(button.heightAnchor.constraint(equalToConstant: buttonHeight))
+            if (screenWidth == 320) {
+                button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+            }
+            button.layer.cornerRadius = buttonHeight/2
+        }
+        
+        for button in doubleButtons {
+            constraints.append(button.widthAnchor.constraint(equalToConstant: doubleButtonWidth))
+            constraints.append(button.heightAnchor.constraint(equalToConstant: buttonHeight))
+            if (screenWidth == 320) {
+                button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+            }
+            button.layer.cornerRadius = buttonHeight/2
         }
         
         return constraints

@@ -131,12 +131,11 @@ class HexadecimalViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         
         // Setup Hexadecimal View Controller constraints
+        
         let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
         
         let hStacks = [hexHStack1!, hexHStack2!, hexHStack3!, hexHStack4!, hexHStack5!, hexHStack6!]
-        
-        let stackConstraints = UIHelper.setupStackContraints(hStacks: hStacks, vStack: hexVStack, screenWidth: screenWidth)
-        NSLayoutConstraint.activate(stackConstraints)
         
         let singleButtons = [XORBtn!, ORBtn!, ANDBtn!, NOTBtn!, DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!,
                              Btn0!, Btn1!, Btn2!, Btn3!, Btn4!, Btn5!, Btn6!, Btn7!, Btn8!, Btn9!,
@@ -144,11 +143,26 @@ class HexadecimalViewController: UIViewController {
         let doubleButtons = [DELBtn!]
         let tripleButton = ACBtn!
         
-        let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, calculator: 1)
-        NSLayoutConstraint.activate(buttonConstraints)
-        
-        let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
-        NSLayoutConstraint.activate(labelConstraints)
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: hexVStack, screenWidth: screenWidth, screenHeight: screenHeight)
+            NSLayoutConstraint.activate(stackConstraints)
+            
+            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
+            NSLayoutConstraint.activate(buttonConstraints)
+            
+            let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
+            NSLayoutConstraint.activate(labelConstraints)
+        }
+        else {
+            let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: hexVStack, screenWidth: screenWidth)
+            NSLayoutConstraint.activate(stackConstraints)
+            
+            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, calculator: 1)
+            NSLayoutConstraint.activate(buttonConstraints)
+            
+            let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
+            NSLayoutConstraint.activate(labelConstraints)
+        }
     }
     //Load the current converted value from either of the other calculator screens
     override func viewWillAppear(_ animated: Bool) {
@@ -190,6 +204,12 @@ class HexadecimalViewController: UIViewController {
         
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
+    }
+    
+    // iPad support portrait and landscape mode, need to alter layout on device rotation
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        print("rotated")
     }
     
     //Function to copy current output label to clipboard when tapped

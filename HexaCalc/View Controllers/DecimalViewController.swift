@@ -95,7 +95,7 @@ class DecimalViewController: UIViewController {
         
         let hStacks = [decHStack1!, decHStack2!, decHStack3!, decHStack4!, decHStack5!]
         
-        let stackConstraints = UIHelper.setupStackContraints(hStacks: hStacks, vStack: decVStack, screenWidth: screenWidth)
+        let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: decVStack, screenWidth: screenWidth)
         NSLayoutConstraint.activate(stackConstraints)
         
         let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, DOTBtn!, PLUSMINUSBtn!,
