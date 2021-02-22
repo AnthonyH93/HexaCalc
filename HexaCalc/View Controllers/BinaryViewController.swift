@@ -97,7 +97,7 @@ class BinaryViewController: UIViewController {
         let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
         NSLayoutConstraint.activate(buttonConstraints)
         
-        let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth)
+        let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
         NSLayoutConstraint.activate(labelConstraints)
     }
     

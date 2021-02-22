@@ -92,19 +92,27 @@ class UIHelper {
         return constraints
     }
     
-    static func setupLabelConstraints(label: UILabel, screenWidth: CGFloat) -> [NSLayoutConstraint] {
+    static func setupLabelConstraints(label: UILabel, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
         
         let labelWidth = screenWidth - 20
         let labelHeight: CGFloat = 64
         
         var constraints = [NSLayoutConstraint]()
         
-        if (screenWidth == 320) {
-            label.font = UIFont(name: "Avenir Next", size: 50)
-        }
-        
         constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
         constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
+        
+        //Adjust binary label font size
+        if (calculator == 2) {
+            if (screenWidth == 320) {
+                label.font = UIFont(name: "Avenir Next", size: 14.5)
+            }
+        }
+        else {
+            if (screenWidth == 320) {
+                label.font = UIFont(name: "Avenir Next", size: 50)
+            }
+        }
         
         return constraints
     }
