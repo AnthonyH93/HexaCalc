@@ -246,7 +246,6 @@ class UIHelper {
         }
         
         label.font = UIFont(name: "Avenir Next", size: labelFontSize)
-        print(labelFontSize)
         
         return constraints
     }

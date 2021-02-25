@@ -206,7 +206,7 @@ class HexadecimalViewController: UIViewController {
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }
     
-    // iPad support portrait and landscape mode, need to alter layout on device rotation
+    // iPad support is for portrait and landscape mode, need to alter layout on device rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         print("rotated")

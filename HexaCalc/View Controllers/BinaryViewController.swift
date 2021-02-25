@@ -83,22 +83,35 @@ class BinaryViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         
+        // Setup Binary View Controller constraints
         let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
         
         let hStacks = [binHStack1!, binHStack2!, binHStack3!, binHStack4!, binHStack5!]
-        
-        let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth)
-        NSLayoutConstraint.activate(stackConstraints)
-        
         let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, XORBtn!, ORBtn!, ANDBtn!, NOTBtn!,
                              ONESBtn!, TWOSBtn!, LSBtn!, RSBtn!, Btn0!, Btn1!, Btn00!, Btn11!]
         let doubleButtons = [ACBtn!]
         
-        let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
-        NSLayoutConstraint.activate(buttonConstraints)
-        
-        let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
-        NSLayoutConstraint.activate(labelConstraints)
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth, screenHeight: screenHeight)
+            NSLayoutConstraint.activate(stackConstraints)
+            
+            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
+            NSLayoutConstraint.activate(buttonConstraints)
+            
+            let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
+            NSLayoutConstraint.activate(labelConstraints)
+        }
+        else {
+            let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth)
+            NSLayoutConstraint.activate(stackConstraints)
+            
+            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
+            NSLayoutConstraint.activate(buttonConstraints)
+            
+            let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
+            NSLayoutConstraint.activate(labelConstraints)
+        }
     }
     
     //Load the current converted value from either of the other calculator screens
@@ -144,6 +157,11 @@ class BinaryViewController: UIViewController {
         
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
+    }
+    
+    // iPad support is for portrait and landscape mode, need to alter layout on device rotation
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     //Function to copy current output label to clipboard when tapped
