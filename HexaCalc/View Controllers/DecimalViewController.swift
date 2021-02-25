@@ -61,6 +61,7 @@ class DecimalViewController: UIViewController {
     
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
     var currentContraints: [NSLayoutConstraint] = []
+    var firstLaunch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,10 +93,9 @@ class DecimalViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        
         // Setup Decimal View Controller constraints
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
+        var screenWidth = UIScreen.main.bounds.width
+        var screenHeight = UIScreen.main.bounds.height
         
         let hStacks = [decHStack1!, decHStack2!, decHStack3!, decHStack4!, decHStack5!]
         let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, DOTBtn!, PLUSMINUSBtn!,
@@ -103,6 +103,13 @@ class DecimalViewController: UIViewController {
         let doubleButtons = [Btn0!]
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
+            // Need to switch width and height if device is in landscape mode on first launch
+            if (UIWindow.isLandscape && firstLaunch) {
+                screenWidth = UIScreen.main.bounds.height
+                screenHeight = UIScreen.main.bounds.width
+            }
+            firstLaunch = false
+            
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: decVStack, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             

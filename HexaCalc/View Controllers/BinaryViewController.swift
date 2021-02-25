@@ -53,6 +53,7 @@ class BinaryViewController: UIViewController {
     
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
     var currentContraints: [NSLayoutConstraint] = []
+    var firstLaunch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,10 +86,9 @@ class BinaryViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        
         // Setup Binary View Controller constraints
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
+        var screenWidth = UIScreen.main.bounds.width
+        var screenHeight = UIScreen.main.bounds.height
         
         let hStacks = [binHStack1!, binHStack2!, binHStack3!, binHStack4!, binHStack5!]
         let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, XORBtn!, ORBtn!, ANDBtn!, NOTBtn!,
@@ -96,6 +96,13 @@ class BinaryViewController: UIViewController {
         let doubleButtons = [ACBtn!]
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
+            // Need to switch width and height if device is in landscape mode on first launch
+            if (UIWindow.isLandscape && firstLaunch) {
+                screenWidth = UIScreen.main.bounds.height
+                screenHeight = UIScreen.main.bounds.width
+            }
+            firstLaunch = false
+            
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             

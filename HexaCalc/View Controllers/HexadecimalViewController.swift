@@ -60,6 +60,7 @@ class HexadecimalViewController: UIViewController {
     
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
     var currentContraints: [NSLayoutConstraint] = []
+    var firstLaunch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,11 +133,9 @@ class HexadecimalViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        
         // Setup Hexadecimal View Controller constraints
-        
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
+        var screenWidth = UIScreen.main.bounds.width
+        var screenHeight = UIScreen.main.bounds.height
         
         let hStacks = [hexHStack1!, hexHStack2!, hexHStack3!, hexHStack4!, hexHStack5!, hexHStack6!]
         let singleButtons = [XORBtn!, ORBtn!, ANDBtn!, NOTBtn!, DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!,
@@ -146,6 +145,13 @@ class HexadecimalViewController: UIViewController {
         let tripleButton = ACBtn!
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
+            // Need to switch width and height if device is in landscape mode on first launch
+            if (UIWindow.isLandscape && firstLaunch) {
+                screenWidth = UIScreen.main.bounds.height
+                screenHeight = UIScreen.main.bounds.width
+            }
+            firstLaunch = false
+            
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: hexVStack, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             
