@@ -145,7 +145,7 @@ class HexadecimalViewController: UIViewController {
         let tripleButton = ACBtn!
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
-            // Need to switch width and height if device is in landscape mode on first launch
+            // Need to switch width and height if device is in landscape mode on first launch - only on hexadecimal due to it being first tab
             if (UIWindow.isLandscape && firstLaunch) {
                 screenWidth = UIScreen.main.bounds.height
                 screenHeight = UIScreen.main.bounds.width
