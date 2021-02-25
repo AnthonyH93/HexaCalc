@@ -58,6 +58,9 @@ class HexadecimalViewController: UIViewController {
     var result = ""
     var currentOperation:Operation = .NULL
     
+    // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
+    var currentContraints: [NSLayoutConstraint] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -136,7 +139,6 @@ class HexadecimalViewController: UIViewController {
         let screenHeight = UIScreen.main.bounds.height
         
         let hStacks = [hexHStack1!, hexHStack2!, hexHStack3!, hexHStack4!, hexHStack5!, hexHStack6!]
-        
         let singleButtons = [XORBtn!, ORBtn!, ANDBtn!, NOTBtn!, DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!,
                              Btn0!, Btn1!, Btn2!, Btn3!, Btn4!, Btn5!, Btn6!, Btn7!, Btn8!, Btn9!,
                              ABtn!, BBtn!, CBtn!, DBtn!, EBtn!, FBtn!]
@@ -145,13 +147,15 @@ class HexadecimalViewController: UIViewController {
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: hexVStack, screenWidth: screenWidth, screenHeight: screenHeight)
-            NSLayoutConstraint.activate(stackConstraints)
+            currentContraints.append(contentsOf: stackConstraints)
             
             let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
-            NSLayoutConstraint.activate(buttonConstraints)
+            currentContraints.append(contentsOf: buttonConstraints)
             
             let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
-            NSLayoutConstraint.activate(labelConstraints)
+            currentContraints.append(contentsOf: labelConstraints)
+            
+            NSLayoutConstraint.activate(currentContraints)
         }
         else {
             let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: hexVStack, screenWidth: screenWidth)
@@ -206,10 +210,13 @@ class HexadecimalViewController: UIViewController {
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }
     
-    // iPad support is for portrait and landscape mode, need to alter layout on device rotation
+    // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        print("rotated")
+        
+        // Deactivate current contraints and remove them from the list, new constraints will be calculated and activated as device rotates
+        NSLayoutConstraint.deactivate(currentContraints)
+        currentContraints.removeAll()
     }
     
     //Function to copy current output label to clipboard when tapped
