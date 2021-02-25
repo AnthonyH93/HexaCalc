@@ -14,7 +14,6 @@ class UIHelper {
     
     // Setup calculator stack constraints
     static func setupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat) -> [NSLayoutConstraint] {
-        
         let stackWidth = screenWidth - 20
         var hStackHeight: CGFloat = 0
         var vStackHeight: CGFloat = 0
@@ -45,7 +44,6 @@ class UIHelper {
     
     // Setup calculator button constraints
     static func setupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], tripleButton: RoundButton?, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
-        
         let stackWidth = screenWidth - 20
         var singleButtonSize: CGFloat = 0
         var doubleButtonSize: CGFloat = 0
@@ -97,7 +95,6 @@ class UIHelper {
     
     // Setup calculator label constraints
     static func setupLabelConstraints(label: UILabel, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
-        
         let labelWidth = screenWidth - 20
         let labelHeight: CGFloat = 64
         
@@ -123,7 +120,6 @@ class UIHelper {
     
     // Setup calculator stack constraints for iPad
     static func iPadSetupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat, screenHeight: CGFloat) -> [NSLayoutConstraint] {
-        
         let stackWidth = screenWidth - 20
         let vStackHeight = screenHeight/1.5
         var hStackHeight: CGFloat = 0
@@ -152,7 +148,6 @@ class UIHelper {
     
     // Setup calculator button constraints for iPad
     static func iPadSetupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], tripleButton: RoundButton?, screenWidth: CGFloat, screenHeight: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
-        
         let stackWidth = screenWidth - 20
         let vStackHeight = screenHeight/1.5
         var buttonHeight: CGFloat = 0
@@ -213,7 +208,6 @@ class UIHelper {
     
     // Setup calculator label constraints for iPads
     static func iPadSetupLabelConstraints(label: UILabel, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
-        
         let labelWidth = screenWidth - 20
         let labelHeight: CGFloat = 150
         var labelFontSize: CGFloat = 0

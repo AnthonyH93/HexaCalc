@@ -51,6 +51,9 @@ class BinaryViewController: UIViewController {
     var result = ""
     var currentOperation:Operation = .NULL
     
+    // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
+    var currentContraints: [NSLayoutConstraint] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -94,13 +97,15 @@ class BinaryViewController: UIViewController {
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth, screenHeight: screenHeight)
-            NSLayoutConstraint.activate(stackConstraints)
+            currentContraints.append(contentsOf: stackConstraints)
             
             let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
-            NSLayoutConstraint.activate(buttonConstraints)
+            currentContraints.append(contentsOf: buttonConstraints)
             
             let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
-            NSLayoutConstraint.activate(labelConstraints)
+            currentContraints.append(contentsOf: labelConstraints)
+            
+            NSLayoutConstraint.activate(currentContraints)
         }
         else {
             let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth)
@@ -159,9 +164,13 @@ class BinaryViewController: UIViewController {
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }
     
-    // iPad support is for portrait and landscape mode, need to alter layout on device rotation
+    // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
+        // Deactivate current contraints and remove them from the list, new constraints will be calculated and activated as device rotates
+        NSLayoutConstraint.deactivate(currentContraints)
+        currentContraints.removeAll()
     }
     
     //Function to copy current output label to clipboard when tapped
