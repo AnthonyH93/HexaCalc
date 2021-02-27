@@ -93,8 +93,8 @@ class DecimalViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         // Setup Decimal View Controller constraints
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
+        let screenWidth = view.bounds.width
+        let screenHeight = view.bounds.height
         
         let hStacks = [decHStack1!, decHStack2!, decHStack3!, decHStack4!, decHStack5!]
         let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, DOTBtn!, PLUSMINUSBtn!,

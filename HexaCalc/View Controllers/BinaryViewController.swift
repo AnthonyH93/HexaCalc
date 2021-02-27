@@ -86,8 +86,8 @@ class BinaryViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         // Setup Binary View Controller constraints
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
+        let screenWidth = view.bounds.width
+        let screenHeight = view.bounds.height
         
         let hStacks = [binHStack1!, binHStack2!, binHStack3!, binHStack4!, binHStack5!]
         let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, XORBtn!, ORBtn!, ANDBtn!, NOTBtn!,

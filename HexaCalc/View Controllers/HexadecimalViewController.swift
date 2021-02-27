@@ -134,8 +134,8 @@ class HexadecimalViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         // Setup Hexadecimal View Controller constraints
-        var screenWidth = UIScreen.main.bounds.width
-        var screenHeight = UIScreen.main.bounds.height
+        var screenWidth = view.bounds.width
+        var screenHeight = view.bounds.height
         
         let hStacks = [hexHStack1!, hexHStack2!, hexHStack3!, hexHStack4!, hexHStack5!, hexHStack6!]
         let singleButtons = [XORBtn!, ORBtn!, ANDBtn!, NOTBtn!, DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!,
@@ -144,11 +144,14 @@ class HexadecimalViewController: UIViewController {
         let doubleButtons = [DELBtn!]
         let tripleButton = ACBtn!
         
+        print("W: \(screenWidth)")
+        print("H: \(screenHeight)")
+        
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             // Need to switch width and height if device is in landscape mode on first launch - only on hexadecimal due to it being first tab
-            if (UIWindow.isLandscape && firstLaunch) {
-                screenWidth = UIScreen.main.bounds.height
-                screenHeight = UIScreen.main.bounds.width
+            if (UIWindow.isLandscape && firstLaunch && (UIScreen.main.bounds.width < screenHeight)) {
+                screenWidth = view.bounds.height
+                screenHeight = view.bounds.width
             }
             firstLaunch = false
             
@@ -219,6 +222,8 @@ class HexadecimalViewController: UIViewController {
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
+        print("Ready to transition")
         
         // Deactivate current contraints and remove them from the list, new constraints will be calculated and activated as device rotates
         NSLayoutConstraint.deactivate(currentContraints)
