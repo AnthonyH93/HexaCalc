@@ -121,10 +121,15 @@ class UIHelper {
     // Setup calculator stack constraints for iPad
     static func iPadSetupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat, screenHeight: CGFloat) -> [NSLayoutConstraint] {
         let stackWidth = screenWidth - 20
-        let vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
+        var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
         var hStackHeight: CGFloat = 0
     
         var constraints = [NSLayoutConstraint]()
+        
+        // Vertical slide over needs special consideration
+        if ((screenWidth * 3) < screenHeight) {
+            vStackHeight = screenHeight/2
+        }
         
         // Hexadecimal calculator
         if (hStacks.count == 6) {
@@ -149,13 +154,18 @@ class UIHelper {
     // Setup calculator button constraints for iPad
     static func iPadSetupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], tripleButton: RoundButton?, screenWidth: CGFloat, screenHeight: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
         let stackWidth = screenWidth - 20
-        let vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
+        var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
         var buttonHeight: CGFloat = 0
         var singleButtonWidth: CGFloat = 0
         var doubleButtonWidth: CGFloat = 0
         var buttonFontSize: CGFloat = 0
         
         var constraints = [NSLayoutConstraint]()
+        
+        // Vertical slide over needs special consideration
+        if ((screenWidth * 3) < screenHeight) {
+            vStackHeight = screenHeight/2
+        }
         
         // Decide button text size
         switch screenWidth {
@@ -230,15 +240,15 @@ class UIHelper {
             case 330..<400:
                 labelFontSize = 20
             case 400..<600:
-                labelFontSize = 28
-            case 600..<800:
                 labelFontSize = 35
-            case 800..<1025:
+            case 600..<825:
+                labelFontSize = 45
+            case 825..<1025:
                 labelFontSize = 50
             default:
                 labelFontSize = 70
             }
-            labelHeight = (labelFontSize * 3)
+            labelHeight = (labelFontSize * 2.5)
         }
         else {
             switch screenWidth {

@@ -168,8 +168,10 @@ class BinaryViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         // Deactivate current contraints and remove them from the list, new constraints will be calculated and activated as device rotates
-        NSLayoutConstraint.deactivate(currentContraints)
-        currentContraints.removeAll()
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            NSLayoutConstraint.deactivate(currentContraints)
+            currentContraints.removeAll()
+        }
     }
     
     //Function to copy current output label to clipboard when tapped
