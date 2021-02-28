@@ -37,6 +37,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var indigoBtn: RoundButton!
     @IBOutlet weak var purpleBtn: RoundButton!
     
+    @IBOutlet weak var colourButtonsStack: UIStackView!
+    
+    // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
+    var currentContraints: [NSLayoutConstraint] = []
     
     //MARK: Variables
     
@@ -222,7 +226,15 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         
-        let screenWidth = UIScreen.main.bounds.width
+        let screenWidth = view.bounds.width
+        let screenHeight = view.bounds.height
+        
+        let buttons = [redBtn!, orangeBtn!, yellowBtn!, greenBtn!, blueBtn!, indigoBtn!, tealBtn!, purpleBtn!]
+        
+        let colourConstraints = UIHelper.setupSettingsColourButtons(stack: colourButtonsStack, buttons: buttons, screenWidth: screenWidth, screenHeight: screenHeight)
+        currentContraints.append(contentsOf: colourConstraints)
+        
+        NSLayoutConstraint.activate(currentContraints)
         
         //iPhone SE (1st generation) special case
         if (screenWidth == 320){
@@ -234,6 +246,17 @@ class SettingsViewController: UIViewController {
             colourLabel?.font = UIFont(name: "Avenir Next", size: 18)
             settingsLabel?.font = UIFont(name: "Avenir Next", size: 20)
             setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
+        }
+    }
+    
+    // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        // Deactivate current contraints and remove them from the list, new constraints will be calculated and activated as device rotates
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            NSLayoutConstraint.deactivate(currentContraints)
+            currentContraints.removeAll()
         }
     }
     

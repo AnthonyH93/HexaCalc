@@ -144,9 +144,6 @@ class HexadecimalViewController: UIViewController {
         let doubleButtons = [DELBtn!]
         let tripleButton = ACBtn!
         
-        print("W: \(screenWidth)")
-        print("H: \(screenHeight)")
-        
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             // Need to switch width and height if device is in landscape mode on first launch - only on hexadecimal due to it being first tab
             if (UIWindow.isLandscape && firstLaunch && (UIScreen.main.bounds.width < screenHeight)) {
@@ -222,8 +219,6 @@ class HexadecimalViewController: UIViewController {
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-        print("Ready to transition")
         
         // Deactivate current contraints and remove them from the list, new constraints will be calculated and activated as device rotates
         if (UIDevice.current.userInterfaceIdiom == .pad) {

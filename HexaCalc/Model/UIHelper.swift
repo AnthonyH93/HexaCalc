@@ -128,7 +128,7 @@ class UIHelper {
         
         // Vertical slide over needs special consideration
         if ((screenWidth * 3) < screenHeight) {
-            vStackHeight = screenHeight/2
+            vStackHeight = screenHeight/2.2
         }
         
         // Hexadecimal calculator
@@ -164,7 +164,7 @@ class UIHelper {
         
         // Vertical slide over needs special consideration
         if ((screenWidth * 3) < screenHeight) {
-            vStackHeight = screenHeight/2
+            vStackHeight = screenHeight/2.2
         }
         
         // Decide button text size
@@ -273,6 +273,34 @@ class UIHelper {
         constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
         
         label.font = UIFont(name: "Avenir Next", size: labelFontSize)
+        
+        return constraints
+    }
+    
+    static func setupSettingsColourButtons(stack: UIStackView, buttons: [RoundButton], screenWidth: CGFloat, screenHeight: CGFloat) -> [NSLayoutConstraint] {
+        var buttonHeight: CGFloat = 0
+        
+        var constraints: [NSLayoutConstraint] = []
+        
+        switch screenWidth {
+        case 0..<600:
+            buttonHeight = 30
+            stack.spacing = 10
+        default:
+            buttonHeight = 60
+            stack.spacing = 20
+        }
+        
+        for button in buttons {
+            //button.frame.size = CGSize(width: buttonHeight, height: buttonHeight)
+            button.layer.cornerRadius = buttonHeight/2
+            constraints.append(button.widthAnchor.constraint(equalToConstant: buttonHeight))
+            constraints.append(button.heightAnchor.constraint(equalToConstant: buttonHeight))
+        }
+        let stackWidth = (buttonHeight * 8) + (stack.spacing * 7)
+        
+        constraints.append(stack.heightAnchor.constraint(equalToConstant: buttonHeight))
+        constraints.append(stack.widthAnchor.constraint(equalToConstant: stackWidth))
         
         return constraints
     }
