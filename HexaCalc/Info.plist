@@ -8,7 +8,7 @@
 	<string>HexaCalc</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIcons~ipad</key>
+	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
@@ -95,7 +95,7 @@
 			<false/>
 		</dict>
 	</dict>
-	<key>CFBundleIcons</key>
+	<key>CFBundleIcons~ipad</key>
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
