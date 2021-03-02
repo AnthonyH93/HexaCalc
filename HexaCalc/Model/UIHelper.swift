@@ -128,7 +128,7 @@ class UIHelper {
         
         // Vertical slide over needs special consideration
         if ((screenWidth * 3) < screenHeight) {
-            vStackHeight = screenHeight/2.4
+            vStackHeight = screenHeight/2.5
         }
         
         // Hexadecimal calculator
@@ -164,11 +164,8 @@ class UIHelper {
         
         // Vertical slide over needs special consideration
         if ((screenWidth * 3) < screenHeight) {
-            vStackHeight = screenHeight/2.4
+            vStackHeight = screenHeight/2.5
         }
-        
-        // Scale button font size based on screen width
-        buttonFontSize = 27*(screenWidth/375)
         
         // Hexadecimal
         if (calculator == 1) {
@@ -176,6 +173,9 @@ class UIHelper {
             singleButtonWidth = (stackWidth - 40)/5.0
             doubleButtonWidth = (singleButtonWidth * 2) + 10
             let tripleButtonWidth: CGFloat = (singleButtonWidth * 3) + 20
+            
+            // Scale button font size based on screen width
+            buttonFontSize = 27*(min(screenHeight, screenWidth)/375)
             
             if (tripleButton != nil) {
                 constraints.append(tripleButton!.widthAnchor.constraint(equalToConstant: tripleButtonWidth))
@@ -190,6 +190,9 @@ class UIHelper {
             buttonHeight = (vStackHeight - 20)/5
             singleButtonWidth = (stackWidth - 30)/4.0
             doubleButtonWidth = (singleButtonWidth * 2) + 10
+            
+            // Scale button font size based on screen width
+            buttonFontSize = 30*(min(screenHeight, screenWidth)/375)
         }
         
         for button in singleButtons {

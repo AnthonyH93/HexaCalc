@@ -1393,6 +1393,10 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="JhF-9W-fU9"/>
+                                            <constraint firstAttribute="width" constant="310" id="e1d-H4-8zj"/>
+                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8S-Cz-Vjt">
                                         <rect key="frame" x="-4" y="556" width="0.0" height="0.0"/>
