@@ -47,6 +47,7 @@ class UIHelper {
         let stackWidth = screenWidth - 20
         var singleButtonSize: CGFloat = 0
         var doubleButtonSize: CGFloat = 0
+        var buttonFontSize: CGFloat = 0
         
         var constraints = [NSLayoutConstraint]()
         
@@ -56,18 +57,21 @@ class UIHelper {
             doubleButtonSize = (singleButtonSize * 2) + 10
             let tripleButtonSize: CGFloat = (singleButtonSize * 3) + 20
             
+            // Scale button font size based on screen width
+            buttonFontSize = 27*(screenWidth/375)
+            
             if (tripleButton != nil) {
                 constraints.append(tripleButton!.widthAnchor.constraint(equalToConstant: tripleButtonSize))
                 constraints.append(tripleButton!.heightAnchor.constraint(equalToConstant: singleButtonSize))
                 tripleButton!.layer.cornerRadius = singleButtonSize/2
-                if (screenWidth == 320) {
-                    tripleButton!.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-                }
+                tripleButton!.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
             }
             
         }
         // Binary or Decimal
         else {
+            // Scale button font size based on screen width
+            buttonFontSize = 30*(screenWidth/375)
             singleButtonSize = (stackWidth - 30)/4.0
             doubleButtonSize = (singleButtonSize * 2) + 10
         }
@@ -75,18 +79,14 @@ class UIHelper {
         for button in singleButtons {
             constraints.append(button.widthAnchor.constraint(equalToConstant: singleButtonSize))
             constraints.append(button.heightAnchor.constraint(equalToConstant: singleButtonSize))
-            if (screenWidth == 320) {
-                button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-            }
+            button.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
             button.layer.cornerRadius = singleButtonSize/2
         }
         
         for button in doubleButtons {
             constraints.append(button.widthAnchor.constraint(equalToConstant: doubleButtonSize))
             constraints.append(button.heightAnchor.constraint(equalToConstant: singleButtonSize))
-            if (screenWidth == 320) {
-                button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-            }
+            button.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
             button.layer.cornerRadius = singleButtonSize/2
         }
         
@@ -128,7 +128,7 @@ class UIHelper {
         
         // Vertical slide over needs special consideration
         if ((screenWidth * 3) < screenHeight) {
-            vStackHeight = screenHeight/2.2
+            vStackHeight = screenHeight/2.4
         }
         
         // Hexadecimal calculator
@@ -164,24 +164,11 @@ class UIHelper {
         
         // Vertical slide over needs special consideration
         if ((screenWidth * 3) < screenHeight) {
-            vStackHeight = screenHeight/2.2
+            vStackHeight = screenHeight/2.4
         }
         
-        // Decide button text size
-        switch screenWidth {
-        case 0..<330:
-            buttonFontSize = 22
-        case 330..<400:
-            buttonFontSize = 25
-        case 400..<600:
-            buttonFontSize = 35
-        case 600..<800:
-            buttonFontSize = 50
-        case 800..<1000:
-            buttonFontSize = 55
-        default:
-            buttonFontSize = 60
-        }
+        // Scale button font size based on screen width
+        buttonFontSize = 27*(screenWidth/375)
         
         // Hexadecimal
         if (calculator == 1) {
