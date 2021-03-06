@@ -13,7 +13,7 @@ import UIKit
 class UIHelper {
     
     // Setup calculator stack constraints
-    static func setupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat) -> [NSLayoutConstraint] {
+    static func setupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, outputLabel: UILabel, screenWidth: CGFloat) -> [NSLayoutConstraint] {
         let stackWidth = screenWidth - 20
         var hStackHeight: CGFloat = 0
         var vStackHeight: CGFloat = 0
@@ -22,7 +22,7 @@ class UIHelper {
         
         // Hexadecimal calculator
         if (hStacks.count == 6) {
-            hStackHeight = (stackWidth - 40)/5.0
+            hStackHeight = (stackWidth - 20)/5.0
             vStackHeight = (hStackHeight * 6) + 25
         }
         // Binary or Decimal calculator
@@ -38,7 +38,11 @@ class UIHelper {
         
         constraints.append(vStack.widthAnchor.constraint(equalToConstant: stackWidth))
         constraints.append(vStack.heightAnchor.constraint(equalToConstant: vStackHeight))
+        constraints.append(vStack.topAnchor.constraint(equalTo: outputLabel.bottomAnchor, constant: 23.0))
         
+        print("SW: \(screenWidth)")
+        print("H: \(hStackHeight)")
+        print("V: \(vStackHeight)")
         return constraints
     }
     
@@ -53,9 +57,9 @@ class UIHelper {
         
         // Hexadecimal
         if (calculator == 1) {
-            singleButtonSize = (stackWidth - 40)/5.0
-            doubleButtonSize = (singleButtonSize * 2) + 10
-            let tripleButtonSize: CGFloat = (singleButtonSize * 3) + 20
+            singleButtonSize = (stackWidth - 20)/5.0
+            doubleButtonSize = (singleButtonSize * 2) + 5
+            let tripleButtonSize: CGFloat = (singleButtonSize * 3) + 10
             
             // Scale button font size based on screen width
             buttonFontSize = 27*(screenWidth/375)
@@ -96,35 +100,30 @@ class UIHelper {
     // Setup calculator label constraints
     static func setupLabelConstraints(label: UILabel, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
         let labelWidth = screenWidth - 20
-        let labelHeight: CGFloat = 64
+        var labelHeight: CGFloat = 0
+        var labelFontSize: CGFloat = 0
         
         var constraints = [NSLayoutConstraint]()
         
         constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
+        
+        labelFontSize = (calculator == 2) ? 30*(screenWidth/375) : 75*(screenWidth/375)
+        labelHeight = (calculator == 2) ? (labelFontSize*2.5) : labelFontSize
+        
         constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
         
-        //Adjust binary label font size
-        if (calculator == 2) {
-            if (screenWidth == 320) {
-                label.font = UIFont(name: "Avenir Next", size: 14.5)
-            }
-        }
-        else {
-            if (screenWidth == 320) {
-                label.font = UIFont(name: "Avenir Next", size: 50)
-            }
-        }
+        label.font = UIFont(name: "Avenir Next", size: labelFontSize)
         
         return constraints
     }
     
     // Setup calculator stack constraints for iPad
-    static func iPadSetupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat, screenHeight: CGFloat) -> [NSLayoutConstraint] {
+    static func iPadSetupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, outputLabel: UILabel, screenWidth: CGFloat, screenHeight: CGFloat) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
         
         // Use iPhone constraints if screen width is of that size
         if (screenWidth < 415) {
-            constraints = setupStackConstraints(hStacks: hStacks, vStack: vStack, screenWidth: screenWidth)
+            constraints = setupStackConstraints(hStacks: hStacks, vStack: vStack, outputLabel: outputLabel, screenWidth: screenWidth)
         }
         else {
             let stackWidth = screenWidth - 20
@@ -152,6 +151,7 @@ class UIHelper {
             
             constraints.append(vStack.widthAnchor.constraint(equalToConstant: stackWidth))
             constraints.append(vStack.heightAnchor.constraint(equalToConstant: vStackHeight))
+            constraints.append(vStack.topAnchor.constraint(equalTo: outputLabel.bottomAnchor, constant: 10.0))
         }
         return constraints
     }
@@ -224,7 +224,7 @@ class UIHelper {
     }
     
     // Setup calculator label constraints for iPads
-    static func iPadSetupLabelConstraints(label: UILabel, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
+    static func iPadSetupLabelConstraints(label: UILabel, screenWidth: CGFloat, screenHeight: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
         let labelWidth = screenWidth - 20
         var labelHeight: CGFloat = 0
         var labelFontSize: CGFloat = 0
@@ -233,43 +233,8 @@ class UIHelper {
         
         constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
         
-        //Adjust label font sizes
-        if (calculator == 2) {
-            switch screenWidth {
-            case 0..<330:
-                labelFontSize = 18
-            case 330..<400:
-                labelFontSize = 20
-            case 400..<600:
-                labelFontSize = 35
-            case 600..<825:
-                labelFontSize = 45
-            case 825..<1025:
-                labelFontSize = 50
-            default:
-                labelFontSize = 70
-            }
-            labelHeight = (labelFontSize * 2.5)
-        }
-        else {
-            switch screenWidth {
-            case 0..<330:
-                labelFontSize = 65
-            case 330..<400:
-                labelFontSize = 75
-            case 400..<600:
-                labelFontSize = 110
-            case 600..<800:
-                labelFontSize = 120
-            case 800..<900:
-                labelFontSize = 130
-            case 900..<1000:
-                labelFontSize = 140
-            default:
-                labelFontSize = 160
-            }
-            labelHeight = labelFontSize
-        }
+        labelFontSize = (calculator == 2) ? 30*(min(screenWidth, screenHeight)/375) : 75*(min(screenWidth, screenHeight)/375)
+        labelHeight = (calculator == 2) ? (labelFontSize*2.5) : labelFontSize
         
         constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
         

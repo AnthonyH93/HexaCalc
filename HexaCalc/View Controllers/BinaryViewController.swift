@@ -95,19 +95,19 @@ class BinaryViewController: UIViewController {
         let doubleButtons = [ACBtn!]
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
-            let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth, screenHeight: screenHeight)
+            let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: binVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             
             let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
             currentContraints.append(contentsOf: buttonConstraints)
             
-            let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
+            let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
             currentContraints.append(contentsOf: labelConstraints)
             
             NSLayoutConstraint.activate(currentContraints)
         }
         else {
-            let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, screenWidth: screenWidth)
+            let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, outputLabel: outputLabel, screenWidth: screenWidth)
             NSLayoutConstraint.activate(stackConstraints)
             
             let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
