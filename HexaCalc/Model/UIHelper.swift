@@ -120,93 +120,104 @@ class UIHelper {
     
     // Setup calculator stack constraints for iPad
     static func iPadSetupStackConstraints(hStacks: [UIStackView], vStack: UIStackView, screenWidth: CGFloat, screenHeight: CGFloat) -> [NSLayoutConstraint] {
-        let stackWidth = screenWidth - 20
-        var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
-        var hStackHeight: CGFloat = 0
-    
         var constraints = [NSLayoutConstraint]()
         
-        // Vertical slide over needs special consideration
-        if ((screenWidth * 3) < screenHeight) {
-            vStackHeight = screenHeight/2.5
+        // Use iPhone constraints if screen width is of that size
+        if (screenWidth < 415) {
+            constraints = setupStackConstraints(hStacks: hStacks, vStack: vStack, screenWidth: screenWidth)
         }
-        
-        // Hexadecimal calculator
-        if (hStacks.count == 6) {
-            hStackHeight = (vStackHeight - 25)/6
-        }
-        // Binary or Decimal calculator
         else {
-            hStackHeight = (vStackHeight - 20)/5
+            let stackWidth = screenWidth - 20
+            var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
+            var hStackHeight: CGFloat = 0
+            
+            // Vertical slide over needs special consideration
+            if ((screenWidth * 3) < screenHeight) {
+                vStackHeight = screenHeight/2.5
+            }
+            
+            // Hexadecimal calculator
+            if (hStacks.count == 6) {
+                hStackHeight = (vStackHeight - 25)/6
+            }
+            // Binary or Decimal calculator
+            else {
+                hStackHeight = (vStackHeight - 20)/5
+            }
+            
+            for hStack in hStacks {
+                constraints.append(hStack.widthAnchor.constraint(equalToConstant: stackWidth))
+                constraints.append(hStack.heightAnchor.constraint(equalToConstant: hStackHeight))
+            }
+            
+            constraints.append(vStack.widthAnchor.constraint(equalToConstant: stackWidth))
+            constraints.append(vStack.heightAnchor.constraint(equalToConstant: vStackHeight))
         }
-        
-        for hStack in hStacks {
-            constraints.append(hStack.widthAnchor.constraint(equalToConstant: stackWidth))
-            constraints.append(hStack.heightAnchor.constraint(equalToConstant: hStackHeight))
-        }
-        
-        constraints.append(vStack.widthAnchor.constraint(equalToConstant: stackWidth))
-        constraints.append(vStack.heightAnchor.constraint(equalToConstant: vStackHeight))
-        
         return constraints
     }
     
     // Setup calculator button constraints for iPad
     static func iPadSetupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], tripleButton: RoundButton?, screenWidth: CGFloat, screenHeight: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
-        let stackWidth = screenWidth - 20
-        var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
-        var buttonHeight: CGFloat = 0
-        var singleButtonWidth: CGFloat = 0
-        var doubleButtonWidth: CGFloat = 0
-        var buttonFontSize: CGFloat = 0
-        
         var constraints = [NSLayoutConstraint]()
         
-        // Vertical slide over needs special consideration
-        if ((screenWidth * 3) < screenHeight) {
-            vStackHeight = screenHeight/2.5
+        // Use iPhone constraints if screen width is of that size
+        if (screenWidth < 415) {
+            constraints = setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, calculator: calculator)
         }
-        
-        // Hexadecimal
-        if (calculator == 1) {
-            buttonHeight = (vStackHeight - 25)/6
-            singleButtonWidth = (stackWidth - 40)/5.0
-            doubleButtonWidth = (singleButtonWidth * 2) + 10
-            let tripleButtonWidth: CGFloat = (singleButtonWidth * 3) + 20
+        else {
+            let stackWidth = screenWidth - 20
+            var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
+            var buttonHeight: CGFloat = 0
+            var singleButtonWidth: CGFloat = 0
+            var doubleButtonWidth: CGFloat = 0
+            var buttonFontSize: CGFloat = 0
             
-            // Scale button font size based on screen width
-            buttonFontSize = 27*(min(screenHeight, screenWidth)/375)
-            
-            if (tripleButton != nil) {
-                constraints.append(tripleButton!.widthAnchor.constraint(equalToConstant: tripleButtonWidth))
-                constraints.append(tripleButton!.heightAnchor.constraint(equalToConstant: buttonHeight))
-                tripleButton!.layer.cornerRadius = ((screenWidth * 2) > screenHeight) ? buttonHeight/2 : buttonHeight/3
-                tripleButton!.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
+            // Vertical slide over needs special consideration
+            if ((screenWidth * 3) < screenHeight) {
+                vStackHeight = screenHeight/2.5
             }
             
-        }
-        // Binary or Decimal
-        else {
-            buttonHeight = (vStackHeight - 20)/5
-            singleButtonWidth = (stackWidth - 30)/4.0
-            doubleButtonWidth = (singleButtonWidth * 2) + 10
+            // Hexadecimal
+            if (calculator == 1) {
+                buttonHeight = (vStackHeight - 25)/6
+                singleButtonWidth = (stackWidth - 40)/5.0
+                doubleButtonWidth = (singleButtonWidth * 2) + 10
+                let tripleButtonWidth: CGFloat = (singleButtonWidth * 3) + 20
+                
+                // Scale button font size based on screen width
+                buttonFontSize = 27*(min(screenHeight, screenWidth)/375)
+                
+                if (tripleButton != nil) {
+                    constraints.append(tripleButton!.widthAnchor.constraint(equalToConstant: tripleButtonWidth))
+                    constraints.append(tripleButton!.heightAnchor.constraint(equalToConstant: buttonHeight))
+                    tripleButton!.layer.cornerRadius = ((screenWidth * 2) > screenHeight) ? buttonHeight/2 : buttonHeight/3
+                    tripleButton!.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
+                }
+                
+            }
+            // Binary or Decimal
+            else {
+                buttonHeight = (vStackHeight - 20)/5
+                singleButtonWidth = (stackWidth - 30)/4.0
+                doubleButtonWidth = (singleButtonWidth * 2) + 10
+                
+                // Scale button font size based on screen width
+                buttonFontSize = 30*(min(screenHeight, screenWidth)/375)
+            }
             
-            // Scale button font size based on screen width
-            buttonFontSize = 30*(min(screenHeight, screenWidth)/375)
-        }
-        
-        for button in singleButtons {
-            constraints.append(button.widthAnchor.constraint(equalToConstant: singleButtonWidth))
-            constraints.append(button.heightAnchor.constraint(equalToConstant: buttonHeight))
-            button.layer.cornerRadius = ((screenWidth * 2) > screenHeight) ? buttonHeight/2 : buttonHeight/3
-            button.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
-        }
-        
-        for button in doubleButtons {
-            constraints.append(button.widthAnchor.constraint(equalToConstant: doubleButtonWidth))
-            constraints.append(button.heightAnchor.constraint(equalToConstant: buttonHeight))
-            button.layer.cornerRadius = ((screenWidth * 2) > screenHeight) ? buttonHeight/2 : buttonHeight/3
-            button.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
+            for button in singleButtons {
+                constraints.append(button.widthAnchor.constraint(equalToConstant: singleButtonWidth))
+                constraints.append(button.heightAnchor.constraint(equalToConstant: buttonHeight))
+                button.layer.cornerRadius = ((screenWidth * 2) > screenHeight) ? buttonHeight/2 : buttonHeight/3
+                button.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
+            }
+            
+            for button in doubleButtons {
+                constraints.append(button.widthAnchor.constraint(equalToConstant: doubleButtonWidth))
+                constraints.append(button.heightAnchor.constraint(equalToConstant: buttonHeight))
+                button.layer.cornerRadius = ((screenWidth * 2) > screenHeight) ? buttonHeight/2 : buttonHeight/3
+                button.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
+            }
         }
         
         return constraints
