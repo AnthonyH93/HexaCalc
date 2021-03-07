@@ -512,10 +512,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="55i-hd-IgX">
-                                        <rect key="frame" x="105" y="496" width="204" height="265"/>
+                                        <rect key="frame" x="112.66666666666669" y="496" width="189" height="265"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ijy-Iy-URI">
-                                                <rect key="frame" x="0.0" y="0.0" width="204" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ijy-Iy-URI">
+                                                <rect key="frame" x="0.0" y="0.0" width="189" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKC-3T-8cx" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="42" height="53"/>
@@ -532,7 +532,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sij-Yn-oNW" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="79.666666666666657" y="0.0" width="57" height="53"/>
+                                                        <rect key="frame" x="71.999999999999986" y="0.0" width="57.000000000000014" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="DEL">
@@ -546,7 +546,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3q-Dh-2ps" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="174" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="÷">
@@ -561,8 +561,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mUt-5U-1Xp">
-                                                <rect key="frame" x="0.0" y="53" width="204" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mUt-5U-1Xp">
+                                                <rect key="frame" x="0.0" y="53" width="189" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDN-r5-ppP" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="53"/>
@@ -579,7 +579,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxU-Uv-ERW" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="50" y="0.0" width="40" height="53"/>
+                                                        <rect key="frame" x="44.999999999999986" y="0.0" width="40" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="&gt;&gt;">
@@ -593,7 +593,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5d-XQ-8me" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="100" y="0.0" width="64" height="53"/>
+                                                        <rect key="frame" x="89.999999999999986" y="0.0" width="64.000000000000014" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="XOR">
@@ -607,7 +607,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fws-FY-nc0" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="174" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="×">
@@ -622,8 +622,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WRl-Ii-Yij">
-                                                <rect key="frame" x="0.0" y="106" width="204" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WRl-Ii-Yij">
+                                                <rect key="frame" x="0.0" y="106" width="189" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ydo-vE-RTm" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="41" height="53"/>
@@ -640,7 +640,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDe-dc-EtK" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="56.666666666666657" y="0.0" width="41" height="53"/>
+                                                        <rect key="frame" x="51.666666666666671" y="0.0" width="41" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="2's">
@@ -654,7 +654,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39t-2m-b1f" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="113.33333333333334" y="0.0" width="45" height="53"/>
+                                                        <rect key="frame" x="103.33333333333333" y="0.0" width="44.999999999999986" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="OR">
@@ -668,7 +668,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tBV-dh-STG" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="174" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="-">
@@ -683,8 +683,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3IF-xw-PqV">
-                                                <rect key="frame" x="0.0" y="159" width="204" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3IF-xw-PqV">
+                                                <rect key="frame" x="0.0" y="159" width="189" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gl7-nE-VdG" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="53"/>
@@ -701,7 +701,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyC-0x-fbI" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="43" y="0.0" width="37" height="53"/>
+                                                        <rect key="frame" x="37.999999999999986" y="0.0" width="37" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="11">
@@ -715,7 +715,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uxe-EP-a1f" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="93" y="0.0" width="68" height="53"/>
+                                                        <rect key="frame" x="82.999999999999986" y="0.0" width="68.000000000000014" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="AND">
@@ -729,7 +729,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSG-bo-Kqa" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="174" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="+">
@@ -744,8 +744,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-ns-mmy">
-                                                <rect key="frame" x="0.0" y="212" width="204" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-ns-mmy">
+                                                <rect key="frame" x="0.0" y="212" width="189" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZk-z6-Dqu" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="53"/>
@@ -762,7 +762,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ii9-LZ-xrx" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="43.666666666666657" y="0.0" width="37" height="53"/>
+                                                        <rect key="frame" x="38.666666666666671" y="0.0" width="37" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="00">
@@ -776,7 +776,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckg-ug-m1d" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="94.333333333333343" y="0.0" width="66" height="53"/>
+                                                        <rect key="frame" x="84.333333333333329" y="0.0" width="65.999999999999986" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="NOT">
@@ -790,7 +790,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb5-ih-FLz" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="174" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="=">
@@ -877,10 +877,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YRn-jp-boy">
-                                        <rect key="frame" x="112.66666666666669" y="476" width="189" height="285"/>
+                                        <rect key="frame" x="120" y="476" width="174" height="285"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iy6-EE-Ni3">
-                                                <rect key="frame" x="0.0" y="0.0" width="189" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iy6-EE-Ni3">
+                                                <rect key="frame" x="0.0" y="0.0" width="174" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFW-Xu-MGc" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="42" height="53"/>
@@ -897,7 +897,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jA-8e-5dW" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="51.999999999999986" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="47" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="±">
@@ -911,7 +911,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSD-iO-cST" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="91.999999999999986" y="0.0" width="57.000000000000014" height="53"/>
+                                                        <rect key="frame" x="82" y="0.0" width="57" height="53"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="DEL">
@@ -925,7 +925,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gf0-fY-7VF" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="144" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="÷">
@@ -940,8 +940,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VS6-jf-MsZ">
-                                                <rect key="frame" x="0.0" y="58" width="189" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VS6-jf-MsZ">
+                                                <rect key="frame" x="0.0" y="58" width="174" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d46-2F-KNS" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="53"/>
@@ -958,7 +958,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riD-mq-Hgo" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="52.999999999999986" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="48" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="8">
@@ -972,7 +972,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDE-6X-Dgl" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="105.99999999999999" y="0.0" width="30.000000000000014" height="53"/>
+                                                        <rect key="frame" x="96" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="9">
@@ -986,7 +986,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zk-72-2JA" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="144" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="×">
@@ -1001,8 +1001,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9os-7c-VOg">
-                                                <rect key="frame" x="0.0" y="116" width="189" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9os-7c-VOg">
+                                                <rect key="frame" x="0.0" y="116" width="174" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCK-9B-i1G" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="53"/>
@@ -1019,7 +1019,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x4-Cz-LL6" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="52.999999999999986" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="48" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="5">
@@ -1033,7 +1033,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fm-vl-7ec" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="105.99999999999999" y="0.0" width="30.000000000000014" height="53"/>
+                                                        <rect key="frame" x="96" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="6">
@@ -1047,7 +1047,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLL-MC-QGn" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="144" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="-">
@@ -1062,8 +1062,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FlW-yi-Lcq">
-                                                <rect key="frame" x="0.0" y="174" width="189" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="FlW-yi-Lcq">
+                                                <rect key="frame" x="0.0" y="174" width="174" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC8-mX-mk0" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="53"/>
@@ -1080,7 +1080,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAv-IB-DwS" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="52.999999999999986" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="48" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="2">
@@ -1094,7 +1094,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYA-Dk-uvT" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="105.99999999999999" y="0.0" width="30.000000000000014" height="53"/>
+                                                        <rect key="frame" x="96" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="3">
@@ -1108,7 +1108,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FR4-Tm-oSL" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="144" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="+">
@@ -1123,8 +1123,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LTM-03-4nc">
-                                                <rect key="frame" x="0.0" y="232" width="189" height="53"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LTM-03-4nc">
+                                                <rect key="frame" x="0.0" y="232" width="174" height="53"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jt-QL-6HL" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="53"/>
@@ -1141,7 +1141,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDP-oH-8mG" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="79.333333333333329" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="72" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title=".">
@@ -1155,7 +1155,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJa-MM-1Zh" customClass="RoundButton" customModule="HexaCalc" customModuleProvider="target">
-                                                        <rect key="frame" x="159" y="0.0" width="30" height="53"/>
+                                                        <rect key="frame" x="144" y="0.0" width="30" height="53"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
                                                         <state key="normal" title="=">

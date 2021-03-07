@@ -20,15 +20,16 @@ class UIHelper {
     
         var constraints = [NSLayoutConstraint]()
         
+        //TODO: Calculate vStackHeight for Hexadecimal and then force the other 2 to follow that by finding stack height using vStackHeight :)
         // Hexadecimal calculator
         if (hStacks.count == 6) {
-            hStackHeight = (stackWidth - 20)/5.0
+            hStackHeight = (stackWidth - 20)/5
             vStackHeight = (hStackHeight * 6) + 25
         }
         // Binary or Decimal calculator
         else {
-            hStackHeight = (stackWidth - 30)/4.0
-            vStackHeight = (hStackHeight * 5) + 20
+            vStackHeight = (((stackWidth - 20)/5) * 6) + 25
+            hStackHeight = (vStackHeight - 20)/5
         }
         
         for hStack in hStacks {
@@ -40,9 +41,6 @@ class UIHelper {
         constraints.append(vStack.heightAnchor.constraint(equalToConstant: vStackHeight))
         constraints.append(vStack.topAnchor.constraint(equalTo: outputLabel.bottomAnchor, constant: 23.0))
         
-        print("SW: \(screenWidth)")
-        print("H: \(hStackHeight)")
-        print("V: \(vStackHeight)")
         return constraints
     }
     
@@ -76,8 +74,9 @@ class UIHelper {
         else {
             // Scale button font size based on screen width
             buttonFontSize = 30*(screenWidth/375)
-            singleButtonSize = (stackWidth - 30)/4.0
-            doubleButtonSize = (singleButtonSize * 2) + 10
+            singleButtonSize = (((((stackWidth - 20)/5) * 6) + 25) - 20)/5
+            let buttonSpacing: CGFloat = (stackWidth - (singleButtonSize * 4))/3
+            doubleButtonSize = (singleButtonSize * 2) + buttonSpacing
         }
         
         for button in singleButtons {
