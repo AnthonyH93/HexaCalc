@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class HexadecimalViewController: UIViewController {
 
@@ -243,6 +244,11 @@ class HexadecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
         self.present(alert, animated: true)
+        
+        //Send event to Firebase about copying action
+        FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
+            "calculator": "Hexadecimal"
+            ])
     }
     
     //Function to handle a swipe
@@ -252,6 +258,12 @@ class HexadecimalViewController: UIViewController {
         guard (sender.view as? UILabel) != nil else { return }
         
         if (sender.direction == .left || sender.direction == .right) {
+            if (runningNumber != "") {
+                //Send event to Firebase about swipe to delete
+                FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
+                    "calculator": "Hexadecimal"
+                    ])
+            }
             deletePressed(DELBtn)
         }
     }
@@ -305,6 +317,10 @@ class HexadecimalViewController: UIViewController {
                 quickUpdateStateController()
             }
         }
+        
+        FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
+            "calculator": "Hexadecimal"
+            ])
     }
     
     @IBAction func digitPressed(_ sender: RoundButton) {
@@ -417,6 +433,9 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
+        FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
+            "calculator": "Hexadecimal"
+            ])
         operation(operation: currentOperation)
     }
     

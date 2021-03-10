@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class BinaryViewController: UIViewController {
     
@@ -205,6 +206,11 @@ class BinaryViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
         self.present(alert, animated: true)
+        
+        //Send event to Firebase about copying action
+        FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
+            "calculator": "Binary"
+            ])
     }
     
     //Function to handle a swipe
@@ -214,6 +220,12 @@ class BinaryViewController: UIViewController {
         guard (sender.view as? UILabel) != nil else { return }
         
         if (sender.direction == .left || sender.direction == .right) {
+            if (runningNumber != "") {
+                //Send event to Firebase about swipe to delete
+                FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
+                    "calculator": "Binary"
+                    ])
+            }
             deletePressed(DELBtn)
         }
     }
@@ -300,6 +312,10 @@ class BinaryViewController: UIViewController {
                 quickUpdateStateController()
             }
         }
+        
+        FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
+            "calculator": "Binary"
+            ])
     }
     
     //Instead of making left shift an operation, just complete it whenever it is pressed the first time (doesn't need 2 arguments)
@@ -527,6 +543,9 @@ class BinaryViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
+        FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
+            "calculator": "Binary"
+            ])
         operation(operation: currentOperation)
     }
     

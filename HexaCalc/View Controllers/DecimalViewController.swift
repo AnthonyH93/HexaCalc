@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 enum Operation:String {
     case Add = "+"
@@ -197,6 +198,11 @@ class DecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
         self.present(alert, animated: true)
+        
+        //Send event to Firebase about copying action
+        FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
+            "calculator": "Decimal"
+            ])
     }
     
     //Function to handle a swipe
@@ -206,6 +212,12 @@ class DecimalViewController: UIViewController {
         guard (sender.view as? UILabel) != nil else { return }
         
         if (sender.direction == .left || sender.direction == .right) {
+            if (runningNumber != "") {
+                //Send event to Firebase about swipe to delete
+                FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
+                    "calculator": "Decimal"
+                    ])
+            }
             deletePressed(DELBtn)
         }
     }
@@ -318,6 +330,10 @@ class DecimalViewController: UIViewController {
                 quickUpdateStateController()
             }
         }
+        
+        FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
+            "calculator": "Decimal"
+            ])
     }
     
     @IBAction func dotPressed(_ sender: RoundButton) {
@@ -341,6 +357,9 @@ class DecimalViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
+        FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
+            "calculator": "Decimal"
+            ])
         operation(operation: currentOperation)
     }
     
