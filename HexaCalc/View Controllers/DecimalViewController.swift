@@ -443,7 +443,9 @@ class DecimalViewController: UIViewController {
         else {
             //If string is empty it should be interpreted as a 0
             if runningNumber == "" {
-                leftValue = "0"
+                if (leftValue == "") {
+                    leftValue = "0"
+                }
             }
             else {
                 leftValue = runningNumber

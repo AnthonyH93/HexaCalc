@@ -553,8 +553,10 @@ class HexadecimalViewController: UIViewController {
         else {
             //If string is empty it should be interpreted as a 0
             let binLeftValue = hexToBin(hexToConvert: runningNumber)
-            if runningNumber == "" {
-                leftValue = "0"
+            if (runningNumber == "") {
+                if (leftValue == "") {
+                    leftValue = "0"
+                }
             }
             else {
                 if (binLeftValue.first == "1" && binLeftValue.count == 64){
