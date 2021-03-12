@@ -209,7 +209,7 @@ class BinaryViewController: UIViewController {
         
         //Send event to Firebase about copying action
         FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
-            "calculator": "Binary"
+            "copied_calculator": "Binary"
             ])
     }
     
@@ -223,7 +223,7 @@ class BinaryViewController: UIViewController {
             if (runningNumber != "") {
                 //Send event to Firebase about swipe to delete
                 FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
-                    "calculator": "Binary"
+                    "delete_swipe_calculator": "Binary"
                     ])
             }
             deletePressed(DELBtn)
@@ -314,7 +314,7 @@ class BinaryViewController: UIViewController {
         }
         
         FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
-            "calculator": "Binary"
+            "delete_button_calculator": "Binary"
             ])
     }
     
@@ -544,7 +544,7 @@ class BinaryViewController: UIViewController {
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
         FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
-            "calculator": "Binary"
+            "equals_button_calculator": "Binary"
             ])
         operation(operation: currentOperation)
     }

@@ -247,7 +247,7 @@ class HexadecimalViewController: UIViewController {
         
         //Send event to Firebase about copying action
         FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
-            "calculator": "Hexadecimal"
+            "copied_calculator": "Hexadecimal"
             ])
     }
     
@@ -261,7 +261,7 @@ class HexadecimalViewController: UIViewController {
             if (runningNumber != "") {
                 //Send event to Firebase about swipe to delete
                 FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
-                    "calculator": "Hexadecimal"
+                    "delete_swipe_calculator": "Hexadecimal"
                     ])
             }
             deletePressed(DELBtn)
@@ -319,7 +319,7 @@ class HexadecimalViewController: UIViewController {
         }
         
         FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
-            "calculator": "Hexadecimal"
+            "delete_button_calculator": "Hexadecimal"
             ])
     }
     
@@ -434,7 +434,7 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
         FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
-            "calculator": "Hexadecimal"
+            "equals_button_calculator": "Hexadecimal"
             ])
         operation(operation: currentOperation)
     }

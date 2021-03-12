@@ -201,7 +201,7 @@ class DecimalViewController: UIViewController {
         
         //Send event to Firebase about copying action
         FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
-            "calculator": "Decimal"
+            "copied_calculator": "Decimal"
             ])
     }
     
@@ -215,7 +215,7 @@ class DecimalViewController: UIViewController {
             if (runningNumber != "") {
                 //Send event to Firebase about swipe to delete
                 FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
-                    "calculator": "Decimal"
+                    "delete_swipe_calculator": "Decimal"
                     ])
             }
             deletePressed(DELBtn)
@@ -332,7 +332,7 @@ class DecimalViewController: UIViewController {
         }
         
         FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
-            "calculator": "Decimal"
+            "delete_button_calculator": "Decimal"
             ])
     }
     
@@ -358,7 +358,7 @@ class DecimalViewController: UIViewController {
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
         FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
-            "calculator": "Decimal"
+            "equals_button_calculator": "Decimal"
             ])
         operation(operation: currentOperation)
     }

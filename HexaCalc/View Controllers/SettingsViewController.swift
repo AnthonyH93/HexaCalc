@@ -396,7 +396,7 @@ class SettingsViewController: UIViewController {
         
         //Send event to Firebase about switch being pressed
         FirebaseAnalytics.Analytics.logEvent("binary_switch_pressed", parameters: [
-            "switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
+            "binary_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
             ])
     }
     
@@ -450,7 +450,7 @@ class SettingsViewController: UIViewController {
         
         //Send event to Firebase about switch being pressed
         FirebaseAnalytics.Analytics.logEvent("decimal_switch_pressed", parameters: [
-            "switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
+            "decimal_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
             ])
     }
     
@@ -463,7 +463,7 @@ class SettingsViewController: UIViewController {
         
         //Send event to Firebase about switch being pressed
         FirebaseAnalytics.Analytics.logEvent("coloured_text_switch_pressed", parameters: [
-            "switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
+            "colour_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
             ])
     }
     
