@@ -313,7 +313,7 @@ class BinaryViewController: UIViewController {
             }
         }
         
-        FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
+        FirebaseAnalytics.Analytics.logEvent("binary_delete_pressed", parameters: [
             "delete_button_calculator": "Binary"
             ])
     }

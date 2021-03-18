@@ -433,7 +433,7 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
+        FirebaseAnalytics.Analytics.logEvent("hexadecimal_equals_pressed", parameters: [
             "equals_button_calculator": "Hexadecimal"
             ])
         operation(operation: currentOperation)

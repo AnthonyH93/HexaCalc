@@ -357,7 +357,7 @@ class DecimalViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
+        FirebaseAnalytics.Analytics.logEvent("decimal_equals_pressed", parameters: [
             "equals_button_calculator": "Decimal"
             ])
         operation(operation: currentOperation)
