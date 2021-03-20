@@ -16,6 +16,7 @@ class SettingsViewController: UIViewController {
     var stateController: StateController?
     
     @IBOutlet weak var optionsLabel: UILabel!
+    @IBOutlet weak var hexLabel: UILabel!
     @IBOutlet weak var binLabel: UILabel!
     @IBOutlet weak var decLabel: UILabel!
     @IBOutlet weak var settingsLabel: UILabel!
@@ -25,6 +26,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var thanksLabel: UILabel!
     @IBOutlet weak var setCalculatorTextColourLabel: UILabel!
     
+    @IBOutlet weak var hexSwitch: UISwitch!
     @IBOutlet weak var binSwitch: UISwitch!
     @IBOutlet weak var decSwitch: UISwitch!
     @IBOutlet weak var setCalculatorTextColourSwitch: UISwitch!
@@ -45,27 +47,23 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, settingsLabel, setCalculatorTextColourLabel]
+        let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
+        let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
+        
         //Setup the button border widths
-        redBtn.layer.borderWidth = 3
-        orangeBtn.layer.borderWidth = 3
-        yellowBtn.layer.borderWidth = 3
-        greenBtn.layer.borderWidth = 3
-        blueBtn.layer.borderWidth = 3
-        tealBtn.layer.borderWidth = 3
-        indigoBtn.layer.borderWidth = 3
-        purpleBtn.layer.borderWidth = 3
+        for button in buttons {
+            button!.layer.borderWidth = 3
+        }
         
         if let savedPreferences = DataPersistence.loadPreferences() {
-            optionsLabel.textColor = savedPreferences.colour
-            binLabel.textColor = savedPreferences.colour
-            decLabel.textColor = savedPreferences.colour
-            thanksLabel.textColor = savedPreferences.colour
-            colourLabel.textColor = savedPreferences.colour
-            settingsLabel.textColor = savedPreferences.colour
-            setCalculatorTextColourLabel.textColor = savedPreferences.colour
-            binSwitch.onTintColor = savedPreferences.colour
-            decSwitch.onTintColor = savedPreferences.colour
-            setCalculatorTextColourSwitch.onTintColor = savedPreferences.colour
+            for label in labels {
+                label?.textColor = savedPreferences.colour
+            }
+            
+            for entry in switches {
+                entry!.onTintColor = savedPreferences.colour
+            }
             
             if (savedPreferences.binTabState == false){
                 binSwitch.isOn = false
@@ -84,126 +82,46 @@ class SettingsViewController: UIViewController {
             //Setup the correct button borders based on the selected colour
             stateController?.convValues.colourNum = savedPreferences.colourNum
             
+            var highlightedIndex = 0
             switch savedPreferences.colourNum {
             //Default case if the colour was never changed but a tab was
             case -1:
-                
-                greenBtn.layer.borderColor = UIColor.white.cgColor
-                
-                redBtn.layer.borderColor = UIColor.darkGray.cgColor
-                orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-                yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-                blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-                tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-                indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-                purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 3
             //Red needs to be selected
             case 0:
-                
-                redBtn.layer.borderColor = UIColor.white.cgColor
-                
-                orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-                yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-                greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-                blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-                tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-                indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-                purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 0  
             //Orange needs to be selected
             case 1:
-                
-                orangeBtn.layer.borderColor = UIColor.white.cgColor
-                
-                redBtn.layer.borderColor = UIColor.darkGray.cgColor
-                yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-                greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-                blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-                tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-                indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-                purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 1
             //Yellow needs to be seelcted
             case 2:
-                
-                yellowBtn.layer.borderColor = UIColor.white.cgColor
-                
-                redBtn.layer.borderColor = UIColor.darkGray.cgColor
-                orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-                greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-                blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-                tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-                indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-                purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 2
             //Green needs to be selected
             case 3:
-                
-                greenBtn.layer.borderColor = UIColor.white.cgColor
-                
-                redBtn.layer.borderColor = UIColor.darkGray.cgColor
-                orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-                yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-                blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-                tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-                indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-                purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 3
             //Blue needs to be selected
             case 4:
-                
-                blueBtn.layer.borderColor = UIColor.white.cgColor
-                
-                redBtn.layer.borderColor = UIColor.darkGray.cgColor
-                orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-                yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-                greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-                tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-                indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-                purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 4
             //Teal needs to be selected
             case 5:
-                
-                tealBtn.layer.borderColor = UIColor.white.cgColor
-                
-                redBtn.layer.borderColor = UIColor.darkGray.cgColor
-                orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-                yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-                greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-                blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-                indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-                purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 5
             //Indigo needs to be selected
             case 6:
-                
-                indigoBtn.layer.borderColor = UIColor.white.cgColor
-                
-                redBtn.layer.borderColor = UIColor.darkGray.cgColor
-                orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-                yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-                greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-                blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-                tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-                purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 6
             //Purple needs to be selected
             case 7:
-                
-                purpleBtn.layer.borderColor = UIColor.white.cgColor
-                
-                redBtn.layer.borderColor = UIColor.darkGray.cgColor
-                orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-                yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-                greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-                blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-                tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-                indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-                
+                highlightedIndex = 7
             default:
                 fatalError("Unexpected colour identifier...")
+            }
+            
+            //Set the button border colours
+            buttons[highlightedIndex]!.layer.borderColor = UIColor.white.cgColor
+            
+            for (index, button) in buttons.enumerated() {
+                if (index != highlightedIndex) {
+                    button!.layer.borderColor = UIColor.darkGray.cgColor
+                }
             }
         }
         else {
@@ -229,16 +147,19 @@ class SettingsViewController: UIViewController {
         let colourTag = "\(colourIdentifier)"
         let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier), binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
         
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, settingsLabel, setCalculatorTextColourLabel]
+        let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
+        let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
+        
         //Change elements onscreen to new colour
-        optionsLabel.textColor = colourClicked
-        binLabel.textColor = colourClicked
-        decLabel.textColor = colourClicked
-        thanksLabel.textColor = colourClicked
-        colourLabel.textColor = colourClicked
-        settingsLabel.textColor = colourClicked
-        setCalculatorTextColourLabel.textColor = colourClicked
-        binSwitch.onTintColor = colourClicked
-        decSwitch.onTintColor = colourClicked
+        for label in labels {
+            label?.textColor = colourClicked
+        }
+        
+        for entry in switches {
+            entry!.onTintColor = colourClicked
+        }
+
         setCalculatorTextColourSwitch.onTintColor = colourClicked
         
         //Set tab bar icon colour to new colour
@@ -254,110 +175,48 @@ class SettingsViewController: UIViewController {
             "colour_set": colourString as String
             ])
         
+        var highlightedIndex = 0
         //Change the app icon based on which colour was selected
         if (colourTag == "0") {
             changeIcon(to: "HexaCalcIconRed")
-            
-            redBtn.layer.borderColor = UIColor.white.cgColor
-            
-            orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-            yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-            greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-            blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-            tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-            indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-            purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
+            highlightedIndex = 0
         }
         else if (colourTag == "1") {
             changeIcon(to: "HexaCalcIconOrange")
-            
-            orangeBtn.layer.borderColor = UIColor.white.cgColor
-            
-            redBtn.layer.borderColor = UIColor.darkGray.cgColor
-            yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-            greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-            blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-            tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-            indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-            purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
+            highlightedIndex = 1
         }
         else if (colourTag == "2"){
             changeIcon(to: "HexaCalcIconYellow")
-            
-            yellowBtn.layer.borderColor = UIColor.white.cgColor
-            
-            redBtn.layer.borderColor = UIColor.darkGray.cgColor
-            orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-            greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-            blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-            tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-            indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-            purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
+            highlightedIndex = 2
         }
         else if (colourTag == "3"){
             changeIcon(to: "HexaCalcIconGreen")
-            
-            greenBtn.layer.borderColor = UIColor.white.cgColor
-            
-            redBtn.layer.borderColor = UIColor.darkGray.cgColor
-            orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-            yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-            blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-            tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-            indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-            purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
+            highlightedIndex = 3
         }
         else if (colourTag == "4"){
             changeIcon(to: "HexaCalcIconBlue")
-            
-            blueBtn.layer.borderColor = UIColor.white.cgColor
-            
-            redBtn.layer.borderColor = UIColor.darkGray.cgColor
-            orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-            yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-            greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-            tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-            indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-            purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
+            highlightedIndex = 4
         }
         else if (colourTag == "5"){
             changeIcon(to: "HexaCalcIconTeal")
-            
-            tealBtn.layer.borderColor = UIColor.white.cgColor
-            
-            redBtn.layer.borderColor = UIColor.darkGray.cgColor
-            orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-            yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-            greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-            blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-            indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
-            purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
+            highlightedIndex = 5
         }
         else if (colourTag == "6"){
             changeIcon(to: "HexaCalcIconIndigo")
-            
-            indigoBtn.layer.borderColor = UIColor.white.cgColor
-            
-            redBtn.layer.borderColor = UIColor.darkGray.cgColor
-            orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-            yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-            greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-            blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-            tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-            purpleBtn.layer.borderColor = UIColor.darkGray.cgColor
+            highlightedIndex = 6
         }
         else {
             changeIcon(to: "HexaCalcIconPurple")
-            
-            purpleBtn.layer.borderColor = UIColor.white.cgColor
-            
-            redBtn.layer.borderColor = UIColor.darkGray.cgColor
-            orangeBtn.layer.borderColor = UIColor.darkGray.cgColor
-            yellowBtn.layer.borderColor = UIColor.darkGray.cgColor
-            greenBtn.layer.borderColor = UIColor.darkGray.cgColor
-            blueBtn.layer.borderColor = UIColor.darkGray.cgColor
-            tealBtn.layer.borderColor = UIColor.darkGray.cgColor
-            indigoBtn.layer.borderColor = UIColor.darkGray.cgColor
+            highlightedIndex = 7
+        }
+        
+        //Set the button border colours
+        buttons[highlightedIndex]!.layer.borderColor = UIColor.white.cgColor
+        
+        for (index, button) in buttons.enumerated() {
+            if (index != highlightedIndex) {
+                button!.layer.borderColor = UIColor.darkGray.cgColor
+            }
         }
         
         DataPersistence.savePreferences(userPreferences: userPreferences)
