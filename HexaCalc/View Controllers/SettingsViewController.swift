@@ -65,14 +65,17 @@ class SettingsViewController: UIViewController {
                 entry!.onTintColor = savedPreferences.colour
             }
             
-            if (savedPreferences.binTabState == false){
+            if (savedPreferences.binTabState == false) {
                 binSwitch.isOn = false
             }
-            if (savedPreferences.decTabState == false){
+            if (savedPreferences.decTabState == false) {
                 decSwitch.isOn = false
             }
+            if (savedPreferences.hexTabState == false) {
+                hexSwitch.isOn = false
+            }
             
-            if (savedPreferences.setCalculatorTextColour == true){
+            if (savedPreferences.setCalculatorTextColour == true) {
                 setCalculatorTextColourSwitch.isOn = true
             }
             else {

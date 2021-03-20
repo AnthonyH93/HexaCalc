@@ -66,6 +66,7 @@ class HexadecimalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Saving the original view controllers
         let originalViewControllers = tabBarController?.viewControllers
         stateController?.convValues.originalTabs = originalViewControllers
         
@@ -75,34 +76,56 @@ class HexadecimalViewController: UIViewController {
             
             //Remove tabs which are disabled by the user
             let arrayOfTabBarItems = tabBarController?.tabBar.items
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (savedPreferences.binTabState == false && savedPreferences.decTabState == false){
-                    var viewControllers = tabBarController?.viewControllers
-                    if (barItems[1].title! == "Binary"){
-                        viewControllers?.remove(at: 1)
-                        tabBarController?.viewControllers = viewControllers
-                    }
-                    if (barItems[2].title! == "Decimal"){
-                        viewControllers?.remove(at: 1)
-                        tabBarController?.viewControllers = viewControllers
-                    }
+            var removeHexTab = false
+            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                if (savedPreferences.hexTabState == false) {
+                    removeHexTab = true
                 }
-                else if (savedPreferences.binTabState == false && savedPreferences.decTabState == true) {
-                    var viewControllers = tabBarController?.viewControllers
-                    if (barItems[1].title! == "Binary"){
+                if (savedPreferences.binTabState == false) {
+                    if (savedPreferences.hexTabState == false) {
+                        var viewControllers = tabBarController?.viewControllers
                         viewControllers?.remove(at: 1)
                         tabBarController?.viewControllers = viewControllers
                     }
-                }
-                else if (savedPreferences.binTabState == true && savedPreferences.decTabState == false) {
-                    var viewControllers = tabBarController?.viewControllers
-                    if (barItems[2].title! == "Decimal"){
+                    else {
+                        var viewControllers = tabBarController?.viewControllers
                         viewControllers?.remove(at: 2)
                         tabBarController?.viewControllers = viewControllers
                     }
                 }
-                else {
-                    //No tabs to remove
+                if (savedPreferences.decTabState == false) {
+                    if (savedPreferences.hexTabState == false) {
+                        if (savedPreferences.binTabState == false) {
+                            var viewControllers = tabBarController?.viewControllers
+                            viewControllers?.remove(at: 1)
+                            tabBarController?.viewControllers = viewControllers
+                        }
+                        else {
+                            var viewControllers = tabBarController?.viewControllers
+                            viewControllers?.remove(at: 2)
+                            tabBarController?.viewControllers = viewControllers
+                        }
+                    }
+                    else {
+                        if (savedPreferences.binTabState == false) {
+                            var viewControllers = tabBarController?.viewControllers
+                            viewControllers?.remove(at: 2)
+                            tabBarController?.viewControllers = viewControllers
+                        }
+                        else {
+                            var viewControllers = tabBarController?.viewControllers
+                            viewControllers?.remove(at: 3)
+                            tabBarController?.viewControllers = viewControllers
+                        }
+                    }
+                }
+                if (removeHexTab == true) {
+                    //Remove hexadecimal tab after setting state values
+                    stateController?.convValues.setCalculatorTextColour = savedPreferences.setCalculatorTextColour
+                    stateController?.convValues.colour = savedPreferences.colour
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 0)
+                    tabBarController?.viewControllers = viewControllers
                 }
             }
             
@@ -118,7 +141,7 @@ class HexadecimalViewController: UIViewController {
             stateController?.convValues.colour = savedPreferences.colour
             
         }
-        
+
         //Setup gesture recognizer for user tapping the calculator screen
         self.setupOutputLabelTap()
         
