@@ -313,7 +313,7 @@ class BinaryViewController: UIViewController {
             }
         }
         
-        FirebaseAnalytics.Analytics.logEvent("binary_delete_pressed", parameters: [
+        FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
             "delete_button_calculator": "Binary"
             ])
     }
@@ -543,7 +543,7 @@ class BinaryViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        FirebaseAnalytics.Analytics.logEvent("equals_pressed", parameters: [
+        FirebaseAnalytics.Analytics.logEvent("binary_equals_pressed", parameters: [
             "equals_button_calculator": "Binary"
             ])
         operation(operation: currentOperation)
