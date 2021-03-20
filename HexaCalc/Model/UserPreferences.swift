@@ -14,10 +14,11 @@ class UserPreferences : NSObject, NSCoding {
     //MARK: Initialization
     
     //Prepares and instance of a class for use
-    init(colour: UIColor, colourNum: Int64, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool) {
+    init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool) {
         //Initialize stored properties.
         self.colour = colour
         self.colourNum = colourNum
+        self.hexTabState = hexTabState
         self.binTabState = binTabState
         self.decTabState = decTabState
         self.setCalculatorTextColour = setCalculatorTextColour
@@ -27,6 +28,7 @@ class UserPreferences : NSObject, NSCoding {
     
     var colour: UIColor
     var colourNum: Int64
+    var hexTabState: Bool
     var binTabState: Bool
     var decTabState: Bool
     var setCalculatorTextColour: Bool
@@ -42,6 +44,7 @@ class UserPreferences : NSObject, NSCoding {
     struct PropertyKey {
         static let colour = "colour"
         static let colourNum = "colourNum"
+        static let hexTabState = "hexTabState"
         static let binTabState = "binTabState"
         static let decTabState = "decTabState"
         static let setCalculatorTextColour = "setCalculatorTextColour"
@@ -52,6 +55,7 @@ class UserPreferences : NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(colour, forKey: PropertyKey.colour)
         aCoder.encode(colourNum, forKey: PropertyKey.colourNum)
+        aCoder.encode(hexTabState, forKey: PropertyKey.hexTabState)
         aCoder.encode(binTabState, forKey: PropertyKey.binTabState)
         aCoder.encode(decTabState, forKey: PropertyKey.decTabState)
         aCoder.encode(setCalculatorTextColour, forKey: PropertyKey.setCalculatorTextColour)
@@ -64,6 +68,8 @@ class UserPreferences : NSObject, NSCoding {
         
         let colourNum = aDecoder.decodeInt64(forKey: PropertyKey.colourNum)
         
+        let hexTabState = aDecoder.decodeBool(forKey: PropertyKey.hexTabState)
+        
         let binTabState = aDecoder.decodeBool(forKey: PropertyKey.binTabState)
         
         let decTabState = aDecoder.decodeBool(forKey: PropertyKey.decTabState)
@@ -71,7 +77,7 @@ class UserPreferences : NSObject, NSCoding {
         let setCalculatorTextColour = aDecoder.decodeBool(forKey: PropertyKey.setCalculatorTextColour)
         
         //Must call designated initializer
-        self.init(colour: colour, colourNum: colourNum, binTabState: binTabState, decTabState: decTabState, setCalculatorTextColour: setCalculatorTextColour)
+        self.init(colour: colour, colourNum: colourNum, hexTabState: hexTabState, binTabState: binTabState, decTabState: decTabState, setCalculatorTextColour: setCalculatorTextColour)
     }
 }
 

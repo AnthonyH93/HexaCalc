@@ -145,7 +145,7 @@ class SettingsViewController: UIViewController {
         let colourClicked = sender.self.backgroundColor
         let colourIdentifier = sender.tag
         let colourTag = "\(colourIdentifier)"
-        let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier), binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+        let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier), hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
         
         let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, settingsLabel, setCalculatorTextColourLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
@@ -223,17 +223,17 @@ class SettingsViewController: UIViewController {
     }
 
     //Function to toggle the binary calculator on or off when the switch is pressed
-    @IBAction func binarySwitchPressed(_ sender: UISwitch) {
+    @IBAction func hexadecimalSwitchPressed(_ sender: UISwitch) {
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (barItems[1].title! != "Binary"){
+            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                if (barItems[0].title! != "Hexadecimal"){
                     var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[0])!, at: 0)
                     tabBarController?.viewControllers = viewControllers
                 }
             }
@@ -241,14 +241,80 @@ class SettingsViewController: UIViewController {
         else {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
-            if let barItems = arrayOfTabBarItems, barItems.count > 2 {
-                if (barItems[1].title! == "Binary"){
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (barItems[0].title! == "Hexadecimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                }
+            }
+        }
+        
+        //Send event to Firebase about switch being pressed
+        FirebaseAnalytics.Analytics.logEvent("hexadecimal_switch_pressed", parameters: [
+            "hexadecimal_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
+            ])
+    }
+    
+    //Function to toggle the binary calculator on or off when the switch is pressed
+    @IBAction func binarySwitchPressed(_ sender: UISwitch) {
+        if sender.isOn {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+            
+            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                switch barItems.count {
+                case 1:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                case 2:
+                    if (barItems[0].title! == "Hexadecimal") {
+                        var viewControllers = tabBarController?.viewControllers
+                        viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                    else if (barItems[0].title == "Binary") {
+                        //Do nothing
+                    }
+                    else {
+                        var viewControllers = tabBarController?.viewControllers
+                        viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 0)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                case 3:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                default:
+                    fatalError("Invalid number of tabs")
+                }
+            }
+        }
+        else {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+            
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (barItems[0].title! == "Binary"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                else if (barItems[1].title! == "Binary"){
                     var viewControllers = tabBarController?.viewControllers
                     viewControllers?.remove(at: 1)
                     tabBarController?.viewControllers = viewControllers
+                }
+                else {
+                    //Do nothing
                 }
             }
         }
@@ -264,45 +330,52 @@ class SettingsViewController: UIViewController {
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (barItems.count == 2){
-                    if (barItems[1].title! != "Decimal"){
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 1)
-                        tabBarController?.viewControllers = viewControllers
-                    }
-                }
-                else if (barItems.count == 3){
-                    if (barItems[1].title! != "Decimal" && barItems[2].title! != "Decimal"){
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 2)
-                        tabBarController?.viewControllers = viewControllers
-                    }
-                }
-                else {
-                    //Should not occur since 1 tab must have been off if the switch was off
+            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                switch barItems.count {
+                case 1:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                case 2:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                case 3:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 2)
+                    tabBarController?.viewControllers = viewControllers
+                default:
+                    fatalError("Invalid number of tabs")
                 }
             }
         }
         else {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
-            if let barItems = arrayOfTabBarItems, barItems.count > 2 {
-                if (barItems[2].title! == "Decimal"){
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (barItems[0].title! == "Decimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                else if (barItems[1].title! == "Decimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                else if (barItems[2].title! == "Decimal"){
                     var viewControllers = tabBarController?.viewControllers
                     viewControllers?.remove(at: 2)
                     tabBarController?.viewControllers = viewControllers
                 }
-                if (barItems[1].title! == "Decimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 1)
-                    tabBarController?.viewControllers = viewControllers
+                else {
+                    //Do nothing
                 }
             }
         }
@@ -316,7 +389,7 @@ class SettingsViewController: UIViewController {
     //Function to toggle the optional setting of the calculator text colour
     @IBAction func setCalculatorTextColourSwitchPressed(_ sender: UISwitch) {
         //Update the stored user preferences with whatever the current switch values are: to be used in the various calcualtor tabs
-        let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+        let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = setCalculatorTextColourSwitch.isOn
         

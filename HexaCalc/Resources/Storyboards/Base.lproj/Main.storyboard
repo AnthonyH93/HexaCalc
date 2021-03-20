@@ -1276,7 +1276,7 @@
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zWu-QA-hkf">
                                                         <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="29.666666666666668"/>
                                                         <connections>
-                                                            <action selector="decimalSwitchPressed:" destination="E78-IU-jHO" eventType="valueChanged" id="IhU-hv-scy"/>
+                                                            <action selector="hexadecimalSwitchPressed:" destination="E78-IU-jHO" eventType="valueChanged" id="fl3-fo-8Ka"/>
                                                         </connections>
                                                     </switch>
                                                 </subviews>
