@@ -143,6 +143,23 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        let screenWidth = view.bounds.width
+
+        //iPhone SE (1st generation) special case
+        if (screenWidth == 320){
+            //Need to edit the font size for this screen width size
+            optionsLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            hexLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            binLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            decLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            thanksLabel?.isHidden = (UIDevice.current.userInterfaceIdiom == .pad) ? false : true
+            colourLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            settingsLabel?.font = UIFont(name: "Avenir Next", size: 26)
+            setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
+        }
+    }
+    
     //MARK: Button Actions
     @IBAction func colourPressed(_ sender: RoundButton) {
         let colourClicked = sender.self.backgroundColor
