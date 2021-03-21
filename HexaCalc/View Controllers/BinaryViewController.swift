@@ -222,6 +222,10 @@ class BinaryViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "01").inverted
         let isValidBinary = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
         if (isValidBinary && pastedInput.count <= 64) {
+            //Send event to Firebase about successful pasting option
+            FirebaseAnalytics.Analytics.logEvent("pasted_successfully", parameters: [
+                "pasted_calculator": "Binary"
+                ])
             if (pastedInput == "0") {
                 runningNumber = ""
                 outputLabel.text = "0"
@@ -238,6 +242,10 @@ class BinaryViewController: UIViewController {
             }
         }
         else {
+            //Send event to Firebase about unsuccessful pasting option
+            FirebaseAnalytics.Analytics.logEvent("pasted_unsuccessfully", parameters: [
+                "pasted_calculator": "Binary"
+                ])
             var alertMessage = "Your clipboad did not contain a valid binary string."
             if (isValidBinary) {
                 alertMessage = "The binary string in your clipboard must have a length of 64 characters or less."

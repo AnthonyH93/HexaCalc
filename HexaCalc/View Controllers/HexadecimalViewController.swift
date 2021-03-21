@@ -263,6 +263,10 @@ class HexadecimalViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "0123456789ABCDEF").inverted
         let isValidHexadecimal = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
         if (isValidHexadecimal && pastedInput.count <= 16) {
+            //Send event to Firebase about successful pasting option
+            FirebaseAnalytics.Analytics.logEvent("pasted_successfully", parameters: [
+                "pasted_calculator": "Hexadecimal"
+                ])
             if (pastedInput == "0") {
                 runningNumber = ""
                 outputLabel.text = "0"
@@ -278,6 +282,10 @@ class HexadecimalViewController: UIViewController {
             }
         }
         else {
+            //Send event to Firebase about unsuccessful pasting option
+            FirebaseAnalytics.Analytics.logEvent("pasted_unsuccessfully", parameters: [
+                "pasted_calculator": "Hexadecimal"
+                ])
             var alertMessage = "Your clipboad did not contain a valid hexadecimal string."
             if (isValidHexadecimal) {
                 alertMessage = "The hexadecimal string in your clipboard must have a length of 16 characters or less."

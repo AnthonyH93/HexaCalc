@@ -223,6 +223,10 @@ class DecimalViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "0123456789.").inverted
         let isValidDecimal = (pastedInput.uppercased().rangeOfCharacter(from: chars) == nil) && ((pastedInput.filter {$0 == "."}.count) < 2)
         if (isValidDecimal && pastedInput.count < 308) {
+            //Send event to Firebase about successful pasting option
+            FirebaseAnalytics.Analytics.logEvent("pasted_successfully", parameters: [
+                "pasted_calculator": "Decimal"
+                ])
             if (pastedInput == "0") {
                 runningNumber = ""
                 outputLabel.text = "0"
@@ -278,6 +282,10 @@ class DecimalViewController: UIViewController {
             }
         }
         else {
+            //Send event to Firebase about unsuccessful pasting option
+            FirebaseAnalytics.Analytics.logEvent("pasted_unsuccessfully", parameters: [
+                "pasted_calculator": "Decimal"
+                ])
             var alertMessage = "Your clipboad did not contain a valid decimal string."
             if (isValidDecimal) {
                 alertMessage = "The decimal string in your clipboard is too large."
