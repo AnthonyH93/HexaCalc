@@ -78,18 +78,8 @@ class DecimalViewController: UIViewController {
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
         
-        //Setup gesture recognizer for user tapping the calculator screen
-        self.setupOutputLabelTap()
-        
-        //Setup gesture recognizer of user swiping left or right on the calculator screen
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
-            
-        leftSwipe.direction = .left
-        rightSwipe.direction = .right
-
-        outputLabel.addGestureRecognizer(leftSwipe)
-        outputLabel.addGestureRecognizer(rightSwipe)
+        //Setup gesture recognizers
+        self.setupOutputLabelGestureRecognizers()
     }
     
     override func viewDidLayoutSubviews() {
@@ -205,6 +195,21 @@ class DecimalViewController: UIViewController {
             ])
     }
     
+    @objc func labelLongPressed(_ sender: UILongPressGestureRecognizer) {
+        //Alert the user to ask if they truly want to paste from their clipboard
+        let alert = UIAlertController(title: "Paste from Clipboard", message: "Press paste to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToDecimalCalculator()}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
+    
+    //Function to get and format content from clipboard
+    func pasteFromClipboardToDecimalCalculator() {
+        
+    }
+    
     //Function to handle a swipe
     @objc func handleLabelSwipes(_ sender:UISwipeGestureRecognizer) {
         
@@ -222,11 +227,21 @@ class DecimalViewController: UIViewController {
         }
     }
     
-    //Function for setting up an output label tap recognizer
-    func setupOutputLabelTap() {
+    //Function for setting up output label gesture recognizers
+    func setupOutputLabelGestureRecognizers() {
         let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
+        let labelLongPressed = UILongPressGestureRecognizer(target: self, action: #selector(self.labelLongPressed(_:)))
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
+            
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+
+        self.outputLabel.addGestureRecognizer(leftSwipe)
+        self.outputLabel.addGestureRecognizer(rightSwipe)
         self.outputLabel.isUserInteractionEnabled = true
         self.outputLabel.addGestureRecognizer(labelTap)
+        self.outputLabel.addGestureRecognizer(labelLongPressed)
     }
     
     //MARK: Button Actions

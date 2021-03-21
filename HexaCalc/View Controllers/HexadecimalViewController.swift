@@ -142,7 +142,7 @@ class HexadecimalViewController: UIViewController {
             
         }
 
-        //Setup gesture recognizer for user tapping the calculator screen
+        //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
     }
     
@@ -268,14 +268,14 @@ class HexadecimalViewController: UIViewController {
         //Alert the user to ask if they truly want to paste from their clipboard
         let alert = UIAlertController(title: "Paste from Clipboard", message: "Press paste to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboard()}))
+        alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToHexadecimalCalculator()}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         
         self.present(alert, animated: true)
     }
     
     //Function to get and format content from clipboard
-    func pasteFromClipboard() {
+    func pasteFromClipboardToHexadecimalCalculator() {
         var pastedInput = ""
         let pasteboard = UIPasteboard.general
         pastedInput = pasteboard.string ?? "0"
