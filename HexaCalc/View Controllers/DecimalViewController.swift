@@ -143,6 +143,9 @@ class DecimalViewController: UIViewController {
             //Check if we need to convert to int
             if(Double(decimalLabelText ?? "0")!.truncatingRemainder(dividingBy: 1) == 0) {
                 decimalLabelText = "\(Int(Double(decimalLabelText ?? "0")!))"
+                if (decimalLabelText != "0") {
+                    runningNumber = decimalLabelText ?? ""
+                }
             }
         }
         
