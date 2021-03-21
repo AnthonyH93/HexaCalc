@@ -146,8 +146,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         let screenWidth = view.bounds.width
 
-        //iPhone SE (1st generation) special case
-        if (screenWidth == 320){
+        //Specific case for smallest screen sizes
+        if (screenWidth <= 320){
             //Need to edit the font size for this screen width size
             optionsLabel?.font = UIFont(name: "Avenir Next", size: 18)
             hexLabel?.font = UIFont(name: "Avenir Next", size: 18)
