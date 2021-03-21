@@ -61,7 +61,6 @@ class UserPreferences : NSObject, NSCoding {
         aCoder.encode(setCalculatorTextColour, forKey: PropertyKey.setCalculatorTextColour)
     }
     
-    //convenience means it is a secondary initializer (must call designated initializer), the ? means it is failable
     required convenience init?(coder aDecoder: NSCoder) {
         
         let colour = aDecoder.decodeObject(forKey: PropertyKey.colour) as! UIColor

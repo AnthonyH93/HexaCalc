@@ -223,48 +223,58 @@ class DecimalViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "0123456789.").inverted
         let isValidDecimal = (pastedInput.uppercased().rangeOfCharacter(from: chars) == nil) && ((pastedInput.filter {$0 == "."}.count) < 2)
         if (isValidDecimal && pastedInput.count < 308) {
-            if (isNegative) {
-                pastedInput = "-" + pastedInput
-            }
-            if (Double(pastedInput)! > 999999999 || Double(pastedInput)! < -999999999){
-                //Need to use scientific notation for this
-                runningNumber = pastedInput
-                outputLabel.text = "\(Double(pastedInput)!.scientificFormatted)"
-                quickUpdateStateController()
+            if (pastedInput == "0") {
+                runningNumber = ""
+                outputLabel.text = "0"
+                stateController?.convValues.largerThan64Bits = false
+                stateController?.convValues.decimalVal = "0"
+                stateController?.convValues.hexVal = "0"
+                stateController?.convValues.binVal = "0"
             }
             else {
-                if(Double(pastedInput)!.truncatingRemainder(dividingBy: 1) == 0) {
-                    runningNumber = "\(Int(Double(pastedInput)!))"
-                    outputLabel.text = runningNumber
+                if (isNegative) {
+                    pastedInput = "-" + pastedInput
+                }
+                if (Double(pastedInput)! > 999999999 || Double(pastedInput)! < -999999999){
+                    //Need to use scientific notation for this
+                    runningNumber = pastedInput
+                    outputLabel.text = "\(Double(pastedInput)!.scientificFormatted)"
+                    quickUpdateStateController()
                 }
                 else {
-                    if (pastedInput.count > 9){
-                        //Need to round to 9 digits
-                        //First find how many digits the decimal portion is
-                        var num = Double(pastedInput)!
-                        if (num < 0){
-                            num *= -1
-                        }
-                        var counter = 1
-                        while (num > 1){
-                            counter *= 10
-                            num = num/10
-                        }
-                        var roundVal = 0
-                        if (counter == 1){
-                            roundVal = 100000000/(counter)
-                        }
-                        else {
-                            roundVal = 1000000000/(counter)
-                        }
-                        runningNumber = "\(Double(round(Double(roundVal) * Double(pastedInput)!)/Double(roundVal)))"
+                    if(Double(pastedInput)!.truncatingRemainder(dividingBy: 1) == 0) {
+                        runningNumber = "\(Int(Double(pastedInput)!))"
+                        outputLabel.text = runningNumber
                     }
                     else {
-                        runningNumber = pastedInput
+                        if (pastedInput.count > 9){
+                            //Need to round to 9 digits
+                            //First find how many digits the decimal portion is
+                            var num = Double(pastedInput)!
+                            if (num < 0){
+                                num *= -1
+                            }
+                            var counter = 1
+                            while (num > 1){
+                                counter *= 10
+                                num = num/10
+                            }
+                            var roundVal = 0
+                            if (counter == 1){
+                                roundVal = 100000000/(counter)
+                            }
+                            else {
+                                roundVal = 1000000000/(counter)
+                            }
+                            runningNumber = "\(Double(round(Double(roundVal) * Double(pastedInput)!)/Double(roundVal)))"
+                        }
+                        else {
+                            runningNumber = pastedInput
+                        }
                     }
+                    outputLabel.text = runningNumber
+                    quickUpdateStateController()
                 }
-                outputLabel.text = runningNumber
-                quickUpdateStateController()
             }
         }
         else {

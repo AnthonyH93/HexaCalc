@@ -263,9 +263,19 @@ class HexadecimalViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "0123456789ABCDEF").inverted
         let isValidHexadecimal = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
         if (isValidHexadecimal && pastedInput.count <= 16) {
-            runningNumber = pastedInput.uppercased()
-            outputLabel.text = runningNumber
-            quickUpdateStateController()
+            if (pastedInput == "0") {
+                runningNumber = ""
+                outputLabel.text = "0"
+                stateController?.convValues.largerThan64Bits = false
+                stateController?.convValues.decimalVal = "0"
+                stateController?.convValues.hexVal = "0"
+                stateController?.convValues.binVal = "0"
+            }
+            else {
+                runningNumber = pastedInput.uppercased()
+                outputLabel.text = runningNumber
+                quickUpdateStateController()
+            }
         }
         else {
             var alertMessage = "Your clipboad did not contain a valid hexadecimal string."

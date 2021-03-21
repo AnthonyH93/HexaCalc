@@ -222,10 +222,20 @@ class BinaryViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "01").inverted
         let isValidBinary = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
         if (isValidBinary && pastedInput.count <= 64) {
-            runningNumber = pastedInput
-            let newLabelValue = formatBinaryString(stringToConvert: runningNumber)
-            outputLabel.text = newLabelValue
-            quickUpdateStateController()
+            if (pastedInput == "0") {
+                runningNumber = ""
+                outputLabel.text = "0"
+                stateController?.convValues.largerThan64Bits = false
+                stateController?.convValues.decimalVal = "0"
+                stateController?.convValues.hexVal = "0"
+                stateController?.convValues.binVal = "0"
+            }
+            else {
+                runningNumber = pastedInput
+                let newLabelValue = formatBinaryString(stringToConvert: runningNumber)
+                outputLabel.text = newLabelValue
+                quickUpdateStateController()
+            }
         }
         else {
             var alertMessage = "Your clipboad did not contain a valid binary string."
