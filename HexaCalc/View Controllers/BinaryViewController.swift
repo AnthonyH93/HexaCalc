@@ -214,7 +214,31 @@ class BinaryViewController: UIViewController {
     }
     
     func pasteFromClipboardToBinaryCalculator() {
+        var pastedInput = ""
+        let pasteboard = UIPasteboard.general
+        pastedInput = pasteboard.string ?? "0"
         
+        //Validate input is a hexadecimal value
+        let chars = CharacterSet(charactersIn: "01").inverted
+        let isValidBinary = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
+        if (isValidBinary && pastedInput.count <= 64) {
+            runningNumber = pastedInput
+            let newLabelValue = formatBinaryString(stringToConvert: runningNumber)
+            outputLabel?.text = newLabelValue
+            quickUpdateStateController()
+        }
+        else {
+            var alertMessage = "Your clipboad did not contain a valid binary string."
+            if (isValidBinary) {
+                alertMessage = "The binary string in your clipboard must have a length of 64 characters or less."
+            }
+            //Alert the user why the paste failed
+            let alert = UIAlertController(title: "Paste Failed", message: alertMessage, preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
     }
     
     //Function to handle a swipe

@@ -290,7 +290,7 @@ class HexadecimalViewController: UIViewController {
         }
         else {
             var alertMessage = "Your clipboad did not contain a valid hexadecimal string."
-            if (!isValidHexadecimal) {
+            if (isValidHexadecimal) {
                 alertMessage = "The hexadecimal string in your clipboard must have a length of 16 characters or less."
             }
             //Alert the user why the paste failed
