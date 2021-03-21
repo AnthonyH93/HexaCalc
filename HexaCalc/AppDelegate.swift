@@ -13,13 +13,14 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let fullPath = paths[0].appendingPathComponent("userPreferences")
+        
+        let existingVersion = UserDefaults.standard.object(forKey: "CurrentVersionNumber") as? String
+        let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         
         if let nsData = NSData(contentsOf: fullPath) {
             do {
@@ -27,6 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let data = Data(referencing:nsData)
 
                 if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
+                    //Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0
+                    if (appVersionNumber == "1.2.0" && existingVersion != "1.2.0") {
+                        let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum, hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState, setCalculatorTextColour: loadedPreferences.setCalculatorTextColour)
+                        DataPersistence.savePreferences(userPreferences: userPreferences)
+                        
+                        //Send event to Firebase about this action (only for debugging)
+                        FirebaseAnalytics.Analytics.logEvent("defaulted_hexadecimal_to_true", parameters: [
+                            "event_purpose": "Debug"
+                            ])
+                    }
                     UITabBar.appearance().tintColor = loadedPreferences.colour
                 }
             } catch {
