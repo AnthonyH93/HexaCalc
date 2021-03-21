@@ -29,14 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                 if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
                     //Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0
-                    if (appVersionNumber == "1.2.0" && existingVersion != "1.2.0") {
+                    if (appVersionNumber == "1.2.0" && appVersionNumber != existingVersion) {
                         let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum, hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState, setCalculatorTextColour: loadedPreferences.setCalculatorTextColour)
                         DataPersistence.savePreferences(userPreferences: userPreferences)
-                        
-                        //Send event to Firebase about this action (only for debugging)
-                        FirebaseAnalytics.Analytics.logEvent("defaulted_hexadecimal_to_true", parameters: [
-                            "event_purpose": "Debug"
-                            ])
+                        UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
                     }
                     UITabBar.appearance().tintColor = loadedPreferences.colour
                 }
