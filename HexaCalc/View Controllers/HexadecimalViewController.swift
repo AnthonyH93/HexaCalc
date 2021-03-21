@@ -82,7 +82,12 @@ class HexadecimalViewController: UIViewController {
                     removeHexTab = true
                 }
                 if (savedPreferences.binTabState == false) {
-                    if (savedPreferences.hexTabState == false) {
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                if (savedPreferences.decTabState == false) {
+                    if (savedPreferences.binTabState == false) {
                         var viewControllers = tabBarController?.viewControllers
                         viewControllers?.remove(at: 1)
                         tabBarController?.viewControllers = viewControllers
@@ -91,32 +96,6 @@ class HexadecimalViewController: UIViewController {
                         var viewControllers = tabBarController?.viewControllers
                         viewControllers?.remove(at: 2)
                         tabBarController?.viewControllers = viewControllers
-                    }
-                }
-                if (savedPreferences.decTabState == false) {
-                    if (savedPreferences.hexTabState == false) {
-                        if (savedPreferences.binTabState == false) {
-                            var viewControllers = tabBarController?.viewControllers
-                            viewControllers?.remove(at: 1)
-                            tabBarController?.viewControllers = viewControllers
-                        }
-                        else {
-                            var viewControllers = tabBarController?.viewControllers
-                            viewControllers?.remove(at: 2)
-                            tabBarController?.viewControllers = viewControllers
-                        }
-                    }
-                    else {
-                        if (savedPreferences.binTabState == false) {
-                            var viewControllers = tabBarController?.viewControllers
-                            viewControllers?.remove(at: 2)
-                            tabBarController?.viewControllers = viewControllers
-                        }
-                        else {
-                            var viewControllers = tabBarController?.viewControllers
-                            viewControllers?.remove(at: 3)
-                            tabBarController?.viewControllers = viewControllers
-                        }
                     }
                 }
                 if (removeHexTab == true) {
@@ -266,9 +245,9 @@ class HexadecimalViewController: UIViewController {
     
     @objc func labelLongPressed(_ sender: UILongPressGestureRecognizer) {
         //Alert the user to ask if they truly want to paste from their clipboard
-        let alert = UIAlertController(title: "Paste from Clipboard", message: "Press paste to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Paste from Clipboard", message: "Press confirm to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToHexadecimalCalculator()}))
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: {_ in self.pasteFromClipboardToHexadecimalCalculator()}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         
         self.present(alert, animated: true)

@@ -205,9 +205,9 @@ class BinaryViewController: UIViewController {
     
     @objc func labelLongPressed(_ sender: UILongPressGestureRecognizer) {
         //Alert the user to ask if they truly want to paste from their clipboard
-        let alert = UIAlertController(title: "Paste from Clipboard", message: "Press paste to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Paste from Clipboard", message: "Press confirm to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToBinaryCalculator()}))
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: {_ in self.pasteFromClipboardToBinaryCalculator()}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         
         self.present(alert, animated: true)
@@ -224,7 +224,7 @@ class BinaryViewController: UIViewController {
         if (isValidBinary && pastedInput.count <= 64) {
             runningNumber = pastedInput
             let newLabelValue = formatBinaryString(stringToConvert: runningNumber)
-            outputLabel?.text = newLabelValue
+            outputLabel.text = newLabelValue
             quickUpdateStateController()
         }
         else {
