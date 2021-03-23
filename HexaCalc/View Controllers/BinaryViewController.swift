@@ -228,7 +228,7 @@ class BinaryViewController: UIViewController {
                 ])
             if (pastedInput == "0") {
                 runningNumber = ""
-                outputLabel.text = "0"
+                outputLabel.text = binaryDefaultLabel
                 stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.decimalVal = "0"
                 stateController?.convValues.hexVal = "0"
