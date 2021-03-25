@@ -1512,7 +1512,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="mab-AI-HrS">
                         <barButtonItem key="rightBarButtonItem" title="Info" image="info.circle" catalog="system" id="1nt-Kg-uN3">
                             <connections>
-                                <segue destination="Ex6-yd-v7P" kind="show" id="utH-LI-C4T"/>
+                                <segue destination="Ex6-yd-v7P" kind="show" animates="NO" id="utH-LI-C4T"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1547,15 +1547,15 @@
             </objects>
             <point key="canvasLocation" x="1599" y="963"/>
         </scene>
-        <!--View Controller-->
+        <!--Extra Information View Controller-->
         <scene sceneID="IbE-wl-Fbm">
             <objects>
-                <viewController id="Ex6-yd-v7P" sceneMemberID="viewController">
+                <viewController id="Ex6-yd-v7P" customClass="ExtraInformationViewController" customModule="HexaCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2nv-Vf-HnA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Zuc-o6-OGc"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="iKH-Ch-Bbp"/>
                 </viewController>
@@ -1843,9 +1843,6 @@
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="hexagon" catalog="system" width="128" height="124"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

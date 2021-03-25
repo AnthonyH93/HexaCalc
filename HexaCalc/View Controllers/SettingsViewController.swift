@@ -62,6 +62,9 @@ class SettingsViewController: UIViewController {
         titleLabel.sizeToFit()
         titleLabel.textAlignment = .center
         
+        // Set custome back button text to navigationItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
+        
         let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel, titleLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
