@@ -55,7 +55,7 @@ class SettingsViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         // Setup custom navigationBarItem
-        titleLabel.font = UIFont(name: "Avenir Next", size: 35)
+        titleLabel.font = UIFont(name: "Avenir Next", size: 30)
 
         titleLabel.text = "Settings"
         titleLabel.numberOfLines = 2
@@ -84,6 +84,7 @@ class SettingsViewController: UIViewController {
             }
             
             infoButton.tintColor = savedPreferences.colour
+            navigationItem.backBarButtonItem?.tintColor = savedPreferences.colour
             
             if (savedPreferences.binTabState == false) {
                 binSwitch.isOn = false
@@ -150,6 +151,7 @@ class SettingsViewController: UIViewController {
         else {
             titleLabel.textColor = .systemGreen
             infoButton.tintColor = .systemGreen
+            navigationItem.backBarButtonItem?.tintColor = .systemGreen
             
             //Default colour is green so outline that button only
             greenBtn.layer.borderColor = UIColor.white.cgColor
@@ -210,6 +212,7 @@ class SettingsViewController: UIViewController {
         }
         
         infoButton.tintColor = colourClicked
+        navigationItem.backBarButtonItem?.tintColor = colourClicked
 
         setCalculatorTextColourSwitch.onTintColor = colourClicked
         

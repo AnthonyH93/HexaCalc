@@ -12,6 +12,13 @@ class ExtraInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let savedPreferences = DataPersistence.loadPreferences() {
+            
+        }
+        else {
+            
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
