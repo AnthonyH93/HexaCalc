@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B6F7D53B36F9CF2E9E8A001 /* Pods_HexaCalcTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B0DA38123846EAD4C25133A /* Pods_HexaCalcTests.framework */; };
 		9D27C37325F7331600A8887F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D27C37225F7331600A8887F /* GoogleService-Info.plist */; };
-		9D2EA6AD260C44B30082F7E0 /* ExtraInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2EA6AC260C44B30082F7E0 /* ExtraInformationViewController.swift */; };
+		9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */; };
 		9D7C09BF25EC61E700771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png */; };
 		9D7C09C025EC61E700771D52 /* HexaCalcIconBlue@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */; };
 		9D7C09C125EC61E700771D52 /* HexaCalcIconOrange~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */; };
@@ -91,7 +91,7 @@
 		7D9C1D3FF4B9785EF8949566 /* Pods-HexaCalc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HexaCalc.debug.xcconfig"; path = "Target Support Files/Pods-HexaCalc/Pods-HexaCalc.debug.xcconfig"; sourceTree = "<group>"; };
 		8CEA9F76C42D7FDD5946C3E3 /* Pods-HexaCalcTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HexaCalcTests.release.xcconfig"; path = "Target Support Files/Pods-HexaCalcTests/Pods-HexaCalcTests.release.xcconfig"; sourceTree = "<group>"; };
 		9D27C37225F7331600A8887F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9D2EA6AC260C44B30082F7E0 /* ExtraInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraInformationViewController.swift; sourceTree = "<group>"; };
+		9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHexaCalcViewController.swift; sourceTree = "<group>"; };
 		9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo-83.5@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconOrange~ipad.png"; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 				9DEF249C24C553F000701F5B /* BinaryViewController.swift */,
 				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
 				9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */,
-				9D2EA6AC260C44B30082F7E0 /* ExtraInformationViewController.swift */,
+				9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -562,7 +562,7 @@
 				9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */,
 				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
-				9D2EA6AD260C44B30082F7E0 /* ExtraInformationViewController.swift in Sources */,
+				9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
 				9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */,
