@@ -498,7 +498,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241378"/>
+            <point key="canvasLocation" x="99" y="-363"/>
         </scene>
         <!--Binary-->
         <scene sceneID="wg7-f3-ORb">
@@ -863,7 +863,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="419"/>
+            <point key="canvasLocation" x="883" y="-364"/>
         </scene>
         <!--Decimal-->
         <scene sceneID="9w7-RN-59N">
@@ -1228,36 +1228,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zxz-Tp-VmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1477.5999999999999" y="0.0"/>
+            <point key="canvasLocation" x="1599" y="-364"/>
         </scene>
-        <!--Settings-->
+        <!--Settings View Controller-->
         <scene sceneID="pFY-ga-fjx">
             <objects>
                 <viewController id="E78-IU-jHO" customClass="SettingsViewController" customModule="HexaCalc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Igh-hb-fYc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ea8-U8-KVu">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc4-uA-nPu">
-                                        <rect key="frame" x="21" y="36" width="372" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="wSm-39-alv"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="35"/>
-                                        <color key="textColor" systemColor="systemGreenColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BNe-bG-HfZ">
-                                        <rect key="frame" x="21" y="92" width="371.66666666666669" height="141"/>
+                                        <rect key="frame" x="21" y="85.666666666666643" width="371.66666666666669" height="147.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="153" translatesAutoresizingMaskIntoConstraints="NO" id="FIc-Hp-dag">
-                                                <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="29"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="30.333333333333332"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tab Bar Options:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d49-Da-Gue">
-                                                        <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="29"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="30.333333333333332"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                                         <color key="textColor" systemColor="systemGreenColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1265,16 +1256,16 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="Dr8-rM-gEV">
-                                                <rect key="frame" x="0.0" y="37" width="371.66666666666669" height="29.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="38.333333333333343" width="371.66666666666669" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hexadecimal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qwa-gf-Wdq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="222.66666666666666" height="29.666666666666668"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="222.66666666666666" height="31"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                                         <color key="textColor" systemColor="systemGreenColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zWu-QA-hkf">
-                                                        <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="29.666666666666668"/>
+                                                        <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="hexadecimalSwitchPressed:" destination="E78-IU-jHO" eventType="valueChanged" id="fl3-fo-8Ka"/>
                                                         </connections>
@@ -1282,16 +1273,16 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="153" translatesAutoresizingMaskIntoConstraints="NO" id="j1E-AG-BOO">
-                                                <rect key="frame" x="0.0" y="74.666666666666657" width="371.66666666666669" height="29.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="77.333333333333343" width="371.66666666666669" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Binary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JFd-8t-ZUC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="169.66666666666666" height="29.666666666666668"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="169.66666666666666" height="31"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                                         <color key="textColor" systemColor="systemGreenColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZCu-em-ZE4">
-                                                        <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="29.666666666666668"/>
+                                                        <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="binarySwitchPressed:" destination="E78-IU-jHO" eventType="valueChanged" id="ha0-k8-mdQ"/>
                                                         </connections>
@@ -1299,16 +1290,16 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="153" translatesAutoresizingMaskIntoConstraints="NO" id="d1l-64-G4m">
-                                                <rect key="frame" x="0.0" y="112.33333333333334" width="371.66666666666669" height="28.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="116.33333333333334" width="371.66666666666669" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decimal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGg-ya-HGp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="169.66666666666666" height="28.666666666666668"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="169.66666666666666" height="31"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                                         <color key="textColor" systemColor="systemGreenColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wPo-3w-rup">
-                                                        <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="28.666666666666668"/>
+                                                        <rect key="frame" x="322.66666666666669" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="decimalSwitchPressed:" destination="E78-IU-jHO" eventType="valueChanged" id="A4f-H0-yec"/>
                                                         </connections>
@@ -1484,12 +1475,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="vcL-1E-7Ug" secondAttribute="trailing" constant="209" id="8my-eS-OG5"/>
-                                    <constraint firstItem="zc4-uA-nPu" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leadingMargin" constant="13" id="C0T-sc-P0n"/>
                                     <constraint firstItem="cRz-p8-Cgq" firstAttribute="top" secondItem="ueu-Tt-0Lt" secondAttribute="bottom" constant="28" id="EkZ-0C-StS"/>
                                     <constraint firstItem="to9-n5-F3Z" firstAttribute="top" secondItem="vcL-1E-7Ug" secondAttribute="bottom" constant="8" id="FWR-qt-hP6"/>
                                     <constraint firstItem="R8S-Cz-Vjt" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="-4" id="FmO-0h-WAD"/>
                                     <constraint firstItem="czb-tV-wxX" firstAttribute="centerX" secondItem="cRz-p8-Cgq" secondAttribute="centerX" id="IM7-69-8hL"/>
-                                    <constraint firstItem="zc4-uA-nPu" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="topMargin" constant="28" id="LCM-CG-5xu"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="top" secondItem="BNe-bG-HfZ" secondAttribute="bottom" constant="40" id="O6f-yo-PRE"/>
                                     <constraint firstItem="cRz-p8-Cgq" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="98" id="TFe-iU-r5m"/>
                                     <constraint firstItem="BNe-bG-HfZ" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="21" id="Tr3-UC-evr"/>
@@ -1502,14 +1491,12 @@
                                     <constraint firstItem="ueu-Tt-0Lt" firstAttribute="trailing" secondItem="BNe-bG-HfZ" secondAttribute="trailing" id="eTS-vi-reZ"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leadingMargin" constant="13" id="mXx-v5-dWq"/>
                                     <constraint firstItem="R8S-Cz-Vjt" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="top" constant="556" id="njl-SG-CTl"/>
-                                    <constraint firstItem="BNe-bG-HfZ" firstAttribute="top" secondItem="zc4-uA-nPu" secondAttribute="bottom" constant="8" id="tHS-Kt-eMc"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="top" constant="273" id="uFv-Lu-wBi"/>
                                     <constraint firstItem="czb-tV-wxX" firstAttribute="top" secondItem="cRz-p8-Cgq" secondAttribute="bottom" constant="8" id="vB9-Cb-8is"/>
                                     <constraint firstItem="to9-n5-F3Z" firstAttribute="top" secondItem="vcL-1E-7Ug" secondAttribute="bottom" constant="8" id="vzF-1V-Fmi"/>
                                     <constraint firstItem="ueu-Tt-0Lt" firstAttribute="top" secondItem="to9-n5-F3Z" secondAttribute="bottom" constant="16.666666666666686" id="w9O-0y-rlj"/>
                                     <constraint firstAttribute="trailing" secondItem="BNe-bG-HfZ" secondAttribute="trailing" constant="21.329999999999998" id="xgH-Qo-hbo"/>
                                     <constraint firstItem="czb-tV-wxX" firstAttribute="centerX" secondItem="TrE-52-IHo" secondAttribute="centerX" id="y5e-CW-Mcb"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="zc4-uA-nPu" secondAttribute="trailing" constant="13" id="zv9-3o-QIf"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1522,7 +1509,7 @@
                             <constraint firstItem="Prf-Kb-rUx" firstAttribute="bottom" secondItem="ea8-U8-KVu" secondAttribute="bottom" id="eIl-nE-AVr"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="rj5-x7-Ssg"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="mab-AI-HrS"/>
                     <connections>
                         <outlet property="binLabel" destination="JFd-8t-ZUC" id="3jX-IH-GLN"/>
                         <outlet property="binSwitch" destination="ZCu-em-ZE4" id="HfI-AN-4h1"/>
@@ -1535,13 +1522,13 @@
                         <outlet property="hexLabel" destination="qwa-gf-Wdq" id="Elc-u3-9CK"/>
                         <outlet property="hexSwitch" destination="zWu-QA-hkf" id="C2V-hP-7e5"/>
                         <outlet property="indigoBtn" destination="m6Q-e1-Zim" id="kDB-rR-62w"/>
+                        <outlet property="navigationItem" destination="mab-AI-HrS" id="a5X-Ab-mKo"/>
                         <outlet property="optionsLabel" destination="d49-Da-Gue" id="PuZ-RW-QV4"/>
                         <outlet property="orangeBtn" destination="xCQ-0L-wgO" id="auC-hj-kBL"/>
                         <outlet property="purpleBtn" destination="ube-zZ-MPu" id="ZP9-x8-kst"/>
                         <outlet property="redBtn" destination="5N4-aC-jka" id="C3o-Al-geM"/>
                         <outlet property="setCalculatorTextColourLabel" destination="hPu-qc-Vo9" id="jBY-wr-6GL"/>
                         <outlet property="setCalculatorTextColourSwitch" destination="0Fe-oE-9ds" id="BTc-ei-FfX"/>
-                        <outlet property="settingsLabel" destination="zc4-uA-nPu" id="JCD-JS-Zou"/>
                         <outlet property="tealBtn" destination="T5E-v9-apF" id="eee-qs-4Qw"/>
                         <outlet property="thanksLabel" destination="TrE-52-IHo" id="aEY-cN-woF"/>
                         <outlet property="viewPPBtn" destination="cRz-p8-Cgq" id="CgQ-nM-YWV"/>
@@ -1551,7 +1538,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-Ra-cND" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2.8985507246376816" y="782.14285714285711"/>
+            <point key="canvasLocation" x="1599" y="963"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1572,12 +1559,38 @@
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="G05-w2-BtH" kind="relationship" relationship="viewControllers" id="Tkt-OU-gMU"/>
-                        <segue destination="E78-IU-jHO" kind="relationship" relationship="viewControllers" id="1au-dO-Def"/>
+                        <segue destination="u9b-zy-5nT" kind="relationship" relationship="viewControllers" id="1au-dO-Def"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="883" y="303"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="8Nf-G7-6UM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u9b-zy-5nT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="rj5-x7-Ssg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6fB-y6-T0l">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" systemColor="systemGreenColor"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" systemColor="systemGreenColor"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="E78-IU-jHO" kind="relationship" relationship="rootViewController" id="fKd-F0-VCS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tfz-WA-r2d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="883" y="963"/>
         </scene>
     </scenes>
     <designables>
