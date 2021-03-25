@@ -44,6 +44,7 @@ class SettingsViewController: UIViewController {
     //MARK: Variables
     
     let titleLabel = UILabel(frame: CGRect(x: 10, y: 0, width: 50, height: 40))
+    let infoButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,15 @@ class SettingsViewController: UIViewController {
         titleLabel.numberOfLines = 2
         titleLabel.sizeToFit()
         titleLabel.textAlignment = .center
+        
+        let view = UIView()
+        infoButton.setImage(UIImage(systemName: "info.circle", withConfiguration: UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
+        infoButton.sizeToFit()
+        infoButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
+        infoButton.sizeToFit()
+        view.addSubview(infoButton)
+        view.frame = infoButton.bounds
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: view)
         
         let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel, titleLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
@@ -77,6 +87,8 @@ class SettingsViewController: UIViewController {
             for entry in switches {
                 entry!.onTintColor = savedPreferences.colour
             }
+            
+            infoButton.tintColor = savedPreferences.colour
             
             if (savedPreferences.binTabState == false) {
                 binSwitch.isOn = false
@@ -142,6 +154,7 @@ class SettingsViewController: UIViewController {
         }
         else {
             titleLabel.textColor = .systemGreen
+            infoButton.tintColor = .systemGreen
             
             //Default colour is green so outline that button only
             greenBtn.layer.borderColor = UIColor.white.cgColor
@@ -177,6 +190,10 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    @objc func addTapped() {
+        print("tapped")
+    }
+    
     //MARK: Button Actions
     @IBAction func colourPressed(_ sender: RoundButton) {
         let colourClicked = sender.self.backgroundColor
@@ -196,6 +213,8 @@ class SettingsViewController: UIViewController {
         for entry in switches {
             entry!.onTintColor = colourClicked
         }
+        
+        infoButton.tintColor = colourClicked
 
         setCalculatorTextColourSwitch.onTintColor = colourClicked
         
