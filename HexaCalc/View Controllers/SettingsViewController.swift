@@ -48,10 +48,11 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup custom navigationBarItem
+        // Remove border from navigationBar
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
+        // Setup custom navigationBarItem
         titleLabel.font = UIFont(name: "Avenir Next", size: 35)
 
         titleLabel.text = "Settings"
