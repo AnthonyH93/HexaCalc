@@ -1509,7 +1509,13 @@
                             <constraint firstItem="Prf-Kb-rUx" firstAttribute="bottom" secondItem="ea8-U8-KVu" secondAttribute="bottom" id="eIl-nE-AVr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="mab-AI-HrS"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="mab-AI-HrS">
+                        <barButtonItem key="rightBarButtonItem" title="Info" image="info.circle" catalog="system" id="1nt-Kg-uN3">
+                            <connections>
+                                <segue destination="Ex6-yd-v7P" kind="show" id="utH-LI-C4T"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="binLabel" destination="JFd-8t-ZUC" id="3jX-IH-GLN"/>
                         <outlet property="binSwitch" destination="ZCu-em-ZE4" id="HfI-AN-4h1"/>
@@ -1522,6 +1528,7 @@
                         <outlet property="hexLabel" destination="qwa-gf-Wdq" id="Elc-u3-9CK"/>
                         <outlet property="hexSwitch" destination="zWu-QA-hkf" id="C2V-hP-7e5"/>
                         <outlet property="indigoBtn" destination="m6Q-e1-Zim" id="kDB-rR-62w"/>
+                        <outlet property="infoButton" destination="1nt-Kg-uN3" id="HwZ-E0-dN0"/>
                         <outlet property="navigationItem" destination="mab-AI-HrS" id="a5X-Ab-mKo"/>
                         <outlet property="optionsLabel" destination="d49-Da-Gue" id="PuZ-RW-QV4"/>
                         <outlet property="orangeBtn" destination="xCQ-0L-wgO" id="auC-hj-kBL"/>
@@ -1539,6 +1546,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-Ra-cND" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1599" y="963"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="IbE-wl-Fbm">
+            <objects>
+                <viewController id="Ex6-yd-v7P" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2nv-Vf-HnA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Zuc-o6-OGc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iKH-Ch-Bbp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Re3-EU-hX7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2419" y="963"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1819,6 +1842,10 @@
         <image name="dot.square" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="hexagon" catalog="system" width="128" height="124"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

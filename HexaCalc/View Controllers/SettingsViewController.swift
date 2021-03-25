@@ -41,10 +41,11 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var colourButtonsStack: UIStackView!
     
+    @IBOutlet weak var infoButton: UIBarButtonItem!
+    
     //MARK: Variables
     
     let titleLabel = UILabel(frame: CGRect(x: 10, y: 0, width: 50, height: 40))
-    let infoButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,15 +61,6 @@ class SettingsViewController: UIViewController {
         titleLabel.numberOfLines = 2
         titleLabel.sizeToFit()
         titleLabel.textAlignment = .center
-        
-        let view = UIView()
-        infoButton.setImage(UIImage(systemName: "info.circle", withConfiguration: UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
-        infoButton.sizeToFit()
-        infoButton.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
-        infoButton.sizeToFit()
-        view.addSubview(infoButton)
-        view.frame = infoButton.bounds
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: view)
         
         let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel, titleLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
