@@ -269,6 +269,9 @@ class HexadecimalViewController: UIViewController {
                 ])
             if (pastedInput == "0") {
                 runningNumber = ""
+                leftValue = ""
+                rightValue = ""
+                result = ""
                 outputLabel.text = "0"
                 stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.decimalVal = "0"

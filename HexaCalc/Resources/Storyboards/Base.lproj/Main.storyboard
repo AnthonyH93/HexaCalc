@@ -1490,7 +1490,7 @@
             </objects>
             <point key="canvasLocation" x="1599" y="963"/>
         </scene>
-        <!--About Hexa Calc View Controller-->
+        <!--About HexaCalc-->
         <scene sceneID="IbE-wl-Fbm">
             <objects>
                 <viewController id="Ex6-yd-v7P" customClass="AboutHexaCalcViewController" customModule="HexaCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -1610,7 +1610,7 @@
                             <constraint firstItem="OR1-r6-ujN" firstAttribute="bottom" secondItem="Zuc-o6-OGc" secondAttribute="bottom" id="acz-VY-Arl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="iKH-Ch-Bbp"/>
+                    <navigationItem key="navigationItem" title="About HexaCalc" id="iKH-Ch-Bbp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Re3-EU-hX7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1648,11 +1648,12 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u9b-zy-5nT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="rj5-x7-Ssg"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6fB-y6-T0l">
+                    <navigationBar key="navigationBar" contentMode="center" translucent="NO" id="6fB-y6-T0l">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                             <color key="textColor" systemColor="systemGreenColor"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
