@@ -74,6 +74,7 @@ class SettingsViewController: UIViewController {
             infoButton.tintColor = savedPreferences.colour
             navigationItem.backBarButtonItem?.tintColor = savedPreferences.colour
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: savedPreferences.colour]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: savedPreferences.colour]
             
             if (savedPreferences.binTabState == false) {
                 binSwitch.isOn = false
@@ -139,6 +140,7 @@ class SettingsViewController: UIViewController {
         }
         else {
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
             infoButton.tintColor = .systemGreen
             navigationItem.backBarButtonItem?.tintColor = .systemGreen
             
@@ -200,6 +202,7 @@ class SettingsViewController: UIViewController {
         infoButton.tintColor = colourClicked
         navigationItem.backBarButtonItem?.tintColor = colourClicked
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colourClicked!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: colourClicked!]
 
         setCalculatorTextColourSwitch.onTintColor = colourClicked
         
