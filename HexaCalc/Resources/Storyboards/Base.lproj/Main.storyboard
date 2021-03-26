@@ -1530,7 +1530,7 @@
                                             </attributedString>
                                         </state>
                                         <connections>
-                                            <action selector="viewPrivacyPolicy:" destination="E78-IU-jHO" eventType="touchUpInside" id="IPQ-j8-nRm"/>
+                                            <action selector="viewPrivacyPolicy:" destination="Ex6-yd-v7P" eventType="touchUpInside" id="lHn-5w-bRG"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g3f-mw-vWn">
@@ -1549,7 +1549,7 @@
                                             </attributedString>
                                         </state>
                                         <connections>
-                                            <action selector="viewTermsAndConditions:" destination="E78-IU-jHO" eventType="touchUpInside" id="72g-hk-bFa"/>
+                                            <action selector="viewTermsAndConditions:" destination="Ex6-yd-v7P" eventType="touchUpInside" id="UeO-8R-boK"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="130" translatesAutoresizingMaskIntoConstraints="NO" id="Cyt-8a-6kZ">
@@ -1611,6 +1611,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About HexaCalc" id="iKH-Ch-Bbp"/>
+                    <connections>
+                        <outlet property="appVersionLabel1" destination="oyK-kI-9jX" id="cYn-89-GhF"/>
+                        <outlet property="appVersionLabel2" destination="vP0-oG-rxo" id="9PS-Dq-i4u"/>
+                        <outlet property="thanksLabel" destination="J8R-vD-xW6" id="keo-Fb-UmJ"/>
+                        <outlet property="viewPrivacyPolicyBtn" destination="0ZQ-WZ-moZ" id="wSQ-yR-Zsb"/>
+                        <outlet property="viewTermsAndConditionsBtn" destination="g3f-mw-vWn" id="6kB-Pb-Tmo"/>
+                        <outlet property="websiteLinksLabel" destination="3Sk-AM-pee" id="3Gd-2j-E5A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Re3-EU-hX7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
