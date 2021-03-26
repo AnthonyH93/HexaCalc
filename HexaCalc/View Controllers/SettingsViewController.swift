@@ -20,9 +20,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var binLabel: UILabel!
     @IBOutlet weak var decLabel: UILabel!
     @IBOutlet weak var colourLabel: UILabel!
-    @IBOutlet weak var viewPPBtn: UIButton!
-    @IBOutlet weak var viewTCBtn: UIButton!
-    @IBOutlet weak var thanksLabel: UILabel!
     @IBOutlet weak var setCalculatorTextColourLabel: UILabel!
     
     @IBOutlet weak var hexSwitch: UISwitch!
@@ -53,7 +50,7 @@ class SettingsViewController: UIViewController {
         // Set custom back button text to navigationItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
         
-        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel]
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
         
@@ -169,14 +166,9 @@ class SettingsViewController: UIViewController {
             hexLabel?.font = UIFont(name: "Avenir Next", size: 18)
             binLabel?.font = UIFont(name: "Avenir Next", size: 18)
             decLabel?.font = UIFont(name: "Avenir Next", size: 18)
-            thanksLabel?.isHidden = (UIDevice.current.userInterfaceIdiom == .pad) ? false : true
             colourLabel?.font = UIFont(name: "Avenir Next", size: 18)
             setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
         }
-    }
-    
-    @objc func addTapped() {
-        print("tapped")
     }
     
     //MARK: Button Actions
@@ -186,7 +178,7 @@ class SettingsViewController: UIViewController {
         let colourTag = "\(colourIdentifier)"
         let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier), hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
         
-        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel]
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
         
@@ -441,18 +433,6 @@ class SettingsViewController: UIViewController {
         FirebaseAnalytics.Analytics.logEvent("coloured_text_switch_pressed", parameters: [
             "colour_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
             ])
-    }
-    
-    //iOS approval requirement to have a hosted privacy policy and a button to open it within the app
-    @IBAction func viewPrivacyPolicy(_ sender: Any) {
-        let privacyPolicyURL = NSURL(string: "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy")! as URL
-        UIApplication.shared.open(privacyPolicyURL, options: [:], completionHandler: nil)
-    }
-    
-    //iOS approval requirement to have a hosted terms and conditions page and a button to open it within the app
-    @IBAction func viewTermsAndConditions(_ sender: Any) {
-        let termsAndConditionsURL = NSURL(string: "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions")! as URL
-        UIApplication.shared.open(termsAndConditionsURL, options: [:], completionHandler: nil)
     }
     
     //MARK: Private Functions
