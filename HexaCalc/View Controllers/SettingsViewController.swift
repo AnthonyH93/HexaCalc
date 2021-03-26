@@ -43,10 +43,6 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var infoButton: UIBarButtonItem!
     
-    //MARK: Variables
-    
-    let titleLabel = UILabel(frame: CGRect(x: 10, y: 0, width: 50, height: 40))
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,18 +50,10 @@ class SettingsViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        // Setup custom navigationBarItem
-        titleLabel.font = UIFont(name: "Avenir Next", size: 30)
-
-        titleLabel.text = "Settings"
-        titleLabel.numberOfLines = 2
-        titleLabel.sizeToFit()
-        titleLabel.textAlignment = .center
-        
-        // Set custome back button text to navigationItem
+        // Set custom back button text to navigationItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
         
-        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel, titleLabel]
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
         
@@ -85,6 +73,7 @@ class SettingsViewController: UIViewController {
             
             infoButton.tintColor = savedPreferences.colour
             navigationItem.backBarButtonItem?.tintColor = savedPreferences.colour
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: savedPreferences.colour]
             
             if (savedPreferences.binTabState == false) {
                 binSwitch.isOn = false
@@ -149,7 +138,7 @@ class SettingsViewController: UIViewController {
             }
         }
         else {
-            titleLabel.textColor = .systemGreen
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
             infoButton.tintColor = .systemGreen
             navigationItem.backBarButtonItem?.tintColor = .systemGreen
             
@@ -166,8 +155,6 @@ class SettingsViewController: UIViewController {
             
             stateController?.convValues.colourNum = -1
         }
-        
-        self.navigationItem.titleView = titleLabel
     }
     
     override func viewDidLayoutSubviews() {
@@ -182,7 +169,6 @@ class SettingsViewController: UIViewController {
             decLabel?.font = UIFont(name: "Avenir Next", size: 18)
             thanksLabel?.isHidden = (UIDevice.current.userInterfaceIdiom == .pad) ? false : true
             colourLabel?.font = UIFont(name: "Avenir Next", size: 18)
-            titleLabel.font = UIFont(name: "Avenir Next", size: 26)
             setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
         }
     }
@@ -198,7 +184,7 @@ class SettingsViewController: UIViewController {
         let colourTag = "\(colourIdentifier)"
         let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier), hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
         
-        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel, titleLabel]
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, setCalculatorTextColourLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
         
@@ -213,6 +199,7 @@ class SettingsViewController: UIViewController {
         
         infoButton.tintColor = colourClicked
         navigationItem.backBarButtonItem?.tintColor = colourClicked
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colourClicked!]
 
         setCalculatorTextColourSwitch.onTintColor = colourClicked
         
