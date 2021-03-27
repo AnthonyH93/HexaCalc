@@ -43,6 +43,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var pasteControl: UISegmentedControl!
     
     @IBOutlet weak var colourButtonsStack: UIStackView!
+    @IBOutlet weak var copyStack: UIStackView!
+    @IBOutlet weak var pasteStack: UIStackView!
     
     @IBOutlet weak var infoButton: UIBarButtonItem!
     
@@ -181,6 +183,9 @@ class SettingsViewController: UIViewController {
             setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
             copyLabel?.font = UIFont(name: "Avenir Next", size: 18)
             pasteLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            
+            copyStack.spacing = -20
+            pasteStack.spacing = -20
             
             if (UIDevice.current.userInterfaceIdiom != .pad) {
                 navigationController?.navigationBar.prefersLargeTitles = false

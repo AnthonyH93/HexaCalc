@@ -1426,7 +1426,7 @@
                                             </switch>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wtj-46-Ude">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wtj-46-Ude">
                                         <rect key="frame" x="21" y="356" width="371.66666666666669" height="70"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="117-jf-C8s">
@@ -1522,6 +1522,7 @@
                         <outlet property="colourLabel" destination="vcL-1E-7Ug" id="VJ5-Td-yZx"/>
                         <outlet property="copyControl" destination="Rhw-r2-STA" id="YeW-0w-Nip"/>
                         <outlet property="copyLabel" destination="LZr-gJ-ZFO" id="PaU-CZ-CgY"/>
+                        <outlet property="copyStack" destination="117-jf-C8s" id="3hQ-sg-yhk"/>
                         <outlet property="decLabel" destination="iGg-ya-HGp" id="lDW-6S-syb"/>
                         <outlet property="decSwitch" destination="wPo-3w-rup" id="uc5-1h-6Iw"/>
                         <outlet property="greenBtn" destination="3Hd-uI-dan" id="Mwp-kB-zO5"/>
@@ -1534,6 +1535,7 @@
                         <outlet property="orangeBtn" destination="xCQ-0L-wgO" id="auC-hj-kBL"/>
                         <outlet property="pasteControl" destination="Ku7-m4-wno" id="HIT-4r-xCf"/>
                         <outlet property="pasteLabel" destination="0F5-vr-7eo" id="Mg3-Pr-HaW"/>
+                        <outlet property="pasteStack" destination="E0Z-eg-KXe" id="Tqj-Fs-C4A"/>
                         <outlet property="purpleBtn" destination="ube-zZ-MPu" id="ZP9-x8-kst"/>
                         <outlet property="redBtn" destination="5N4-aC-jka" id="C3o-Al-geM"/>
                         <outlet property="setCalculatorTextColourLabel" destination="hPu-qc-Vo9" id="jBY-wr-6GL"/>
