@@ -31,6 +31,19 @@ class AboutHexaCalcViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        let screenWidth = view.bounds.width
+
+        //Specific case for the smallest screen sizes
+        if (screenWidth <= 320){
+            //Need to edit the font size for this screen width size
+            websiteLinksLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            appVersionLabel1?.font = UIFont(name: "Avenir Next", size: 18)
+            appVersionLabel2?.font = UIFont(name: "Avenir Next", size: 18)
+            thanksLabel?.font = UIFont(name: "Avenir Next", size: 18)
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // turn on animations
