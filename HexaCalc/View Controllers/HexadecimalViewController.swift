@@ -60,7 +60,8 @@ class HexadecimalViewController: UIViewController {
     
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
     var currentContraints: [NSLayoutConstraint] = []
-    var firstLaunch = true
+    
+    var currentlyRecognizingDoubleTap = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,8 +130,8 @@ class HexadecimalViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         // Setup Hexadecimal View Controller constraints
-        var screenWidth = view.bounds.width
-        var screenHeight = view.bounds.height
+        let screenWidth = view.bounds.width
+        let screenHeight = view.bounds.height
         
         let hStacks = [hexHStack1!, hexHStack2!, hexHStack3!, hexHStack4!, hexHStack5!, hexHStack6!]
         let singleButtons = [XORBtn!, ORBtn!, ANDBtn!, NOTBtn!, DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!,
@@ -140,13 +141,6 @@ class HexadecimalViewController: UIViewController {
         let tripleButton = ACBtn!
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
-            // Need to switch width and height if device is in landscape mode on first launch - only on hexadecimal due to it being first tab
-            if (UIWindow.isLandscape && firstLaunch && (UIScreen.main.bounds.width < screenHeight)) {
-                screenWidth = view.bounds.height
-                screenHeight = view.bounds.width
-            }
-            firstLaunch = false
-            
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: hexVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             
@@ -205,6 +199,12 @@ class HexadecimalViewController: UIViewController {
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
             outputLabel.textColor = stateController?.convValues.colour
+        }
+        
+        // Small optimization to only delay single tap if absolutely necessary
+        if (((stateController?.convValues.copyActionIndex == 1 || stateController?.convValues.pasteActionIndex == 1) && currentlyRecognizingDoubleTap == false) ||
+            ((stateController?.convValues.copyActionIndex != 1 && stateController?.convValues.pasteActionIndex != 1) && currentlyRecognizingDoubleTap == true)) {
+            self.setupOutputLabelGestureRecognizers()
         }
         
         //Set calculator text colour
@@ -358,7 +358,12 @@ class HexadecimalViewController: UIViewController {
         self.outputLabel.isUserInteractionEnabled = true
         self.outputLabel.addGestureRecognizer(labelSingleTap)
         self.outputLabel.addGestureRecognizer(labelDoubleTap)
-        labelSingleTap.require(toFail: labelDoubleTap)
+        
+        // Small optimization to only delay single tap if absolutely necessary
+        if (stateController?.convValues.copyActionIndex == 1 || stateController?.convValues.pasteActionIndex == 1) {
+            labelSingleTap.require(toFail: labelDoubleTap)
+            currentlyRecognizingDoubleTap = true
+        }
     }
     
     //MARK: Button Actions

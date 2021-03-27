@@ -62,6 +62,8 @@ class DecimalViewController: UIViewController {
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
     var currentContraints: [NSLayoutConstraint] = []
     
+    var currentlyRecognizingDoubleTap = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
