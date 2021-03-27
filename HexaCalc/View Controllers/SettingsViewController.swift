@@ -168,6 +168,11 @@ class SettingsViewController: UIViewController {
             decLabel?.font = UIFont(name: "Avenir Next", size: 18)
             colourLabel?.font = UIFont(name: "Avenir Next", size: 18)
             setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            
+            if (UIDevice.current.userInterfaceIdiom != .pad) {
+                navigationController?.navigationBar.prefersLargeTitles = false
+                
+            }
         }
     }
     
