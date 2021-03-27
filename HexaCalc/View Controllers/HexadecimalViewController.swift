@@ -223,7 +223,7 @@ class HexadecimalViewController: UIViewController {
     }
     
     //Function to copy current output label to clipboard when tapped
-    @objc func labelTapped(_ sender: UITapGestureRecognizer) {
+    @objc func labelSingleTapped(_ sender: UITapGestureRecognizer) {
         var currentOutput = runningNumber;
         if (runningNumber == ""){
             currentOutput = outputLabel.text ?? "0"
@@ -240,7 +240,7 @@ class HexadecimalViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    @objc func labelLongPressed(_ sender: UILongPressGestureRecognizer) {
+    @objc func labelDoubleTapped(_ sender: UILongPressGestureRecognizer) {
         //Alert the user to ask if they truly want to paste from their clipboard
         let alert = UIAlertController(title: "Paste from Clipboard", message: "Press confirm to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
 
@@ -304,8 +304,10 @@ class HexadecimalViewController: UIViewController {
     
     //Function for setting up output label gesture recognizers
     func setupOutputLabelGestureRecognizers() {
-        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
-        let labelLongPressed = UILongPressGestureRecognizer(target: self, action: #selector(self.labelLongPressed(_:)))
+        let labelSingleTap = UITapGestureRecognizer(target: self, action: #selector(self.labelSingleTapped(_:)))
+        labelSingleTap.numberOfTapsRequired = 1
+        let labelDoubleTap = UITapGestureRecognizer(target: self, action: #selector(self.labelDoubleTapped(_:)))
+        labelDoubleTap.numberOfTapsRequired = 2
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
             
@@ -315,8 +317,9 @@ class HexadecimalViewController: UIViewController {
         self.outputLabel.addGestureRecognizer(leftSwipe)
         self.outputLabel.addGestureRecognizer(rightSwipe)
         self.outputLabel.isUserInteractionEnabled = true
-        self.outputLabel.addGestureRecognizer(labelTap)
-        self.outputLabel.addGestureRecognizer(labelLongPressed)
+        self.outputLabel.addGestureRecognizer(labelSingleTap)
+        self.outputLabel.addGestureRecognizer(labelDoubleTap)
+        labelSingleTap.require(toFail: labelDoubleTap)
     }
     
     //MARK: Button Actions
