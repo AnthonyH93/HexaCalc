@@ -1448,6 +1448,9 @@
                                                         </segments>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="selectedSegmentTintColor" systemColor="systemGreenColor"/>
+                                                        <connections>
+                                                            <action selector="copyIndexChanged:" destination="E78-IU-jHO" eventType="valueChanged" id="EiU-7u-X8a"/>
+                                                        </connections>
                                                     </segmentedControl>
                                                 </subviews>
                                             </stackView>
@@ -1470,6 +1473,9 @@
                                                         </segments>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="selectedSegmentTintColor" systemColor="systemGreenColor"/>
+                                                        <connections>
+                                                            <action selector="pasteIndexChanged:" destination="E78-IU-jHO" eventType="valueChanged" id="jBb-eh-k6C"/>
+                                                        </connections>
                                                     </segmentedControl>
                                                 </subviews>
                                             </stackView>

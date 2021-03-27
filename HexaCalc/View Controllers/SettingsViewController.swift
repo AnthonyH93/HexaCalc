@@ -172,7 +172,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         let screenWidth = view.bounds.width
 
-        //Specific case for smallest screen sizes
+        //Specific case for the smallest screen sizes
         if (screenWidth <= 320){
             //Need to edit the font size for this screen width size
             optionsLabel?.font = UIFont(name: "Avenir Next", size: 18)
@@ -458,6 +458,32 @@ class SettingsViewController: UIViewController {
         FirebaseAnalytics.Analytics.logEvent("coloured_text_switch_pressed", parameters: [
             "colour_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
             ])
+    }
+    
+    @IBAction func copyIndexChanged(_ sender: Any) {
+        switch copyControl.selectedSegmentIndex {
+        case 0:
+            print("tap")
+        case 1:
+            print("2 taps")
+        case 2:
+            print("Off")
+        default:
+            break
+        }
+    }
+    
+    @IBAction func pasteIndexChanged(_ sender: Any) {
+        switch pasteControl.selectedSegmentIndex {
+        case 0:
+            print("tap")
+        case 1:
+            print("2 taps")
+        case 2:
+            print("Off")
+        default:
+            break
+        }
     }
     
     //MARK: Private Functions
