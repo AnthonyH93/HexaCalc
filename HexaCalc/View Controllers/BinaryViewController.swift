@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 class BinaryViewController: UIViewController {
     
@@ -196,11 +195,6 @@ class BinaryViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
         self.present(alert, animated: true)
-        
-        //Send event to Firebase about copying action
-        FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
-            "copied_calculator": "Binary"
-            ])
     }
     
     @objc func labelLongPressed(_ sender: UILongPressGestureRecognizer) {
@@ -222,10 +216,6 @@ class BinaryViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "01").inverted
         let isValidBinary = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
         if (isValidBinary && pastedInput.count <= 64) {
-            //Send event to Firebase about successful pasting option
-            FirebaseAnalytics.Analytics.logEvent("pasted_successfully", parameters: [
-                "pasted_calculator": "Binary"
-                ])
             if (pastedInput == "0") {
                 runningNumber = ""
                 outputLabel.text = binaryDefaultLabel
@@ -242,10 +232,6 @@ class BinaryViewController: UIViewController {
             }
         }
         else {
-            //Send event to Firebase about unsuccessful pasting option
-            FirebaseAnalytics.Analytics.logEvent("pasted_unsuccessfully", parameters: [
-                "pasted_calculator": "Binary"
-                ])
             var alertMessage = "Your clipboad did not contain a valid binary string."
             if (isValidBinary) {
                 alertMessage = "The binary string in your clipboard must have a length of 64 characters or less."
@@ -266,12 +252,6 @@ class BinaryViewController: UIViewController {
         guard (sender.view as? UILabel) != nil else { return }
         
         if (sender.direction == .left || sender.direction == .right) {
-            if (runningNumber != "") {
-                //Send event to Firebase about swipe to delete
-                FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
-                    "delete_swipe_calculator": "Binary"
-                    ])
-            }
             deletePressed(DELBtn)
         }
     }
@@ -368,10 +348,6 @@ class BinaryViewController: UIViewController {
                 quickUpdateStateController()
             }
         }
-        
-        FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
-            "delete_button_calculator": "Binary"
-            ])
     }
     
     //Instead of making left shift an operation, just complete it whenever it is pressed the first time (doesn't need 2 arguments)
@@ -599,9 +575,6 @@ class BinaryViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        FirebaseAnalytics.Analytics.logEvent("binary_equals_pressed", parameters: [
-            "equals_button_calculator": "Binary"
-            ])
         operation(operation: currentOperation)
     }
     

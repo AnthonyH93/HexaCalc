@@ -26,6 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
 
         for child in tabBarController.viewControllers ?? [] {
+            if let navigationChild = child as? UINavigationController {
+                if let firstChild = navigationChild.viewControllers[0] as? StateControllerProtocol {
+                    firstChild.setState(state: stateController)
+                    continue
+                }
+            }
             if let top = child as? StateControllerProtocol {
                 top.setState(state: stateController)
             }

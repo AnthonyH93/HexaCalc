@@ -1,6 +1,0 @@
-framework module Pods_HexaCalc {
-  umbrella header "Pods-HexaCalc-umbrella.h"
-
-  export *
-  module * { export * }
-}

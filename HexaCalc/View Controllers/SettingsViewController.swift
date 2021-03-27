@@ -8,7 +8,6 @@
 
 import UIKit
 import os.log
-import FirebaseAnalytics
 
 class SettingsViewController: UIViewController {
 
@@ -19,12 +18,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var hexLabel: UILabel!
     @IBOutlet weak var binLabel: UILabel!
     @IBOutlet weak var decLabel: UILabel!
-    @IBOutlet weak var settingsLabel: UILabel!
     @IBOutlet weak var colourLabel: UILabel!
-    @IBOutlet weak var viewPPBtn: UIButton!
-    @IBOutlet weak var viewTCBtn: UIButton!
-    @IBOutlet weak var thanksLabel: UILabel!
     @IBOutlet weak var setCalculatorTextColourLabel: UILabel!
+    @IBOutlet weak var copyLabel: UILabel!
+    @IBOutlet weak var pasteLabel: UILabel!
     
     @IBOutlet weak var hexSwitch: UISwitch!
     @IBOutlet weak var binSwitch: UISwitch!
@@ -40,14 +37,27 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var indigoBtn: RoundButton!
     @IBOutlet weak var purpleBtn: RoundButton!
     
-    @IBOutlet weak var colourButtonsStack: UIStackView!
     
-    //MARK: Variables
+    @IBOutlet weak var copyControl: UISegmentedControl!
+    @IBOutlet weak var pasteControl: UISegmentedControl!
+    
+    @IBOutlet weak var colourButtonsStack: UIStackView!
+    @IBOutlet weak var copyStack: UIStackView!
+    @IBOutlet weak var pasteStack: UIStackView!
+    
+    @IBOutlet weak var infoButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, settingsLabel, setCalculatorTextColourLabel]
+        // Remove border from navigationBar
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Set custom back button text to navigationItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
+        
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel, copyLabel, pasteLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
         
@@ -55,6 +65,9 @@ class SettingsViewController: UIViewController {
         for button in buttons {
             button!.layer.borderWidth = 3
         }
+        
+        copyControl.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        pasteControl.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         
         if let savedPreferences = DataPersistence.loadPreferences() {
             for label in labels {
@@ -64,6 +77,13 @@ class SettingsViewController: UIViewController {
             for entry in switches {
                 entry!.onTintColor = savedPreferences.colour
             }
+            
+            copyControl.selectedSegmentTintColor = savedPreferences.colour
+            pasteControl.selectedSegmentTintColor = savedPreferences.colour
+            infoButton.tintColor = savedPreferences.colour
+            navigationItem.backBarButtonItem?.tintColor = savedPreferences.colour
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: savedPreferences.colour]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: savedPreferences.colour]
             
             if (savedPreferences.binTabState == false) {
                 binSwitch.isOn = false
@@ -128,6 +148,11 @@ class SettingsViewController: UIViewController {
             }
         }
         else {
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
+            infoButton.tintColor = .systemGreen
+            navigationItem.backBarButtonItem?.tintColor = .systemGreen
+            
             //Default colour is green so outline that button only
             greenBtn.layer.borderColor = UIColor.white.cgColor
             
@@ -146,17 +171,25 @@ class SettingsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         let screenWidth = view.bounds.width
 
-        //Specific case for smallest screen sizes
+        //Specific case for the smallest screen sizes
         if (screenWidth <= 320){
             //Need to edit the font size for this screen width size
             optionsLabel?.font = UIFont(name: "Avenir Next", size: 18)
             hexLabel?.font = UIFont(name: "Avenir Next", size: 18)
             binLabel?.font = UIFont(name: "Avenir Next", size: 18)
             decLabel?.font = UIFont(name: "Avenir Next", size: 18)
-            thanksLabel?.isHidden = (UIDevice.current.userInterfaceIdiom == .pad) ? false : true
             colourLabel?.font = UIFont(name: "Avenir Next", size: 18)
-            settingsLabel?.font = UIFont(name: "Avenir Next", size: 26)
             setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            copyLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            pasteLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            
+            copyStack.spacing = -20
+            pasteStack.spacing = -20
+            
+            if (UIDevice.current.userInterfaceIdiom != .pad) {
+                navigationController?.navigationBar.prefersLargeTitles = false
+                
+            }
         }
     }
     
@@ -165,9 +198,12 @@ class SettingsViewController: UIViewController {
         let colourClicked = sender.self.backgroundColor
         let colourIdentifier = sender.tag
         let colourTag = "\(colourIdentifier)"
-        let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier), hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+        let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier),
+                                              hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                              setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                              copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
         
-        let labels = [hexLabel, optionsLabel, binLabel, decLabel, thanksLabel, colourLabel, settingsLabel, setCalculatorTextColourLabel]
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel, copyLabel, pasteLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
         
@@ -179,6 +215,13 @@ class SettingsViewController: UIViewController {
         for entry in switches {
             entry!.onTintColor = colourClicked
         }
+        
+        copyControl.selectedSegmentTintColor = colourClicked
+        pasteControl.selectedSegmentTintColor = colourClicked
+        infoButton.tintColor = colourClicked
+        navigationItem.backBarButtonItem?.tintColor = colourClicked
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colourClicked!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: colourClicked!]
 
         setCalculatorTextColourSwitch.onTintColor = colourClicked
         
@@ -188,12 +231,6 @@ class SettingsViewController: UIViewController {
         //Set state controller such that all calculators know the new colour without a reload
         stateController?.convValues.colour = colourClicked!
         stateController?.convValues.colourNum = Int64(colourIdentifier)
-        
-        let colourString = getColourStringFromID(id: colourIdentifier)
-        //Send event to Firebase about colour changing
-        FirebaseAnalytics.Analytics.logEvent("colour_changed", parameters: [
-            "colour_set": colourString as String
-            ])
         
         var highlightedIndex = 0
         //Change the app icon based on which colour was selected
@@ -247,7 +284,10 @@ class SettingsViewController: UIViewController {
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
@@ -261,7 +301,10 @@ class SettingsViewController: UIViewController {
         else {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
@@ -272,11 +315,6 @@ class SettingsViewController: UIViewController {
                 }
             }
         }
-        
-        //Send event to Firebase about switch being pressed
-        FirebaseAnalytics.Analytics.logEvent("hexadecimal_switch_pressed", parameters: [
-            "hexadecimal_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
-            ])
     }
     
     //Function to toggle the binary calculator on or off when the switch is pressed
@@ -284,7 +322,10 @@ class SettingsViewController: UIViewController {
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
@@ -319,7 +360,10 @@ class SettingsViewController: UIViewController {
         else {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
@@ -338,11 +382,6 @@ class SettingsViewController: UIViewController {
                 }
             }
         }
-        
-        //Send event to Firebase about switch being pressed
-        FirebaseAnalytics.Analytics.logEvent("binary_switch_pressed", parameters: [
-            "binary_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
-            ])
     }
     
     //Function to toggle the decimal calculator on or off when the switch is pressed
@@ -350,7 +389,10 @@ class SettingsViewController: UIViewController {
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
@@ -375,7 +417,10 @@ class SettingsViewController: UIViewController {
         else {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
@@ -399,36 +444,44 @@ class SettingsViewController: UIViewController {
                 }
             }
         }
-        
-        //Send event to Firebase about switch being pressed
-        FirebaseAnalytics.Analytics.logEvent("decimal_switch_pressed", parameters: [
-            "decimal_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
-            ])
     }
     
     //Function to toggle the optional setting of the calculator text colour
     @IBAction func setCalculatorTextColourSwitchPressed(_ sender: UISwitch) {
         //Update the stored user preferences with whatever the current switch values are: to be used in the various calcualtor tabs
-        let userPreferences = UserPreferences(colour: settingsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+        let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                              setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                              copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex) )
+        
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = setCalculatorTextColourSwitch.isOn
-        
-        //Send event to Firebase about switch being pressed
-        FirebaseAnalytics.Analytics.logEvent("coloured_text_switch_pressed", parameters: [
-            "colour_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
-            ])
     }
     
-    //iOS approval requirement to have a hosted privacy policy and a button to open it within the app
-    @IBAction func viewPrivacyPolicy(_ sender: Any) {
-        let privacyPolicyURL = NSURL(string: "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy")! as URL
-        UIApplication.shared.open(privacyPolicyURL, options: [:], completionHandler: nil)
+    @IBAction func copyIndexChanged(_ sender: Any) {
+        switch copyControl.selectedSegmentIndex {
+        case 0:
+            print("tap")
+        case 1:
+            print("2 taps")
+        case 2:
+            print("Off")
+        default:
+            break
+        }
     }
     
-    //iOS approval requirement to have a hosted terms and conditions page and a button to open it within the app
-    @IBAction func viewTermsAndConditions(_ sender: Any) {
-        let termsAndConditionsURL = NSURL(string: "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions")! as URL
-        UIApplication.shared.open(termsAndConditionsURL, options: [:], completionHandler: nil)
+    @IBAction func pasteIndexChanged(_ sender: Any) {
+        switch pasteControl.selectedSegmentIndex {
+        case 0:
+            print("tap")
+        case 1:
+            print("2 taps")
+        case 2:
+            print("Off")
+        default:
+            break
+        }
     }
     
     //MARK: Private Functions
@@ -449,33 +502,6 @@ class SettingsViewController: UIViewController {
           print("App icon changed successfully")
         }
       })
-    }
-    
-    func getColourStringFromID(id: Int) -> String {
-        var colourString = ""
-        
-        switch id {
-        case 0:
-            colourString = "Red"
-        case 1:
-            colourString = "Orange"
-        case 2:
-            colourString = "Yellow"
-        case 3:
-            colourString = "Green"
-        case 4:
-            colourString = "Blue"
-        case 5:
-            colourString = "Teal"
-        case 6:
-            colourString = "Indigo"
-        case 7:
-            colourString = "Violet"
-        default:
-            colourString = "Error"
-        }
-        
-        return colourString
     }
 }
 

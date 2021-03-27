@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B6F7D53B36F9CF2E9E8A001 /* Pods_HexaCalcTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B0DA38123846EAD4C25133A /* Pods_HexaCalcTests.framework */; };
-		9D27C37325F7331600A8887F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D27C37225F7331600A8887F /* GoogleService-Info.plist */; };
+		9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */; };
 		9D7C09BF25EC61E700771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png */; };
 		9D7C09C025EC61E700771D52 /* HexaCalcIconBlue@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */; };
 		9D7C09C125EC61E700771D52 /* HexaCalcIconOrange~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */; };
@@ -69,7 +68,6 @@
 		9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */; };
 		9DEF24B324C553F100701F5B /* HexaCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24B224C553F100701F5B /* HexaCalcTests.swift */; };
 		9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24BD24C5578300701F5B /* DecimalViewController.swift */; };
-		A6CF6A356CA75AF9D5094B2A /* Pods_HexaCalc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0960B7F4D670E6D9AD506D53 /* Pods_HexaCalc.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,13 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0960B7F4D670E6D9AD506D53 /* Pods_HexaCalc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HexaCalc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D03B421E9B21E563E7483FC /* Pods-HexaCalc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HexaCalc.release.xcconfig"; path = "Target Support Files/Pods-HexaCalc/Pods-HexaCalc.release.xcconfig"; sourceTree = "<group>"; };
-		650C49FE274350CF89E94A7E /* Pods-HexaCalcTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HexaCalcTests.debug.xcconfig"; path = "Target Support Files/Pods-HexaCalcTests/Pods-HexaCalcTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6B0DA38123846EAD4C25133A /* Pods_HexaCalcTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HexaCalcTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D9C1D3FF4B9785EF8949566 /* Pods-HexaCalc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HexaCalc.debug.xcconfig"; path = "Target Support Files/Pods-HexaCalc/Pods-HexaCalc.debug.xcconfig"; sourceTree = "<group>"; };
-		8CEA9F76C42D7FDD5946C3E3 /* Pods-HexaCalcTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HexaCalcTests.release.xcconfig"; path = "Target Support Files/Pods-HexaCalcTests/Pods-HexaCalcTests.release.xcconfig"; sourceTree = "<group>"; };
-		9D27C37225F7331600A8887F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHexaCalcViewController.swift; sourceTree = "<group>"; };
 		9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo-83.5@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconOrange~ipad.png"; sourceTree = "<group>"; };
@@ -161,7 +153,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6CF6A356CA75AF9D5094B2A /* Pods_HexaCalc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,33 +160,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B6F7D53B36F9CF2E9E8A001 /* Pods_HexaCalcTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2CDD67B0518E0DC85F0B4A9C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7D9C1D3FF4B9785EF8949566 /* Pods-HexaCalc.debug.xcconfig */,
-				1D03B421E9B21E563E7483FC /* Pods-HexaCalc.release.xcconfig */,
-				650C49FE274350CF89E94A7E /* Pods-HexaCalcTests.debug.xcconfig */,
-				8CEA9F76C42D7FDD5946C3E3 /* Pods-HexaCalcTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		4CA990A36F4491821E07DD2D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0960B7F4D670E6D9AD506D53 /* Pods_HexaCalc.framework */,
-				6B0DA38123846EAD4C25133A /* Pods_HexaCalcTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		9D6DE93024D3CCD4005018E5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +173,7 @@
 				9DEF249C24C553F000701F5B /* BinaryViewController.swift */,
 				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
 				9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */,
+				9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -303,8 +274,6 @@
 				9DEF249524C553F000701F5B /* HexaCalc */,
 				9DEF24B124C553F100701F5B /* HexaCalcTests */,
 				9DEF249424C553F000701F5B /* Products */,
-				2CDD67B0518E0DC85F0B4A9C /* Pods */,
-				4CA990A36F4491821E07DD2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -327,7 +296,6 @@
 				9DEF249624C553F000701F5B /* AppDelegate.swift */,
 				9DEF249824C553F000701F5B /* SceneDelegate.swift */,
 				9DEF24A924C553F100701F5B /* Info.plist */,
-				9D27C37225F7331600A8887F /* GoogleService-Info.plist */,
 			);
 			path = HexaCalc;
 			sourceTree = "<group>";
@@ -348,11 +316,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DEF24B724C553F100701F5B /* Build configuration list for PBXNativeTarget "HexaCalc" */;
 			buildPhases = (
-				FAF74CE0F87698E03D03C875 /* [CP] Check Pods Manifest.lock */,
 				9DEF248F24C553F000701F5B /* Sources */,
 				9DEF249024C553F000701F5B /* Frameworks */,
 				9DEF249124C553F000701F5B /* Resources */,
-				E15B891A82D1E4C5C8979CC2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -367,7 +333,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DEF24BA24C553F100701F5B /* Build configuration list for PBXNativeTarget "HexaCalcTests" */;
 			buildPhases = (
-				D5190455067E39A2BA468088 /* [CP] Check Pods Manifest.lock */,
 				9DEF24AA24C553F100701F5B /* Sources */,
 				9DEF24AB24C553F100701F5B /* Frameworks */,
 				9DEF24AC24C553F100701F5B /* Resources */,
@@ -427,7 +392,6 @@
 			files = (
 				9D7C09D025EC61E700771D52 /* HexaCalcIconIndigo@3x.png in Resources */,
 				9D7C09E725EC61E700771D52 /* HexaCalcIconRed@2x~ipad.png in Resources */,
-				9D27C37325F7331600A8887F /* GoogleService-Info.plist in Resources */,
 				9D7C09C525EC61E700771D52 /* HexaCalcIconRed~ipad.png in Resources */,
 				9D7C09CE25EC61E700771D52 /* HexaCalcIconPurple@3x.png in Resources */,
 				9D7C09C125EC61E700771D52 /* HexaCalcIconOrange~ipad.png in Resources */,
@@ -482,70 +446,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		D5190455067E39A2BA468088 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HexaCalcTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E15B891A82D1E4C5C8979CC2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HexaCalc/Pods-HexaCalc-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HexaCalc/Pods-HexaCalc-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HexaCalc/Pods-HexaCalc-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FAF74CE0F87698E03D03C875 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HexaCalc-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		9DEF248F24C553F000701F5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -559,6 +459,7 @@
 				9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */,
 				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
+				9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
 				9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */,
@@ -725,7 +626,6 @@
 		};
 		9DEF24B824C553F100701F5B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D9C1D3FF4B9785EF8949566 /* Pods-HexaCalc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -747,7 +647,6 @@
 		};
 		9DEF24B924C553F100701F5B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D03B421E9B21E563E7483FC /* Pods-HexaCalc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -769,7 +668,6 @@
 		};
 		9DEF24BB24C553F100701F5B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 650C49FE274350CF89E94A7E /* Pods-HexaCalcTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -792,7 +690,6 @@
 		};
 		9DEF24BC24C553F100701F5B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8CEA9F76C42D7FDD5946C3E3 /* Pods-HexaCalcTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

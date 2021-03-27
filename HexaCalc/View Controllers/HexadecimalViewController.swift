@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 class HexadecimalViewController: UIViewController {
 
@@ -236,11 +235,6 @@ class HexadecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
         self.present(alert, animated: true)
-        
-        //Send event to Firebase about copying action
-        FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
-            "copied_calculator": "Hexadecimal"
-            ])
     }
     
     @objc func labelLongPressed(_ sender: UILongPressGestureRecognizer) {
@@ -263,12 +257,11 @@ class HexadecimalViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "0123456789ABCDEF").inverted
         let isValidHexadecimal = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
         if (isValidHexadecimal && pastedInput.count <= 16) {
-            //Send event to Firebase about successful pasting option
-            FirebaseAnalytics.Analytics.logEvent("pasted_successfully", parameters: [
-                "pasted_calculator": "Hexadecimal"
-                ])
             if (pastedInput == "0") {
                 runningNumber = ""
+                leftValue = ""
+                rightValue = ""
+                result = ""
                 outputLabel.text = "0"
                 stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.decimalVal = "0"
@@ -282,10 +275,6 @@ class HexadecimalViewController: UIViewController {
             }
         }
         else {
-            //Send event to Firebase about unsuccessful pasting option
-            FirebaseAnalytics.Analytics.logEvent("pasted_unsuccessfully", parameters: [
-                "pasted_calculator": "Hexadecimal"
-                ])
             var alertMessage = "Your clipboad did not contain a valid hexadecimal string."
             if (isValidHexadecimal) {
                 alertMessage = "The hexadecimal string in your clipboard must have a length of 16 characters or less."
@@ -306,12 +295,6 @@ class HexadecimalViewController: UIViewController {
         guard (sender.view as? UILabel) != nil else { return }
         
         if (sender.direction == .left || sender.direction == .right) {
-            if (runningNumber != "") {
-                //Send event to Firebase about swipe to delete
-                FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
-                    "delete_swipe_calculator": "Hexadecimal"
-                    ])
-            }
             deletePressed(DELBtn)
         }
     }
@@ -375,10 +358,6 @@ class HexadecimalViewController: UIViewController {
                 quickUpdateStateController()
             }
         }
-        
-        FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
-            "delete_button_calculator": "Hexadecimal"
-            ])
     }
     
     @IBAction func digitPressed(_ sender: RoundButton) {
@@ -491,9 +470,6 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        FirebaseAnalytics.Analytics.logEvent("hexadecimal_equals_pressed", parameters: [
-            "equals_button_calculator": "Hexadecimal"
-            ])
         operation(operation: currentOperation)
     }
     

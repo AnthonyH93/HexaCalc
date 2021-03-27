@@ -14,7 +14,7 @@ class UserPreferences : NSObject, NSCoding {
     //MARK: Initialization
     
     //Prepares and instance of a class for use
-    init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool) {
+    init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool, copyActionIndex: Int32, pasteActionIndex: Int32) {
         //Initialize stored properties.
         self.colour = colour
         self.colourNum = colourNum
@@ -22,6 +22,8 @@ class UserPreferences : NSObject, NSCoding {
         self.binTabState = binTabState
         self.decTabState = decTabState
         self.setCalculatorTextColour = setCalculatorTextColour
+        self.copyActionIndex = copyActionIndex
+        self.pasteActionIndex = pasteActionIndex
     }
     
     //MARK: Properties
@@ -32,6 +34,8 @@ class UserPreferences : NSObject, NSCoding {
     var binTabState: Bool
     var decTabState: Bool
     var setCalculatorTextColour: Bool
+    var copyActionIndex: Int32
+    var pasteActionIndex: Int32
     
     //MARK: Archiving Paths
     
@@ -48,6 +52,8 @@ class UserPreferences : NSObject, NSCoding {
         static let binTabState = "binTabState"
         static let decTabState = "decTabState"
         static let setCalculatorTextColour = "setCalculatorTextColour"
+        static let copyActionIndex = "copyActionIndex"
+        static let pasteActionIndex = "pasteActionIndex"
     }
     
     //MARK: NSCoding
@@ -59,6 +65,8 @@ class UserPreferences : NSObject, NSCoding {
         aCoder.encode(binTabState, forKey: PropertyKey.binTabState)
         aCoder.encode(decTabState, forKey: PropertyKey.decTabState)
         aCoder.encode(setCalculatorTextColour, forKey: PropertyKey.setCalculatorTextColour)
+        aCoder.encode(copyActionIndex, forKey: PropertyKey.copyActionIndex)
+        aCoder.encode(pasteActionIndex, forKey: PropertyKey.pasteActionIndex)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -75,8 +83,12 @@ class UserPreferences : NSObject, NSCoding {
         
         let setCalculatorTextColour = aDecoder.decodeBool(forKey: PropertyKey.setCalculatorTextColour)
         
+        let copyActionIndex = aDecoder.decodeInt32(forKey: PropertyKey.copyActionIndex)
+        
+        let pasteActionIndex = aDecoder.decodeInt32(forKey: PropertyKey.pasteActionIndex)
+        
         //Must call designated initializer
-        self.init(colour: colour, colourNum: colourNum, hexTabState: hexTabState, binTabState: binTabState, decTabState: decTabState, setCalculatorTextColour: setCalculatorTextColour)
+        self.init(colour: colour, colourNum: colourNum, hexTabState: hexTabState, binTabState: binTabState, decTabState: decTabState, setCalculatorTextColour: setCalculatorTextColour, copyActionIndex: copyActionIndex, pasteActionIndex: pasteActionIndex)
     }
 }
 

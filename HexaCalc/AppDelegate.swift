@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,7 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
                     //Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0
                     if (appVersionNumber == "1.2.0" && appVersionNumber != existingVersion) {
-                        let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum, hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState, setCalculatorTextColour: loadedPreferences.setCalculatorTextColour)
+                        let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum,
+                                                              hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState,
+                                                              setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
+                                                              copyActionIndex: loadedPreferences.copyActionIndex, pasteActionIndex: loadedPreferences.pasteActionIndex)
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
                     }
@@ -40,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Couldn't read file.")
             }
         }
-        FirebaseApp.configure()
         return true
     }
 
