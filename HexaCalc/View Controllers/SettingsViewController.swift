@@ -199,7 +199,10 @@ class SettingsViewController: UIViewController {
         let colourClicked = sender.self.backgroundColor
         let colourIdentifier = sender.tag
         let colourTag = "\(colourIdentifier)"
-        let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier), hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+        let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier),
+                                              hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                              setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                              copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
         
         let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel, copyLabel, pasteLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
@@ -288,7 +291,10 @@ class SettingsViewController: UIViewController {
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
@@ -302,7 +308,10 @@ class SettingsViewController: UIViewController {
         else {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
@@ -325,7 +334,10 @@ class SettingsViewController: UIViewController {
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
@@ -360,7 +372,10 @@ class SettingsViewController: UIViewController {
         else {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
@@ -391,7 +406,10 @@ class SettingsViewController: UIViewController {
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
@@ -416,7 +434,10 @@ class SettingsViewController: UIViewController {
         else {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             
-            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+            let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                                  hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                                  setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                                  copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
             DataPersistence.savePreferences(userPreferences: userPreferences)
             
             if let barItems = arrayOfTabBarItems, barItems.count > 1 {
@@ -450,7 +471,11 @@ class SettingsViewController: UIViewController {
     //Function to toggle the optional setting of the calculator text colour
     @IBAction func setCalculatorTextColourSwitchPressed(_ sender: UISwitch) {
         //Update the stored user preferences with whatever the current switch values are: to be used in the various calcualtor tabs
-        let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!, hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
+        let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                              setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                              copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex) )
+        
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = setCalculatorTextColourSwitch.isOn
         
