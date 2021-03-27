@@ -151,6 +151,12 @@ class BinaryViewController: UIViewController {
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
         }
         
+        // Small optimization to only delay single tap if absolutely necessary
+        if (((stateController?.convValues.copyActionIndex == 1 || stateController?.convValues.pasteActionIndex == 1) && currentlyRecognizingDoubleTap == false) ||
+            ((stateController?.convValues.copyActionIndex != 1 && stateController?.convValues.pasteActionIndex != 1) && currentlyRecognizingDoubleTap == true)) {
+            self.setupOutputLabelGestureRecognizers()
+        }
+        
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }
@@ -314,7 +320,12 @@ class BinaryViewController: UIViewController {
         self.outputLabel.isUserInteractionEnabled = true
         self.outputLabel.addGestureRecognizer(labelSingleTap)
         self.outputLabel.addGestureRecognizer(labelDoubleTap)
-        labelSingleTap.require(toFail: labelDoubleTap)
+        
+        // Small optimization to only delay single tap if absolutely necessary
+        if (stateController?.convValues.copyActionIndex == 1 || stateController?.convValues.pasteActionIndex == 1) {
+            labelSingleTap.require(toFail: labelDoubleTap)
+            currentlyRecognizingDoubleTap = true
+        }
     }
 
     //MARK: Button Actions
