@@ -28,8 +28,6 @@ class AboutHexaCalcViewController: UIViewController {
             for label in labels {
                 label?.textColor = savedPreferences.colour
             }
-//            viewPrivacyPolicyBtn.tintColor = savedPreferences.colour
-//            viewTermsAndConditionsBtn.tintColor = savedPreferences.colour
         }
     }
     

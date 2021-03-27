@@ -101,6 +101,8 @@ class HexadecimalViewController: UIViewController {
                     //Remove hexadecimal tab after setting state values
                     stateController?.convValues.setCalculatorTextColour = savedPreferences.setCalculatorTextColour
                     stateController?.convValues.colour = savedPreferences.colour
+                    stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
+                    stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
                     var viewControllers = tabBarController?.viewControllers
                     viewControllers?.remove(at: 0)
                     tabBarController?.viewControllers = viewControllers
@@ -117,7 +119,8 @@ class HexadecimalViewController: UIViewController {
             
             stateController?.convValues.setCalculatorTextColour = savedPreferences.setCalculatorTextColour
             stateController?.convValues.colour = savedPreferences.colour
-            
+            stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
+            stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
         }
 
         //Setup gesture recognizers

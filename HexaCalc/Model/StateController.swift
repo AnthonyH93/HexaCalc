@@ -18,6 +18,8 @@ struct convVals{
     var originalTabs: [UIViewController]?
     var colourNum: Int64 = -1
     var setCalculatorTextColour: Bool = false
+    var copyActionIndex: Int32 = 0
+    var pasteActionIndex: Int32 = 1
 }
 
 protocol StateControllerProtocol {

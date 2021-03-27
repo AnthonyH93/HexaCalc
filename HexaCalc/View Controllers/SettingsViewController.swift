@@ -448,40 +448,32 @@ class SettingsViewController: UIViewController {
     
     //Function to toggle the optional setting of the calculator text colour
     @IBAction func setCalculatorTextColourSwitchPressed(_ sender: UISwitch) {
-        //Update the stored user preferences with whatever the current switch values are: to be used in the various calcualtor tabs
         let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
                                               hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
                                               setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
-                                              copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex) )
-        
+                                              copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = setCalculatorTextColourSwitch.isOn
     }
     
+    //Function to toggle the action for which a user copies the calculator value
     @IBAction func copyIndexChanged(_ sender: Any) {
-        switch copyControl.selectedSegmentIndex {
-        case 0:
-            print("tap")
-        case 1:
-            print("2 taps")
-        case 2:
-            print("Off")
-        default:
-            break
-        }
+        let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                              setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                              copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
+        DataPersistence.savePreferences(userPreferences: userPreferences)
+        stateController?.convValues.copyActionIndex = Int32(copyControl.selectedSegmentIndex)
     }
     
+    //Function to toggle the action for which a user pastes into the calculator
     @IBAction func pasteIndexChanged(_ sender: Any) {
-        switch pasteControl.selectedSegmentIndex {
-        case 0:
-            print("tap")
-        case 1:
-            print("2 taps")
-        case 2:
-            print("Off")
-        default:
-            break
-        }
+        let userPreferences = UserPreferences(colour: optionsLabel.textColor, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn,
+                                              setCalculatorTextColour: setCalculatorTextColourSwitch.isOn,
+                                              copyActionIndex: Int32(copyControl.selectedSegmentIndex), pasteActionIndex: Int32(pasteControl.selectedSegmentIndex))
+        DataPersistence.savePreferences(userPreferences: userPreferences)
+        stateController?.convValues.pasteActionIndex = Int32(pasteControl.selectedSegmentIndex)
     }
     
     //MARK: Private Functions
