@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                 if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
                     //Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0
-                    if (appVersionNumber == "1.3.0" && ((existingVersion != "1.2.0") || (existingVersion != appVersionNumber))) {
+                    if (appVersionNumber == "1.3.0" && ((existingVersion != "1.2.0") && (existingVersion != appVersionNumber))) {
                         let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum,
                                                               hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState,
                                                               setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,

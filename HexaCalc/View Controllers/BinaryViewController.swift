@@ -164,8 +164,39 @@ class BinaryViewController: UIViewController {
         }
     }
     
-    //Function to copy current output label to clipboard when tapped
-    @objc func labelTapped(_ sender: UITapGestureRecognizer) {
+    @objc func labelSingleTapped(_ sender: UITapGestureRecognizer) {
+        // Only perform action on single tap if user has that setting option enabled
+        if (stateController?.convValues.copyActionIndex == 0 || stateController?.convValues.pasteActionIndex == 0) {
+            // Decide which actions should be performed by a single tap
+            if (stateController?.convValues.copyActionIndex == 0 && stateController?.convValues.pasteActionIndex == 0) {
+                self.copyAndPasteSelected()
+            }
+            else if (stateController?.convValues.copyActionIndex == 0) {
+                self.copySelected()
+            }
+            else {
+                self.pasteSelected()
+            }
+        }
+    }
+    
+    @objc func labelDoubleTapped(_ sender: UILongPressGestureRecognizer) {
+        // Only perform action on double tap if user has that setting option enabled
+        if (stateController?.convValues.copyActionIndex == 1 || stateController?.convValues.pasteActionIndex == 1) {
+            // Decide which actions should be performed by a double tap
+            if (stateController?.convValues.copyActionIndex == 1 && stateController?.convValues.pasteActionIndex == 1) {
+                self.copyAndPasteSelected()
+            }
+            else if (stateController?.convValues.copyActionIndex == 1) {
+                self.copySelected()
+            }
+            else {
+                self.pasteSelected()
+            }
+        }
+    }
+    
+    func copySelected() {
         var currentOutput = runningNumber;
         if (runningNumber == ""){
             //Need to do some processing as the binary label has extra formatting
@@ -197,12 +228,20 @@ class BinaryViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    @objc func labelLongPressed(_ sender: UILongPressGestureRecognizer) {
-        //Alert the user to ask if they truly want to paste from their clipboard
+    func pasteSelected() {
         let alert = UIAlertController(title: "Paste from Clipboard", message: "Press confirm to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: {_ in self.pasteFromClipboardToBinaryCalculator()}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
+    
+    func copyAndPasteSelected() {
+        let alert = UIAlertController(title: "Select Clipboard Action", message: "Press the action that you would like to perform.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: {_ in self.copySelected()}))
+        alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToBinaryCalculator()}))
         
         self.present(alert, animated: true)
     }
@@ -258,8 +297,10 @@ class BinaryViewController: UIViewController {
     
     //Function for setting up output label gesture recognizers
     func setupOutputLabelGestureRecognizers() {
-        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
-        let labelLongPressed = UILongPressGestureRecognizer(target: self, action: #selector(self.labelLongPressed(_:)))
+        let labelSingleTap = UITapGestureRecognizer(target: self, action: #selector(self.labelSingleTapped(_:)))
+        labelSingleTap.numberOfTapsRequired = 1
+        let labelDoubleTap = UITapGestureRecognizer(target: self, action: #selector(self.labelDoubleTapped(_:)))
+        labelDoubleTap.numberOfTapsRequired = 2
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleLabelSwipes(_:)))
             
@@ -269,8 +310,9 @@ class BinaryViewController: UIViewController {
         self.outputLabel.addGestureRecognizer(leftSwipe)
         self.outputLabel.addGestureRecognizer(rightSwipe)
         self.outputLabel.isUserInteractionEnabled = true
-        self.outputLabel.addGestureRecognizer(labelTap)
-        self.outputLabel.addGestureRecognizer(labelLongPressed)
+        self.outputLabel.addGestureRecognizer(labelSingleTap)
+        self.outputLabel.addGestureRecognizer(labelDoubleTap)
+        labelSingleTap.require(toFail: labelDoubleTap)
     }
 
     //MARK: Button Actions
