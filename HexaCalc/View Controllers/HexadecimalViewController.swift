@@ -222,8 +222,39 @@ class HexadecimalViewController: UIViewController {
         }
     }
     
-    //Function to copy current output label to clipboard when tapped
     @objc func labelSingleTapped(_ sender: UITapGestureRecognizer) {
+        // Only perform action on single tap if user has that setting option enabled
+        if (stateController?.convValues.copyActionIndex == 0 || stateController?.convValues.pasteActionIndex == 0) {
+            // Decide which actions should be performed by a single tap
+            if (stateController?.convValues.copyActionIndex == 0 && stateController?.convValues.pasteActionIndex == 0) {
+                self.copyAndPasteSelected()
+            }
+            else if (stateController?.convValues.copyActionIndex == 0) {
+                self.copySelected()
+            }
+            else {
+                self.pasteSelected()
+            }
+        }
+    }
+    
+    @objc func labelDoubleTapped(_ sender: UILongPressGestureRecognizer) {
+        // Only perform action on double tap if user has that setting option enabled
+        if (stateController?.convValues.copyActionIndex == 1 || stateController?.convValues.pasteActionIndex == 1) {
+            // Decide which actions should be performed by a double tap
+            if (stateController?.convValues.copyActionIndex == 1 && stateController?.convValues.pasteActionIndex == 1) {
+                self.copyAndPasteSelected()
+            }
+            else if (stateController?.convValues.copyActionIndex == 1) {
+                self.copySelected()
+            }
+            else {
+                self.pasteSelected()
+            }
+        }
+    }
+    
+    func copySelected() {
         var currentOutput = runningNumber;
         if (runningNumber == ""){
             currentOutput = outputLabel.text ?? "0"
@@ -240,12 +271,20 @@ class HexadecimalViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    @objc func labelDoubleTapped(_ sender: UILongPressGestureRecognizer) {
-        //Alert the user to ask if they truly want to paste from their clipboard
+    func pasteSelected() {
         let alert = UIAlertController(title: "Paste from Clipboard", message: "Press confirm to paste the contents of your clipboard into HexaCalc.", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: {_ in self.pasteFromClipboardToHexadecimalCalculator()}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
+    
+    func copyAndPasteSelected() {
+        let alert = UIAlertController(title: "Select Clipboard Action", message: "Press the action that you would like to perform.", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: {_ in self.copySelected()}))
+        alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToHexadecimalCalculator()}))
         
         self.present(alert, animated: true)
     }
