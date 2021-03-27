@@ -1426,10 +1426,61 @@
                                             </switch>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wtj-46-Ude">
+                                        <rect key="frame" x="21" y="356" width="371.66666666666669" height="70"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="117-jf-C8s">
+                                                <rect key="frame" x="0.0" y="0.0" width="371.66666666666669" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZr-gJ-ZFO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="186" height="31"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
+                                                        <color key="textColor" systemColor="systemGreenColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rhw-r2-STA">
+                                                        <rect key="frame" x="186" y="0.0" width="185.66666666666663" height="32"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <segments>
+                                                            <segment title="1 Tap"/>
+                                                            <segment title="2 Taps"/>
+                                                            <segment title="Off"/>
+                                                        </segments>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="selectedSegmentTintColor" systemColor="systemGreenColor"/>
+                                                    </segmentedControl>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="E0Z-eg-KXe">
+                                                <rect key="frame" x="0.0" y="39" width="371.66666666666669" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paste Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0F5-vr-7eo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="186" height="31"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
+                                                        <color key="textColor" systemColor="systemGreenColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ku7-m4-wno">
+                                                        <rect key="frame" x="186" y="0.0" width="185.66666666666663" height="32"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <segments>
+                                                            <segment title="1 Tap"/>
+                                                            <segment title="2 Taps"/>
+                                                            <segment title="Off"/>
+                                                        </segments>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="selectedSegmentTintColor" systemColor="systemGreenColor"/>
+                                                    </segmentedControl>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="wtj-46-Ude" firstAttribute="top" secondItem="ueu-Tt-0Lt" secondAttribute="bottom" constant="40" id="0c4-fg-bJy"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="vcL-1E-7Ug" secondAttribute="trailing" constant="209" id="8my-eS-OG5"/>
+                                    <constraint firstItem="wtj-46-Ude" firstAttribute="leading" secondItem="ueu-Tt-0Lt" secondAttribute="leading" id="91z-PT-qwz"/>
                                     <constraint firstItem="to9-n5-F3Z" firstAttribute="top" secondItem="vcL-1E-7Ug" secondAttribute="bottom" constant="8" id="FWR-qt-hP6"/>
                                     <constraint firstItem="R8S-Cz-Vjt" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leading" constant="-4" id="FmO-0h-WAD"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="top" secondItem="BNe-bG-HfZ" secondAttribute="bottom" constant="40" id="O6f-yo-PRE"/>
@@ -1437,6 +1488,7 @@
                                     <constraint firstItem="ueu-Tt-0Lt" firstAttribute="leading" secondItem="vcL-1E-7Ug" secondAttribute="leading" id="Zfa-57-yTs"/>
                                     <constraint firstItem="to9-n5-F3Z" firstAttribute="centerX" secondItem="BNe-bG-HfZ" secondAttribute="centerX" id="dAu-Zi-qhQ"/>
                                     <constraint firstItem="ueu-Tt-0Lt" firstAttribute="trailing" secondItem="BNe-bG-HfZ" secondAttribute="trailing" id="eTS-vi-reZ"/>
+                                    <constraint firstItem="wtj-46-Ude" firstAttribute="centerX" secondItem="ueu-Tt-0Lt" secondAttribute="centerX" id="gYT-y7-c1R"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="leading" secondItem="ea8-U8-KVu" secondAttribute="leadingMargin" constant="13" id="mXx-v5-dWq"/>
                                     <constraint firstItem="R8S-Cz-Vjt" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="top" constant="556" id="njl-SG-CTl"/>
                                     <constraint firstItem="vcL-1E-7Ug" firstAttribute="top" secondItem="ea8-U8-KVu" secondAttribute="top" constant="200" id="uFv-Lu-wBi"/>
@@ -1468,6 +1520,8 @@
                         <outlet property="blueBtn" destination="MaL-Lf-Eon" id="Ho3-Ih-lw3"/>
                         <outlet property="colourButtonsStack" destination="to9-n5-F3Z" id="h6U-Bx-JUP"/>
                         <outlet property="colourLabel" destination="vcL-1E-7Ug" id="VJ5-Td-yZx"/>
+                        <outlet property="copyControl" destination="Rhw-r2-STA" id="YeW-0w-Nip"/>
+                        <outlet property="copyLabel" destination="LZr-gJ-ZFO" id="PaU-CZ-CgY"/>
                         <outlet property="decLabel" destination="iGg-ya-HGp" id="lDW-6S-syb"/>
                         <outlet property="decSwitch" destination="wPo-3w-rup" id="uc5-1h-6Iw"/>
                         <outlet property="greenBtn" destination="3Hd-uI-dan" id="Mwp-kB-zO5"/>
@@ -1478,6 +1532,8 @@
                         <outlet property="navigationItem" destination="mab-AI-HrS" id="a5X-Ab-mKo"/>
                         <outlet property="optionsLabel" destination="d49-Da-Gue" id="PuZ-RW-QV4"/>
                         <outlet property="orangeBtn" destination="xCQ-0L-wgO" id="auC-hj-kBL"/>
+                        <outlet property="pasteControl" destination="Ku7-m4-wno" id="HIT-4r-xCf"/>
+                        <outlet property="pasteLabel" destination="0F5-vr-7eo" id="Mg3-Pr-HaW"/>
                         <outlet property="purpleBtn" destination="ube-zZ-MPu" id="ZP9-x8-kst"/>
                         <outlet property="redBtn" destination="5N4-aC-jka" id="C3o-Al-geM"/>
                         <outlet property="setCalculatorTextColourLabel" destination="hPu-qc-Vo9" id="jBY-wr-6GL"/>
@@ -1488,7 +1544,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-Ra-cND" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1599" y="963"/>
+            <point key="canvasLocation" x="1598.5507246376812" y="962.94642857142856"/>
         </scene>
         <!--About HexaCalc-->
         <scene sceneID="IbE-wl-Fbm">

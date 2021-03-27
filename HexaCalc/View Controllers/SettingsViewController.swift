@@ -21,6 +21,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var decLabel: UILabel!
     @IBOutlet weak var colourLabel: UILabel!
     @IBOutlet weak var setCalculatorTextColourLabel: UILabel!
+    @IBOutlet weak var copyLabel: UILabel!
+    @IBOutlet weak var pasteLabel: UILabel!
     
     @IBOutlet weak var hexSwitch: UISwitch!
     @IBOutlet weak var binSwitch: UISwitch!
@@ -36,6 +38,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var indigoBtn: RoundButton!
     @IBOutlet weak var purpleBtn: RoundButton!
     
+    
+    @IBOutlet weak var copyControl: UISegmentedControl!
+    @IBOutlet weak var pasteControl: UISegmentedControl!
+    
     @IBOutlet weak var colourButtonsStack: UIStackView!
     
     @IBOutlet weak var infoButton: UIBarButtonItem!
@@ -50,7 +56,7 @@ class SettingsViewController: UIViewController {
         // Set custom back button text to navigationItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
         
-        let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel]
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel, copyLabel, pasteLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
         
@@ -58,6 +64,9 @@ class SettingsViewController: UIViewController {
         for button in buttons {
             button!.layer.borderWidth = 3
         }
+        
+        copyControl.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        pasteControl.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         
         if let savedPreferences = DataPersistence.loadPreferences() {
             for label in labels {
@@ -68,6 +77,8 @@ class SettingsViewController: UIViewController {
                 entry!.onTintColor = savedPreferences.colour
             }
             
+            copyControl.selectedSegmentTintColor = savedPreferences.colour
+            pasteControl.selectedSegmentTintColor = savedPreferences.colour
             infoButton.tintColor = savedPreferences.colour
             navigationItem.backBarButtonItem?.tintColor = savedPreferences.colour
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: savedPreferences.colour]
@@ -168,6 +179,8 @@ class SettingsViewController: UIViewController {
             decLabel?.font = UIFont(name: "Avenir Next", size: 18)
             colourLabel?.font = UIFont(name: "Avenir Next", size: 18)
             setCalculatorTextColourLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            copyLabel?.font = UIFont(name: "Avenir Next", size: 18)
+            pasteLabel?.font = UIFont(name: "Avenir Next", size: 18)
             
             if (UIDevice.current.userInterfaceIdiom != .pad) {
                 navigationController?.navigationBar.prefersLargeTitles = false
@@ -183,7 +196,7 @@ class SettingsViewController: UIViewController {
         let colourTag = "\(colourIdentifier)"
         let userPreferences = UserPreferences(colour: colourClicked!, colourNum: Int64(colourIdentifier), hexTabState: hexSwitch.isOn, binTabState: binSwitch.isOn, decTabState: decSwitch.isOn, setCalculatorTextColour: setCalculatorTextColourSwitch.isOn)
         
-        let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel]
+        let labels = [hexLabel, optionsLabel, binLabel, decLabel, colourLabel, setCalculatorTextColourLabel, copyLabel, pasteLabel]
         let switches = [hexSwitch, binSwitch, decSwitch, setCalculatorTextColourSwitch]
         let buttons = [redBtn, orangeBtn, yellowBtn, greenBtn, blueBtn, tealBtn, indigoBtn, purpleBtn]
         
@@ -196,6 +209,8 @@ class SettingsViewController: UIViewController {
             entry!.onTintColor = colourClicked
         }
         
+        copyControl.selectedSegmentTintColor = colourClicked
+        pasteControl.selectedSegmentTintColor = colourClicked
         infoButton.tintColor = colourClicked
         navigationItem.backBarButtonItem?.tintColor = colourClicked
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: colourClicked!]
