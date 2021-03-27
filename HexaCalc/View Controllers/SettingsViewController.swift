@@ -102,6 +102,9 @@ class SettingsViewController: UIViewController {
                 setCalculatorTextColourSwitch.isOn = false
             }
             
+            copyControl.selectedSegmentIndex = Int(savedPreferences.copyActionIndex)
+            pasteControl.selectedSegmentIndex = Int(savedPreferences.pasteActionIndex)
+            
             //Setup the correct button borders based on the selected colour
             stateController?.convValues.colourNum = savedPreferences.colourNum
             
