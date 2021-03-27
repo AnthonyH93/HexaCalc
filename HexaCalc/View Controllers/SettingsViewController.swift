@@ -8,7 +8,6 @@
 
 import UIKit
 import os.log
-import FirebaseAnalytics
 
 class SettingsViewController: UIViewController {
 
@@ -233,12 +232,6 @@ class SettingsViewController: UIViewController {
         stateController?.convValues.colour = colourClicked!
         stateController?.convValues.colourNum = Int64(colourIdentifier)
         
-        let colourString = getColourStringFromID(id: colourIdentifier)
-        //Send event to Firebase about colour changing
-        FirebaseAnalytics.Analytics.logEvent("colour_changed", parameters: [
-            "colour_set": colourString as String
-            ])
-        
         var highlightedIndex = 0
         //Change the app icon based on which colour was selected
         if (colourTag == "0") {
@@ -322,11 +315,6 @@ class SettingsViewController: UIViewController {
                 }
             }
         }
-        
-        //Send event to Firebase about switch being pressed
-        FirebaseAnalytics.Analytics.logEvent("hexadecimal_switch_pressed", parameters: [
-            "hexadecimal_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
-            ])
     }
     
     //Function to toggle the binary calculator on or off when the switch is pressed
@@ -394,11 +382,6 @@ class SettingsViewController: UIViewController {
                 }
             }
         }
-        
-        //Send event to Firebase about switch being pressed
-        FirebaseAnalytics.Analytics.logEvent("binary_switch_pressed", parameters: [
-            "binary_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
-            ])
     }
     
     //Function to toggle the decimal calculator on or off when the switch is pressed
@@ -461,11 +444,6 @@ class SettingsViewController: UIViewController {
                 }
             }
         }
-        
-        //Send event to Firebase about switch being pressed
-        FirebaseAnalytics.Analytics.logEvent("decimal_switch_pressed", parameters: [
-            "decimal_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
-            ])
     }
     
     //Function to toggle the optional setting of the calculator text colour
@@ -478,11 +456,6 @@ class SettingsViewController: UIViewController {
         
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = setCalculatorTextColourSwitch.isOn
-        
-        //Send event to Firebase about switch being pressed
-        FirebaseAnalytics.Analytics.logEvent("coloured_text_switch_pressed", parameters: [
-            "colour_switch_new_state": sender.isOn ? "Turned On" : "Turned Off" as String
-            ])
     }
     
     @IBAction func copyIndexChanged(_ sender: Any) {
@@ -529,33 +502,6 @@ class SettingsViewController: UIViewController {
           print("App icon changed successfully")
         }
       })
-    }
-    
-    func getColourStringFromID(id: Int) -> String {
-        var colourString = ""
-        
-        switch id {
-        case 0:
-            colourString = "Red"
-        case 1:
-            colourString = "Orange"
-        case 2:
-            colourString = "Yellow"
-        case 3:
-            colourString = "Green"
-        case 4:
-            colourString = "Blue"
-        case 5:
-            colourString = "Teal"
-        case 6:
-            colourString = "Indigo"
-        case 7:
-            colourString = "Violet"
-        default:
-            colourString = "Error"
-        }
-        
-        return colourString
     }
 }
 

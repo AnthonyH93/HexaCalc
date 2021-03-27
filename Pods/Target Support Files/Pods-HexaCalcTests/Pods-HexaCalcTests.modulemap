@@ -1,6 +1,0 @@
-framework module Pods_HexaCalcTests {
-  umbrella header "Pods-HexaCalcTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

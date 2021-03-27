@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 enum Operation:String {
     case Add = "+"
@@ -191,11 +190,6 @@ class DecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
         self.present(alert, animated: true)
-        
-        //Send event to Firebase about copying action
-        FirebaseAnalytics.Analytics.logEvent("copied_calculator_value", parameters: [
-            "copied_calculator": "Decimal"
-            ])
     }
     
     @objc func labelLongPressed(_ sender: UILongPressGestureRecognizer) {
@@ -223,10 +217,6 @@ class DecimalViewController: UIViewController {
         let chars = CharacterSet(charactersIn: "0123456789.").inverted
         let isValidDecimal = (pastedInput.uppercased().rangeOfCharacter(from: chars) == nil) && ((pastedInput.filter {$0 == "."}.count) < 2)
         if (isValidDecimal && pastedInput.count < 308) {
-            //Send event to Firebase about successful pasting option
-            FirebaseAnalytics.Analytics.logEvent("pasted_successfully", parameters: [
-                "pasted_calculator": "Decimal"
-                ])
             if (pastedInput == "0") {
                 runningNumber = ""
                 leftValue = ""
@@ -285,10 +275,6 @@ class DecimalViewController: UIViewController {
             }
         }
         else {
-            //Send event to Firebase about unsuccessful pasting option
-            FirebaseAnalytics.Analytics.logEvent("pasted_unsuccessfully", parameters: [
-                "pasted_calculator": "Decimal"
-                ])
             var alertMessage = "Your clipboad did not contain a valid decimal string."
             if (isValidDecimal) {
                 alertMessage = "The decimal string in your clipboard is too large."
@@ -309,12 +295,6 @@ class DecimalViewController: UIViewController {
         guard (sender.view as? UILabel) != nil else { return }
         
         if (sender.direction == .left || sender.direction == .right) {
-            if (runningNumber != "") {
-                //Send event to Firebase about swipe to delete
-                FirebaseAnalytics.Analytics.logEvent("swipe_to_delete", parameters: [
-                    "delete_swipe_calculator": "Decimal"
-                    ])
-            }
             deletePressed(DELBtn)
         }
     }
@@ -437,10 +417,6 @@ class DecimalViewController: UIViewController {
                 quickUpdateStateController()
             }
         }
-        
-        FirebaseAnalytics.Analytics.logEvent("delete_pressed", parameters: [
-            "delete_button_calculator": "Decimal"
-            ])
     }
     
     @IBAction func dotPressed(_ sender: RoundButton) {
@@ -464,9 +440,6 @@ class DecimalViewController: UIViewController {
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        FirebaseAnalytics.Analytics.logEvent("decimal_equals_pressed", parameters: [
-            "equals_button_calculator": "Decimal"
-            ])
         operation(operation: currentOperation)
     }
     
