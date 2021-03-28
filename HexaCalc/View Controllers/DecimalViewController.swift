@@ -162,6 +162,7 @@ class DecimalViewController: UIViewController {
         // Small optimization to only delay single tap if absolutely necessary
         if (((stateController?.convValues.copyActionIndex == 1 || stateController?.convValues.pasteActionIndex == 1) && currentlyRecognizingDoubleTap == false) ||
             ((stateController?.convValues.copyActionIndex != 1 && stateController?.convValues.pasteActionIndex != 1) && currentlyRecognizingDoubleTap == true)) {
+            outputLabel.gestureRecognizers?.forEach(outputLabel.removeGestureRecognizer)
             self.setupOutputLabelGestureRecognizers()
         }
         
@@ -363,6 +364,8 @@ class DecimalViewController: UIViewController {
         self.outputLabel.isUserInteractionEnabled = true
         self.outputLabel.addGestureRecognizer(labelSingleTap)
         self.outputLabel.addGestureRecognizer(labelDoubleTap)
+        
+        currentlyRecognizingDoubleTap = false
         
         // Small optimization to only delay single tap if absolutely necessary
         if (stateController?.convValues.copyActionIndex == 1 || stateController?.convValues.pasteActionIndex == 1) {
