@@ -631,6 +631,15 @@ class DecimalViewController: UIViewController {
                     roundVal = 1000000000/(counter)
                 }
                 result = "\(Double(round(Double(roundVal) * Double(result)!)/Double(roundVal)))"
+                
+                let decimalComponents = result.components(separatedBy: ".")
+                if (decimalComponents.count == 2) {
+                    let chars = CharacterSet(charactersIn: "0.").inverted
+                    if ((decimalComponents[1].rangeOfCharacter(from: chars) == nil)) {
+                        result = decimalComponents[0]
+                        stateController?.convValues.decimalVal = result
+                    }
+                }
             }
         }
     }
@@ -670,11 +679,16 @@ class DecimalViewController: UIViewController {
     
     // Add standard comma separation that stock iOS calculator has
     func formatDecimalString(stringToConvert: String) -> String {
+        if (stringToConvert.contains("e")) {
+            return stringToConvert
+        }
+        
+        var stringToManipulate = stringToConvert
         var stringToReturn = ""
-        if (stringToConvert.contains(".") || (stringToConvert.contains("-"))) {
-            if (stringToConvert.contains(".") && stringToConvert.contains("-")) {
-                let minusRemoved = (stringToConvert.components(separatedBy: "-").joined(separator: ""))
-                let decimalComponents = minusRemoved.components(separatedBy: ".")
+        if (stringToConvert.contains(".") || (stringToManipulate.removeFirst() == "-")) {
+            if (stringToConvert.contains(".") && (stringToManipulate.removeFirst() == "-")) {
+                stringToManipulate.remove(at: stringToManipulate.startIndex)
+                let decimalComponents = stringToManipulate.components(separatedBy: ".")
                 let reversed = String(decimalComponents[0].reversed())
                 let commaSeperated = reversed.separate(every: 3, with: ",")
                 stringToReturn = "-" + commaSeperated.reversed() + "." + decimalComponents[1]
@@ -686,8 +700,8 @@ class DecimalViewController: UIViewController {
                 stringToReturn = commaSeperated.reversed() + "." + decimalComponents[1]
             }
             else {
-                let minusRemoved = (stringToConvert.components(separatedBy: "-").joined(separator: ""))
-                let reversed = String(minusRemoved.reversed())
+                stringToManipulate.remove(at: stringToManipulate.startIndex)
+                let reversed = String(stringToManipulate.reversed())
                 let commaSeperated = reversed.separate(every: 3, with: ",")
                 stringToReturn = "-" + commaSeperated.reversed()
             }
