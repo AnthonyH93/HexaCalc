@@ -434,7 +434,13 @@ class DecimalViewController: UIViewController {
                 else {
                     runningNumber = "\(currentNumber)"
                 }
-                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                
+                if (runningNumber.contains("e")) {
+                    outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
+                }
+                else {
+                    outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                }
                 quickUpdateStateController()
                 
             }
@@ -580,7 +586,6 @@ class DecimalViewController: UIViewController {
                     return
                 }
                 formatResult()
-                outputLabel.text = self.formatDecimalString(stringToConvert: result)
             }
             currentOperation = operation
         }
@@ -609,9 +614,11 @@ class DecimalViewController: UIViewController {
             else {
                 result = "\(Int(Double(result)!))"
             }
+            
+            outputLabel.text = self.formatDecimalString(stringToConvert: result)
         }
         else {
-            if (result.count > 9){
+            if (result.count > 9 && !result.contains("e")) {
                 //Need to round to 9 digits
                 //First find how many digits the decimal portion is
                 var num = Double(result)!
@@ -630,15 +637,24 @@ class DecimalViewController: UIViewController {
                 else {
                     roundVal = 1000000000/(counter)
                 }
-                result = "\(Double(round(Double(roundVal) * Double(result)!)/Double(roundVal)))"
+                let roundedResult = "\(Double(round(Double(roundVal) * Double(result)!)/Double(roundVal)))"
                 
-                let decimalComponents = result.components(separatedBy: ".")
+                let decimalComponents = roundedResult.components(separatedBy: ".")
                 if (decimalComponents.count == 2) {
                     let chars = CharacterSet(charactersIn: "0.").inverted
                     if ((decimalComponents[1].rangeOfCharacter(from: chars) == nil)) {
                         result = decimalComponents[0]
                         stateController?.convValues.decimalVal = result
                     }
+                }
+                outputLabel.text = self.formatDecimalString(stringToConvert: roundedResult)
+            }
+            else {
+                if (result.contains("e")) {
+                    outputLabel.text = "\(Double(result)!.scientificFormatted)"
+                }
+                else {
+                    outputLabel.text = self.formatDecimalString(stringToConvert: result)
                 }
             }
         }
@@ -677,16 +693,18 @@ class DecimalViewController: UIViewController {
         }
     }
     
-    // Add standard comma separation that stock iOS calculator has
+    // Add standard comma separation that the stock iOS calculator has
     func formatDecimalString(stringToConvert: String) -> String {
         if (stringToConvert.contains("e")) {
             return stringToConvert
         }
         
         var stringToManipulate = stringToConvert
+        var stringCopy1 = stringToConvert
+        var stringCopy2 = stringToConvert
         var stringToReturn = ""
-        if (stringToConvert.contains(".") || (stringToManipulate.removeFirst() == "-")) {
-            if (stringToConvert.contains(".") && (stringToManipulate.removeFirst() == "-")) {
+        if (stringToConvert.contains(".") || (stringCopy1.removeFirst() == "-")) {
+            if (stringToConvert.contains(".") && (stringCopy2.removeFirst() == "-")) {
                 stringToManipulate.remove(at: stringToManipulate.startIndex)
                 let decimalComponents = stringToManipulate.components(separatedBy: ".")
                 let reversed = String(decimalComponents[0].reversed())
