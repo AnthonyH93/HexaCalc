@@ -117,7 +117,7 @@ class DecimalViewController: UIViewController {
         }
     }
     
-    //Load the current converted value from either of the other calculator screens
+    // Load the current converted value from either of the other calculator screens
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -136,21 +136,22 @@ class DecimalViewController: UIViewController {
             currentOperation = .NULL
         }
         
-        //Check if a conversion to scientific notation is necessary
+        // Check if a conversion to scientific notation is necessary
         if (Double(decimalLabelText ?? "0")! > 999999999 || Double(decimalLabelText ?? "0")! < -999999999) {
             decimalLabelText = "\(Double(decimalLabelText ?? "0")!.scientificFormatted)"
         }
         else {
-            //Check if we need to convert to int
+            // Check if we need to convert to int
             if(Double(decimalLabelText ?? "0")!.truncatingRemainder(dividingBy: 1) == 0) {
                 decimalLabelText = "\(Int(Double(decimalLabelText ?? "0")!))"
                 if (decimalLabelText != "0") {
                     runningNumber = decimalLabelText ?? ""
                 }
+                decimalLabelText = self.formatDecimalString(stringToConvert: decimalLabelText ?? "0")
             }
         }
         
-        //Set button colour based on state controller
+        // Set button colour based on state controller
         if (stateController?.convValues.colour != nil){
             PLUSBtn.backgroundColor = stateController?.convValues.colour
             SUBBtn.backgroundColor = stateController?.convValues.colour
@@ -218,7 +219,9 @@ class DecimalViewController: UIViewController {
     func copySelected() {
         var currentOutput = runningNumber;
         if (runningNumber == ""){
-            currentOutput = outputLabel.text ?? "0"
+            let currLabel = outputLabel.text
+            let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+            currentOutput = spacesRemoved
         }
 
         let pasteboard = UIPasteboard.general
@@ -289,7 +292,7 @@ class DecimalViewController: UIViewController {
                 else {
                     if(Double(pastedInput)!.truncatingRemainder(dividingBy: 1) == 0) {
                         runningNumber = "\(Int(Double(pastedInput)!))"
-                        outputLabel.text = runningNumber
+                        outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
                     }
                     else {
                         if (pastedInput.count > 9){
@@ -317,7 +320,7 @@ class DecimalViewController: UIViewController {
                             runningNumber = pastedInput
                         }
                     }
-                    outputLabel.text = runningNumber
+                    outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
                     quickUpdateStateController()
                 }
             }
@@ -385,7 +388,7 @@ class DecimalViewController: UIViewController {
             }
             else {
                 runningNumber += "\(sender.tag)"
-                outputLabel.text = runningNumber
+                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
             }
             
             stateController?.convValues.largerThan64Bits = false
@@ -418,7 +421,10 @@ class DecimalViewController: UIViewController {
                 //Need to reset the current operation as we are overriding a null running number state
                 currentOperation = .NULL
                 
-                var currentNumber = Double(outputLabel.text ?? "0")!
+                let currLabel = outputLabel.text
+                let commasRemoved = (currLabel?.components(separatedBy: ",").joined(separator: ""))!
+                
+                var currentNumber = Double(commasRemoved)!
                 currentNumber *= -1
                 
                 //Find out if number is an integer
@@ -428,7 +434,7 @@ class DecimalViewController: UIViewController {
                 else {
                     runningNumber = "\(currentNumber)"
                 }
-                outputLabel.text = runningNumber
+                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
                 quickUpdateStateController()
                 
             }
@@ -448,7 +454,7 @@ class DecimalViewController: UIViewController {
             else {
                 runningNumber = "\(number)"
             }
-            outputLabel.text = runningNumber
+            outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
             quickUpdateStateController()
         }
     }
@@ -471,7 +477,7 @@ class DecimalViewController: UIViewController {
             }
             else {
                 runningNumber.removeLast()
-                outputLabel.text = runningNumber
+                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
                 quickUpdateStateController()
             }
         }
@@ -484,11 +490,11 @@ class DecimalViewController: UIViewController {
             if (outputLabel.text == "0" || runningNumber == ""){
                 runningNumber = ""
                 runningNumber = "0."
-                outputLabel.text = runningNumber
+                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
             }
             else {
                 runningNumber += "."
-                outputLabel.text = runningNumber
+                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
             }
             
             stateController?.convValues.largerThan64Bits = false
@@ -574,7 +580,7 @@ class DecimalViewController: UIViewController {
                     return
                 }
                 formatResult()
-                outputLabel.text = result
+                outputLabel.text = self.formatDecimalString(stringToConvert: result)
             }
             currentOperation = operation
         }
@@ -660,6 +666,23 @@ class DecimalViewController: UIViewController {
             stateController?.convValues.hexVal = hexCurrentVal
             stateController?.convValues.binVal = binCurrentVal
         }
+    }
+    
+    // Add standard comma separation that stock iOS calculator has
+    func formatDecimalString(stringToConvert: String) -> String {
+        var stringToReturn = ""
+        if (stringToConvert.contains(".")) {
+            let decimalComponents = stringToConvert.components(separatedBy: ".")
+            let reversed = String(decimalComponents[0].reversed())
+            let commaSeperated = reversed.separate(every: 3, with: ",")
+            stringToReturn = commaSeperated.reversed() + "." + decimalComponents[1]
+        }
+        else {
+            let reversed = String(stringToConvert.reversed())
+            let commaSeperated = reversed.separate(every: 3, with: ",")
+            stringToReturn = commaSeperated.reversed() + ""
+        }
+        return stringToReturn
     }
     
     //Function to check whether the user wants the output text label colour to be the same as the overall theme
