@@ -220,7 +220,7 @@ class DecimalViewController: UIViewController {
         var currentOutput = runningNumber;
         if (runningNumber == ""){
             let currLabel = outputLabel.text
-            let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+            let spacesRemoved = (currLabel?.components(separatedBy: ",").joined(separator: ""))!
             currentOutput = spacesRemoved
         }
 
@@ -671,11 +671,26 @@ class DecimalViewController: UIViewController {
     // Add standard comma separation that stock iOS calculator has
     func formatDecimalString(stringToConvert: String) -> String {
         var stringToReturn = ""
-        if (stringToConvert.contains(".")) {
-            let decimalComponents = stringToConvert.components(separatedBy: ".")
-            let reversed = String(decimalComponents[0].reversed())
-            let commaSeperated = reversed.separate(every: 3, with: ",")
-            stringToReturn = commaSeperated.reversed() + "." + decimalComponents[1]
+        if (stringToConvert.contains(".") || (stringToConvert.contains("-"))) {
+            if (stringToConvert.contains(".") && stringToConvert.contains("-")) {
+                let minusRemoved = (stringToConvert.components(separatedBy: "-").joined(separator: ""))
+                let decimalComponents = minusRemoved.components(separatedBy: ".")
+                let reversed = String(decimalComponents[0].reversed())
+                let commaSeperated = reversed.separate(every: 3, with: ",")
+                stringToReturn = "-" + commaSeperated.reversed() + "." + decimalComponents[1]
+            }
+            else if (stringToConvert.contains(".")) {
+                let decimalComponents = stringToConvert.components(separatedBy: ".")
+                let reversed = String(decimalComponents[0].reversed())
+                let commaSeperated = reversed.separate(every: 3, with: ",")
+                stringToReturn = commaSeperated.reversed() + "." + decimalComponents[1]
+            }
+            else {
+                let minusRemoved = (stringToConvert.components(separatedBy: "-").joined(separator: ""))
+                let reversed = String(minusRemoved.reversed())
+                let commaSeperated = reversed.separate(every: 3, with: ",")
+                stringToReturn = "-" + commaSeperated.reversed()
+            }
         }
         else {
             let reversed = String(stringToConvert.reversed())
