@@ -479,6 +479,11 @@ class DecimalViewController: UIViewController {
     
     @IBAction func deletePressed(_ sender: RoundButton) {
         
+        // Do not delete anything if the calculator is displaying a number in scientific notation
+        if (runningNumber.contains("e")) {
+            return
+        }
+        
         if (runningNumber.count == 0 || abs(Int(runningNumber) ?? 0) > 999999999) {
             //Nothing to delete
         }
