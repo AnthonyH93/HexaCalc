@@ -40,9 +40,9 @@ This app is optimized to run and look amazing on all iPhones which are supported
 
 ### Device Screenshots for Hexacdecimal Calculator
 
-Green Positive Hexadecimal Output | Green Negative Hexadecimal Output | Red Negative Hexadecimal Output | Indigo Three Tab Positive Hexadecimal Output
+Green Positive Hexadecimal Output | Green Negative Hexadecimal Output | Red Negative Hexadecimal White Text Output | Orange Three Tab Positive Hexadecimal Output
 ---------------------- | -------------- | --------------------- | -----------------------------------
-![alt text](iPhoneX_DeviceScreenshots/GreenPositiveHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/IndigoThreeTabPositiveHex.png?raw=true)
+![alt text](iPhoneX_DeviceScreenshots/GreenPositiveHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeHex.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeHexWhiteText.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/OrangeThreeTabPositiveHex.png?raw=true)
 
 ### Binary Calculator
 * Addition, subtraction, multiplication, division
@@ -52,9 +52,9 @@ Green Positive Hexadecimal Output | Green Negative Hexadecimal Output | Red Nega
 
 ### Device Screenshots for Binary Calculator
 
-Green Positive Binary Output | Green Negative Binary Output | Red Negative Binary Output | Teal Three Tab Positive Binary Output
+Green Positive Binary Output | Green Negative Binary Output | Red Negative Binary White Text Output | Teal Two Tab Positive Binary Output
 ---------------------- | -------------- | --------------------- | -----------------------------------
-![alt text](iPhoneX_DeviceScreenshots/GreenPositiveBin.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeBin.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeBin.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/TealPositiveThreeTabBin.png?raw=true)
+![alt text](iPhoneX_DeviceScreenshots/GreenPositiveBin.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeBin.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeBinWhiteText.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/TealPositiveTwoTabBin.png?raw=true)
 
 ### Decimal Calculator
 * Addition, subtraction, multiplication, division
@@ -62,9 +62,9 @@ Green Positive Binary Output | Green Negative Binary Output | Red Negative Binar
 
 ### Device Screenshots for Decimal Calculator
 
-Green Positive Decimal Output | Green Negative Decimal Output | Red Negative Decimal Output | Indigo Three Tab Positive Decimal Output
+Green Positive Decimal Output | Green Negative Decimal Output | Red Negative Decimal White Text Output | Orange Three Tab Positive Decimal Output
 ---------------------- | -------------- | --------------------- | -----------------------------------
-![alt text](iPhoneX_DeviceScreenshots/GreenPositiveDec.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeDec.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeDec.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/IndigoThreeTabPositiveDec.png?raw=true)
+![alt text](iPhoneX_DeviceScreenshots/GreenPositiveDec.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenNegativeDec.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedNegativeDecWhiteText.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/OrangeThreeTabPositiveDec.png?raw=true)
 
 ## User Customization
 
@@ -79,8 +79,8 @@ The settings menu also has links to the privacy policy and terms and conditions 
 
 ### Device Screenshots for Settings Tab
 
-Default Settings View | Red Two Tab Settings View | Changing Icon to Blue | Setting Calculator Text Colour to Green
+Default Settings View | Default About HexaCalc View | Red Two Tab Settings View | Changing Icon to Blue
 ---------------------- | -------------- | --------------------- | -----------------------------------
-![alt text](iPhoneX_DeviceScreenshots/YellowDefaultSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedTwoTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/ChangeIconBlue.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/GreenColouredCalculatorText.png?raw=true)
+![alt text](iPhoneX_DeviceScreenshots/DefaultSettings.png?raw=true) |  ![alt text](iPhoneX_DeviceScreenshots/DefaultAboutHexaCalc.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedTwoTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/ChangeIconBlue.png?raw=true)
 
 Thanks for looking at this project!
