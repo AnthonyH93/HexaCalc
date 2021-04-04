@@ -389,7 +389,7 @@ class DecimalViewController: UIViewController {
         
         if ((runningNumber.count <= 8) || (runningNumber.count == 9 && isNegative)) {
             let digit = "\(sender.tag)"
-            if ((digit == "0") && (outputLabel.text == "0")){
+            if ((digit == "0") && (outputLabel.text == "0" || runningNumber == "")){
                 //if 0 is pressed and calculator is showing 0 then do nothing
             }
             else {
@@ -399,7 +399,6 @@ class DecimalViewController: UIViewController {
             
             stateController?.convValues.largerThan64Bits = false
             quickUpdateStateController()
-            
         }
     }
     
@@ -434,7 +433,7 @@ class DecimalViewController: UIViewController {
                 currentNumber *= -1
                 
                 //Find out if number is an integer
-                if((currentNumber).truncatingRemainder(dividingBy: 1) == 0 && !(Double(result)! >= Double(INT64_MAX) || Double(result)! <= Double((INT64_MAX * -1) - 1))) {
+                if((currentNumber).truncatingRemainder(dividingBy: 1) == 0 && !(Double(commasRemoved)! >= Double(INT64_MAX) || Double(commasRemoved)! <= Double((INT64_MAX * -1) - 1))) {
                     runningNumber = "\(Int(currentNumber))"
                 }
                 else {
@@ -460,7 +459,7 @@ class DecimalViewController: UIViewController {
             number *= -1
             
             //Find out if number is an integer
-            if((number).truncatingRemainder(dividingBy: 1) == 0 && !(Double(result)! >= Double(INT64_MAX) || Double(result)! <= Double((INT64_MAX * -1) - 1))) {
+            if((number).truncatingRemainder(dividingBy: 1) == 0 && !(Double(runningNumber)! >= Double(INT64_MAX) || Double(runningNumber)! <= Double((INT64_MAX * -1) - 1))) {
                 runningNumber = "\(Int(number))"
             }
             else {
