@@ -137,7 +137,7 @@ class DecimalViewController: UIViewController {
         }
         
         // Check if a conversion to scientific notation is necessary
-        if (Double(decimalLabelText ?? "0")! > 999999999 || Double(decimalLabelText ?? "0")! < -999999999) {
+        if ((Double(decimalLabelText ?? "0")! > 999999999 || Double(decimalLabelText ?? "0")! < -999999999) || (decimalLabelText ?? "0").contains("e")) {
             decimalLabelText = "\(Double(decimalLabelText ?? "0")!.scientificFormatted)"
         }
         else {
@@ -645,9 +645,11 @@ class DecimalViewController: UIViewController {
                     if ((decimalComponents[1].rangeOfCharacter(from: chars) == nil)) {
                         result = decimalComponents[0]
                         stateController?.convValues.decimalVal = result
+                        return
                     }
                 }
                 outputLabel.text = self.formatDecimalString(stringToConvert: roundedResult)
+                stateController?.convValues.decimalVal = roundedResult
             }
             else {
                 if (result.contains("e")) {
