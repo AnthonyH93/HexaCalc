@@ -441,7 +441,7 @@ class DecimalViewController: UIViewController {
                     runningNumber = "\(currentNumber)"
                 }
                 
-                if (runningNumber.contains("e")) {
+                if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
                     outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
                 }
                 else {
@@ -467,7 +467,7 @@ class DecimalViewController: UIViewController {
                 runningNumber = "\(number)"
             }
             
-            if (runningNumber.contains("e")) {
+            if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
                 outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
             }
             else {
@@ -507,6 +507,11 @@ class DecimalViewController: UIViewController {
     }
     
     @IBAction func dotPressed(_ sender: RoundButton) {
+        
+        // Do not allow a dot to be added if the calculator is displaying a number in scientific notation
+        if (runningNumber.contains("e")) {
+            return
+        }
         
         //Last character cannot be a dot
         if runningNumber.count <= 7 && !runningNumber.contains(".") {
@@ -662,6 +667,7 @@ class DecimalViewController: UIViewController {
                     if ((decimalComponents[1].rangeOfCharacter(from: chars) == nil)) {
                         result = decimalComponents[0]
                         stateController?.convValues.decimalVal = result
+                        outputLabel.text = result
                         return
                     }
                 }
