@@ -22,14 +22,9 @@ Note: All screenshots shown were taken on an iPhone X simulator.
 
 ## System Requirements
 
-This app is optimized to run and look amazing on all iPhones which are supported by iOS13:
-* iPhone 12, 12 Pro, 12 Pro Max, 12 Mini
-* iPhone 11, 11 Pro, 11 Pro Max 
-* iPhone X, XR, XS, XS Max
-* iPhone 8, 8 Plus
-* iPhone 7, 7 Plus
-* iPhone SE (1st and 2nd generations)
-* iPhone 6s
+This app is optimized to run and look amazing on all iPhones and iPads which are supported by iOS13/iPadOS13.
+
+For iPads this includes support for both landscape and portrait modes as well as support for any multitasking screen size and Slide Over.
 
 ## Operations
 
@@ -72,10 +67,11 @@ This app uses data persistance to implement saved user customization allowing ea
 
 ### Customization options
 * 8 different system colours which change the colour of buttons and the app icon
-* The ability to disable or enable the binary and decimal calculators should the user not require them
+* The ability to disable or enable any combination of calculator tabs allowing the user to focus on what is important for them
 * The option to change the default calculator text colour from white to your selected colour
+* Options for the copy and paste clipboard gestures as well as the ability to disable them
 
-The settings menu also has links to the privacy policy and terms and conditions documents.
+The settings menu also includes navigation to the About HexaCalc view which has links to the privacy policy and terms and conditions documents.
 
 ### Device Screenshots for Settings Tab
 
@@ -83,4 +79,4 @@ Default Settings View | Default About HexaCalc View | Red Two Tab Settings View 
 ---------------------- | -------------- | --------------------- | -----------------------------------
 ![alt text](iPhoneX_DeviceScreenshots/DefaultSettings.png?raw=true) |  ![alt text](iPhoneX_DeviceScreenshots/DefaultAboutHexaCalc.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedTwoTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/ChangeIconBlue.png?raw=true)
 
-Thanks for looking at this project!
+Thank you for looking at this project!
