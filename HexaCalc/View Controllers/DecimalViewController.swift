@@ -381,7 +381,13 @@ class DecimalViewController: UIViewController {
     @IBAction func numberPressed(_ sender: RoundButton) {
         
         //Limit number of digits to 9
-        if runningNumber.count <= 8 {
+        var currentCopy = runningNumber
+        var isNegative = false
+        if (runningNumber != "" && currentCopy.removeFirst() == "-") {
+            isNegative = true
+        }
+        
+        if ((runningNumber.count <= 8) || (runningNumber.count == 9 && isNegative)) {
             let digit = "\(sender.tag)"
             if ((digit == "0") && (outputLabel.text == "0")){
                 //if 0 is pressed and calculator is showing 0 then do nothing
