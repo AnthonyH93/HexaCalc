@@ -434,7 +434,7 @@ class DecimalViewController: UIViewController {
                 currentNumber *= -1
                 
                 //Find out if number is an integer
-                if((currentNumber).truncatingRemainder(dividingBy: 1) == 0) {
+                if((currentNumber).truncatingRemainder(dividingBy: 1) == 0 && !(Double(result)! >= Double(INT64_MAX) || Double(result)! <= Double((INT64_MAX * -1) - 1))) {
                     runningNumber = "\(Int(currentNumber))"
                 }
                 else {
@@ -460,13 +460,19 @@ class DecimalViewController: UIViewController {
             number *= -1
             
             //Find out if number is an integer
-            if((number).truncatingRemainder(dividingBy: 1) == 0) {
+            if((number).truncatingRemainder(dividingBy: 1) == 0 && !(Double(result)! >= Double(INT64_MAX) || Double(result)! <= Double((INT64_MAX * -1) - 1))) {
                 runningNumber = "\(Int(number))"
             }
             else {
                 runningNumber = "\(number)"
             }
-            outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+            
+            if (runningNumber.contains("e")) {
+                outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
+            }
+            else {
+                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+            }
             quickUpdateStateController()
         }
     }
