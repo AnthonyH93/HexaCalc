@@ -667,7 +667,7 @@ class DecimalViewController: UIViewController {
                     if ((decimalComponents[1].rangeOfCharacter(from: chars) == nil)) {
                         result = decimalComponents[0]
                         stateController?.convValues.decimalVal = result
-                        outputLabel.text = result
+                        outputLabel.text = self.formatDecimalString(stringToConvert: result)
                         return
                     }
                 }
