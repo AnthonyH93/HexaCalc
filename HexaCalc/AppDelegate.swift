@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     //Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0)
                     let shouldUpdatePreferences = (existingVersion == "1.1.1") || (existingVersion == "1.1.0") || (existingVersion == "1.0.2")
                                                || (existingVersion == "1.0.1") || (existingVersion == "1.0.0")
-                    if (appVersionNumber == "1.3.1" && (shouldUpdatePreferences && (existingVersion != appVersionNumber))) {
+                    if (appVersionNumber == "1.3.2" && (shouldUpdatePreferences && (existingVersion != appVersionNumber))) {
                         let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum,
                                                               hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState,
                                                               setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
