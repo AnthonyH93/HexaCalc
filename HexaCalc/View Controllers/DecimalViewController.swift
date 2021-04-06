@@ -389,11 +389,17 @@ class DecimalViewController: UIViewController {
         
         if ((runningNumber.count <= 8) || (runningNumber.count == 9 && isNegative)) {
             let digit = "\(sender.tag)"
-            if ((digit == "0") && (outputLabel.text == "0" || runningNumber == "")){
+            if ((digit == "0") && (outputLabel.text == "0")){
                 //if 0 is pressed and calculator is showing 0 then do nothing
             }
             else {
-                runningNumber += "\(sender.tag)"
+                // Overwrite running number if it is already 0
+                if (runningNumber == "0") {
+                    runningNumber = "\(sender.tag)"
+                }
+                else {
+                    runningNumber += "\(sender.tag)"
+                }
                 outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
             }
             

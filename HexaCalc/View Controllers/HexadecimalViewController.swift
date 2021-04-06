@@ -427,7 +427,13 @@ class HexadecimalViewController: UIViewController {
             }
             else {
                 let convertedDigit = tagToHex(digitToConvert: digit)
-                runningNumber += convertedDigit
+                // Overwrite running number if it is already 0
+                if (runningNumber == "0") {
+                    runningNumber = convertedDigit
+                }
+                else {
+                    runningNumber += convertedDigit
+                }
                 outputLabel.text = runningNumber
                 quickUpdateStateController()
             }
