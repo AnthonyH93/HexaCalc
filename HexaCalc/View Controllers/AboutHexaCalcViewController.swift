@@ -29,6 +29,10 @@ class AboutHexaCalcViewController: UIViewController {
                 label?.textColor = savedPreferences.colour
             }
         }
+        
+        // Set the app version label
+        let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        appVersionLabel2.text = appVersionNumber
     }
     
     override func viewDidLayoutSubviews() {
