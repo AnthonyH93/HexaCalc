@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let fullPath = paths[0].appendingPathComponent("userPreferences")
         
-        let existingVersion = UserDefaults.standard.object(forKey: "CurrentVersionNumber") as? String
         let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        let existingVersion = UserDefaults.standard.object(forKey: "CurrentVersionNumber") as? String ?? appVersionNumber
         
         if let nsData = NSData(contentsOf: fullPath) {
             do {
@@ -28,9 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                 if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
                     //Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0)
-                    let shouldUpdatePreferences = (existingVersion == "1.1.1") || (existingVersion == "1.1.0") || (existingVersion == "1.0.2")
-                                               || (existingVersion == "1.0.1") || (existingVersion == "1.0.0")
-                    if (appVersionNumber == "1.3.2" && (shouldUpdatePreferences && (existingVersion != appVersionNumber))) {
+                    let updatePreferencesVersions = ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1"]
+                    if (updatePreferencesVersions.firstIndex(of: existingVersion) != nil) {
                         let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum,
                                                               hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState,
                                                               setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
