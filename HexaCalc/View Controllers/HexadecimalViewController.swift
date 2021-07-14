@@ -298,7 +298,7 @@ class HexadecimalViewController: UIViewController {
         
         //Validate input is a hexadecimal value
         let chars = CharacterSet(charactersIn: "0123456789ABCDEF").inverted
-        let isValidHexadecimal = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
+        let isValidHexadecimal = pastedInput.trimmingCharacters(in: .whitespaces).uppercased().rangeOfCharacter(from: chars) == nil
         if (isValidHexadecimal && pastedInput.count <= 16) {
             if (pastedInput == "0") {
                 runningNumber = ""
