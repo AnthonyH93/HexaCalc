@@ -1,7 +1,7 @@
 # HexaCalc
 
 ## Available on the iOS App Store
-https://apps.apple.com/ca/app/hexacalc/id1529225315
+https://apps.apple.com/app/hexacalc/id1529225315
 
 ## App Icon
 
