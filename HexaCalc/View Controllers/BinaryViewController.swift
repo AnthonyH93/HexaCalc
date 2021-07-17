@@ -262,8 +262,9 @@ class BinaryViewController: UIViewController {
         
         //Validate input is a hexadecimal value
         let chars = CharacterSet(charactersIn: "01").inverted
-        let isValidBinary = pastedInput.uppercased().rangeOfCharacter(from: chars) == nil
-        if (isValidBinary && pastedInput.count <= 64) {
+        let strippedSpacesBinary =  pastedInput.components(separatedBy: .whitespacesAndNewlines).joined()
+        let isValidBinary = strippedSpacesBinary.uppercased().rangeOfCharacter(from: chars) == nil
+        if (isValidBinary && strippedSpacesBinary.count <= 64) {
             if (pastedInput == "0") {
                 runningNumber = ""
                 outputLabel.text = binaryDefaultLabel
@@ -273,7 +274,7 @@ class BinaryViewController: UIViewController {
                 stateController?.convValues.binVal = "0"
             }
             else {
-                runningNumber = pastedInput
+                runningNumber = strippedSpacesBinary
                 let newLabelValue = formatBinaryString(stringToConvert: runningNumber)
                 outputLabel.text = newLabelValue
                 quickUpdateStateController()

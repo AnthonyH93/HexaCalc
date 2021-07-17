@@ -298,8 +298,9 @@ class HexadecimalViewController: UIViewController {
         
         //Validate input is a hexadecimal value
         let chars = CharacterSet(charactersIn: "0123456789ABCDEF").inverted
-        let isValidHexadecimal = pastedInput.trimmingCharacters(in: .whitespaces).uppercased().rangeOfCharacter(from: chars) == nil
-        if (isValidHexadecimal && pastedInput.count <= 16) {
+        let strippedSpacesHexadecimal =  pastedInput.components(separatedBy: .whitespacesAndNewlines).joined()
+        let isValidHexadecimal = strippedSpacesHexadecimal.uppercased().rangeOfCharacter(from: chars) == nil
+        if (isValidHexadecimal && strippedSpacesHexadecimal.count <= 16) {
             if (pastedInput == "0") {
                 runningNumber = ""
                 leftValue = ""
@@ -312,7 +313,7 @@ class HexadecimalViewController: UIViewController {
                 stateController?.convValues.binVal = "0"
             }
             else {
-                runningNumber = pastedInput.uppercased()
+                runningNumber = strippedSpacesHexadecimal.uppercased()
                 outputLabel.text = runningNumber
                 quickUpdateStateController()
             }
