@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1620,7 +1620,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="Cyt-8a-6kZ">
                                         <rect key="frame" x="21" y="158.33333333333331" width="372" height="30.333333333333343"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Version:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oyK-kI-9jX">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oyK-kI-9jX">
                                                 <rect key="frame" x="0.0" y="0.0" width="202" height="30.333333333333332"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                                 <color key="textColor" systemColor="systemGreenColor"/>
@@ -1638,11 +1638,33 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for using this app!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J8R-vD-xW6">
-                                        <rect key="frame" x="21" y="233" width="374" height="30.333333333333314"/>
+                                        <rect key="frame" x="21" y="280.66666666666669" width="374" height="30.333333333333314"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                         <color key="textColor" systemColor="systemGreenColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WUB-qg-pkS">
+                                        <rect key="frame" x="21" y="208.33333333333331" width="372" height="32"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HexaCalc is Open Source" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K0S-3R-wup">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
+                                                <color key="textColor" systemColor="systemGreenColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31B-Kb-BcW">
+                                                <rect key="frame" x="340" y="0.0" width="32" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="MKk-C0-iGg"/>
+                                                </constraints>
+                                                <state key="normal" image="GitHub"/>
+                                                <connections>
+                                                    <action selector="viewCodeRepository:" destination="Ex6-yd-v7P" eventType="touchUpInside" id="Ap9-iP-zSO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <viewLayoutGuide key="safeArea" id="fPx-Mb-Eca"/>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1651,7 +1673,9 @@
                                     <constraint firstItem="0ZQ-WZ-moZ" firstAttribute="leading" secondItem="g3f-mw-vWn" secondAttribute="leading" id="72u-1A-XuU"/>
                                     <constraint firstItem="0ZQ-WZ-moZ" firstAttribute="top" secondItem="3Sk-AM-pee" secondAttribute="bottom" constant="8" symbolic="YES" id="8bE-ZL-ihu"/>
                                     <constraint firstItem="g3f-mw-vWn" firstAttribute="top" secondItem="0ZQ-WZ-moZ" secondAttribute="bottom" constant="8" symbolic="YES" id="8pP-cR-Yc1"/>
-                                    <constraint firstItem="J8R-vD-xW6" firstAttribute="top" secondItem="Cyt-8a-6kZ" secondAttribute="bottom" constant="44.333333333333314" id="Exe-QA-98V"/>
+                                    <constraint firstItem="WUB-qg-pkS" firstAttribute="centerX" secondItem="OR1-r6-ujN" secondAttribute="centerX" id="8yN-yB-bJ9"/>
+                                    <constraint firstItem="J8R-vD-xW6" firstAttribute="top" secondItem="Cyt-8a-6kZ" secondAttribute="bottom" constant="92" id="Exe-QA-98V"/>
+                                    <constraint firstItem="WUB-qg-pkS" firstAttribute="leading" secondItem="Cyt-8a-6kZ" secondAttribute="leading" id="L6W-E3-KZM"/>
                                     <constraint firstItem="g3f-mw-vWn" firstAttribute="leading" secondItem="Cyt-8a-6kZ" secondAttribute="leading" id="NZC-Me-Ioo"/>
                                     <constraint firstItem="0ZQ-WZ-moZ" firstAttribute="trailing" secondItem="g3f-mw-vWn" secondAttribute="trailing" constant="2" id="RLF-1u-zok"/>
                                     <constraint firstItem="ERD-C4-Qij" firstAttribute="top" secondItem="OR1-r6-ujN" secondAttribute="top" constant="556" id="SJg-c9-WDw"/>
@@ -1662,6 +1686,7 @@
                                     <constraint firstItem="3Sk-AM-pee" firstAttribute="centerX" secondItem="OR1-r6-ujN" secondAttribute="centerX" id="dtD-Uk-05L"/>
                                     <constraint firstItem="3Sk-AM-pee" firstAttribute="centerX" secondItem="Cyt-8a-6kZ" secondAttribute="centerX" id="gDv-8X-NC7"/>
                                     <constraint firstItem="Cyt-8a-6kZ" firstAttribute="top" secondItem="g3f-mw-vWn" secondAttribute="bottom" constant="40" id="gEe-Hi-Pa2"/>
+                                    <constraint firstItem="WUB-qg-pkS" firstAttribute="top" secondItem="Cyt-8a-6kZ" secondAttribute="bottom" constant="19.666666666666657" id="l3g-Gf-RGZ"/>
                                     <constraint firstItem="3Sk-AM-pee" firstAttribute="top" secondItem="OR1-r6-ujN" secondAttribute="top" constant="13" id="uIf-VG-4CZ"/>
                                 </constraints>
                             </view>
@@ -1679,6 +1704,8 @@
                     <connections>
                         <outlet property="appVersionLabel1" destination="oyK-kI-9jX" id="cYn-89-GhF"/>
                         <outlet property="appVersionLabel2" destination="vP0-oG-rxo" id="9PS-Dq-i4u"/>
+                        <outlet property="openSourceButton" destination="31B-Kb-BcW" id="ye3-Lb-C7Z"/>
+                        <outlet property="openSourceLabel" destination="K0S-3R-wup" id="DHQ-Vq-ymM"/>
                         <outlet property="thanksLabel" destination="J8R-vD-xW6" id="keo-Fb-UmJ"/>
                         <outlet property="viewPrivacyPolicyBtn" destination="0ZQ-WZ-moZ" id="wSQ-yR-Zsb"/>
                         <outlet property="viewTermsAndConditionsBtn" destination="g3f-mw-vWn" id="6kB-Pb-Tmo"/>
@@ -1966,6 +1993,7 @@
     </designables>
     <resources>
         <image name="01.square" catalog="system" width="128" height="114"/>
+        <image name="GitHub" width="32" height="32"/>
         <image name="dot.square" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="hexagon" catalog="system" width="128" height="124"/>

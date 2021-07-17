@@ -14,15 +14,17 @@ class AboutHexaCalcViewController: UIViewController {
     @IBOutlet weak var websiteLinksLabel: UILabel!
     @IBOutlet weak var appVersionLabel1: UILabel!
     @IBOutlet weak var appVersionLabel2: UILabel!
+    @IBOutlet weak var openSourceLabel: UILabel!
     @IBOutlet weak var thanksLabel: UILabel!
     
+    @IBOutlet weak var openSourceButton: UIButton!
     @IBOutlet weak var viewPrivacyPolicyBtn: UIButton!
     @IBOutlet weak var viewTermsAndConditionsBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let labels = [websiteLinksLabel, appVersionLabel1, appVersionLabel2, thanksLabel]
+        let labels = [websiteLinksLabel, appVersionLabel1, appVersionLabel2, openSourceLabel, thanksLabel]
         
         if let savedPreferences = DataPersistence.loadPreferences() {
             for label in labels {
@@ -58,6 +60,12 @@ class AboutHexaCalcViewController: UIViewController {
         super.viewWillDisappear(animated)
         // turn off animations
         UIView.setAnimationsEnabled(false)
+    }
+    
+    // Provide a link to the GitHub repository
+    @IBAction func viewCodeRepository(_ sender: Any) {
+        let openSourceURL = NSURL(string: "https://github.com/AnthonyH93/HexaCalc")! as URL
+        UIApplication.shared.open(openSourceURL, options: [:], completionHandler: nil)
     }
     
     //iOS approval requirement to have a hosted privacy policy and a button to open it within the app
