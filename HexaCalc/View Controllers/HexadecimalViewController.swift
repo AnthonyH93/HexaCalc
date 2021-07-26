@@ -264,7 +264,7 @@ class HexadecimalViewController: UIViewController {
         let pasteboard = UIPasteboard.general
         pasteboard.string = currentOutput
         
-        //Alert the user that the output was copied to their clipboard
+        // Alert the user that the output was copied to their clipboard
         let alert = UIAlertController(title: "Copied to Clipboard", message: currentOutput + " has been added to your clipboard.", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -290,16 +290,20 @@ class HexadecimalViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    //Function to get and format content from clipboard
+    // Function to get and format content from clipboard
     func pasteFromClipboardToHexadecimalCalculator() {
         var pastedInput = ""
         let pasteboard = UIPasteboard.general
         pastedInput = pasteboard.string ?? "0"
         
-        //Validate input is a hexadecimal value
+        // Validate input is a hexadecimal value
         let chars = CharacterSet(charactersIn: "0123456789ABCDEF").inverted
-        let strippedSpacesHexadecimal =  pastedInput.components(separatedBy: .whitespacesAndNewlines).joined()
+        var strippedSpacesHexadecimal =  pastedInput.components(separatedBy: .whitespacesAndNewlines).joined()
         let isValidHexadecimal = strippedSpacesHexadecimal.uppercased().rangeOfCharacter(from: chars) == nil
+        // Strip leading zeros
+        if (strippedSpacesHexadecimal.hasPrefix("0")) {
+            strippedSpacesHexadecimal = strippedSpacesHexadecimal.replacingOccurrences(of: "^0+", with: "", options: .regularExpression)
+        }
         if (isValidHexadecimal && strippedSpacesHexadecimal.count <= 16) {
             if (pastedInput == "0") {
                 runningNumber = ""
@@ -323,7 +327,7 @@ class HexadecimalViewController: UIViewController {
             if (isValidHexadecimal) {
                 alertMessage = "The hexadecimal string in your clipboard must have a length of 16 characters or less."
             }
-            //Alert the user why the paste failed
+            // Alert the user why the paste failed
             let alert = UIAlertController(title: "Paste Failed", message: alertMessage, preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -332,7 +336,7 @@ class HexadecimalViewController: UIViewController {
         }
     }
     
-    //Function to handle a swipe
+    // Function to handle a swipe
     @objc func handleLabelSwipes(_ sender:UISwipeGestureRecognizer) {
         
         //Make sure the label was swiped
