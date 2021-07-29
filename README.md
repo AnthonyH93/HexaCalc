@@ -79,4 +79,20 @@ Default Settings View | Default About HexaCalc View | Red Two Tab Settings View 
 ---------------------- | -------------- | --------------------- | -----------------------------------
 ![alt text](iPhoneX_DeviceScreenshots/DefaultSettings.png?raw=true) |  ![alt text](iPhoneX_DeviceScreenshots/DefaultAboutHexaCalcWithOpenSource.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/RedTwoTabSettings.png?raw=true) | ![alt text](iPhoneX_DeviceScreenshots/ChangeIconBlue.png?raw=true)
 
+## Future Development
+There are many features that I would like to add to HexaCalc and these are some of the ones that I will look into implementing next:
+* Localization
+  * As of now, the app only supports English, it would be great to add support for many more languages
+* Improve the bit shift operations
+  * Bit shifting is a common operation, but it is only implemented on the binary calculator and only with shifts of 1
+  * Add X>>Y and X<<Y to both the decimal and hexadecimal calculators
+* Modulo operator
+  * The modulo operation would be a good addition to the hexadecimal/decimal calculators
+* History
+  * Adding calculation history for each of the calculators
+* Support for any number base
+  * The app only includes binary, hexadecimal and decimal, more number bases could be added (such as octal)
+* Full calculator customization
+  * Add more optional calculator buttons and let users create their own layout with their desired operations
+
 Thank you for looking at this project!
