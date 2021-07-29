@@ -85,7 +85,7 @@ There are many features that I would like to add to HexaCalc and these are some 
   * As of now, the app only supports English, it would be great to add support for many more languages
 * Improve the bit shift operations
   * Bit shifting is a common operation, but it is only implemented on the binary calculator and only with shifts of 1
-  * Add X>>Y and X<<Y to both the decimal and hexadecimal calculators
+  * Add X>>Y and X<<Y to both the binary and hexadecimal calculators
 * Modulo operator
   * The modulo operation would be a good addition to the hexadecimal/decimal calculators
 * History
