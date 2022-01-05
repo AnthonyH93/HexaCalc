@@ -521,7 +521,7 @@ class BinaryViewController: UIViewController {
     //Twos complement involves flipping all the bits and then adding 1
     @IBAction func twosCompPressed(_ sender: RoundButton) {
         
-        //Button not available during error state
+        //Button not available during error state or when the value is 0
         if (stateController?.convValues.largerThan64Bits == true || outputLabel.text == binaryDefaultLabel){
             return
         }
