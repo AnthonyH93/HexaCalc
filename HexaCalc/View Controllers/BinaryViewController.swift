@@ -522,7 +522,7 @@ class BinaryViewController: UIViewController {
     @IBAction func twosCompPressed(_ sender: RoundButton) {
         
         //Button not available during error state
-        if (stateController?.convValues.largerThan64Bits == true){
+        if (stateController?.convValues.largerThan64Bits == true || outputLabel.text == binaryDefaultLabel){
             return
         }
         
