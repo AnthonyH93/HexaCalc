@@ -20,7 +20,6 @@ class UIHelper {
     
         var constraints = [NSLayoutConstraint]()
         
-        //TODO: Calculate vStackHeight for Hexadecimal and then force the other 2 to follow that by finding stack height using vStackHeight :)
         // Hexadecimal calculator
         if (hStacks.count == 6) {
             hStackHeight = (stackWidth - 20)/5
@@ -106,7 +105,7 @@ class UIHelper {
         
         constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
         
-        labelFontSize = (calculator == 2) ? 30*(screenWidth/375) : 75*(screenWidth/375)
+        labelFontSize = (calculator == 2) ? 30*(screenWidth/375) : 100*(screenWidth/375)
         labelHeight = (calculator == 2) ? (labelFontSize*2.5) : labelFontSize
         
         constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
@@ -232,7 +231,7 @@ class UIHelper {
         
         constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
         
-        labelFontSize = (calculator == 2) ? 30*(min(screenWidth, screenHeight)/375) : 75*(min(screenWidth, screenHeight)/375)
+        labelFontSize = (calculator == 2) ? 30*(min(screenWidth, screenHeight)/375) : 100*(min(screenWidth, screenHeight)/375)
         labelHeight = (calculator == 2) ? (labelFontSize*2.5) : labelFontSize
         
         constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
