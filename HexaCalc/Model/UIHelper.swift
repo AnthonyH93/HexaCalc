@@ -229,14 +229,20 @@ class UIHelper {
         
         var constraints = [NSLayoutConstraint]()
         
-        constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
-        
-        labelFontSize = (calculator == 2) ? 30*(min(screenWidth, screenHeight)/375) : 100*(min(screenWidth, screenHeight)/375)
-        labelHeight = (calculator == 2) ? (labelFontSize*2.5) : labelFontSize
-        
-        constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
-        
-        label.font = UIFont(name: "Avenir Next", size: labelFontSize)
+        // Use iPhone constraints if screen width is of that size
+        if (screenWidth < 415) {
+            constraints = setupLabelConstraints(label: label, screenWidth: screenWidth, calculator: calculator)
+        }
+        else {
+            constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
+            
+            labelFontSize = (calculator == 2) ? 30*(min(screenWidth, screenHeight)/375) : 80*(min(screenWidth, screenHeight)/375)
+            labelHeight = (calculator == 2) ? (labelFontSize*2.5) : labelFontSize
+            
+            constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
+            
+            label.font = UIFont(name: "Avenir Next", size: labelFontSize)
+        }
         
         return constraints
     }
