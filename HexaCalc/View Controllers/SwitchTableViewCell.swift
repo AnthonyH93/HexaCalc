@@ -19,8 +19,9 @@ class SwitchTableViewCell: UITableViewCell {
         return UINib(nibName: "SwitchTableViewCell", bundle: nil)
     }
     
-    public func configure(with text: String) {
+    public func configure(with text: String, isOn: Bool) {
         cellText.self.text = text
+        cellSwitch.isOn = isOn
     }
     
     override func awakeFromNib() {

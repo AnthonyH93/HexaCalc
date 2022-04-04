@@ -73,61 +73,72 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         switch indexPath.section {
         // Tab bar section
         case 0:
+            // Hexadecimal
             if indexPath.row == 0 {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Hexadecimal")
+                cell.configure(with: "Hexadecimal", isOn: preferences.hexTabState)
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.hexadecimalSwitchPressed), for: .touchUpInside)
                 return cell
             }
+            // Binary
+            else if indexPath.row == 1 {
+                // Show switch
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+                cell.configure(with: "Binary", isOn: preferences.binTabState)
+                cell.self.cellSwitch.addTarget(self, action: #selector(self.binarySwitchPressed), for: .touchUpInside)
+                return cell
+            }
+            // Decimal
             else {
-                // Show text
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath)
-                cell.textLabel?.text = "Test"
+                // Show switch
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+                cell.configure(with: "Decimal", isOn: preferences.decTabState)
+                cell.self.cellSwitch.addTarget(self, action: #selector(self.decimalSwitchPressed), for: .touchUpInside)
                 return cell
             }
         // Gestures section
         case 1:
-            if indexPath.row == 2 {
-                // Show switch
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Hexadecimal")
-                return cell
-            }
-            else {
+//            if indexPath.row == 2 {
+//                // Show switch
+//                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+//                cell.configure(with: "Hexadecimal")
+//                return cell
+//            }
+//            else {
                 // Show text
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath)
                 cell.textLabel?.text = "Test"
                 return cell
-            }
+            //}
         // Customization section
         case 2:
-            if indexPath.row == 1 {
-                // Show switch
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Hexadecimal")
-                return cell
-            }
-            else {
+//            if indexPath.row == 1 {
+//                // Show switch
+//                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+//                cell.configure(with: "Hexadecimal")
+//                return cell
+//            }
+//            else {
                 // Show text
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath)
                 cell.textLabel?.text = "Test"
                 return cell
-            }
+            //}
         // About the app section
         case 3:
-            if indexPath.row == 0 {
-                // Show switch
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Hexadecimal")
-                return cell
-            }
-            else {
+//            if indexPath.row == 0 {
+//                // Show switch
+//                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+//                cell.configure(with: "Hexadecimal")
+//                return cell
+//            }
+//            else {
                 // Show text
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath)
                 cell.textLabel?.text = "Test"
                 return cell
-            }
+            //}
         default:
             fatalError("Index out of range")
         }
@@ -164,6 +175,123 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     var viewControllers = tabBarController?.viewControllers
                     viewControllers?.remove(at: 0)
                     tabBarController?.viewControllers = viewControllers
+                }
+            }
+        }
+        self.preferences = userPreferences
+    }
+    
+    @objc func binarySwitchPressed(_ sender: UISwitch) {
+        let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: preferences.hexTabState, binTabState: sender.isOn, decTabState: preferences.decTabState,
+                                              setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+        if sender.isOn {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+
+            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                switch barItems.count {
+                case 1:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                case 2:
+                    if (barItems[0].title! == "Hexadecimal") {
+                        var viewControllers = tabBarController?.viewControllers
+                        viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                    else if (barItems[0].title == "Binary") {
+                        //Do nothing
+                    }
+                    else {
+                        var viewControllers = tabBarController?.viewControllers
+                        viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 0)
+                        tabBarController?.viewControllers = viewControllers
+                    }
+                case 3:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                default:
+                    fatalError("Invalid number of tabs")
+                }
+            }
+        }
+        else {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (barItems[0].title! == "Binary"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                else if (barItems[1].title! == "Binary"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                else {
+                    //Do nothing
+                }
+            }
+        }
+        self.preferences = userPreferences
+    }
+
+    @IBAction func decimalSwitchPressed(_ sender: UISwitch) {
+        let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: sender.isOn,
+                                              setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+        if sender.isOn {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+
+            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                switch barItems.count {
+                case 1:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                case 2:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                case 3:
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 2)
+                    tabBarController?.viewControllers = viewControllers
+                default:
+                    fatalError("Invalid number of tabs")
+                }
+            }
+        }
+        else {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (barItems[0].title! == "Decimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                else if (barItems[1].title! == "Decimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 1)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                else if (barItems[2].title! == "Decimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 2)
+                    tabBarController?.viewControllers = viewControllers
+                }
+                else {
+                    //Do nothing
                 }
             }
         }
