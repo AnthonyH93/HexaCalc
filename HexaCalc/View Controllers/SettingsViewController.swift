@@ -19,6 +19,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                           "About the app" ]
     let rowsPerSection = [3, 2, 2, 4]
     
+    var preferences = UserPreferences.getDefaultPreferences()
+    
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         
@@ -36,7 +38,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         
-        // Setup nib actions
+        // Check if prefereces are saved
+        if let savedPreferences = DataPersistence.loadPreferences() {
+            self.preferences = savedPreferences
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,11 +71,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     // Build table cell layout
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
+        // Tab bar section
         case 0:
             if indexPath.row == 0 {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
                 cell.configure(with: "Hexadecimal")
+                cell.self.cellSwitch.addTarget(self, action: #selector(self.hexadecimalSwitchPressed), for: .touchUpInside)
                 return cell
             }
             else {
@@ -79,6 +86,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.textLabel?.text = "Test"
                 return cell
             }
+        // Gestures section
         case 1:
             if indexPath.row == 2 {
                 // Show switch
@@ -92,6 +100,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.textLabel?.text = "Test"
                 return cell
             }
+        // Customization section
         case 2:
             if indexPath.row == 1 {
                 // Show switch
@@ -105,6 +114,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.textLabel?.text = "Test"
                 return cell
             }
+        // About the app section
         case 3:
             if indexPath.row == 0 {
                 // Show switch
@@ -126,6 +136,38 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
+    }
+    
+    @objc func hexadecimalSwitchPressed(_ sender: UISwitch) {
+        let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: sender.isOn, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                              setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+        if sender.isOn {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+
+            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                if (barItems[0].title! != "Hexadecimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.insert((stateController?.convValues.originalTabs?[0])!, at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                }
+            }
+        }
+        else {
+            let arrayOfTabBarItems = tabBarController?.tabBar.items
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+
+            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
+                if (barItems[0].title! == "Hexadecimal"){
+                    var viewControllers = tabBarController?.viewControllers
+                    viewControllers?.remove(at: 0)
+                    tabBarController?.viewControllers = viewControllers
+                }
+            }
+        }
+        self.preferences = userPreferences
     }
     
 //    @IBOutlet weak var optionsLabel: UILabel!
