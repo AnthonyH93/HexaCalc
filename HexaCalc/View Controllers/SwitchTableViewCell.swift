@@ -19,9 +19,10 @@ class SwitchTableViewCell: UITableViewCell {
         return UINib(nibName: "SwitchTableViewCell", bundle: nil)
     }
     
-    public func configure(with text: String, isOn: Bool) {
+    public func configure(with text: String, isOn: Bool, colour: UIColor) {
         cellText.self.text = text
         cellSwitch.isOn = isOn
+        cellSwitch.onTintColor = colour
     }
     
     override func awakeFromNib() {

@@ -27,6 +27,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
     var selectedIndex: Int?
     var preferences: UserPreferences?
     var selectionType: SelectionType?
+    var name: String?
     
     var numberOfRows = 0
     
@@ -53,15 +54,11 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Check if prefereces are saved
         if let selectionList = selectionList {
-            if let preferences = preferences {
-                if let selectedIndex = selectedIndex {
-                    if let selectionType = selectionType {
-                        // Setup UI and properties
-                        numberOfRows = selectionList.count
-                    }
-                }
+            if let name = name {
+                numberOfRows = selectionList.count
+                self.title = name
+                self.navigationController?.navigationBar.prefersLargeTitles = false
             }
         }
     }
@@ -78,20 +75,23 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
     
     // Build table cell layout
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let selectedList = selectionList, let selectedIndex = selectedIndex
+        else {
+            fatalError("Paramaters were not set")
+        }
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionTableViewCell.identifier, for: indexPath) as! SelectionTableViewCell
+        cell.textLabel?.text = selectedList[indexPath.row]
+        
         // Currently selected index
-        if indexPath.row == selectedIndex ?? 0 {
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionTableViewCell.identifier, for: indexPath) as! SelectionTableViewCell
-            cell.textLabel?.text = "Test1"
-            cell.configure(isSelected: true)
-            return cell
+        if indexPath.row == selectedIndex {
+            cell.configure(isSelected: true, colour: stateController?.convValues.colour ?? .systemGreen)
         }
         // Alternate choice
         else {
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionTableViewCell.identifier, for: indexPath) as! SelectionTableViewCell
-            cell.textLabel?.text = "Test"
-            cell.configure(isSelected: false)
-            return cell
+            cell.configure(isSelected: false, colour: stateController?.convValues.colour ?? .systemGreen)
         }
+        return cell
     }
     
     // method to run when table view cell is tapped
@@ -109,6 +109,9 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                   hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                   setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                   copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+                
+                // Set tab bar icon colour to new colour
+                tabBarController?.tabBar.tintColor = colour
                 // Set state controller such that all calculators know the new colour without a reload
                 stateController?.convValues.colour = colour
                 stateController?.convValues.colourNum = Int64(index)
@@ -144,11 +147,4 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
         }
       })
     }
-}
-
-//Adds state controller to the view controller
-extension SettingsSelectionViewController: StateControllerProtocol {
-  func setState(state: StateController) {
-    self.stateController = state
-  }
 }

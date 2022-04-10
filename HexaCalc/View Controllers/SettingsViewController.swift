@@ -48,11 +48,30 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if let savedPreferences = DataPersistence.loadPreferences() {
             self.preferences = savedPreferences
         }
+
+        // Set custom back button text to navigationItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Set the preferences that might have been changed by a child view
+        self.preferences.colourNum = stateController?.convValues.colourNum ?? self.preferences.colourNum
+        self.preferences.colour = stateController?.convValues.colour ?? self.preferences.colour
+        
+        // Colour the navigation bar
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.preferences.colour]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: self.preferences.colour]
+        navigationItem.backBarButtonItem?.tintColor = self.preferences.colour
+        
+        // Child might have preferred small titles
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        tableView.reloadData()
     }
     
     // Setup number of rows per section
@@ -83,7 +102,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             if indexPath.row == 0 {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Hexadecimal", isOn: preferences.hexTabState)
+                cell.configure(with: "Hexadecimal", isOn: preferences.hexTabState, colour: self.preferences.colour)
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.hexadecimalSwitchPressed), for: .touchUpInside)
                 return cell
             }
@@ -91,7 +110,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             else if indexPath.row == 1 {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Binary", isOn: preferences.binTabState)
+                cell.configure(with: "Binary", isOn: preferences.binTabState, colour: self.preferences.colour)
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.binarySwitchPressed), for: .touchUpInside)
                 return cell
             }
@@ -99,7 +118,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             else {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Decimal", isOn: preferences.decTabState)
+                cell.configure(with: "Decimal", isOn: preferences.decTabState, colour: self.preferences.colour)
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.decimalSwitchPressed), for: .touchUpInside)
                 return cell
             }
@@ -152,15 +171,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
-        
         // Navigate to colour selection view
         if indexPath.section == 1 && indexPath.row == 0 {
             if let subjectCell = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
-                destinationViewController.selectionList = ["Test", "Test2"]
+                destinationViewController.selectionList = ["Red", "Orange", "Yellow", "Green", "Blue", "Teal", "Indigo", "Violet"]
                 destinationViewController.preferences = self.preferences
-                destinationViewController.selectedIndex = 0
+                destinationViewController.selectedIndex = self.preferences.colourNum == -1 ? 3 : Int(self.preferences.colourNum)
                 destinationViewController.selectionType = SelectionType.colour
+                destinationViewController.stateController = stateController
+                destinationViewController.name = "Colour"
                 
                 // Navigate to new view
                 navigationController?.pushViewController(destinationViewController, animated: true)

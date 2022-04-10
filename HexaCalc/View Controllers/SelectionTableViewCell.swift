@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SelectionTableViewCell: UITableViewCell {
     
@@ -32,9 +33,10 @@ class SelectionTableViewCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10))
     }
     
-    func configure(isSelected: Bool) {
+    func configure(isSelected: Bool, colour: UIColor) {
         if isSelected {
             rightImage.image = UIImage(systemName: "checkmark")
+            rightImage.tintColor = colour
         }
     }
     
