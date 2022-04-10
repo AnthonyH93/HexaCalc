@@ -31,6 +31,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
     
     var numberOfRows = 0
     
+    let textColour = [UIColor.systemRed, UIColor.systemOrange, UIColor.systemYellow, UIColor.systemGreen, UIColor.systemBlue, UIColor.systemTeal, UIColor.systemIndigo, UIColor.systemPurple]
+    
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         
@@ -82,6 +84,12 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionTableViewCell.identifier, for: indexPath) as! SelectionTableViewCell
         cell.textLabel?.text = selectedList[indexPath.row]
+        
+        if let selectionType = selectionType {
+            if selectionType == .colour {
+                cell.textLabel?.textColor = textColour[indexPath.row]
+            }
+        }
         
         // Currently selected index
         if indexPath.row == selectedIndex {
