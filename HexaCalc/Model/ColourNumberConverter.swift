@@ -56,4 +56,27 @@ class ColourNumberConverter {
                 return -1
         }
     }
+    
+    static func getAppIconNameFromIndex(index: Int) -> String {
+        switch index {
+        case 0:
+            return "HexaCalcIconRed"
+        case 1:
+            return "HexaCalcIconOrange"
+        case 2:
+            return "HexaCalcIconYellow"
+        case 3:
+            return "HexaCalcIconGreen"
+        case 4:
+            return "HexaCalcIconBlue"
+        case 5:
+            return "HexaCalcIconTeal"
+        case 6:
+            return "HexaCalcIconIndigo"
+        case 7:
+            return "HexaCalcIconPurple"
+        default:
+            return "HexaCalcIconGreen"
+        }
+    }
 }

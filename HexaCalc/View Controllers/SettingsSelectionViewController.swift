@@ -100,30 +100,42 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func selectionChanged(index: Int) {
+        var shouldSavePreferences = false
         if let preferences = preferences {
             var userPreferences = UserPreferences.getDefaultPreferences()
             switch selectionType {
             case .colour:
-                let colour = ColourNumberConverter.getColourFromIndex(index: index)
-                userPreferences = UserPreferences(colour: colour, colourNum: Int64(index),
-                                                  hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
-                                                  setCalculatorTextColour: preferences.setCalculatorTextColour,
-                                                  copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
-                
-                // Set tab bar icon colour to new colour
-                tabBarController?.tabBar.tintColor = colour
-                // Set state controller such that all calculators know the new colour without a reload
-                stateController?.convValues.colour = colour
-                stateController?.convValues.colourNum = Int64(index)
+                // Ensure that a different selection was made
+                if preferences.colourNum != index {
+                    shouldSavePreferences = true
+                    let colour = ColourNumberConverter.getColourFromIndex(index: index)
+                    userPreferences = UserPreferences(colour: colour, colourNum: Int64(index),
+                                                      hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                                      setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+                    
+                    // Set tab bar icon colour to new colour
+                    tabBarController?.tabBar.tintColor = colour
+                    
+                    // Change icon to new colour
+                    self.changeIcon(to: ColourNumberConverter.getAppIconNameFromIndex(index: index))
+                    
+                    // Set state controller such that all calculators know the new colour without a reload
+                    stateController?.convValues.colour = colour
+                    stateController?.convValues.colourNum = Int64(index)
+                }
             default:
                 fatalError("SelectionType is not defined")
             }
             
-            DataPersistence.savePreferences(userPreferences: userPreferences)
-            
-            // Navigate back to settings tab
-            if let navController = self.navigationController {
-                navController.popViewController(animated: true)
+            // Only save and navigate away if there is a new selection
+            if shouldSavePreferences {
+                DataPersistence.savePreferences(userPreferences: userPreferences)
+                
+                // Navigate back to settings tab
+                if let navController = self.navigationController {
+                    navController.popViewController(animated: true)
+                }
             }
         }
     }

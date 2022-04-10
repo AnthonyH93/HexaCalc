@@ -47,6 +47,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // Check if prefereces are saved
         if let savedPreferences = DataPersistence.loadPreferences() {
             self.preferences = savedPreferences
+            self.stateController?.convValues.colourNum = savedPreferences.colourNum
+            self.stateController?.convValues.colour = savedPreferences.colour
         }
 
         // Set custom back button text to navigationItem
