@@ -9,14 +9,24 @@
 import UIKit
 import os.log
 
+// Type of settings selection instantiation
+enum SelectionType {
+    case colour
+    case pasteAction
+    case copyAction
+}
+
 class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //MARK: Properties
+    var stateController: StateController?
+    
     static let identifier = "SettingsSelectionVC"
     
     var selectionList: [String]?
     var selectedIndex: Int?
     var preferences: UserPreferences?
+    var selectionType: SelectionType?
     
     var numberOfRows = 0
     
@@ -47,8 +57,10 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
         if let selectionList = selectionList {
             if let preferences = preferences {
                 if let selectedIndex = selectedIndex {
-                    // Setup UI and properties
-                    numberOfRows = selectionList.count
+                    if let selectionType = selectionType {
+                        // Setup UI and properties
+                        numberOfRows = selectionList.count
+                    }
                 }
             }
         }
@@ -84,38 +96,59 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
     
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
+        selectionChanged(index: indexPath.row)
     }
     
-//    @IBAction func hexadecimalSwitchPressed(_ sender: UISwitch) {
-//        let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
-//                                              hexTabState: sender.isOn, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
-//                                              setCalculatorTextColour: preferences.setCalculatorTextColour,
-//                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
-//        if sender.isOn {
-//            let arrayOfTabBarItems = tabBarController?.tabBar.items
-//            DataPersistence.savePreferences(userPreferences: userPreferences)
-//
-//            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-//                if (barItems[0].title! != "Hexadecimal"){
-//                    var viewControllers = tabBarController?.viewControllers
-//                    viewControllers?.insert((stateController?.convValues.originalTabs?[0])!, at: 0)
-//                    tabBarController?.viewControllers = viewControllers
-//                }
-//            }
-//        }
-//        else {
-//            let arrayOfTabBarItems = tabBarController?.tabBar.items
-//            DataPersistence.savePreferences(userPreferences: userPreferences)
-//
-//            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-//                if (barItems[0].title! == "Hexadecimal"){
-//                    var viewControllers = tabBarController?.viewControllers
-//                    viewControllers?.remove(at: 0)
-//                    tabBarController?.viewControllers = viewControllers
-//                }
-//            }
-//        }
-//        self.preferences = userPreferences
-//    }
+    func selectionChanged(index: Int) {
+        if let preferences = preferences {
+            var userPreferences = UserPreferences.getDefaultPreferences()
+            switch selectionType {
+            case .colour:
+                let colour = ColourNumberConverter.getColourFromIndex(index: index)
+                userPreferences = UserPreferences(colour: colour, colourNum: Int64(index),
+                                                  hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                                  setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                                  copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+                // Set state controller such that all calculators know the new colour without a reload
+                stateController?.convValues.colour = colour
+                stateController?.convValues.colourNum = Int64(index)
+            default:
+                fatalError("SelectionType is not defined")
+            }
+            
+            DataPersistence.savePreferences(userPreferences: userPreferences)
+            
+            // Navigate back to settings tab
+            if let navController = self.navigationController {
+                navController.popViewController(animated: true)
+            }
+        }
+    }
+    
+    //MARK: Private Functions
+
+    // Function to change the app icon to one of the preloaded options
+    func changeIcon(to iconName: String) {
+      // First, need to make sure the app can change its icon
+      guard UIApplication.shared.supportsAlternateIcons else {
+        return
+      }
+
+      // Next we can actually work on changing the app icon
+      UIApplication.shared.setAlternateIconName(iconName, completionHandler: { (error) in
+        // Output the result of the icon change
+        if let error = error {
+          print("App icon failed to change due to \(error.localizedDescription)")
+        } else {
+          print("App icon changed successfully")
+        }
+      })
+    }
+}
+
+//Adds state controller to the view controller
+extension SettingsSelectionViewController: StateControllerProtocol {
+  func setState(state: StateController) {
+    self.stateController = state
+  }
 }

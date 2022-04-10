@@ -13,6 +13,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     //MARK: Properties
     var stateController: StateController?
+    
     let sectionTitles = [ "Tab Bar",
                           "Gestures",
                           "Customization",
@@ -159,6 +160,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 destinationViewController.selectionList = ["Test", "Test2"]
                 destinationViewController.preferences = self.preferences
                 destinationViewController.selectedIndex = 0
+                destinationViewController.selectionType = SelectionType.colour
+                
                 // Navigate to new view
                 navigationController?.pushViewController(destinationViewController, animated: true)
             }
