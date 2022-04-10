@@ -59,7 +59,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return self.rowsPerSection[section]
     }
     
-    // Setup number of rows
+    // Setup number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.sectionTitles.count
     }
@@ -152,6 +152,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
+        
+        // Navigate to colour selection view
+        if indexPath.section == 1 && indexPath.row == 0 {
+            if let subjectCell = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
+                destinationViewController.selectionList = ["Test", "Test2"]
+                destinationViewController.preferences = self.preferences
+                destinationViewController.selectedIndex = 0
+                // Navigate to new view
+                navigationController?.pushViewController(destinationViewController, animated: true)
+            }
+        }
     }
     
     @IBAction func hexadecimalSwitchPressed(_ sender: UISwitch) {

@@ -61,6 +61,8 @@
 		9DC7581727ED867F00BB2953 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */; };
 		9DC7581A27ED88A800BB2953 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */; };
 		9DC7581B27ED88A800BB2953 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */; };
+		9DC758212802842E00BB2953 /* SettingsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */; };
+		9DC7582428028CC600BB2953 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */; };
 		9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249624C553F000701F5B /* AppDelegate.swift */; };
 		9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249824C553F000701F5B /* SceneDelegate.swift */; };
 		9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */; };
@@ -138,6 +140,8 @@
 		9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
+		9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSelectionViewController.swift; sourceTree = "<group>"; };
+		9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		9DEF249324C553F000701F5B /* HexaCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexaCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEF249624C553F000701F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DEF249824C553F000701F5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 				9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */,
 				9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */,
 				9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */,
+				9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */,
+				9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -464,10 +470,12 @@
 				9DC7581727ED867F00BB2953 /* TextTableViewCell.swift in Sources */,
 				9DEF249D24C553F000701F5B /* BinaryViewController.swift in Sources */,
 				9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */,
+				9DC758212802842E00BB2953 /* SettingsSelectionViewController.swift in Sources */,
 				9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */,
 				9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */,
 				9DC7581A27ED88A800BB2953 /* SwitchTableViewCell.swift in Sources */,
 				9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */,
+				9DC7582428028CC600BB2953 /* SelectionTableViewCell.swift in Sources */,
 				9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */,
 				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,

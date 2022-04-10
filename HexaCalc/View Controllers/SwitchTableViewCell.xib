@@ -18,25 +18,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKr-Lj-MCV">
-                        <rect key="frame" x="10" y="10" width="577" height="32"/>
+                        <rect key="frame" x="20" y="10" width="557" height="32"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GDf-4Y-xvR">
-                        <rect key="frame" x="609" y="11" width="51" height="31"/>
+                        <rect key="frame" x="599" y="11" width="51" height="31"/>
                     </switch>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="aKr-Lj-MCV" secondAttribute="bottom" constant="10" id="3GV-FT-NG3"/>
+                    <constraint firstItem="aKr-Lj-MCV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="Buf-9R-tPu"/>
                     <constraint firstItem="aKr-Lj-MCV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="CbH-et-Y0o"/>
+                    <constraint firstAttribute="trailing" secondItem="GDf-4Y-xvR" secondAttribute="trailing" constant="20" symbolic="YES" id="GQa-Gw-yRR"/>
                     <constraint firstItem="GDf-4Y-xvR" firstAttribute="leading" secondItem="aKr-Lj-MCV" secondAttribute="trailing" constant="22" id="SRV-7F-BTZ"/>
-                    <constraint firstAttribute="trailing" secondItem="GDf-4Y-xvR" secondAttribute="trailing" constant="10" id="SZ1-h3-0Wp"/>
                     <constraint firstItem="aKr-Lj-MCV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="b3N-ej-mLg"/>
                     <constraint firstAttribute="bottom" secondItem="GDf-4Y-xvR" secondAttribute="bottom" constant="10" id="cYc-0b-V3m"/>
                     <constraint firstAttribute="bottom" secondItem="aKr-Lj-MCV" secondAttribute="bottom" constant="10" id="mp8-kN-Wsy"/>
                     <constraint firstItem="GDf-4Y-xvR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="pg1-Jp-gcC"/>
-                    <constraint firstItem="aKr-Lj-MCV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="uKF-LP-hnR"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

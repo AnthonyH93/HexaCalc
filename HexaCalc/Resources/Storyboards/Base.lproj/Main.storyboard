@@ -1240,6 +1240,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="mab-AI-HrS"/>
                     <connections>
                         <outlet property="navigationItem" destination="mab-AI-HrS" id="a5X-Ab-mKo"/>
+                        <segue destination="CNG-kH-WYO" kind="show" id="npp-bm-L2Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-Ra-cND" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1398,7 +1399,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Re3-EU-hX7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2415.9420289855075" y="962.94642857142856"/>
+            <point key="canvasLocation" x="2296" y="1696"/>
+        </scene>
+        <!--Settings Selection View Controller-->
+        <scene sceneID="h7p-Jb-9oG">
+            <objects>
+                <viewController storyboardIdentifier="SettingsSelectionVC" id="CNG-kH-WYO" customClass="SettingsSelectionViewController" customModule="HexaCalc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LJl-eX-gQn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="WL5-Sw-5rd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="OOZ-AH-ySr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ksh-eH-CpZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2387" y="963"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1659,6 +1676,9 @@
         <image name="hexagon" catalog="system" width="128" height="124"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
