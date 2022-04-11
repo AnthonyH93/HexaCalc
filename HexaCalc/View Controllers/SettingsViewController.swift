@@ -150,13 +150,16 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         // Customization section
         case 2:
+            // Set calculator text colour
             if indexPath.row == 1 {
                 // Show switch for set calculator text colour
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
                 cell.configure(isOn: self.preferences.setCalculatorTextColour, colour: preferences.colour)
                 cell.textLabel?.text = "Set Calculator Text Colour"
+                cell.self.cellSwitch.addTarget(self, action: #selector(self.setCalculatorTextColourSwitchPressed), for: .touchUpInside)
                 return cell
             }
+            // Select colour preference
             else {
                 // Show summary detail view for colour selection
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
@@ -361,6 +364,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
+        self.preferences = userPreferences
+    }
+    
+    // Function to toggle the optional setting of the calculator text colour
+    @IBAction func setCalculatorTextColourSwitchPressed(_ sender: UISwitch) {
+        let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                              setCalculatorTextColour: sender.isOn,
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+        DataPersistence.savePreferences(userPreferences: userPreferences)
+        stateController?.convValues.setCalculatorTextColour = sender.isOn
         self.preferences = userPreferences
     }
     
