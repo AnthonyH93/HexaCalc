@@ -104,7 +104,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             if indexPath.row == 0 {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Hexadecimal", isOn: preferences.hexTabState, colour: self.preferences.colour)
+                cell.configure(isOn: preferences.hexTabState, colour: self.preferences.colour)
+                cell.textLabel?.text = "Hexadecimal"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.hexadecimalSwitchPressed), for: .touchUpInside)
                 return cell
             }
@@ -112,7 +113,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             else if indexPath.row == 1 {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Binary", isOn: preferences.binTabState, colour: self.preferences.colour)
+                cell.configure(isOn: preferences.binTabState, colour: self.preferences.colour)
+                cell.textLabel?.text = "Binary"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.binarySwitchPressed), for: .touchUpInside)
                 return cell
             }
@@ -120,7 +122,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             else {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-                cell.configure(with: "Decimal", isOn: preferences.decTabState, colour: self.preferences.colour)
+                cell.configure(isOn: preferences.decTabState, colour: self.preferences.colour)
+                cell.textLabel?.text = "Decimal"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.decimalSwitchPressed), for: .touchUpInside)
                 return cell
             }

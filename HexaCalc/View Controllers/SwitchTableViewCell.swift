@@ -11,7 +11,6 @@ import UIKit
 class SwitchTableViewCell: UITableViewCell {
     
     @IBOutlet var cellSwitch: UISwitch!
-    @IBOutlet var cellText: UILabel!
     
     static let identifier = "SwitchTableViewCell"
     
@@ -19,8 +18,7 @@ class SwitchTableViewCell: UITableViewCell {
         return UINib(nibName: "SwitchTableViewCell", bundle: nil)
     }
     
-    public func configure(with text: String, isOn: Bool, colour: UIColor) {
-        cellText.self.text = text
+    public func configure(isOn: Bool, colour: UIColor) {
         cellSwitch.isOn = isOn
         cellSwitch.onTintColor = colour
     }
