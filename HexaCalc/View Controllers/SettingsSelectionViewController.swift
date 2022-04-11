@@ -12,8 +12,8 @@ import os.log
 // Type of settings selection instantiation
 enum SelectionType {
     case colour
-    case pasteAction
     case copyAction
+    case pasteAction
 }
 
 class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -131,6 +131,26 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                     // Set state controller such that all calculators know the new colour without a reload
                     stateController?.convValues.colour = colour
                     stateController?.convValues.colourNum = Int64(index)
+                }
+            case .copyAction:
+                // Ensure that a different selection was made
+                if preferences.copyActionIndex != index {
+                    shouldSavePreferences = true
+                    userPreferences = UserPreferences(colour: preferences.colour, colourNum: preferences.colourNum,
+                                                      hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                                      setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                                      copyActionIndex: Int32(index), pasteActionIndex: preferences.pasteActionIndex)
+                    stateController?.convValues.copyActionIndex = Int32(index)
+                }
+            case .pasteAction:
+                // Ensure that a different selection was made
+                if preferences.pasteActionIndex != index {
+                    shouldSavePreferences = true
+                    userPreferences = UserPreferences(colour: preferences.colour, colourNum: preferences.colourNum,
+                                                      hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                                      setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index))
+                    stateController?.convValues.pasteActionIndex = Int32(index)
                 }
             default:
                 fatalError("SelectionType is not defined")

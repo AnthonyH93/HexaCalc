@@ -65,6 +65,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // Set the preferences that might have been changed by a child view
         self.preferences.colourNum = stateController?.convValues.colourNum ?? self.preferences.colourNum
         self.preferences.colour = stateController?.convValues.colour ?? self.preferences.colour
+        self.preferences.copyActionIndex = stateController?.convValues.copyActionIndex ?? self.preferences.copyActionIndex
+        self.preferences.pasteActionIndex = stateController?.convValues.pasteActionIndex ?? self.preferences.pasteActionIndex
         
         // Colour the navigation bar
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.preferences.colour]
@@ -130,19 +132,22 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         // Gestures section
         case 1:
-//            if indexPath.row == 2 {
-//                // Show switch
-//                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-//                cell.configure(with: "Hexadecimal")
-//                return cell
-//            }
-//            else {
-                // Show text
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
-            cell.configure(rightText: ColourNumberConverter.getColourNameFromIndex(index: Int(self.preferences.colourNum)), colour: UIColor.systemGray)
-            cell.textLabel?.text = "Colour"
-            return cell
-            //}
+            // Copy action
+            if indexPath.row == 0 {
+                // Show summary detail view for copy action selection
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
+                cell.configure(rightText: CopyOrPasteActionConverter.getActionFromIndex(index: Int(self.preferences.copyActionIndex), paste: false), colour: UIColor.systemGray)
+                cell.textLabel?.text = "Copy Action"
+                return cell
+            }
+            // Paste action
+            else {
+                // Show summary detail view for paste action selection
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
+                cell.configure(rightText: CopyOrPasteActionConverter.getActionFromIndex(index: Int(self.preferences.pasteActionIndex), paste: true), colour: UIColor.systemGray)
+                cell.textLabel?.text = "Paste Action"
+                return cell
+            }
         // Customization section
         case 2:
             if indexPath.row == 1 {
@@ -180,6 +185,20 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Navigate to copy or paste action selection view
+        if indexPath.section == 1 {
+            if let subjectCell = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
+                destinationViewController.selectionList = ["Single Tap", "Double Tap", "Off"]
+                destinationViewController.preferences = self.preferences
+                destinationViewController.selectedIndex = indexPath.row == 0 ? Int(preferences.copyActionIndex) : Int(preferences.pasteActionIndex)
+                destinationViewController.selectionType = indexPath.row == 0 ? SelectionType.copyAction : SelectionType.pasteAction
+                destinationViewController.stateController = stateController
+                destinationViewController.name = indexPath.row == 0 ? "Copy Action" : "Paste Action"
+                
+                // Navigate to new view
+                navigationController?.pushViewController(destinationViewController, animated: true)
+            }
+        }
         // Navigate to colour selection view
         if indexPath.section == 2 && indexPath.row == 0 {
             if let subjectCell = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
