@@ -31,9 +31,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         
-        table.register(TextTableViewCell.self, forCellReuseIdentifier: TextTableViewCell.identifier)
-        table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: SwitchTableViewCell.identifier)
-        table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: SelectionSummaryTableViewCell.identifier)
+        // We don't want cells to be reused since there are a finite number and reuse has problems when they are reloaded due to state changes
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "AppVersion")
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "PrivacyPolicy")
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "TermsAndConditions")
+        table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "SetCalculatorColourSwitch")
+        table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "HexadecimalSwitch")
+        table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "BinarySwitch")
+        table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "DecimalSwitch")
+        table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "ColourSelection")
+        table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "CopyActionSelection")
+        table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "PasteActionSelection")
         table.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.identifier)
         
         table.sectionHeaderHeight = 40
@@ -59,6 +67,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
         // Set custom back button text to navigationItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,20 +77,28 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         // Set the preferences that might have been changed by a child view
-        self.preferences.colourNum = stateController?.convValues.colourNum ?? self.preferences.colourNum
-        self.preferences.colour = stateController?.convValues.colour ?? self.preferences.colour
-        self.preferences.copyActionIndex = stateController?.convValues.copyActionIndex ?? self.preferences.copyActionIndex
-        self.preferences.pasteActionIndex = stateController?.convValues.pasteActionIndex ?? self.preferences.pasteActionIndex
+        if (self.preferences.colourNum != stateController?.convValues.colourNum) {
+            self.preferences.colourNum = stateController?.convValues.colourNum ?? self.preferences.colourNum
+            self.preferences.colour = stateController?.convValues.colour ?? self.preferences.colour
+            
+            // Reload UI only when necessary
+            self.tableView.reloadSections([0,2,3], with: .none)
+        }
+        else if (self.preferences.copyActionIndex != stateController?.convValues.copyActionIndex) {
+            self.preferences.copyActionIndex = stateController?.convValues.copyActionIndex ?? self.preferences.copyActionIndex
+            // Reload UI only when necessary
+            self.tableView.reloadSections([1], with: .none)
+        }
+        else if (self.preferences.pasteActionIndex != stateController?.convValues.pasteActionIndex) {
+            self.preferences.pasteActionIndex = stateController?.convValues.pasteActionIndex ?? self.preferences.pasteActionIndex
+            // Reload UI only when necessary
+            self.tableView.reloadSections([1], with: .none)
+        }
         
         // Colour the navigation bar
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.preferences.colour]
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: self.preferences.colour]
         navigationItem.backBarButtonItem?.tintColor = self.preferences.colour
-        
-        // Child might have preferred small titles
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        tableView.reloadData()
     }
     
     // Setup number of rows per section
@@ -111,7 +128,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Hexadecimal
             if indexPath.row == 0 {
                 // Show switch
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "HexadecimalSwitch", for: indexPath) as! SwitchTableViewCell
                 cell.configure(isOn: preferences.hexTabState, colour: self.preferences.colour)
                 cell.textLabel?.text = "Hexadecimal"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.hexadecimalSwitchPressed), for: .touchUpInside)
@@ -120,7 +137,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Binary
             else if indexPath.row == 1 {
                 // Show switch
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "BinarySwitch", for: indexPath) as! SwitchTableViewCell
                 cell.configure(isOn: preferences.binTabState, colour: self.preferences.colour)
                 cell.textLabel?.text = "Binary"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.binarySwitchPressed), for: .touchUpInside)
@@ -129,7 +146,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Decimal
             else {
                 // Show switch
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "DecimalSwitch", for: indexPath) as! SwitchTableViewCell
                 cell.configure(isOn: preferences.decTabState, colour: self.preferences.colour)
                 cell.textLabel?.text = "Decimal"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.decimalSwitchPressed), for: .touchUpInside)
@@ -140,7 +157,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Copy action
             if indexPath.row == 0 {
                 // Show summary detail view for copy action selection
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "CopyActionSelection", for: indexPath) as! SelectionSummaryTableViewCell
                 cell.configure(rightText: CopyOrPasteActionConverter.getActionFromIndex(index: Int(self.preferences.copyActionIndex), paste: false), colour: UIColor.systemGray)
                 cell.textLabel?.text = "Copy Action"
                 return cell
@@ -148,7 +165,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Paste action
             else {
                 // Show summary detail view for paste action selection
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "PasteActionSelection", for: indexPath) as! SelectionSummaryTableViewCell
                 cell.configure(rightText: CopyOrPasteActionConverter.getActionFromIndex(index: Int(self.preferences.pasteActionIndex), paste: true), colour: UIColor.systemGray)
                 cell.textLabel?.text = "Paste Action"
                 return cell
@@ -158,7 +175,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Set calculator text colour
             if indexPath.row == 1 {
                 // Show switch for set calculator text colour
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "SetCalculatorColourSwitch", for: indexPath) as! SwitchTableViewCell
                 cell.configure(isOn: self.preferences.setCalculatorTextColour, colour: preferences.colour)
                 cell.textLabel?.text = "Set Calculator Text Colour"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.setCalculatorTextColourSwitchPressed), for: .touchUpInside)
@@ -167,7 +184,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Select colour preference
             else {
                 // Show summary detail view for colour selection
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "ColourSelection", for: indexPath) as! SelectionSummaryTableViewCell
                 cell.configure(rightText: ColourNumberConverter.getColourNameFromIndex(index: Int(self.preferences.colourNum)), colour: UIColor.systemGray)
                 cell.textLabel?.text = "Colour"
                 return cell
@@ -176,7 +193,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         case 3:
             // App version
             if indexPath.row == 0 {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath) as! TextTableViewCell
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "AppVersion", for: indexPath) as! TextTableViewCell
                 // Get the app version label
                 let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
                 cell.configure(rightText: appVersionNumber)
@@ -192,7 +209,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
             // View privacy policy or terms and conditions
             else {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath)
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: indexPath.row == 2 ? "PrivacyPolicy" : "TermsAndConditions", for: indexPath)
                 cell.textLabel?.text = indexPath.row == 2 ? "View Privacy Policy" : "View Terms and Conditions"
                 cell.textLabel?.textColor = preferences.colour
                 return cell

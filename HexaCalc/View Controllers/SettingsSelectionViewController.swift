@@ -60,7 +60,6 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
             if let name = name {
                 numberOfRows = selectionList.count
                 self.title = name
-                self.navigationController?.navigationBar.prefersLargeTitles = false
             }
         }
     }
