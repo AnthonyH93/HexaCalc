@@ -29,6 +29,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         table.register(TextTableViewCell.self, forCellReuseIdentifier: TextTableViewCell.identifier)
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: SwitchTableViewCell.identifier)
+        table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: SelectionSummaryTableViewCell.identifier)
         
         table.sectionHeaderHeight = 40
         
@@ -137,24 +138,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 //            }
 //            else {
                 // Show text
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath)
-                cell.textLabel?.text = "Test"
-                return cell
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
+            cell.configure(rightText: ColourNumberConverter.getColourNameFromIndex(index: Int(self.preferences.colourNum)), colour: UIColor.systemGray)
+            cell.textLabel?.text = "Colour"
+            return cell
             //}
         // Customization section
         case 2:
-//            if indexPath.row == 1 {
-//                // Show switch
-//                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-//                cell.configure(with: "Hexadecimal")
-//                return cell
-//            }
-//            else {
-                // Show text
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath)
-                cell.textLabel?.text = "Test"
+            if indexPath.row == 1 {
+                // Show switch for set calculator text colour
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
+                cell.configure(isOn: self.preferences.setCalculatorTextColour, colour: preferences.colour)
+                cell.textLabel?.text = "Set Calculator Text Colour"
                 return cell
-            //}
+            }
+            else {
+                // Show summary detail view for colour selection
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: SelectionSummaryTableViewCell.identifier, for: indexPath) as! SelectionSummaryTableViewCell
+                cell.configure(rightText: ColourNumberConverter.getColourNameFromIndex(index: Int(self.preferences.colourNum)), colour: UIColor.systemGray)
+                cell.textLabel?.text = "Colour"
+                return cell
+            }
         // About the app section
         case 3:
 //            if indexPath.row == 0 {
@@ -177,7 +181,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Navigate to colour selection view
-        if indexPath.section == 1 && indexPath.row == 0 {
+        if indexPath.section == 2 && indexPath.row == 0 {
             if let subjectCell = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
                 destinationViewController.selectionList = ["Red", "Orange", "Yellow", "Green", "Blue", "Teal", "Indigo", "Violet"]
                 destinationViewController.preferences = self.preferences
