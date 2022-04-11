@@ -90,5 +90,9 @@ class UserPreferences : NSObject, NSCoding {
         //Must call designated initializer
         self.init(colour: colour, colourNum: colourNum, hexTabState: hexTabState, binTabState: binTabState, decTabState: decTabState, setCalculatorTextColour: setCalculatorTextColour, copyActionIndex: copyActionIndex, pasteActionIndex: pasteActionIndex)
     }
+    
+    static func getDefaultPreferences() -> UserPreferences {
+        return UserPreferences(colour: .systemGreen, colourNum: 3, hexTabState: true, binTabState: true, decTabState: true, setCalculatorTextColour: true, copyActionIndex: 0, pasteActionIndex: 0)
+    }
 }
 

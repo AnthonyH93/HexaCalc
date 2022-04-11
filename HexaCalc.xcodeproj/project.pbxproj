@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */; };
 		9D7C09BF25EC61E700771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png */; };
 		9D7C09C025EC61E700771D52 /* HexaCalcIconBlue@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */; };
 		9D7C09C125EC61E700771D52 /* HexaCalcIconOrange~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */; };
@@ -58,6 +57,15 @@
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
 		9DC242F225E1EE440038DD63 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC242F125E1EE440038DD63 /* UIHelper.swift */; };
+		9DC7581727ED867F00BB2953 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */; };
+		9DC7581A27ED88A800BB2953 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */; };
+		9DC7581B27ED88A800BB2953 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */; };
+		9DC758212802842E00BB2953 /* SettingsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */; };
+		9DC7582428028CC600BB2953 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */; };
+		9DC758272802A83500BB2953 /* ColourNumberConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758262802A83500BB2953 /* ColourNumberConverter.swift */; };
+		9DC758292803C85200BB2953 /* SelectionSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */; };
+		9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */; };
+		9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */; };
 		9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249624C553F000701F5B /* AppDelegate.swift */; };
 		9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249824C553F000701F5B /* SceneDelegate.swift */; };
 		9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */; };
@@ -81,7 +89,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHexaCalcViewController.swift; sourceTree = "<group>"; };
 		9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo-83.5@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconOrange~ipad.png"; sourceTree = "<group>"; };
@@ -132,6 +139,15 @@
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
 		9DC242F125E1EE440038DD63 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
+		9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
+		9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSelectionViewController.swift; sourceTree = "<group>"; };
+		9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
+		9DC758262802A83500BB2953 /* ColourNumberConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourNumberConverter.swift; sourceTree = "<group>"; };
+		9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionSummaryTableViewCell.swift; sourceTree = "<group>"; };
+		9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyOrPasteActionConverter.swift; sourceTree = "<group>"; };
+		9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		9DEF249324C553F000701F5B /* HexaCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexaCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEF249624C553F000701F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DEF249824C553F000701F5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,7 +189,7 @@
 				9DEF249C24C553F000701F5B /* BinaryViewController.swift */,
 				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
 				9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */,
-				9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */,
+				9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -186,6 +202,8 @@
 				9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */,
 				9DA0D7ED250B270800F72051 /* DataPersistence.swift */,
 				9DC242F125E1EE440038DD63 /* UIHelper.swift */,
+				9DC758262802A83500BB2953 /* ColourNumberConverter.swift */,
+				9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,6 +286,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		9DC7582D2803F28200BB2953 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */,
+				9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */,
+				9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */,
+				9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */,
+				9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */,
+				9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9DEF248A24C553F000701F5B = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +320,7 @@
 		9DEF249524C553F000701F5B /* HexaCalc */ = {
 			isa = PBXGroup;
 			children = (
+				9DC7582D2803F28200BB2953 /* View */,
 				9D6DE93024D3CCD4005018E5 /* View Controllers */,
 				9DAE268B24C68C090070B965 /* Extensions */,
 				9D6DE93124D3CCFB005018E5 /* Model */,
@@ -396,6 +428,7 @@
 				9D7C09CE25EC61E700771D52 /* HexaCalcIconPurple@3x.png in Resources */,
 				9D7C09C125EC61E700771D52 /* HexaCalcIconOrange~ipad.png in Resources */,
 				9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */,
+				9DC7581B27ED88A800BB2953 /* SwitchTableViewCell.xib in Resources */,
 				9D7C09E125EC61E700771D52 /* HexaCalcIconYellow@3x.png in Resources */,
 				9D7C09CF25EC61E700771D52 /* HexaCalcIconOrange@2x.png in Resources */,
 				9D7C09E625EC61E700771D52 /* HexaCalcIconBlue@3x.png in Resources */,
@@ -451,20 +484,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC7581727ED867F00BB2953 /* TextTableViewCell.swift in Sources */,
 				9DEF249D24C553F000701F5B /* BinaryViewController.swift in Sources */,
 				9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */,
+				9DC758212802842E00BB2953 /* SettingsSelectionViewController.swift in Sources */,
 				9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */,
 				9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */,
+				9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */,
+				9DC7581A27ED88A800BB2953 /* SwitchTableViewCell.swift in Sources */,
 				9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */,
+				9DC7582428028CC600BB2953 /* SelectionTableViewCell.swift in Sources */,
 				9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */,
 				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
-				9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
+				9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
 				9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */,
+				9DC758272802A83500BB2953 /* ColourNumberConverter.swift in Sources */,
 				9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */,
 				9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */,
+				9DC758292803C85200BB2953 /* SelectionSummaryTableViewCell.swift in Sources */,
 				9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */,
 				9DC242F225E1EE440038DD63 /* UIHelper.swift in Sources */,
 			);
@@ -629,7 +669,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QMBJV5C74X;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -637,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.6;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -650,7 +690,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QMBJV5C74X;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -658,7 +698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.6;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
