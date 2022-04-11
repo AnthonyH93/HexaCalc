@@ -190,18 +190,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.textLabel?.text = "HexaCalc is Open Source"
                 return cell
             }
-//            if indexPath.row == 0 {
-//                // Show switch
-//                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
-//                cell.configure(with: "Hexadecimal")
-//                return cell
-//            }
-//            else {
-                // Show text
+            // View privacy policy or terms and conditions
+            else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath)
-                cell.textLabel?.text = "Test"
+                cell.textLabel?.text = indexPath.row == 2 ? "View Privacy Policy" : "View Terms and Conditions"
+                cell.textLabel?.textColor = preferences.colour
                 return cell
-            //}
+            }
         default:
             fatalError("Index out of range")
         }
