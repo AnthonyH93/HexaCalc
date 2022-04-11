@@ -278,6 +278,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Present share the app activity view
             else if indexPath.row == 2 {
                 let activityViewController = UIActivityViewController(activityItems: [ReviewManager.getProductURL()], applicationActivities: nil)
+                // To prevent crashes on iPads
+                activityViewController.popoverPresentationController?.sourceView = self.tableView.cellForRow(at: indexPath)
                 present(activityViewController, animated: true, completion: nil)
             }
             // Open link to GitHub
