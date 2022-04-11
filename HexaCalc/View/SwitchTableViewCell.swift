@@ -10,8 +10,19 @@ import UIKit
 
 class SwitchTableViewCell: UITableViewCell {
     
+    @IBOutlet var cellSwitch: UISwitch!
+    
     static let identifier = "SwitchTableViewCell"
-
+    
+    static func nib() -> UINib {
+        return UINib(nibName: "SwitchTableViewCell", bundle: nil)
+    }
+    
+    public func configure(isOn: Bool, colour: UIColor) {
+        cellSwitch.isOn = isOn
+        cellSwitch.onTintColor = colour
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

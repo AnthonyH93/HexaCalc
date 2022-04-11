@@ -190,12 +190,6 @@
 				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
 				9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */,
 				9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */,
-				9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */,
-				9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */,
-				9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */,
-				9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */,
-				9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */,
-				9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -292,6 +286,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		9DC7582D2803F28200BB2953 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */,
+				9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */,
+				9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */,
+				9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */,
+				9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */,
+				9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9DEF248A24C553F000701F5B = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +320,7 @@
 		9DEF249524C553F000701F5B /* HexaCalc */ = {
 			isa = PBXGroup;
 			children = (
+				9DC7582D2803F28200BB2953 /* View */,
 				9D6DE93024D3CCD4005018E5 /* View Controllers */,
 				9DAE268B24C68C090070B965 /* Extensions */,
 				9D6DE93124D3CCFB005018E5 /* Model */,

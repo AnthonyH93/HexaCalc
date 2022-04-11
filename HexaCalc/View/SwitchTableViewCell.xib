@@ -24,6 +24,8 @@
                 <constraints>
                     <constraint firstItem="GDf-4Y-xvR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IGI-bi-mXl"/>
                     <constraint firstAttribute="trailing" secondItem="GDf-4Y-xvR" secondAttribute="trailing" constant="12" id="N12-aF-zLi"/>
+                    <constraint firstItem="GDf-4Y-xvR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="P9B-3J-2DH"/>
+                    <constraint firstAttribute="bottom" secondItem="GDf-4Y-xvR" secondAttribute="bottom" constant="7" id="z02-YA-PCA"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
