@@ -189,6 +189,7 @@
 				9DEF249C24C553F000701F5B /* BinaryViewController.swift */,
 				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
 				9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */,
+				9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */,
 				9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */,
 			);
 			path = "View Controllers";
@@ -292,7 +293,6 @@
 				9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */,
 				9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */,
 				9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */,
-				9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */,
 				9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */,
 				9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */,
 			);

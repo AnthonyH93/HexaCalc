@@ -169,6 +169,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         // About the app section
         case 3:
+            // App version
+            if indexPath.row == 0 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: TextTableViewCell.identifier, for: indexPath) as! TextTableViewCell
+                // Get the app version label
+                let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+                cell.configure(rightText: appVersionNumber)
+                cell.textLabel?.text = "App Version"
+                return cell
+            }
 //            if indexPath.row == 0 {
 //                // Show switch
 //                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
