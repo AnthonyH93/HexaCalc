@@ -66,6 +66,7 @@
 		9DC758272802A83500BB2953 /* ColourNumberConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758262802A83500BB2953 /* ColourNumberConverter.swift */; };
 		9DC758292803C85200BB2953 /* SelectionSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */; };
 		9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */; };
+		9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */; };
 		9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249624C553F000701F5B /* AppDelegate.swift */; };
 		9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249824C553F000701F5B /* SceneDelegate.swift */; };
 		9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */; };
@@ -148,6 +149,7 @@
 		9DC758262802A83500BB2953 /* ColourNumberConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourNumberConverter.swift; sourceTree = "<group>"; };
 		9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionSummaryTableViewCell.swift; sourceTree = "<group>"; };
 		9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyOrPasteActionConverter.swift; sourceTree = "<group>"; };
+		9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		9DEF249324C553F000701F5B /* HexaCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexaCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEF249624C553F000701F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DEF249824C553F000701F5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */,
 				9DC7582228028CC600BB2953 /* SelectionTableViewCell.swift */,
 				9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */,
+				9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
 				9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
+				9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
 				9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */,
 				9DC758272802A83500BB2953 /* ColourNumberConverter.swift in Sources */,

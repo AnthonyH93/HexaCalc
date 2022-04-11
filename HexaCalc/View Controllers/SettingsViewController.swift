@@ -22,6 +22,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var actions = ["One tap", "Two tap"]
     
+    let urls = [ "https://github.com/AnthonyH93/HexaCalc",
+                 "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
+                 "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
+    
     var preferences = UserPreferences.getDefaultPreferences()
     
     private let tableView: UITableView = {
@@ -30,6 +34,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         table.register(TextTableViewCell.self, forCellReuseIdentifier: TextTableViewCell.identifier)
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: SwitchTableViewCell.identifier)
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: SelectionSummaryTableViewCell.identifier)
+        table.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.identifier)
         
         table.sectionHeaderHeight = 40
         
@@ -178,6 +183,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.textLabel?.text = "App Version"
                 return cell
             }
+            // Open source link
+            else if indexPath.row == 1 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: ImageTableViewCell.identifier, for: indexPath) as! ImageTableViewCell
+                cell.configure(image: "GitHub")
+                cell.textLabel?.text = "HexaCalc is Open Source"
+                return cell
+            }
 //            if indexPath.row == 0 {
 //                // Show switch
 //                let cell = self.tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
@@ -225,6 +237,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 navigationController?.pushViewController(destinationViewController, animated: true)
             }
         }
+        // Open a URL
+        if indexPath.section == 3 && indexPath.row > 0 {
+            let currentURL = NSURL(string: urls[indexPath.row - 1])! as URL
+            UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)
+        }
+                
     }
     
     @IBAction func hexadecimalSwitchPressed(_ sender: UISwitch) {
