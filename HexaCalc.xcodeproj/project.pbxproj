@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */; };
 		9D7C09BF25EC61E700771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png */; };
 		9D7C09C025EC61E700771D52 /* HexaCalcIconBlue@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */; };
 		9D7C09C125EC61E700771D52 /* HexaCalcIconOrange~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */; };
@@ -90,7 +89,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHexaCalcViewController.swift; sourceTree = "<group>"; };
 		9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo-83.5@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconOrange~ipad.png"; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 				9DEF24BD24C5578300701F5B /* DecimalViewController.swift */,
 				9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */,
 				9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */,
-				9D2EA6AC260C44B30082F7E0 /* AboutHexaCalcViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -500,7 +497,6 @@
 				9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */,
 				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
-				9D2EA6AD260C44B30082F7E0 /* AboutHexaCalcViewController.swift in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
 				9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
