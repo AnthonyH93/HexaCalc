@@ -17,14 +17,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let sectionTitles = [ "Tab Bar",
                           "Gestures",
                           "Customization",
-                          "About the app" ]
-    let rowsPerSection = [3, 2, 2, 4]
+                          "About the app",
+                          "Support" ]
+    let rowsPerSection = [3, 2, 2, 4, 2]
     
     var actions = ["One tap", "Two tap"]
     
-    let urls = [ "https://github.com/AnthonyH93/HexaCalc",
-                 "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
-                 "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
+    let supportURLs = [ "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
+                        "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
+    let aboutAppURLs = [ "https://github.com/AnthonyH93/HexaCalc" ]
     
     var preferences = UserPreferences.getDefaultPreferences()
     
@@ -35,6 +36,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "AppVersion")
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "PrivacyPolicy")
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "TermsAndConditions")
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "ShareApp")
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "WriteReview")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "SetCalculatorColourSwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "HexadecimalSwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "BinarySwitch")
@@ -85,7 +88,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             self.preferences.colour = stateController?.convValues.colour ?? self.preferences.colour
             
             // Reload UI only when necessary
-            self.tableView.reloadSections([0,2,3], with: .none)
+            self.tableView.reloadSections([0,2,3,4], with: .none)
         }
         else if (self.preferences.copyActionIndex != stateController?.convValues.copyActionIndex) {
             self.preferences.copyActionIndex = stateController?.convValues.copyActionIndex ?? self.preferences.copyActionIndex
@@ -210,13 +213,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.textLabel?.text = "HexaCalc is Open Source"
                 return cell
             }
-            // View privacy policy or terms and conditions
-            else {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: indexPath.row == 2 ? "PrivacyPolicy" : "TermsAndConditions", for: indexPath)
-                cell.textLabel?.text = indexPath.row == 2 ? "View Privacy Policy" : "View Terms and Conditions"
+            // Share the app
+            else if indexPath.row == 2 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "ShareApp", for: indexPath)
+                cell.textLabel?.text = "Share"
                 cell.textLabel?.textColor = preferences.colour
                 return cell
             }
+            // Write a review
+            else {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "WriteReview", for: indexPath)
+                cell.textLabel?.text = "Review HexaCalc"
+                cell.textLabel?.textColor = preferences.colour
+                return cell
+            }
+        // Support section
+        case 4:
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: indexPath.row == 0 ? "PrivacyPolicy" : "TermsAndConditions", for: indexPath)
+            cell.textLabel?.text = indexPath.row == 0 ? "View Privacy Policy" : "View Terms and Conditions"
+            cell.textLabel?.textColor = preferences.colour
+            return cell
         default:
             fatalError("Index out of range")
         }
@@ -252,9 +268,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 navigationController?.pushViewController(destinationViewController, animated: true)
             }
         }
-        // Open a URL
+        // Open an about the app URL or open share detail menu
         if indexPath.section == 3 && indexPath.row > 0 {
-            let currentURL = NSURL(string: urls[indexPath.row - 1])! as URL
+            if indexPath.row == 3 {
+                if let currentURL = ReviewManager.getWriteReviewURL() {
+                    UIApplication.shared.open(currentURL)
+                }
+            }
+            // Present share the app activity view
+            else if indexPath.row == 2 {
+                let activityViewController = UIActivityViewController(activityItems: [ReviewManager.getProductURL()], applicationActivities: nil)
+                present(activityViewController, animated: true, completion: nil)
+            }
+            // Open link to GitHub
+            else {
+                let currentURL = NSURL(string: aboutAppURLs[indexPath.row - 1])! as URL
+                UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)
+            }
+        }
+        // Open a support URL
+        if indexPath.section == 4 {
+            let currentURL = NSURL(string: supportURLs[indexPath.row])! as URL
             UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)
         }
                 

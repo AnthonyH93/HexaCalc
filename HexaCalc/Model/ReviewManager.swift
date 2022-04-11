@@ -17,6 +17,8 @@ class ReviewManager {
     
     static let reviewCountKey = "ReviewWorthyActionCount"
     static let reviewRequestVersionKey = "LastVersionReviewRequested"
+    
+    static let productURLString = "https://apps.apple.com/app/id1529225315"
 
     static func requestReviewIfAppropriate() {
       let defaults = UserDefaults.standard
@@ -45,5 +47,24 @@ class ReviewManager {
       defaults.set(0, forKey: reviewCountKey)
       defaults.set(currentVersion, forKey: reviewRequestVersionKey)
     }
+    
+    static func getProductURL() -> URL {
+        return NSURL(string: productURLString)! as URL
+    }
+    
+    static func getWriteReviewURL() -> URL? {
+        let productURL = getProductURL()
+        
+        var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
 
+        components?.queryItems = [
+          URLQueryItem(name: "action", value: "write-review")
+        ]
+
+        guard let writeReviewURL = components?.url else {
+          return nil
+        }
+        
+        return writeReviewURL
+    }
 }
