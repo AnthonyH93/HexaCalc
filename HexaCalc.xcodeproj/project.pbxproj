@@ -66,6 +66,7 @@
 		9DC758292803C85200BB2953 /* SelectionSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */; };
 		9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */; };
 		9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */; };
+		9DC758312804CD6200BB2953 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758302804CD6200BB2953 /* ReviewManager.swift */; };
 		9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249624C553F000701F5B /* AppDelegate.swift */; };
 		9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249824C553F000701F5B /* SceneDelegate.swift */; };
 		9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */; };
@@ -148,6 +149,7 @@
 		9DC758282803C85200BB2953 /* SelectionSummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionSummaryTableViewCell.swift; sourceTree = "<group>"; };
 		9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyOrPasteActionConverter.swift; sourceTree = "<group>"; };
 		9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		9DC758302804CD6200BB2953 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		9DEF249324C553F000701F5B /* HexaCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexaCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEF249624C553F000701F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DEF249824C553F000701F5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				9DC242F125E1EE440038DD63 /* UIHelper.swift */,
 				9DC758262802A83500BB2953 /* ColourNumberConverter.swift */,
 				9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */,
+				9DC758302804CD6200BB2953 /* ReviewManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				9DC7581727ED867F00BB2953 /* TextTableViewCell.swift in Sources */,
 				9DEF249D24C553F000701F5B /* BinaryViewController.swift in Sources */,
 				9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */,
+				9DC758312804CD6200BB2953 /* ReviewManager.swift in Sources */,
 				9DC758212802842E00BB2953 /* SettingsSelectionViewController.swift in Sources */,
 				9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */,
 				9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */,
