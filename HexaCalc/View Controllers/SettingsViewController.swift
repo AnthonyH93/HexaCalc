@@ -8,8 +8,9 @@
 
 import UIKit
 import os.log
+import MessageUI
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
     //MARK: Properties
     var stateController: StateController?
@@ -19,13 +20,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                           "Customization",
                           "About the app",
                           "Support" ]
-    let rowsPerSection = [3, 2, 2, 4, 2]
+    let rowsPerSection = [3, 2, 2, 4, 3]
     
     var actions = ["One tap", "Two tap"]
     
     let supportURLs = [ "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
                         "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
     let aboutAppURLs = [ "https://github.com/AnthonyH93/HexaCalc" ]
+    
+    let feedbackAddress = "hexacalc@gmail.com"
     
     var preferences = UserPreferences.getDefaultPreferences()
     
@@ -34,10 +37,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         // We don't want cells to be reused since there are a finite number and reuse has problems when they are reloaded due to state changes
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "AppVersion")
-        table.register(TextTableViewCell.self, forCellReuseIdentifier: "PrivacyPolicy")
-        table.register(TextTableViewCell.self, forCellReuseIdentifier: "TermsAndConditions")
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "ShareApp")
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "WriteReview")
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "PrivacyPolicy")
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "TermsAndConditions")
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "EmailFeedback")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "SetCalculatorColourSwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "HexadecimalSwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "BinarySwitch")
@@ -229,10 +233,18 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         // Support section
         case 4:
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: indexPath.row == 0 ? "PrivacyPolicy" : "TermsAndConditions", for: indexPath)
-            cell.textLabel?.text = indexPath.row == 0 ? "View Privacy Policy" : "View Terms and Conditions"
-            cell.textLabel?.textColor = preferences.colour
-            return cell
+            if indexPath.row < 2 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: indexPath.row == 0 ? "PrivacyPolicy" : "TermsAndConditions", for: indexPath)
+                cell.textLabel?.text = indexPath.row == 0 ? "View Privacy Policy" : "View Terms and Conditions"
+                cell.textLabel?.textColor = preferences.colour
+                return cell
+            }
+            else {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "EmailFeedback", for: indexPath)
+                cell.textLabel?.text = "Email Feedback"
+                cell.textLabel?.textColor = preferences.colour
+                return cell
+            }
         default:
             fatalError("Index out of range")
         }
@@ -290,10 +302,18 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         // Open a support URL
         if indexPath.section == 4 {
-            let currentURL = NSURL(string: supportURLs[indexPath.row])! as URL
-            UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)
+            if indexPath.row < 2 {
+                let currentURL = NSURL(string: supportURLs[indexPath.row])! as URL
+                UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)
+            }
+            else {
+                self.sendEmail()
+            }
         }
-                
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
     
     @IBAction func hexadecimalSwitchPressed(_ sender: UISwitch) {
@@ -381,9 +401,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     viewControllers?.remove(at: 1)
                     tabBarController?.viewControllers = viewControllers
                 }
-                else {
-                    //Do nothing
-                }
             }
         }
         self.preferences = userPreferences
@@ -437,9 +454,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     viewControllers?.remove(at: 2)
                     tabBarController?.viewControllers = viewControllers
                 }
-                else {
-                    //Do nothing
-                }
             }
         }
         self.preferences = userPreferences
@@ -454,6 +468,28 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = sender.isOn
         self.preferences = userPreferences
+    }
+    
+    //MARK: Private functions
+    
+    // Prompt user to send feedback email
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([self.feedbackAddress])
+            mail.setSubject("HexaCalc App Feedback")
+
+            self.present(mail, animated: true)
+        }
+        else {
+            // Show failure alert
+            let alertMessage = "Could not generate an email, please ensure that your Mail account is setup or manually send the email to \(self.feedbackAddress)."
+            let alert = UIAlertController(title: "Email Generation Failed", message: alertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
     }
 }
 

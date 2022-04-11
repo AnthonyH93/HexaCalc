@@ -11,6 +11,7 @@
 import Foundation
 import StoreKit
 
+// Class to manage interactions with HexaCalc reviewing
 class ReviewManager {
 
     static let minimumReviewWorthyActionCount = 2
