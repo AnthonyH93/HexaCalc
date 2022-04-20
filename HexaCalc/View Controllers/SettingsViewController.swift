@@ -307,7 +307,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)
             }
             else {
-                self.sendEmail()
+                self.promptForEmail()
             }
         }
     }
@@ -473,14 +473,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: Private functions
     
     // Prompt user to send feedback email
-    func sendEmail() {
+    func promptForEmail() {
         if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients([self.feedbackAddress])
-            mail.setSubject("HexaCalc App Feedback")
-
-            self.present(mail, animated: true)
+            // Show alert to choose between report a bug or request a feature
+            let alertMessage = "Please choose the best reason for sending feedback."
+            let alert = UIAlertController(title: "Purpose of Feedback", message: alertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Report a Problem", style: .default, handler: {_ in self.createEmail(problem: true)}))
+            alert.addAction(UIAlertAction(title: "Request a Feature", style: .default, handler: {_ in self.createEmail(problem: false)}))
+            
+            self.present(alert, animated: true)
         }
         else {
             // Show failure alert
@@ -490,6 +491,28 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
             self.present(alert, animated: true)
         }
+    }
+    
+    // Add app version and iOS version to
+    func createEmail(problem: Bool) {
+        let subject = problem ? "HexaCalc Report a Problem" : "HexaCalc Request a Feature"
+        
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        mail.setToRecipients([self.feedbackAddress])
+        mail.setSubject(subject)
+        
+        // Add app version and iOS version
+        if problem {
+            let body = """
+                        Meta Data
+                        App Version: \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)
+                        iOS Version: \(UIDevice.current.systemVersion)
+                        """
+            mail.setMessageBody(body, isHTML: false)
+        }
+
+        self.present(mail, animated: true)
     }
 }
 
