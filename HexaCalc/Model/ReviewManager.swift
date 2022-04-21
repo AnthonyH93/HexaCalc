@@ -21,15 +21,23 @@ class ReviewManager {
     
     static let productURLString = "https://apps.apple.com/app/id1529225315"
 
+    static func incrementReviewWorthyCount() {
+        let defaults = UserDefaults.standard
+
+        var actionCount = defaults.integer(forKey: reviewCountKey)
+        
+        // Limit for requesting a review is 2, so no need to count past 3
+        if actionCount < 3 {
+            actionCount += 1
+            defaults.set(actionCount, forKey: reviewCountKey)
+        }
+    }
+    
     static func requestReviewIfAppropriate() {
       let defaults = UserDefaults.standard
       let bundle = Bundle.main
 
-      var actionCount = defaults.integer(forKey: reviewCountKey)
-
-      actionCount += 1
-
-      defaults.set(actionCount, forKey: reviewCountKey)
+      let actionCount = defaults.integer(forKey: reviewCountKey)
 
       guard actionCount >= minimumReviewWorthyActionCount else {
         return

@@ -43,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Couldn't read file.")
             }
         }
+        
+        // Increment review worthy count on launch
+        ReviewManager.incrementReviewWorthyCount()
+        
         return true
     }
 
