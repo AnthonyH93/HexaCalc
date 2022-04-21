@@ -71,6 +71,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             self.stateController?.convValues.colourNum = savedPreferences.colourNum
             self.stateController?.convValues.colour = savedPreferences.colour
         }
+        else {
+            // Use state controller as it will contain the default preferences
+            self.preferences.copyActionIndex = self.stateController?.convValues.copyActionIndex ?? 0
+            self.preferences.pasteActionIndex = self.stateController?.convValues.pasteActionIndex ?? 1
+            self.preferences.setCalculatorTextColour = self.stateController?.convValues.setCalculatorTextColour ?? false
+            self.preferences.colour = self.stateController?.convValues.colour ?? .systemGreen
+        }
 
         // Set custom back button text to navigationItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
