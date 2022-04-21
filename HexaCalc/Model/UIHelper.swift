@@ -105,7 +105,7 @@ class UIHelper {
         
         constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
         
-        labelFontSize = (calculator == 2) ? 30*(screenWidth/375) : 100*(screenWidth/375)
+        labelFontSize = (calculator == 2) ? 30*(screenWidth/375) : 120*(screenWidth/375)
         labelHeight = (calculator == 2) ? (labelFontSize*2.5) : labelFontSize
         
         constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
