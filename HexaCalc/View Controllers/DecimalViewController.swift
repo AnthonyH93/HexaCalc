@@ -13,6 +13,7 @@ enum Operation:String {
     case Subtract = "-"
     case Divide = "/"
     case Multiply = "*"
+    case Modulus = "%"
     case AND = "&"
     case OR = "|"
     case XOR = "^"
@@ -439,66 +440,6 @@ class DecimalViewController: UIViewController {
         self.secondFunctionMode.toggle()
     }
     
-//    @IBAction func signPressed(_ sender: RoundButton) {
-//
-//        //Essentially need to multiply the number by -1
-//        if (outputLabel.text == "0" || runningNumber == ""){
-//            //In the case that we want to negate the currently displayed number after a calculation
-//            if (outputLabel.text != "0"){
-//
-//                //Need to reset the current operation as we are overriding a null running number state
-//                currentOperation = .NULL
-//
-//                let currLabel = outputLabel.text
-//                let commasRemoved = (currLabel?.components(separatedBy: ",").joined(separator: ""))!
-//
-//                var currentNumber = Double(commasRemoved)!
-//                currentNumber *= -1
-//
-//                //Find out if number is an integer
-//                if((currentNumber).truncatingRemainder(dividingBy: 1) == 0 && !(Double(commasRemoved)! >= Double(INT64_MAX) || Double(commasRemoved)! <= Double((INT64_MAX * -1) - 1))) {
-//                    runningNumber = "\(Int(currentNumber))"
-//                }
-//                else {
-//                    runningNumber = "\(currentNumber)"
-//                }
-//
-//                if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
-//                    outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
-//                }
-//                else {
-//                    outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
-//                }
-//                quickUpdateStateController()
-//
-//            }
-//            else {
-//                runningNumber = ""
-//                outputLabel.text = "0"
-//            }
-//        }
-//        else {
-//            var number = Double(runningNumber)!
-//            number *= -1
-//
-//            //Find out if number is an integer
-//            if((number).truncatingRemainder(dividingBy: 1) == 0 && !(Double(runningNumber)! >= Double(INT64_MAX) || Double(runningNumber)! <= Double((INT64_MAX * -1) - 1))) {
-//                runningNumber = "\(Int(number))"
-//            }
-//            else {
-//                runningNumber = "\(number)"
-//            }
-//
-//            if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
-//                outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
-//            }
-//            else {
-//                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
-//            }
-//            quickUpdateStateController()
-//        }
-//    }
-    
     @IBAction func deletePressed(_ sender: RoundButton) {
         
         // Do not delete anything if the calculator is displaying a number in scientific notation
@@ -566,11 +507,76 @@ class DecimalViewController: UIViewController {
     }
     
     @IBAction func multiplyPressed(_ sender: RoundButton) {
-        operation(operation: .Multiply)
+        if secondFunctionMode {
+            operation(operation: .Modulus)
+        }
+        else {
+            operation(operation: .Multiply)
+        }
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {
-        operation(operation: .Divide)
+        if secondFunctionMode {
+            //Essentially need to multiply the number by -1
+            if (outputLabel.text == "0" || runningNumber == ""){
+                //In the case that we want to negate the currently displayed number after a calculation
+                if (outputLabel.text != "0"){
+
+                    //Need to reset the current operation as we are overriding a null running number state
+                    currentOperation = .NULL
+
+                    let currLabel = outputLabel.text
+                    let commasRemoved = (currLabel?.components(separatedBy: ",").joined(separator: ""))!
+
+                    var currentNumber = Double(commasRemoved)!
+                    currentNumber *= -1
+
+                    //Find out if number is an integer
+                    if((currentNumber).truncatingRemainder(dividingBy: 1) == 0 && !(Double(commasRemoved)! >= Double(INT64_MAX) || Double(commasRemoved)! <= Double((INT64_MAX * -1) - 1))) {
+                        runningNumber = "\(Int(currentNumber))"
+                    }
+                    else {
+                        runningNumber = "\(currentNumber)"
+                    }
+
+                    if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
+                        outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
+                    }
+                    else {
+                        outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                    }
+                    quickUpdateStateController()
+
+                }
+                else {
+                    runningNumber = ""
+                    outputLabel.text = "0"
+                }
+            }
+            else {
+                var number = Double(runningNumber)!
+                number *= -1
+
+                //Find out if number is an integer
+                if((number).truncatingRemainder(dividingBy: 1) == 0 && !(Double(runningNumber)! >= Double(INT64_MAX) || Double(runningNumber)! <= Double((INT64_MAX * -1) - 1))) {
+                    runningNumber = "\(Int(number))"
+                }
+                else {
+                    runningNumber = "\(number)"
+                }
+
+                if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
+                    outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
+                }
+                else {
+                    outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                }
+                quickUpdateStateController()
+            }
+        }
+        else {
+            operation(operation: .Divide)
+        }
     }
     
     //MARK: Private Functions
@@ -590,6 +596,9 @@ class DecimalViewController: UIViewController {
                     
                 case .Multiply:
                     result = "\(Double(leftValue)! * Double(rightValue)!)"
+                    
+                case .Modulus:
+                    result = "\(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!))"
 
                 case .Divide:
                     //Output Error! if division by 0
