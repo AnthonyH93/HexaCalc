@@ -139,15 +139,14 @@ class HexadecimalViewController: UIViewController {
         let hStacks = [hexHStack1!, hexHStack2!, hexHStack3!, hexHStack4!, hexHStack5!, hexHStack6!]
         let singleButtons = [XORBtn!, ORBtn!, ANDBtn!, NOTBtn!, DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!,
                              Btn0!, Btn1!, Btn2!, Btn3!, Btn4!, Btn5!, Btn6!, Btn7!, Btn8!, Btn9!,
-                             ABtn!, BBtn!, CBtn!, DBtn!, EBtn!, FBtn!]
-        let doubleButtons = [DELBtn!]
-        let tripleButton = ACBtn!
+                             ABtn!, BBtn!, CBtn!, DBtn!, EBtn!, FBtn!, SecondFunctionBtn!]
+        let doubleButtons = [ACBtn!, DELBtn!]
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: hexVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             
-            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
+            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
             currentContraints.append(contentsOf: buttonConstraints)
             
             let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
@@ -159,7 +158,7 @@ class HexadecimalViewController: UIViewController {
             let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: hexVStack, outputLabel: outputLabel, screenWidth: screenWidth)
             NSLayoutConstraint.activate(stackConstraints)
             
-            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, calculator: 1)
+            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, calculator: 1)
             NSLayoutConstraint.activate(buttonConstraints)
             
             let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)

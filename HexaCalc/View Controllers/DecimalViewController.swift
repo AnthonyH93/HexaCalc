@@ -101,7 +101,7 @@ class DecimalViewController: UIViewController {
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: decVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             
-            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
+            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
             currentContraints.append(contentsOf: buttonConstraints)
             
             let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
@@ -113,7 +113,7 @@ class DecimalViewController: UIViewController {
             let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: decVStack, outputLabel: outputLabel, screenWidth: screenWidth)
             NSLayoutConstraint.activate(stackConstraints)
             
-            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
+            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, calculator: 2)
             NSLayoutConstraint.activate(buttonConstraints)
             
             let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
