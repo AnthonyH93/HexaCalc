@@ -33,7 +33,7 @@ class DecimalViewController: UIViewController {
     @IBOutlet weak var outputLabel: UILabel!
     
     @IBOutlet weak var ACBtn: RoundButton!
-    @IBOutlet weak var PLUSMINUSBtn: RoundButton!
+    @IBOutlet weak var SecondFunctionBtn: RoundButton!
     @IBOutlet weak var DELBtn: RoundButton!
     @IBOutlet weak var DIVBtn: RoundButton!
     @IBOutlet weak var MULTBtn: RoundButton!
@@ -64,6 +64,8 @@ class DecimalViewController: UIViewController {
     
     var currentlyRecognizingDoubleTap = false
     
+    var secondFunctionMode = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,7 +91,7 @@ class DecimalViewController: UIViewController {
         let screenHeight = view.bounds.height
         
         let hStacks = [decHStack1!, decHStack2!, decHStack3!, decHStack4!, decHStack5!]
-        let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, DOTBtn!, PLUSMINUSBtn!,
+        let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, DOTBtn!, SecondFunctionBtn!,
                              ACBtn!, Btn1!, Btn2!, Btn3!, Btn4!, Btn5!, Btn6!, Btn7!, Btn8!, Btn9!]
         let doubleButtons = [Btn0!]
         
@@ -422,65 +424,80 @@ class DecimalViewController: UIViewController {
         stateController?.convValues.binVal = "0"
     }
     
-    @IBAction func signPressed(_ sender: RoundButton) {
-                
-        //Essentially need to multiply the number by -1
-        if (outputLabel.text == "0" || runningNumber == ""){
-            //In the case that we want to negate the currently displayed number after a calculation
-            if (outputLabel.text != "0"){
-                
-                //Need to reset the current operation as we are overriding a null running number state
-                currentOperation = .NULL
-                
-                let currLabel = outputLabel.text
-                let commasRemoved = (currLabel?.components(separatedBy: ",").joined(separator: ""))!
-                
-                var currentNumber = Double(commasRemoved)!
-                currentNumber *= -1
-                
-                //Find out if number is an integer
-                if((currentNumber).truncatingRemainder(dividingBy: 1) == 0 && !(Double(commasRemoved)! >= Double(INT64_MAX) || Double(commasRemoved)! <= Double((INT64_MAX * -1) - 1))) {
-                    runningNumber = "\(Int(currentNumber))"
-                }
-                else {
-                    runningNumber = "\(currentNumber)"
-                }
-                
-                if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
-                    outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
-                }
-                else {
-                    outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
-                }
-                quickUpdateStateController()
-                
-            }
-            else {
-                runningNumber = ""
-                outputLabel.text = "0"
-            }
+    @IBAction func secondFunctionPressed(_ sender: RoundButton) {
+        let operatorButtons = [DIVBtn, MULTBtn, SUBBtn, PLUSBtn]
+        
+        if (self.secondFunctionMode) {
+            // Change back to default operators
+            self.changeOperators(buttons: operatorButtons, secondFunctionActive: false)
         }
         else {
-            var number = Double(runningNumber)!
-            number *= -1
-            
-            //Find out if number is an integer
-            if((number).truncatingRemainder(dividingBy: 1) == 0 && !(Double(runningNumber)! >= Double(INT64_MAX) || Double(runningNumber)! <= Double((INT64_MAX * -1) - 1))) {
-                runningNumber = "\(Int(number))"
-            }
-            else {
-                runningNumber = "\(number)"
-            }
-            
-            if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
-                outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
-            }
-            else {
-                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
-            }
-            quickUpdateStateController()
+            // Change to second function operators
+            self.changeOperators(buttons: operatorButtons, secondFunctionActive: true)
         }
+        
+        self.secondFunctionMode.toggle()
     }
+    
+//    @IBAction func signPressed(_ sender: RoundButton) {
+//
+//        //Essentially need to multiply the number by -1
+//        if (outputLabel.text == "0" || runningNumber == ""){
+//            //In the case that we want to negate the currently displayed number after a calculation
+//            if (outputLabel.text != "0"){
+//
+//                //Need to reset the current operation as we are overriding a null running number state
+//                currentOperation = .NULL
+//
+//                let currLabel = outputLabel.text
+//                let commasRemoved = (currLabel?.components(separatedBy: ",").joined(separator: ""))!
+//
+//                var currentNumber = Double(commasRemoved)!
+//                currentNumber *= -1
+//
+//                //Find out if number is an integer
+//                if((currentNumber).truncatingRemainder(dividingBy: 1) == 0 && !(Double(commasRemoved)! >= Double(INT64_MAX) || Double(commasRemoved)! <= Double((INT64_MAX * -1) - 1))) {
+//                    runningNumber = "\(Int(currentNumber))"
+//                }
+//                else {
+//                    runningNumber = "\(currentNumber)"
+//                }
+//
+//                if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
+//                    outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
+//                }
+//                else {
+//                    outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+//                }
+//                quickUpdateStateController()
+//
+//            }
+//            else {
+//                runningNumber = ""
+//                outputLabel.text = "0"
+//            }
+//        }
+//        else {
+//            var number = Double(runningNumber)!
+//            number *= -1
+//
+//            //Find out if number is an integer
+//            if((number).truncatingRemainder(dividingBy: 1) == 0 && !(Double(runningNumber)! >= Double(INT64_MAX) || Double(runningNumber)! <= Double((INT64_MAX * -1) - 1))) {
+//                runningNumber = "\(Int(number))"
+//            }
+//            else {
+//                runningNumber = "\(number)"
+//            }
+//
+//            if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
+//                outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
+//            }
+//            else {
+//                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+//            }
+//            quickUpdateStateController()
+//        }
+//    }
     
     @IBAction func deletePressed(_ sender: RoundButton) {
         
@@ -769,6 +786,41 @@ class DecimalViewController: UIViewController {
         }
         else {
             outputLabel.textColor = UIColor.white
+        }
+    }
+    
+    private func changeOperators(buttons: [RoundButton?], secondFunctionActive: Bool) {
+        if secondFunctionActive {
+            for (i, button) in buttons.enumerated() {
+                switch i {
+                case 0:
+                    button?.setTitle("±", for: .normal)
+                case 1:
+                    button?.setTitle("MOD", for: .normal)
+                case 2:
+                    button?.setTitle("(", for: .normal)
+                case 3:
+                    button?.setTitle(")", for: .normal)
+                default:
+                    fatalError("Index out of range")
+                }
+            }
+        }
+        else {
+            for (i, button) in buttons.enumerated() {
+                switch i {
+                case 0:
+                    button?.setTitle("÷", for: .normal)
+                case 1:
+                    button?.setTitle("×", for: .normal)
+                case 2:
+                    button?.setTitle("-", for: .normal)
+                case 3:
+                    button?.setTitle("+", for: .normal)
+                default:
+                    fatalError("Index out of range")
+                }
+            }
         }
     }
 }
