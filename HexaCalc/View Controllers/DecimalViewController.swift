@@ -8,12 +8,13 @@
 
 import UIKit
 
-enum Operation:String {
+enum Operation: String {
     case Add = "+"
     case Subtract = "-"
     case Divide = "/"
     case Multiply = "*"
     case Modulus = "%"
+    case Exp = "EXP"
     case AND = "&"
     case OR = "|"
     case XOR = "^"
@@ -58,7 +59,7 @@ class DecimalViewController: UIViewController {
     var leftValue = ""
     var rightValue = ""
     var result = ""
-    var currentOperation:Operation = .NULL
+    var currentOperation: Operation = .NULL
     
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
     var currentContraints: [NSLayoutConstraint] = []
@@ -499,11 +500,81 @@ class DecimalViewController: UIViewController {
     }
     
     @IBAction func plusPressed(_ sender: RoundButton) {
-        operation(operation: .Add)
+        if secondFunctionMode {
+            if (outputLabel.text == "0" || runningNumber == "") {
+                //In the case that we want to negate the currently displayed number after a calculation
+                if (outputLabel.text != "0"){
+
+                    //Need to reset the current operation as we are overriding a null running number state
+                    currentOperation = .NULL
+
+                    let currLabel = outputLabel.text
+                    let commasRemoved = (currLabel?.components(separatedBy: ",").joined(separator: ""))!
+
+                    let currentNumber = Double(commasRemoved)!
+                    
+                    // Error - cannot squareroot a negative number
+                    if (currentNumber < 0.0) {
+                        result = "Error!"
+                        outputLabel.text = result
+                        return
+                    }
+                    
+                    result = "\(sqrt(currentNumber))"
+
+
+                    setupStateControllerValues()
+                    stateController?.convValues.largerThan64Bits = false
+                    
+                    if (Double(result)! > 999999999 || Double(result)! < -999999999){
+                        //Need to use scientific notation for this
+                        result = "\(Double(result)!.scientificFormatted)"
+                        outputLabel.text = result
+                        return
+                    }
+                    formatResult()
+                }
+                else {
+                    runningNumber = ""
+                    outputLabel.text = "0"
+                }
+            }
+            else {
+                let number = Double(runningNumber)!
+                
+                // Error - cannot squareroot a negative number
+                if (number < 0.0) {
+                    result = "Error!"
+                    outputLabel.text = result
+                    return
+                }
+                
+                result = "\(sqrt(number))"
+
+                setupStateControllerValues()
+                stateController?.convValues.largerThan64Bits = false
+                
+                if (Double(result)! > 999999999 || Double(result)! < -999999999){
+                    //Need to use scientific notation for this
+                    result = "\(Double(result)!.scientificFormatted)"
+                    outputLabel.text = result
+                    return
+                }
+                formatResult()
+            }
+        }
+        else {
+            operation(operation: .Add)
+        }
     }
     
     @IBAction func minusPressed(_ sender: RoundButton) {
-        operation(operation: .Subtract)
+        if secondFunctionMode {
+            operation(operation: .Exp)
+        }
+        else {
+            operation(operation: .Subtract)
+        }
     }
     
     @IBAction func multiplyPressed(_ sender: RoundButton) {
@@ -546,7 +617,6 @@ class DecimalViewController: UIViewController {
                         outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
                     }
                     quickUpdateStateController()
-
                 }
                 else {
                     runningNumber = ""
@@ -599,6 +669,9 @@ class DecimalViewController: UIViewController {
                     
                 case .Modulus:
                     result = "\(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!))"
+                    
+                case .Exp:
+                    result = "\(pow(Double(leftValue)!, Double(rightValue)!))"
 
                 case .Divide:
                     //Output Error! if division by 0
@@ -807,9 +880,9 @@ class DecimalViewController: UIViewController {
                 case 1:
                     button?.setTitle("MOD", for: .normal)
                 case 2:
-                    button?.setTitle("(", for: .normal)
+                    button?.setTitle("EXP", for: .normal)
                 case 3:
-                    button?.setTitle(")", for: .normal)
+                    button?.setTitle("√", for: .normal)
                 default:
                     fatalError("Index out of range")
                 }
