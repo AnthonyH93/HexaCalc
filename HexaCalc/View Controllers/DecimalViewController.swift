@@ -432,10 +432,12 @@ class DecimalViewController: UIViewController {
         if (self.secondFunctionMode) {
             // Change back to default operators
             self.changeOperators(buttons: operatorButtons, secondFunctionActive: false)
+            SecondFunctionBtn.backgroundColor = .lightGray
         }
         else {
             // Change to second function operators
             self.changeOperators(buttons: operatorButtons, secondFunctionActive: true)
+            SecondFunctionBtn.backgroundColor = .white
         }
         
         self.secondFunctionMode.toggle()
@@ -521,7 +523,6 @@ class DecimalViewController: UIViewController {
                     }
                     
                     result = "\(sqrt(currentNumber))"
-
 
                     setupStateControllerValues()
                     stateController?.convValues.largerThan64Bits = false
