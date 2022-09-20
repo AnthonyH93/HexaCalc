@@ -872,6 +872,7 @@ class DecimalViewController: UIViewController {
         }
     }
     
+    // Used to change the display text of buttons for second function mode
     private func changeOperators(buttons: [RoundButton?], secondFunctionActive: Bool) {
         if secondFunctionActive {
             for (i, button) in buttons.enumerated() {

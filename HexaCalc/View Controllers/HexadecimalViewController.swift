@@ -25,6 +25,7 @@ class HexadecimalViewController: UIViewController {
     
     @IBOutlet weak var ACBtn: RoundButton!
     @IBOutlet weak var DELBtn: RoundButton!
+    @IBOutlet weak var SecondFunctionBtn: RoundButton!
     @IBOutlet weak var XORBtn: RoundButton!
     @IBOutlet weak var ORBtn: RoundButton!
     @IBOutlet weak var ANDBtn: RoundButton!
@@ -62,6 +63,8 @@ class HexadecimalViewController: UIViewController {
     var currentContraints: [NSLayoutConstraint] = []
     
     var currentlyRecognizingDoubleTap = false
+    
+    var secondFunctionMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -390,7 +393,6 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func deletePressed(_ sender: RoundButton) {
-        
         //Button not available during error state
         if (stateController?.convValues.largerThan64Bits == true){
             return
@@ -416,6 +418,23 @@ class HexadecimalViewController: UIViewController {
                 quickUpdateStateController()
             }
         }
+    }
+    
+    @IBAction func secondFunctionPressed(_ sender: RoundButton) {
+        let operatorButtons = [DIVBtn, MULTBtn, SUBBtn, PLUSBtn]
+        
+        if (self.secondFunctionMode) {
+            // Change back to default operators
+            self.changeOperators(buttons: operatorButtons, secondFunctionActive: false)
+            SecondFunctionBtn.backgroundColor = .lightGray
+        }
+        else {
+            // Change to second function operators
+            self.changeOperators(buttons: operatorButtons, secondFunctionActive: true)
+            SecondFunctionBtn.backgroundColor = .white
+        }
+        
+        self.secondFunctionMode.toggle()
     }
     
     @IBAction func digitPressed(_ sender: RoundButton) {
@@ -886,6 +905,42 @@ class HexadecimalViewController: UIViewController {
         }
         else {
             outputLabel.textColor = UIColor.white
+        }
+    }
+    
+    // Used to change the display text of buttons for second function mode
+    private func changeOperators(buttons: [RoundButton?], secondFunctionActive: Bool) {
+        if secondFunctionActive {
+            for (i, button) in buttons.enumerated() {
+                switch i {
+                case 0:
+                    button?.setTitle("±", for: .normal)
+                case 1:
+                    button?.setTitle("MOD", for: .normal)
+                case 2:
+                    button?.setTitle("EXP", for: .normal)
+                case 3:
+                    button?.setTitle("√", for: .normal)
+                default:
+                    fatalError("Index out of range")
+                }
+            }
+        }
+        else {
+            for (i, button) in buttons.enumerated() {
+                switch i {
+                case 0:
+                    button?.setTitle("÷", for: .normal)
+                case 1:
+                    button?.setTitle("×", for: .normal)
+                case 2:
+                    button?.setTitle("-", for: .normal)
+                case 3:
+                    button?.setTitle("+", for: .normal)
+                default:
+                    fatalError("Index out of range")
+                }
+            }
         }
     }
 }
