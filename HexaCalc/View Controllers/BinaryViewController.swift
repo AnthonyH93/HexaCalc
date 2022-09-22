@@ -491,27 +491,21 @@ class BinaryViewController: UIViewController {
         
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
-        var newString = ""
-        //Flip all bits
-        for i in 0..<spacesRemoved.count {
-            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
-                newString += "1"
-            }
-            else {
-                newString += "0"
-            }
-        }
+        let castInt = UInt64(spacesRemoved, radix: 2)!
+        let onesComplimentInt = ~castInt
+        
+        let onesComplimentString = String(onesComplimentInt, radix: 2)
         
         //Check if new value is negative or positive
-        if (newString.first == "1" && newString.count == 64){
-            runningNumber = newString
+        if (onesComplimentString.first == "1" && onesComplimentString.count == 64){
+            runningNumber = onesComplimentString
         }
         else {
-            let asInt = Int(newString)
+            let asInt = Int(onesComplimentString)
             let removedLeadingZeroes = "\(asInt ?? 0)"
             runningNumber = removedLeadingZeroes
         }
-        var newLabelValue = newString
+        var newLabelValue = onesComplimentString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
         outputLabel.text = newLabelValue
         
@@ -526,42 +520,23 @@ class BinaryViewController: UIViewController {
             return
         }
         
-        //First flip all the bits
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
-        var newString = ""
+        let castInt = UInt64(spacesRemoved, radix: 2)!
+        let twosComplimentInt = ~castInt + 1
         
-        for i in 0..<spacesRemoved.count {
-            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
-                newString += "1"
-            }
-            else {
-                newString += "0"
-            }
-        }
-        
-        //Add 1 to the current value
-        let index = newString.lastIndex(of: "0") ?? (newString.endIndex)
-        var newSubString = String(newString.prefix(upTo: index))
-        
-        if (newSubString.count < newString.count) {
-            newSubString = newSubString + "1"
-        }
-        
-        while (newSubString.count < newString.count) {
-            newSubString = newSubString + "0"
-        }
+        let twosComplimentString = String(twosComplimentInt, radix: 2)
         
         //Check if new value is negative or positive
-        if (newSubString.first == "1" && newSubString.count == 64){
-            runningNumber = newSubString
+        if (twosComplimentString.first == "1" && twosComplimentString.count == 64){
+            runningNumber = twosComplimentString
         }
         else {
-            let asInt = Int(newSubString)
+            let asInt = Int(twosComplimentString)
             let removedLeadingZeroes = "\(asInt ?? 0)"
             runningNumber = removedLeadingZeroes
         }
-        var newLabelValue = newSubString
+        var newLabelValue = twosComplimentString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
         outputLabel.text = newLabelValue
         
