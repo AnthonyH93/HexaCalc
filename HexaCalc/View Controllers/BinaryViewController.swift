@@ -454,20 +454,15 @@ class BinaryViewController: UIViewController {
         }
         
         //If running number is empty then it will just stay as 0
-        var currentValue = ""
         if runningNumber != "" {
-        if (runningNumber.first == "1" && runningNumber.count == 64){
-            currentValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
-        }
-        else {
-            currentValue = String(Int(runningNumber, radix: 2)!)
-        }
-            currentValue = "\(Int(currentValue)! >> 1)"
+            let currLabel = outputLabel.text
+            let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+            let rightShifted = String(Int(UInt64(spacesRemoved.dropLast(), radix: 2)!))
             
             //Update the state controller
-            stateController?.convValues.decimalVal = currentValue
-            let hexConversion = String(Int(Double(currentValue)!), radix: 16)
-            let binConversion = String(Int(Double(currentValue)!), radix: 2)
+            stateController?.convValues.decimalVal = rightShifted
+            let hexConversion = String(Int(rightShifted)!, radix: 16)
+            let binConversion = String(Int(rightShifted)!, radix: 2)
             stateController?.convValues.hexVal = hexConversion
             stateController?.convValues.binVal = binConversion
             

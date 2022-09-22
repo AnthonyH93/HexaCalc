@@ -55,6 +55,7 @@ class HexadecimalViewController: UIViewController {
     //MARK: Variables
     var runningNumber = ""
     var leftValue = ""
+    var leftValueHex = ""
     var rightValue = ""
     var result = ""
     var currentOperation:Operation = .NULL
@@ -179,6 +180,7 @@ class HexadecimalViewController: UIViewController {
                 outputLabel.text = "0"
                 runningNumber = ""
                 leftValue = ""
+                leftValueHex = ""
                 rightValue = ""
                 currentOperation = .NULL
             }
@@ -310,6 +312,7 @@ class HexadecimalViewController: UIViewController {
             if (pastedInput == "0") {
                 runningNumber = ""
                 leftValue = ""
+                leftValueHex = ""
                 rightValue = ""
                 result = ""
                 outputLabel.text = "0"
@@ -380,6 +383,7 @@ class HexadecimalViewController: UIViewController {
     @IBAction func ACPressed(_ sender: RoundButton) {
         runningNumber = ""
         leftValue = ""
+        leftValueHex = ""
         rightValue = ""
         result = ""
         currentOperation = .NULL
@@ -521,7 +525,7 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func multiplyPressed(_ sender: RoundButton) {
         if secondFunctionMode {
-            
+            operation(operation: .Modulus)
         }
         else {
             operation(operation: .Multiply)
@@ -530,7 +534,8 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func minusPressed(_ sender: RoundButton) {
         if secondFunctionMode {
-            
+            // Left shift pressed
+            operation(operation: .LeftShift)
         }
         else {
             operation(operation: .Subtract)
@@ -539,7 +544,8 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func plusPressed(_ sender: RoundButton) {
         if secondFunctionMode {
-            
+            // Right shift pressed
+            operation(operation: .RightShift)
         }
         else {
             operation(operation: .Add)
@@ -614,6 +620,16 @@ class HexadecimalViewController: UIViewController {
                         result = "\(Int(leftValue)! * Int(rightValue)!)"
                     }
                     
+                case .Modulus:
+                    //Output Error! if division by 0
+                    if Int(rightValue)! == 0 {
+                        result = "Error!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        return
+                    }
+                    result = "\(Int(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!)))"
+                    
                 case .Divide:
                     //Output Error! if division by 0
                     if Int(rightValue)! == 0 {
@@ -633,6 +649,22 @@ class HexadecimalViewController: UIViewController {
                     }
                     else {
                         result = "\(Int(leftValue)! / Int(rightValue)!)"
+                    }
+                
+                case .LeftShift:
+                    result = "\(Int(leftValue)! << Int(rightValue)!)"
+                    
+                case .RightShift:
+                    let currValue = hexToBin(hexToConvert: leftValueHex)
+                    let rightShiftRight = Int(rightValue)!
+                    if (rightShiftRight <= 0) {
+                        result = leftValue
+                    }
+                    else if (rightShiftRight > currValue.count) {
+                        result = "0"
+                    }
+                    else {
+                        result = String(Int(UInt64(currValue.dropLast(rightShiftRight), radix: 2)!))
                     }
                     
                 case .AND:
@@ -667,11 +699,13 @@ class HexadecimalViewController: UIViewController {
             if (runningNumber == "") {
                 if (leftValue == "") {
                     leftValue = "0"
+                    leftValueHex = "0"
                 }
             }
             else {
+                leftValueHex = runningNumber
                 if (binLeftValue.first == "1" && binLeftValue.count == 64){
-                leftValue = String(Int64(bitPattern: UInt64(binLeftValue, radix: 2)!))
+                    leftValue = String(Int64(bitPattern: UInt64(binLeftValue, radix: 2)!))
                 }
                 else {
                     leftValue = String(Int(binLeftValue, radix: 2)!)
@@ -751,7 +785,7 @@ class HexadecimalViewController: UIViewController {
     //Helper function to convert hex to binary
     private func hexToBin(hexToConvert: String) -> String {
         var result = ""
-        var copy = hexToConvert
+        var copy = hexToConvert.uppercased()
         
         if (hexToConvert == ""){
             return hexToConvert

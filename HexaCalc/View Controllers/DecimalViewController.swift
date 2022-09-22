@@ -8,19 +8,6 @@
 
 import UIKit
 
-enum Operation: String {
-    case Add = "+"
-    case Subtract = "-"
-    case Divide = "/"
-    case Multiply = "*"
-    case Modulus = "%"
-    case Exp = "EXP"
-    case AND = "&"
-    case OR = "|"
-    case XOR = "^"
-    case NULL = "Empty"
-}
-
 class DecimalViewController: UIViewController {
     
     //MARK: Properties
