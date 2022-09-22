@@ -556,40 +556,7 @@ class BinaryViewController: UIViewController {
     }
     
     @IBAction func NOTPressed(_ sender: RoundButton) {
-        
-        //Button not available during error state
-        if (stateController?.convValues.largerThan64Bits == true){
-            return
-        }
-        
-        //Just flip all the bits
-        let currLabel = outputLabel.text
-        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
-        var newString = ""
-        //Flip all bits
-        for i in 0..<spacesRemoved.count {
-            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
-                newString += "1"
-            }
-            else {
-                newString += "0"
-            }
-        }
-        
-        //Check if new value is negative or positive
-        if (newString.first == "1" && newString.count == 64){
-            runningNumber = newString
-        }
-        else {
-            let asInt = Int(newString)
-            let removedLeadingZeroes = "\(asInt ?? 0)"
-            runningNumber = removedLeadingZeroes
-        }
-        var newLabelValue = newString
-        newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-        outputLabel.text = newLabelValue
-        
-        quickUpdateStateController()
+        onesCompPressed(sender)
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {

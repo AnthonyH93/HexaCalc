@@ -503,6 +503,7 @@ class DecimalViewController: UIViewController {
     
     @IBAction func plusPressed(_ sender: RoundButton) {
         if secondFunctionMode {
+            // Squareroot pressed
             if (outputLabel.text == "0" || runningNumber == "") {
                 //In the case that we want to negate the currently displayed number after a calculation
                 if (outputLabel.text != "0"){
@@ -589,7 +590,8 @@ class DecimalViewController: UIViewController {
     
     @IBAction func dividePressed(_ sender: RoundButton) {
         if secondFunctionMode {
-            //Essentially need to multiply the number by -1
+            // Plus/Minus pressed
+            // Essentially need to multiply the number by -1
             if (outputLabel.text == "0" || runningNumber == ""){
                 //In the case that we want to negate the currently displayed number after a calculation
                 if (outputLabel.text != "0"){

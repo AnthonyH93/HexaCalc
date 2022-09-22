@@ -477,78 +477,73 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func NOTPressed(_ sender: RoundButton) {
         
-        //Button not available during error state
+        // Button not available during error state
         if (stateController?.convValues.largerThan64Bits == true){
             return
         }
         
-        //Need to flip every bit
         var currentValue = runningNumber
         if (runningNumber == ""){
             currentValue = "0"
         }
-        //Need to extend to 64 bits
-        while (currentValue.count < 16){
-            currentValue = "0" + currentValue
-        }
-        //Convert from hex to binary
-        let binaryValue = hexToBin(hexToConvert: currentValue)
         
-        var flippedBitsBinary = ""
+        let castInt = UInt64(currentValue, radix: 16)!
+        let onesComplimentInt = ~castInt
         
-        //Perform the bit flipping
-        for i in 0..<binaryValue.count {
-            if (binaryValue[binaryValue.index(binaryValue.startIndex, offsetBy: i)] == "0"){
-                flippedBitsBinary += "1"
-            }
-            else {
-                flippedBitsBinary += "0"
-            }
-        }
+        runningNumber = String(onesComplimentInt, radix: 16).uppercased()
         
-        //Convert back to hex and update state controller
-        if (flippedBitsBinary.first == "1"){
-            stateController?.convValues.binVal = flippedBitsBinary
-            stateController?.convValues.decimalVal = String(Int64(bitPattern: UInt64(flippedBitsBinary, radix: 2)!))
-            var hexCurrentVal = String(Int64(bitPattern: UInt64(flippedBitsBinary, radix: 2)!), radix: 16)
-            hexCurrentVal = formatNegativeHex(hexToConvert: hexCurrentVal).uppercased()
-            stateController?.convValues.hexVal = hexCurrentVal
-            runningNumber = hexCurrentVal
-            outputLabel.text = runningNumber
-        }
-        else {
-            let asInt = Int(flippedBitsBinary)
-            let removedLeadingZeroes = "\(asInt ?? 0)"
-            stateController?.convValues.binVal = removedLeadingZeroes
-            stateController?.convValues.decimalVal = String(Int(removedLeadingZeroes, radix: 2)!)
-            let hexCurrentVal = String(Int(removedLeadingZeroes, radix: 2)!, radix: 16).uppercased()
-            stateController?.convValues.hexVal = hexCurrentVal
-            
-            if (hexCurrentVal == "0"){
-                runningNumber = ""
-            }
-            else {
-                runningNumber = hexCurrentVal
-            }
-            
-            outputLabel.text = hexCurrentVal
-        }
+        outputLabel.text = runningNumber
+        
+        quickUpdateStateController()
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {
-        operation(operation: .Divide)
+        if secondFunctionMode {
+            // 2's compliment pressed
+            // Button not available during error state or when the value is 0
+            if (stateController?.convValues.largerThan64Bits == true || runningNumber == ""){
+                return
+            }
+            
+            let castInt = UInt64(runningNumber, radix: 16)!
+            let twosComplimentInt = ~castInt + 1
+            
+            runningNumber = String(twosComplimentInt, radix: 16).uppercased()
+            
+            outputLabel.text = runningNumber
+            
+            quickUpdateStateController()
+        }
+        else {
+            operation(operation: .Divide)
+        }
     }
     
     @IBAction func multiplyPressed(_ sender: RoundButton) {
-        operation(operation: .Multiply)
+        if secondFunctionMode {
+            
+        }
+        else {
+            operation(operation: .Multiply)
+        }
     }
     
     @IBAction func minusPressed(_ sender: RoundButton) {
-        operation(operation: .Subtract)
+        if secondFunctionMode {
+            
+        }
+        else {
+            operation(operation: .Subtract)
+        }
     }
     
     @IBAction func plusPressed(_ sender: RoundButton) {
-        operation(operation: .Add)
+        if secondFunctionMode {
+            
+        }
+        else {
+            operation(operation: .Add)
+        }
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
