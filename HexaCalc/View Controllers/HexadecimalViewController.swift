@@ -913,13 +913,13 @@ class HexadecimalViewController: UIViewController {
             for (i, button) in buttons.enumerated() {
                 switch i {
                 case 0:
-                    button?.setTitle("±", for: .normal)
+                    button?.setTitle("2's", for: .normal)
                 case 1:
                     button?.setTitle("MOD", for: .normal)
                 case 2:
-                    button?.setTitle("EXP", for: .normal)
+                    button?.setTitle("<<X", for: .normal)
                 case 3:
-                    button?.setTitle("√", for: .normal)
+                    button?.setTitle(">>X", for: .normal)
                 default:
                     fatalError("Index out of range")
                 }
