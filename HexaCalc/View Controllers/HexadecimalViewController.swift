@@ -63,6 +63,8 @@ class HexadecimalViewController: UIViewController {
     
     var currentlyRecognizingDoubleTap = false
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

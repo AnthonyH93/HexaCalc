@@ -68,6 +68,8 @@ class DecimalViewController: UIViewController {
     
     var secondFunctionMode = false
     
+    var calculationHistory: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -185,6 +187,13 @@ class DecimalViewController: UIViewController {
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             NSLayoutConstraint.deactivate(currentContraints)
             currentContraints.removeAll()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.destination is CalculationHistoryViewController) {
+            let vc = segue.destination as! CalculationHistoryViewController
+            vc.calculationHistory = calculationHistory
         }
     }
     
@@ -653,10 +662,15 @@ class DecimalViewController: UIViewController {
     //MARK: Private Functions
     
     private func operation(operation: Operation) {
+        
         if currentOperation != .NULL {
             if runningNumber != "" {
                 rightValue = runningNumber
                 runningNumber = ""
+                
+                // Create calculation representation to add to history of calculations
+                let calculationRepresentation = "\(leftValue) \(operation.rawValue) \(rightValue)"
+                calculationHistory.append(calculationRepresentation)
                 
                 switch (currentOperation) {
                 case .Add:
@@ -714,6 +728,7 @@ class DecimalViewController: UIViewController {
                 }
                 formatResult()
             }
+            
             currentOperation = operation
         }
         else {

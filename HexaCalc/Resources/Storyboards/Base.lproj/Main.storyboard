@@ -499,7 +499,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="99" y="-363"/>
+            <point key="canvasLocation" x="98.550724637681171" y="-363.61607142857139"/>
+        </scene>
+        <!--Calculation History View Controller-->
+        <scene sceneID="wwF-Pt-vzf">
+            <objects>
+                <viewController id="mI5-fy-VRx" customClass="CalculationHistoryViewController" customModule="HexaCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6JK-gY-jv2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculation History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Hm-d3-MZl">
+                                <rect key="frame" x="105.33333333333333" y="36" width="203.66666666666669" height="30"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Em7-TN-XCK">
+                                <rect key="frame" x="0.0" y="74" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="calculationHistoryCell" id="nYd-PP-Ipo">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nYd-PP-Ipo" id="sHK-03-oDS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5O7-hT-DSb"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5O7-hT-DSb" firstAttribute="trailing" secondItem="Em7-TN-XCK" secondAttribute="trailing" id="18n-Zf-EUX"/>
+                            <constraint firstItem="Em7-TN-XCK" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="bottom" constant="8" id="8Y9-l3-4ag"/>
+                            <constraint firstItem="Em7-TN-XCK" firstAttribute="leading" secondItem="5O7-hT-DSb" secondAttribute="leading" id="CRR-n5-HLt"/>
+                            <constraint firstItem="5O7-hT-DSb" firstAttribute="bottom" secondItem="Em7-TN-XCK" secondAttribute="bottom" id="Ncg-02-Jkj"/>
+                            <constraint firstItem="5O7-hT-DSb" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="top" constant="8" id="XQs-5h-d9P"/>
+                            <constraint firstItem="0Hm-d3-MZl" firstAttribute="centerX" secondItem="5O7-hT-DSb" secondAttribute="centerX" id="pUN-U6-bys"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RUg-ak-FVQ"/>
+                    <connections>
+                        <outlet property="tableView" destination="Em7-TN-XCK" id="srK-1q-TUr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WOc-Mp-eaD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="882.60869565217399" y="-1021.2053571428571"/>
         </scene>
         <!--Binary-->
         <scene sceneID="wg7-f3-ORb">
@@ -1180,13 +1229,24 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2z-BK-qG9">
+                                        <rect key="frame" x="260" y="0.0" width="146" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Calculation History"/>
+                                        <connections>
+                                            <segue destination="mI5-fy-VRx" kind="show" id="pm7-Mn-O33"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="YRn-jp-boy" firstAttribute="top" secondItem="a2J-4m-Np0" secondAttribute="bottom" priority="250" constant="23" id="4Mn-Si-XTX"/>
                                     <constraint firstItem="YRn-jp-boy" firstAttribute="bottom" secondItem="2gC-fg-Gz8" secondAttribute="bottomMargin" id="HbO-rU-dvK"/>
+                                    <constraint firstItem="b2z-BK-qG9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2gC-fg-Gz8" secondAttribute="leading" constant="20" symbolic="YES" id="IBf-mI-WrA"/>
                                     <constraint firstItem="a2J-4m-Np0" firstAttribute="centerX" secondItem="YRn-jp-boy" secondAttribute="centerX" id="ZtP-6E-lmq"/>
+                                    <constraint firstAttribute="trailing" secondItem="b2z-BK-qG9" secondAttribute="trailing" constant="8" id="iyK-u9-M2r"/>
                                     <constraint firstItem="YRn-jp-boy" firstAttribute="centerX" secondItem="2gC-fg-Gz8" secondAttribute="centerX" id="kvT-4s-uJk"/>
+                                    <constraint firstItem="b2z-BK-qG9" firstAttribute="top" secondItem="2gC-fg-Gz8" secondAttribute="top" id="vCZ-Rm-wfA"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1231,7 +1291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zxz-Tp-VmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1599" y="-364"/>
+            <point key="canvasLocation" x="1598.5507246376812" y="-364.28571428571428"/>
         </scene>
         <!--Settings-->
         <scene sceneID="pFY-ga-fjx">
