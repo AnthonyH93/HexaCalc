@@ -90,7 +90,7 @@ class BinaryViewController: UIViewController {
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: binVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             
-            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
+            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
             currentContraints.append(contentsOf: buttonConstraints)
             
             let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
@@ -102,7 +102,7 @@ class BinaryViewController: UIViewController {
             let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, outputLabel: outputLabel, screenWidth: screenWidth)
             NSLayoutConstraint.activate(stackConstraints)
             
-            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
+            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, calculator: 2)
             NSLayoutConstraint.activate(buttonConstraints)
             
             let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
@@ -454,20 +454,15 @@ class BinaryViewController: UIViewController {
         }
         
         //If running number is empty then it will just stay as 0
-        var currentValue = ""
         if runningNumber != "" {
-        if (runningNumber.first == "1" && runningNumber.count == 64){
-            currentValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
-        }
-        else {
-            currentValue = String(Int(runningNumber, radix: 2)!)
-        }
-            currentValue = "\(Int(currentValue)! >> 1)"
+            let currLabel = outputLabel.text
+            let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+            let rightShifted = String(Int(UInt64(spacesRemoved.dropLast(), radix: 2)!))
             
             //Update the state controller
-            stateController?.convValues.decimalVal = currentValue
-            let hexConversion = String(Int(Double(currentValue)!), radix: 16)
-            let binConversion = String(Int(Double(currentValue)!), radix: 2)
+            stateController?.convValues.decimalVal = rightShifted
+            let hexConversion = String(Int(rightShifted)!, radix: 16)
+            let binConversion = String(Int(rightShifted)!, radix: 2)
             stateController?.convValues.hexVal = hexConversion
             stateController?.convValues.binVal = binConversion
             
@@ -491,27 +486,21 @@ class BinaryViewController: UIViewController {
         
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
-        var newString = ""
-        //Flip all bits
-        for i in 0..<spacesRemoved.count {
-            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
-                newString += "1"
-            }
-            else {
-                newString += "0"
-            }
-        }
+        let castInt = UInt64(spacesRemoved, radix: 2)!
+        let onesComplimentInt = ~castInt
+        
+        let onesComplimentString = String(onesComplimentInt, radix: 2)
         
         //Check if new value is negative or positive
-        if (newString.first == "1" && newString.count == 64){
-            runningNumber = newString
+        if (onesComplimentString.first == "1" && onesComplimentString.count == 64){
+            runningNumber = onesComplimentString
         }
         else {
-            let asInt = Int(newString)
+            let asInt = Int(onesComplimentString)
             let removedLeadingZeroes = "\(asInt ?? 0)"
             runningNumber = removedLeadingZeroes
         }
-        var newLabelValue = newString
+        var newLabelValue = onesComplimentString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
         outputLabel.text = newLabelValue
         
@@ -526,42 +515,23 @@ class BinaryViewController: UIViewController {
             return
         }
         
-        //First flip all the bits
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
-        var newString = ""
+        let castInt = UInt64(spacesRemoved, radix: 2)!
+        let twosComplimentInt = ~castInt + 1
         
-        for i in 0..<spacesRemoved.count {
-            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
-                newString += "1"
-            }
-            else {
-                newString += "0"
-            }
-        }
-        
-        //Add 1 to the current value
-        let index = newString.lastIndex(of: "0") ?? (newString.endIndex)
-        var newSubString = String(newString.prefix(upTo: index))
-        
-        if (newSubString.count < newString.count) {
-            newSubString = newSubString + "1"
-        }
-        
-        while (newSubString.count < newString.count) {
-            newSubString = newSubString + "0"
-        }
+        let twosComplimentString = String(twosComplimentInt, radix: 2)
         
         //Check if new value is negative or positive
-        if (newSubString.first == "1" && newSubString.count == 64){
-            runningNumber = newSubString
+        if (twosComplimentString.first == "1" && twosComplimentString.count == 64){
+            runningNumber = twosComplimentString
         }
         else {
-            let asInt = Int(newSubString)
+            let asInt = Int(twosComplimentString)
             let removedLeadingZeroes = "\(asInt ?? 0)"
             runningNumber = removedLeadingZeroes
         }
-        var newLabelValue = newSubString
+        var newLabelValue = twosComplimentString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
         outputLabel.text = newLabelValue
         
@@ -581,40 +551,7 @@ class BinaryViewController: UIViewController {
     }
     
     @IBAction func NOTPressed(_ sender: RoundButton) {
-        
-        //Button not available during error state
-        if (stateController?.convValues.largerThan64Bits == true){
-            return
-        }
-        
-        //Just flip all the bits
-        let currLabel = outputLabel.text
-        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
-        var newString = ""
-        //Flip all bits
-        for i in 0..<spacesRemoved.count {
-            if (spacesRemoved[spacesRemoved.index(spacesRemoved.startIndex, offsetBy: i)] == "0"){
-                newString += "1"
-            }
-            else {
-                newString += "0"
-            }
-        }
-        
-        //Check if new value is negative or positive
-        if (newString.first == "1" && newString.count == 64){
-            runningNumber = newString
-        }
-        else {
-            let asInt = Int(newString)
-            let removedLeadingZeroes = "\(asInt ?? 0)"
-            runningNumber = removedLeadingZeroes
-        }
-        var newLabelValue = newString
-        newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-        outputLabel.text = newLabelValue
-        
-        quickUpdateStateController()
+        onesCompPressed(sender)
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {

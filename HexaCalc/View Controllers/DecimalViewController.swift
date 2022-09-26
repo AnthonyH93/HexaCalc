@@ -8,19 +8,6 @@
 
 import UIKit
 
-enum Operation: String {
-    case Add = "+"
-    case Subtract = "-"
-    case Divide = "/"
-    case Multiply = "*"
-    case Modulus = "%"
-    case Exp = "EXP"
-    case AND = "&"
-    case OR = "|"
-    case XOR = "^"
-    case NULL = "Empty"
-}
-
 class DecimalViewController: UIViewController {
     
     //MARK: Properties
@@ -103,7 +90,7 @@ class DecimalViewController: UIViewController {
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: decVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             
-            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
+            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
             currentContraints.append(contentsOf: buttonConstraints)
             
             let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
@@ -115,7 +102,7 @@ class DecimalViewController: UIViewController {
             let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: decVStack, outputLabel: outputLabel, screenWidth: screenWidth)
             NSLayoutConstraint.activate(stackConstraints)
             
-            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: nil, screenWidth: screenWidth, calculator: 2)
+            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, calculator: 2)
             NSLayoutConstraint.activate(buttonConstraints)
             
             let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
@@ -512,6 +499,7 @@ class DecimalViewController: UIViewController {
     
     @IBAction func plusPressed(_ sender: RoundButton) {
         if secondFunctionMode {
+            // Squareroot pressed
             if (outputLabel.text == "0" || runningNumber == "") {
                 //In the case that we want to negate the currently displayed number after a calculation
                 if (outputLabel.text != "0"){
@@ -598,7 +586,8 @@ class DecimalViewController: UIViewController {
     
     @IBAction func dividePressed(_ sender: RoundButton) {
         if secondFunctionMode {
-            //Essentially need to multiply the number by -1
+            // Plus/Minus pressed
+            // Essentially need to multiply the number by -1
             if (outputLabel.text == "0" || runningNumber == ""){
                 //In the case that we want to negate the currently displayed number after a calculation
                 if (outputLabel.text != "0"){
@@ -887,6 +876,7 @@ class DecimalViewController: UIViewController {
         }
     }
     
+    // Used to change the display text of buttons for second function mode
     private func changeOperators(buttons: [RoundButton?], secondFunctionActive: Bool) {
         if secondFunctionActive {
             for (i, button) in buttons.enumerated() {

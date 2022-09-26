@@ -44,7 +44,7 @@ class UIHelper {
     }
     
     // Setup calculator button constraints
-    static func setupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], tripleButton: RoundButton?, screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
+    static func setupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], screenWidth: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
         let stackWidth = screenWidth - 20
         var singleButtonSize: CGFloat = 0
         var doubleButtonSize: CGFloat = 0
@@ -56,18 +56,9 @@ class UIHelper {
         if (calculator == 1) {
             singleButtonSize = (stackWidth - 20)/5.0
             doubleButtonSize = (singleButtonSize * 2) + 5
-            let tripleButtonSize: CGFloat = (singleButtonSize * 3) + 10
             
             // Scale button font size based on screen width
             buttonFontSize = 27*(screenWidth/375)
-            
-            if (tripleButton != nil) {
-                constraints.append(tripleButton!.widthAnchor.constraint(equalToConstant: tripleButtonSize))
-                constraints.append(tripleButton!.heightAnchor.constraint(equalToConstant: singleButtonSize))
-                tripleButton!.layer.cornerRadius = singleButtonSize/2
-                tripleButton!.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
-            }
-            
         }
         // Binary or Decimal
         else {
@@ -155,12 +146,12 @@ class UIHelper {
     }
     
     // Setup calculator button constraints for iPad
-    static func iPadSetupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], tripleButton: RoundButton?, screenWidth: CGFloat, screenHeight: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
+    static func iPadSetupButtonConstraints(singleButtons: [RoundButton], doubleButtons: [RoundButton], screenWidth: CGFloat, screenHeight: CGFloat, calculator: Int) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
         
         // Use iPhone constraints if screen width is of that size
         if (screenWidth < 415) {
-            constraints = setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, calculator: calculator)
+            constraints = setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, calculator: calculator)
         }
         else {
             let stackWidth = screenWidth - 20
@@ -180,18 +171,9 @@ class UIHelper {
                 buttonHeight = (vStackHeight - 25)/6
                 singleButtonWidth = (stackWidth - 40)/5.0
                 doubleButtonWidth = (singleButtonWidth * 2) + 10
-                let tripleButtonWidth: CGFloat = (singleButtonWidth * 3) + 20
                 
                 // Scale button font size based on screen width
                 buttonFontSize = 27*(min(screenHeight, screenWidth)/375)
-                
-                if (tripleButton != nil) {
-                    constraints.append(tripleButton!.widthAnchor.constraint(equalToConstant: tripleButtonWidth))
-                    constraints.append(tripleButton!.heightAnchor.constraint(equalToConstant: buttonHeight))
-                    tripleButton!.layer.cornerRadius = ((screenWidth * 2) > screenHeight) ? buttonHeight/2 : buttonHeight/3
-                    tripleButton!.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize, weight: .semibold)
-                }
-                
             }
             // Binary or Decimal
             else {

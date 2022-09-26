@@ -25,6 +25,7 @@ class HexadecimalViewController: UIViewController {
     
     @IBOutlet weak var ACBtn: RoundButton!
     @IBOutlet weak var DELBtn: RoundButton!
+    @IBOutlet weak var SecondFunctionBtn: RoundButton!
     @IBOutlet weak var XORBtn: RoundButton!
     @IBOutlet weak var ORBtn: RoundButton!
     @IBOutlet weak var ANDBtn: RoundButton!
@@ -54,6 +55,7 @@ class HexadecimalViewController: UIViewController {
     //MARK: Variables
     var runningNumber = ""
     var leftValue = ""
+    var leftValueHex = ""
     var rightValue = ""
     var result = ""
     var currentOperation:Operation = .NULL
@@ -63,7 +65,7 @@ class HexadecimalViewController: UIViewController {
     
     var currentlyRecognizingDoubleTap = false
     
-    
+    var secondFunctionMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,15 +140,14 @@ class HexadecimalViewController: UIViewController {
         let hStacks = [hexHStack1!, hexHStack2!, hexHStack3!, hexHStack4!, hexHStack5!, hexHStack6!]
         let singleButtons = [XORBtn!, ORBtn!, ANDBtn!, NOTBtn!, DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!,
                              Btn0!, Btn1!, Btn2!, Btn3!, Btn4!, Btn5!, Btn6!, Btn7!, Btn8!, Btn9!,
-                             ABtn!, BBtn!, CBtn!, DBtn!, EBtn!, FBtn!]
-        let doubleButtons = [DELBtn!]
-        let tripleButton = ACBtn!
+                             ABtn!, BBtn!, CBtn!, DBtn!, EBtn!, FBtn!, SecondFunctionBtn!]
+        let doubleButtons = [ACBtn!, DELBtn!]
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: hexVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
             currentContraints.append(contentsOf: stackConstraints)
             
-            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
+            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
             currentContraints.append(contentsOf: buttonConstraints)
             
             let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
@@ -158,7 +159,7 @@ class HexadecimalViewController: UIViewController {
             let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: hexVStack, outputLabel: outputLabel, screenWidth: screenWidth)
             NSLayoutConstraint.activate(stackConstraints)
             
-            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, tripleButton: tripleButton, screenWidth: screenWidth, calculator: 1)
+            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, calculator: 1)
             NSLayoutConstraint.activate(buttonConstraints)
             
             let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 1)
@@ -179,6 +180,7 @@ class HexadecimalViewController: UIViewController {
                 outputLabel.text = "0"
                 runningNumber = ""
                 leftValue = ""
+                leftValueHex = ""
                 rightValue = ""
                 currentOperation = .NULL
             }
@@ -310,6 +312,7 @@ class HexadecimalViewController: UIViewController {
             if (pastedInput == "0") {
                 runningNumber = ""
                 leftValue = ""
+                leftValueHex = ""
                 rightValue = ""
                 result = ""
                 outputLabel.text = "0"
@@ -380,6 +383,7 @@ class HexadecimalViewController: UIViewController {
     @IBAction func ACPressed(_ sender: RoundButton) {
         runningNumber = ""
         leftValue = ""
+        leftValueHex = ""
         rightValue = ""
         result = ""
         currentOperation = .NULL
@@ -392,7 +396,6 @@ class HexadecimalViewController: UIViewController {
     }
     
     @IBAction func deletePressed(_ sender: RoundButton) {
-        
         //Button not available during error state
         if (stateController?.convValues.largerThan64Bits == true){
             return
@@ -418,6 +421,23 @@ class HexadecimalViewController: UIViewController {
                 quickUpdateStateController()
             }
         }
+    }
+    
+    @IBAction func secondFunctionPressed(_ sender: RoundButton) {
+        let operatorButtons = [DIVBtn, MULTBtn, SUBBtn, PLUSBtn]
+        
+        if (self.secondFunctionMode) {
+            // Change back to default operators
+            self.changeOperators(buttons: operatorButtons, secondFunctionActive: false)
+            SecondFunctionBtn.backgroundColor = .lightGray
+        }
+        else {
+            // Change to second function operators
+            self.changeOperators(buttons: operatorButtons, secondFunctionActive: true)
+            SecondFunctionBtn.backgroundColor = .white
+        }
+        
+        self.secondFunctionMode.toggle()
     }
     
     @IBAction func digitPressed(_ sender: RoundButton) {
@@ -461,78 +481,75 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func NOTPressed(_ sender: RoundButton) {
         
-        //Button not available during error state
+        // Button not available during error state
         if (stateController?.convValues.largerThan64Bits == true){
             return
         }
         
-        //Need to flip every bit
         var currentValue = runningNumber
         if (runningNumber == ""){
             currentValue = "0"
         }
-        //Need to extend to 64 bits
-        while (currentValue.count < 16){
-            currentValue = "0" + currentValue
-        }
-        //Convert from hex to binary
-        let binaryValue = hexToBin(hexToConvert: currentValue)
         
-        var flippedBitsBinary = ""
+        let castInt = UInt64(currentValue, radix: 16)!
+        let onesComplimentInt = ~castInt
         
-        //Perform the bit flipping
-        for i in 0..<binaryValue.count {
-            if (binaryValue[binaryValue.index(binaryValue.startIndex, offsetBy: i)] == "0"){
-                flippedBitsBinary += "1"
-            }
-            else {
-                flippedBitsBinary += "0"
-            }
-        }
+        runningNumber = String(onesComplimentInt, radix: 16).uppercased()
         
-        //Convert back to hex and update state controller
-        if (flippedBitsBinary.first == "1"){
-            stateController?.convValues.binVal = flippedBitsBinary
-            stateController?.convValues.decimalVal = String(Int64(bitPattern: UInt64(flippedBitsBinary, radix: 2)!))
-            var hexCurrentVal = String(Int64(bitPattern: UInt64(flippedBitsBinary, radix: 2)!), radix: 16)
-            hexCurrentVal = formatNegativeHex(hexToConvert: hexCurrentVal).uppercased()
-            stateController?.convValues.hexVal = hexCurrentVal
-            runningNumber = hexCurrentVal
-            outputLabel.text = runningNumber
-        }
-        else {
-            let asInt = Int(flippedBitsBinary)
-            let removedLeadingZeroes = "\(asInt ?? 0)"
-            stateController?.convValues.binVal = removedLeadingZeroes
-            stateController?.convValues.decimalVal = String(Int(removedLeadingZeroes, radix: 2)!)
-            let hexCurrentVal = String(Int(removedLeadingZeroes, radix: 2)!, radix: 16).uppercased()
-            stateController?.convValues.hexVal = hexCurrentVal
-            
-            if (hexCurrentVal == "0"){
-                runningNumber = ""
-            }
-            else {
-                runningNumber = hexCurrentVal
-            }
-            
-            outputLabel.text = hexCurrentVal
-        }
+        outputLabel.text = runningNumber
+        
+        quickUpdateStateController()
     }
     
     @IBAction func dividePressed(_ sender: RoundButton) {
-        operation(operation: .Divide)
+        if secondFunctionMode {
+            // 2's compliment pressed
+            // Button not available during error state or when the value is 0
+            if (stateController?.convValues.largerThan64Bits == true || runningNumber == ""){
+                return
+            }
+            
+            let castInt = UInt64(runningNumber, radix: 16)!
+            let twosComplimentInt = ~castInt + 1
+            
+            runningNumber = String(twosComplimentInt, radix: 16).uppercased()
+            
+            outputLabel.text = runningNumber
+            
+            quickUpdateStateController()
+        }
+        else {
+            operation(operation: .Divide)
+        }
     }
     
     @IBAction func multiplyPressed(_ sender: RoundButton) {
-        operation(operation: .Multiply)
+        if secondFunctionMode {
+            operation(operation: .Modulus)
+        }
+        else {
+            operation(operation: .Multiply)
+        }
     }
     
     @IBAction func minusPressed(_ sender: RoundButton) {
-        operation(operation: .Subtract)
+        if secondFunctionMode {
+            // Left shift pressed
+            operation(operation: .LeftShift)
+        }
+        else {
+            operation(operation: .Subtract)
+        }
     }
     
     @IBAction func plusPressed(_ sender: RoundButton) {
-        operation(operation: .Add)
+        if secondFunctionMode {
+            // Right shift pressed
+            operation(operation: .RightShift)
+        }
+        else {
+            operation(operation: .Add)
+        }
     }
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
@@ -603,6 +620,16 @@ class HexadecimalViewController: UIViewController {
                         result = "\(Int(leftValue)! * Int(rightValue)!)"
                     }
                     
+                case .Modulus:
+                    //Output Error! if division by 0
+                    if Int(rightValue)! == 0 {
+                        result = "Error!"
+                        outputLabel.text = result
+                        currentOperation = operation
+                        return
+                    }
+                    result = "\(Int(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!)))"
+                    
                 case .Divide:
                     //Output Error! if division by 0
                     if Int(rightValue)! == 0 {
@@ -622,6 +649,22 @@ class HexadecimalViewController: UIViewController {
                     }
                     else {
                         result = "\(Int(leftValue)! / Int(rightValue)!)"
+                    }
+                
+                case .LeftShift:
+                    result = "\(Int(leftValue)! << Int(rightValue)!)"
+                    
+                case .RightShift:
+                    let currValue = hexToBin(hexToConvert: leftValueHex)
+                    let rightShiftRight = Int(rightValue)!
+                    if (rightShiftRight <= 0) {
+                        result = leftValue
+                    }
+                    else if (rightShiftRight > currValue.count) {
+                        result = "0"
+                    }
+                    else {
+                        result = String(Int(UInt64(currValue.dropLast(rightShiftRight), radix: 2)!))
                     }
                     
                 case .AND:
@@ -656,11 +699,13 @@ class HexadecimalViewController: UIViewController {
             if (runningNumber == "") {
                 if (leftValue == "") {
                     leftValue = "0"
+                    leftValueHex = "0"
                 }
             }
             else {
+                leftValueHex = runningNumber
                 if (binLeftValue.first == "1" && binLeftValue.count == 64){
-                leftValue = String(Int64(bitPattern: UInt64(binLeftValue, radix: 2)!))
+                    leftValue = String(Int64(bitPattern: UInt64(binLeftValue, radix: 2)!))
                 }
                 else {
                     leftValue = String(Int(binLeftValue, radix: 2)!)
@@ -740,7 +785,7 @@ class HexadecimalViewController: UIViewController {
     //Helper function to convert hex to binary
     private func hexToBin(hexToConvert: String) -> String {
         var result = ""
-        var copy = hexToConvert
+        var copy = hexToConvert.uppercased()
         
         if (hexToConvert == ""){
             return hexToConvert
@@ -888,6 +933,42 @@ class HexadecimalViewController: UIViewController {
         }
         else {
             outputLabel.textColor = UIColor.white
+        }
+    }
+    
+    // Used to change the display text of buttons for second function mode
+    private func changeOperators(buttons: [RoundButton?], secondFunctionActive: Bool) {
+        if secondFunctionActive {
+            for (i, button) in buttons.enumerated() {
+                switch i {
+                case 0:
+                    button?.setTitle("2's", for: .normal)
+                case 1:
+                    button?.setTitle("MOD", for: .normal)
+                case 2:
+                    button?.setTitle("<<X", for: .normal)
+                case 3:
+                    button?.setTitle(">>X", for: .normal)
+                default:
+                    fatalError("Index out of range")
+                }
+            }
+        }
+        else {
+            for (i, button) in buttons.enumerated() {
+                switch i {
+                case 0:
+                    button?.setTitle("÷", for: .normal)
+                case 1:
+                    button?.setTitle("×", for: .normal)
+                case 2:
+                    button?.setTitle("-", for: .normal)
+                case 3:
+                    button?.setTitle("+", for: .normal)
+                default:
+                    fatalError("Index out of range")
+                }
+            }
         }
     }
 }

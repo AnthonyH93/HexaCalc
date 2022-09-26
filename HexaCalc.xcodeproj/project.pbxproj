@@ -50,6 +50,7 @@
 		9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */; };
 		9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */; };
 		9DC758312804CD6200BB2953 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758302804CD6200BB2953 /* ReviewManager.swift */; };
+		9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9FB4728DC220E00705A4F /* Operation.swift */; };
 		9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249624C553F000701F5B /* AppDelegate.swift */; };
 		9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249824C553F000701F5B /* SceneDelegate.swift */; };
 		9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249A24C553F000701F5B /* HexadecimalViewController.swift */; };
@@ -117,6 +118,7 @@
 		9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyOrPasteActionConverter.swift; sourceTree = "<group>"; };
 		9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		9DC758302804CD6200BB2953 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		9DE9FB4728DC220E00705A4F /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		9DEF249324C553F000701F5B /* HexaCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexaCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEF249624C553F000701F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DEF249824C553F000701F5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				9DC758262802A83500BB2953 /* ColourNumberConverter.swift */,
 				9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */,
 				9DC758302804CD6200BB2953 /* ReviewManager.swift */,
+				9DE9FB4728DC220E00705A4F /* Operation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				9DC7582428028CC600BB2953 /* SelectionTableViewCell.swift in Sources */,
 				9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */,
 				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
+				9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
 				9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */,
