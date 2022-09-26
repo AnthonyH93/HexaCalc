@@ -23,22 +23,41 @@ class HexaCalcUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testBasicAppSetup() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//        XCUIApplication().buttons["hexadecimalOutputLabel"].tap()
-//        let text = app.staticTexts.element(matching: .any, identifier: "hexadecimalOutputLabel").label
+        // Launched on Hexadecimal tab
         
-        let button = XCUIApplication().buttons["A"]
-        button.tap()
-        button.tap()
-        
-//        let text = app.staticTexts["hexadecimalOutputLabel"].element.label
+        app.buttons["A"].tap()
+        app.buttons["B"].tap()
                 
-        XCTAssert(app.staticTexts["AA"].label == "AA")
+        XCTAssert(app.staticTexts["AB"].label == "AB")
+        
+        let tabBar = app.tabBars["Tab Bar"]
+        
+        tabBar.buttons["Binary"].tap()
+                
+        XCTAssert(app.buttons["0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1010 1011"].label == "0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1010 1011")
+        
+        app/*@START_MENU_TOKEN@*/.staticTexts["1"]/*[[".buttons[\"1\"].staticTexts[\"1\"]",".staticTexts[\"1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        tabBar.buttons["Decimal"].tap()
+        
+        XCTAssert(app.buttons["343"].label == "343")
+        
+        app.buttons["9"].tap()
+        
+        tabBar.buttons["Settings"].tap()
+        
+        // App rating popup might appear
+        if (app.scrollViews.otherElements.buttons["Not Now"].exists) {
+            app.scrollViews.otherElements.buttons["Not Now"].tap()
+        }
+        
+        tabBar.buttons["Hexadecimal"].tap()
+                
         
 //        let app = XCUIApplication()
 //        app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Cancel"].tap()
