@@ -57,14 +57,77 @@ class HexaCalcUITests: XCTestCase {
         }
         
         tabBar.buttons["Hexadecimal"].tap()
-                
         
-//        let app = XCUIApplication()
-//        app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Cancel"].tap()
-//
-//        let hexadecimaloutputlabelStaticText = app.staticTexts["hexadecimalOutputLabel"]
-//        hexadecimaloutputlabelStaticText.tap()
-//        hexadecimaloutputlabelStaticText.tap()
-        //        XCTAssert(text == "0")
+        XCTAssert(app.staticTexts["D6F"].label == "D6F")
+    }
+    
+    func testHexadecimalBasicCalculations() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        
+        let acButton = app.buttons["AC"]
+        let divButton = app.buttons["÷"]
+        let multButton = app.buttons["×"]
+        let subButton = app.buttons["-"]
+        let plusButton = app.buttons["+"]
+        let equalsButton = app.buttons["="]
+        
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        
+        XCTAssert(app.staticTexts["10"].label == "10")
+        
+        // Addition
+        plusButton.tap()
+        
+        app.buttons["3"].tap()
+        app.buttons["2"].tap()
+        
+        XCTAssert(app.staticTexts["32"].label == "32")
+        
+        equalsButton.tap()
+        
+        XCTAssert(app.staticTexts["42"].label == "42")
+        
+        // Subtraction
+        subButton.tap()
+        
+        app.buttons["3"].tap()
+        app.buttons["0"].tap()
+        
+        XCTAssert(app.staticTexts["30"].label == "30")
+        
+        equalsButton.tap()
+        
+        XCTAssert(app.staticTexts["12"].label == "12")
+        
+        // Multiplication
+        multButton.tap()
+        
+        app.buttons["F"].tap()
+        app.buttons["E"].tap()
+        
+        XCTAssert(app.staticTexts["FE"].label == "FE")
+        
+        equalsButton.tap()
+        
+        XCTAssert(app.staticTexts["11DC"].label == "11DC")
+        
+        // Division
+        divButton.tap()
+        
+        app.buttons["A"].tap()
+        app.buttons["B"].tap()
+        
+        XCTAssert(app.staticTexts["AB"].label == "AB")
+        
+        equalsButton.tap()
+        
+        XCTAssert(app.staticTexts["1A"].label == "1A")
+        
+        acButton.tap()
+                
+        XCTAssert(!app.staticTexts["1A"].exists)
     }
 }
