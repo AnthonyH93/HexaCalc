@@ -48,6 +48,8 @@ class BinaryViewController: UIViewController {
     var runningNumber = ""
     var leftValue = ""
     var rightValue = ""
+    var leftBinValue = ""
+    var rightBinValue = ""
     var result = ""
     var currentOperation:Operation = .NULL
     
@@ -55,6 +57,8 @@ class BinaryViewController: UIViewController {
     var currentContraints: [NSLayoutConstraint] = []
     
     var currentlyRecognizingDoubleTap = false
+    
+    var calculationHistory: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +78,12 @@ class BinaryViewController: UIViewController {
         
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CalculationHistoryViewController {
+            vc.calculationHistory = calculationHistory
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -578,6 +588,9 @@ class BinaryViewController: UIViewController {
     private func operation(operation: Operation) {
         if currentOperation != .NULL {
             if runningNumber != "" {
+                
+                leftBinValue = runningNumber
+                
                 if (runningNumber.first == "1" && runningNumber.count == 64){
                     rightValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
                 }
@@ -680,10 +693,17 @@ class BinaryViewController: UIViewController {
                 }
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
                 outputLabel.text = newLabelValue
+                
+                let operationToStore = "\(leftBinValue) \(operation.rawValue) \(rightBinValue)"
+                calculationHistory.append(operationToStore)
+                
+                rightBinValue = newLabelValue
             }
             currentOperation = operation
         }
         else {
+            
+            rightBinValue = runningNumber
             //If string is empty it should be interpreted as a 0
             if runningNumber == "" {
                 if (leftValue == "") {

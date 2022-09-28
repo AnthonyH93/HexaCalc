@@ -453,9 +453,19 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-0s-Vvk">
+                                        <rect key="frame" x="260" y="0.0" width="146" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Calculation History"/>
+                                        <connections>
+                                            <segue destination="mI5-fy-VRx" kind="show" id="a6X-bd-Zhu"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="ChW-0s-Vvk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4da-24-9uX" secondAttribute="leading" constant="20" symbolic="YES" id="K6C-m4-jY2"/>
+                                    <constraint firstAttribute="trailing" secondItem="ChW-0s-Vvk" secondAttribute="trailing" constant="8" id="PDU-iH-jMW"/>
                                     <constraint firstItem="e8g-mp-jBB" firstAttribute="bottom" secondItem="4da-24-9uX" secondAttribute="bottomMargin" id="Qox-fa-Lxj"/>
                                     <constraint firstItem="Z7g-zo-MXa" firstAttribute="centerX" secondItem="e8g-mp-jBB" secondAttribute="centerX" id="Shr-A0-ioB"/>
                                     <constraint firstItem="e8g-mp-jBB" firstAttribute="top" secondItem="Z7g-zo-MXa" secondAttribute="bottom" priority="250" constant="23" id="T3G-Qs-Vvf"/>
@@ -469,6 +479,7 @@
                             <constraint firstItem="4da-24-9uX" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="5zp-2V-Jd0"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="4da-24-9uX" secondAttribute="bottom" id="Js1-SX-7aq"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="4da-24-9uX" secondAttribute="trailing" id="RG6-a4-McA"/>
+                            <constraint firstItem="ChW-0s-Vvk" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="RXC-hZ-wci"/>
                             <constraint firstItem="4da-24-9uX" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="cdG-BT-a8F"/>
                         </constraints>
                     </view>
@@ -525,13 +536,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculation History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Hm-d3-MZl">
-                                <rect key="frame" x="105.33333333333333" y="36" width="203.66666666666669" height="30"/>
+                                <rect key="frame" x="105.33333333333333" y="52" width="203.66666666666669" height="30"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Em7-TN-XCK">
-                                <rect key="frame" x="0.0" y="74" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="90" width="414" height="752"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="calculationHistoryCell" id="nYd-PP-Ipo">
@@ -552,7 +563,7 @@
                             <constraint firstItem="Em7-TN-XCK" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="bottom" constant="8" id="8Y9-l3-4ag"/>
                             <constraint firstItem="Em7-TN-XCK" firstAttribute="leading" secondItem="5O7-hT-DSb" secondAttribute="leading" id="CRR-n5-HLt"/>
                             <constraint firstItem="5O7-hT-DSb" firstAttribute="bottom" secondItem="Em7-TN-XCK" secondAttribute="bottom" id="Ncg-02-Jkj"/>
-                            <constraint firstItem="5O7-hT-DSb" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="top" constant="8" id="XQs-5h-d9P"/>
+                            <constraint firstItem="5O7-hT-DSb" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="top" constant="-8" id="XQs-5h-d9P"/>
                             <constraint firstItem="0Hm-d3-MZl" firstAttribute="centerX" secondItem="5O7-hT-DSb" secondAttribute="centerX" id="pUN-U6-bys"/>
                         </constraints>
                     </view>
@@ -878,10 +889,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQT-NH-z0d">
+                                        <rect key="frame" x="260" y="0.0" width="146" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Calculation History"/>
+                                        <connections>
+                                            <segue destination="mI5-fy-VRx" kind="show" id="3cW-T8-B0X"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="55i-hd-IgX" firstAttribute="centerX" secondItem="HKc-mO-UCF" secondAttribute="centerX" id="1i1-53-J7H"/>
+                                    <constraint firstAttribute="trailing" secondItem="jQT-NH-z0d" secondAttribute="trailing" constant="8" id="5qg-yq-tZN"/>
+                                    <constraint firstItem="jQT-NH-z0d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HKc-mO-UCF" secondAttribute="leading" constant="20" symbolic="YES" id="AsZ-EB-c7f"/>
                                     <constraint firstItem="55i-hd-IgX" firstAttribute="top" secondItem="c3H-nl-HbE" secondAttribute="bottom" priority="250" constant="23" id="XBA-3T-MJ9"/>
                                     <constraint firstItem="55i-hd-IgX" firstAttribute="bottom" secondItem="HKc-mO-UCF" secondAttribute="bottomMargin" id="YdW-OG-G2P"/>
                                     <constraint firstItem="c3H-nl-HbE" firstAttribute="centerX" secondItem="55i-hd-IgX" secondAttribute="centerX" id="ch3-Ke-rPy"/>
@@ -893,6 +914,7 @@
                         <constraints>
                             <constraint firstItem="HKc-mO-UCF" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="aVR-RW-4WE"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="HKc-mO-UCF" secondAttribute="bottom" id="alG-PE-2Gp"/>
+                            <constraint firstItem="jQT-NH-z0d" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="fnc-Em-SWZ"/>
                             <constraint firstItem="HKc-mO-UCF" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="obL-ub-Bjo"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="HKc-mO-UCF" secondAttribute="trailing" id="t2U-vS-EVp"/>
                         </constraints>
@@ -1592,6 +1614,9 @@
             <size key="intrinsicContentSize" width="30" height="53"/>
         </designable>
     </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="pm7-Mn-O33"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="01.square" catalog="system" width="128" height="114"/>
         <image name="dot.square" catalog="system" width="128" height="114"/>

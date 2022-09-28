@@ -57,7 +57,11 @@ class HexadecimalViewController: UIViewController {
     var leftValue = ""
     var leftValueHex = ""
     var rightValue = ""
+    // Values used to store calculation history
+    var leftHexValue = ""
+    var rightHexValue = ""
     var result = ""
+    
     var currentOperation:Operation = .NULL
     
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
@@ -65,7 +69,10 @@ class HexadecimalViewController: UIViewController {
     
     var currentlyRecognizingDoubleTap = false
     
+
     var secondFunctionMode = false
+
+    var calculationHistory: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +137,12 @@ class HexadecimalViewController: UIViewController {
 
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CalculationHistoryViewController {
+            vc.calculationHistory = calculationHistory
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -559,7 +572,13 @@ class HexadecimalViewController: UIViewController {
     //MARK: Private Functions
     
     private func operation(operation: Operation) {
+        
         if currentOperation != .NULL {
+            
+            if runningNumber != "" {
+                leftHexValue = runningNumber
+            }
+            
             let binRightValue = hexToBin(hexToConvert: runningNumber)
             if binRightValue != "" {
                 if (binRightValue.first == "1" && binRightValue.count == 64) {
@@ -569,6 +588,8 @@ class HexadecimalViewController: UIViewController {
                     rightValue = String(Int(binRightValue, radix: 2)!)
                 }
                 runningNumber = ""
+                
+                
                 
                 switch (currentOperation) {
                     
@@ -690,10 +711,16 @@ class HexadecimalViewController: UIViewController {
                     newLabelValue = formatNegativeHex(hexToConvert: newLabelValue).uppercased()
                 }
                 outputLabel.text = newLabelValue
+                
+                let operationToStore = "\(leftHexValue) \(operation.rawValue) \(rightHexValue)"
+                calculationHistory.append(operationToStore)
+                
+                rightHexValue = newLabelValue
             }
             currentOperation = operation
         }
         else {
+            rightHexValue = runningNumber
             //If string is empty it should be interpreted as a 0
             let binLeftValue = hexToBin(hexToConvert: runningNumber)
             if (runningNumber == "") {
@@ -978,4 +1005,10 @@ extension HexadecimalViewController: StateControllerProtocol {
   func setState(state: StateController) {
     self.stateController = state
   }
+}
+
+struct CalculationHistory {
+    var operation: Operation
+    var leftValue: String
+    var rightValue: String
 }
