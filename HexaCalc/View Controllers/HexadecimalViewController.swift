@@ -1006,9 +1006,3 @@ extension HexadecimalViewController: StateControllerProtocol {
     self.stateController = state
   }
 }
-
-struct CalculationHistory {
-    var operation: Operation
-    var leftValue: String
-    var rightValue: String
-}
