@@ -42,7 +42,7 @@ class BinaryViewController: UIViewController {
     @IBOutlet weak var EQUALSBtn: RoundButton!
     @IBOutlet weak var Btn00: RoundButton!
     @IBOutlet weak var Btn11: RoundButton!
-    
+    @IBOutlet weak var calculationHistoryButton: UIButton!
     
     //MARK: Variables
     var runningNumber = ""
@@ -58,7 +58,7 @@ class BinaryViewController: UIViewController {
     
     var currentlyRecognizingDoubleTap = false
     
-    var calculationHistory: [String] = []
+    var calculationHistory: [CalculationData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +72,7 @@ class BinaryViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            calculationHistoryButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
@@ -159,6 +160,7 @@ class BinaryViewController: UIViewController {
             MULTBtn.backgroundColor = stateController?.convValues.colour
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
+            calculationHistoryButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary
@@ -694,8 +696,8 @@ class BinaryViewController: UIViewController {
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
                 outputLabel.text = newLabelValue
                 
-                let operationToStore = "\(leftBinValue) \(operation.rawValue) \(rightBinValue)"
-                calculationHistory.append(operationToStore)
+                let calculationData = CalculationData(leftValue: leftBinValue, rightValue: rightBinValue, operation: operation, result: newLabelValue)
+                calculationHistory.append(calculationData)
                 
                 rightBinValue = newLabelValue
             }

@@ -51,6 +51,7 @@ class HexadecimalViewController: UIViewController {
     @IBOutlet weak var Btn2: RoundButton!
     @IBOutlet weak var Btn3: RoundButton!
     @IBOutlet weak var EQUALSBtn: RoundButton!
+    @IBOutlet weak var calculationHistoryButton: UIButton!
     
     //MARK: Variables
     var runningNumber = ""
@@ -72,7 +73,7 @@ class HexadecimalViewController: UIViewController {
 
     var secondFunctionMode = false
 
-    var calculationHistory: [String] = []
+    var calculationHistory: [CalculationData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +127,7 @@ class HexadecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            calculationHistoryButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
             
@@ -182,7 +184,7 @@ class HexadecimalViewController: UIViewController {
     //Load the current converted value from either of the other calculator screens
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if ((stateController?.convValues.largerThan64Bits)!) {
             outputLabel.text = "Error! Integer overflow!"
         }
@@ -216,6 +218,7 @@ class HexadecimalViewController: UIViewController {
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
             outputLabel.textColor = stateController?.convValues.colour
+            calculationHistoryButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary
@@ -712,8 +715,8 @@ class HexadecimalViewController: UIViewController {
                 }
                 outputLabel.text = newLabelValue
                 
-                let operationToStore = "\(leftHexValue) \(operation.rawValue) \(rightHexValue)"
-                calculationHistory.append(operationToStore)
+                let calculationData = CalculationData(leftValue: leftHexValue, rightValue: rightHexValue, operation: currentOperation, result: newLabelValue)
+                calculationHistory.append(calculationData)
                 
                 rightHexValue = newLabelValue
             }

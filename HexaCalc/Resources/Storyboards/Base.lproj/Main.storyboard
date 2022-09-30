@@ -513,6 +513,7 @@
                         <outlet property="SUBBtn" destination="Gez-Xo-Kz8" id="JXu-j1-fKf"/>
                         <outlet property="SecondFunctionBtn" destination="6Pw-L1-6hK" id="vgp-XQ-F3U"/>
                         <outlet property="XORBtn" destination="orD-ym-tCe" id="hTE-nX-WMP"/>
+                        <outlet property="calculationHistoryButton" destination="ChW-0s-Vvk" id="Zl2-4g-E7m"/>
                         <outlet property="hexHStack1" destination="35y-Ac-0Gl" id="O1P-My-I3M"/>
                         <outlet property="hexHStack2" destination="oxv-2j-paj" id="Uha-eo-59l"/>
                         <outlet property="hexHStack3" destination="vZb-vh-zDY" id="CjJ-4F-tDk"/>
@@ -536,14 +537,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculation History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Hm-d3-MZl">
-                                <rect key="frame" x="105.33333333333333" y="52" width="203.66666666666669" height="30"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="81.000000000000014" y="60" width="252.33333333333337" height="37"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Em7-TN-XCK">
-                                <rect key="frame" x="0.0" y="90" width="414" height="752"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Em7-TN-XCK">
+                                <rect key="frame" x="0.0" y="113" width="414" height="729"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="calculationHistoryCell" id="nYd-PP-Ipo">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="43.666667938232422"/>
@@ -552,18 +554,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5O7-hT-DSb"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5O7-hT-DSb" firstAttribute="trailing" secondItem="Em7-TN-XCK" secondAttribute="trailing" id="18n-Zf-EUX"/>
-                            <constraint firstItem="Em7-TN-XCK" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="bottom" constant="8" id="8Y9-l3-4ag"/>
+                            <constraint firstItem="Em7-TN-XCK" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="bottom" constant="16" id="8Y9-l3-4ag"/>
                             <constraint firstItem="Em7-TN-XCK" firstAttribute="leading" secondItem="5O7-hT-DSb" secondAttribute="leading" id="CRR-n5-HLt"/>
                             <constraint firstItem="5O7-hT-DSb" firstAttribute="bottom" secondItem="Em7-TN-XCK" secondAttribute="bottom" id="Ncg-02-Jkj"/>
-                            <constraint firstItem="5O7-hT-DSb" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="top" constant="-8" id="XQs-5h-d9P"/>
+                            <constraint firstItem="5O7-hT-DSb" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="top" constant="-16" id="XQs-5h-d9P"/>
                             <constraint firstItem="0Hm-d3-MZl" firstAttribute="centerX" secondItem="5O7-hT-DSb" secondAttribute="centerX" id="pUN-U6-bys"/>
                         </constraints>
                     </view>
@@ -946,6 +949,7 @@
                         <outlet property="binHStack4" destination="3IF-xw-PqV" id="xKI-CL-fgm"/>
                         <outlet property="binHStack5" destination="ggU-ns-mmy" id="nUn-z6-iCS"/>
                         <outlet property="binVStack" destination="55i-hd-IgX" id="fLD-4O-4fn"/>
+                        <outlet property="calculationHistoryButton" destination="jQT-NH-z0d" id="wru-4P-MYC"/>
                         <outlet property="outputLabel" destination="c3H-nl-HbE" id="Ika-ID-pHJ"/>
                     </connections>
                 </viewController>
@@ -1317,6 +1321,7 @@
                         <outlet property="PLUSBtn" destination="FR4-Tm-oSL" id="UIb-PI-jJH"/>
                         <outlet property="SUBBtn" destination="dLL-MC-QGn" id="Edy-KV-upM"/>
                         <outlet property="SecondFunctionBtn" destination="0jA-8e-5dW" id="80F-rw-jXb"/>
+                        <outlet property="calculationHistoryButton" destination="b2z-BK-qG9" id="jmd-3O-Ko3"/>
                         <outlet property="decHStack1" destination="iy6-EE-Ni3" id="EwX-kn-7h6"/>
                         <outlet property="decHStack2" destination="VS6-jf-MsZ" id="txb-dV-zXZ"/>
                         <outlet property="decHStack3" destination="9os-7c-VOg" id="L7v-NX-f58"/>
