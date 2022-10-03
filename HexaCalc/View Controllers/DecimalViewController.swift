@@ -58,7 +58,7 @@ class DecimalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        outputLabel.text = "0"
+        updateOutputLabel(value: "0")
         
         if let savedPreferences = DataPersistence.loadPreferences() {
             PLUSBtn.backgroundColor = savedPreferences.colour
@@ -161,7 +161,7 @@ class DecimalViewController: UIViewController {
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
         
-        outputLabel.text = decimalLabelText
+        updateOutputLabel(value: decimalLabelText ?? "0")
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
@@ -264,7 +264,7 @@ class DecimalViewController: UIViewController {
                 leftValue = ""
                 rightValue = ""
                 result = ""
-                outputLabel.text = "0"
+                updateOutputLabel(value: "0")
                 stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.decimalVal = "0"
                 stateController?.convValues.hexVal = "0"
@@ -277,13 +277,13 @@ class DecimalViewController: UIViewController {
                 if (Double(pastedInput)! > 999999999 || Double(pastedInput)! < -999999999){
                     //Need to use scientific notation for this
                     runningNumber = pastedInput
-                    outputLabel.text = "\(Double(pastedInput)!.scientificFormatted)"
+                    updateOutputLabel(value: "\(Double(pastedInput)!.scientificFormatted)")
                     quickUpdateStateController()
                 }
                 else {
                     if(Double(pastedInput)!.truncatingRemainder(dividingBy: 1) == 0) {
                         runningNumber = "\(Int(Double(pastedInput)!))"
-                        outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                        updateOutputLabel(value: self.formatDecimalString(stringToConvert: runningNumber))
                     }
                     else {
                         if (pastedInput.count > 9){
@@ -311,7 +311,7 @@ class DecimalViewController: UIViewController {
                             runningNumber = pastedInput
                         }
                     }
-                    outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                    updateOutputLabel(value: self.formatDecimalString(stringToConvert: runningNumber))
                     quickUpdateStateController()
                 }
             }
@@ -391,7 +391,7 @@ class DecimalViewController: UIViewController {
                 else {
                     runningNumber += "\(sender.tag)"
                 }
-                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                updateOutputLabel(value: self.formatDecimalString(stringToConvert: runningNumber))
             }
             
             stateController?.convValues.largerThan64Bits = false
@@ -405,7 +405,7 @@ class DecimalViewController: UIViewController {
         rightValue = ""
         result = ""
         currentOperation = .NULL
-        outputLabel.text = "0"
+        updateOutputLabel(value: "0")
         
         stateController?.convValues.largerThan64Bits = false
         stateController?.convValues.decimalVal = "0"
@@ -444,7 +444,7 @@ class DecimalViewController: UIViewController {
             //Need to set label to 0 when we remove last digit
             if (runningNumber.count == 1 || ((runningNumber.first == "-") && (runningNumber.count == 2)) || (runningNumber == "0.")){
                 runningNumber = ""
-                outputLabel.text = "0"
+                updateOutputLabel(value: "0")
                 
                 stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.binVal = "0"
@@ -453,7 +453,7 @@ class DecimalViewController: UIViewController {
             }
             else {
                 runningNumber.removeLast()
-                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                updateOutputLabel(value: self.formatDecimalString(stringToConvert: runningNumber))
                 quickUpdateStateController()
             }
         }
@@ -471,11 +471,11 @@ class DecimalViewController: UIViewController {
             if (outputLabel.text == "0" || runningNumber == ""){
                 runningNumber = ""
                 runningNumber = "0."
-                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                updateOutputLabel(value: self.formatDecimalString(stringToConvert: runningNumber))
             }
             else {
                 runningNumber += "."
-                outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                updateOutputLabel(value: self.formatDecimalString(stringToConvert: runningNumber))
             }
             
             stateController?.convValues.largerThan64Bits = false
@@ -506,7 +506,7 @@ class DecimalViewController: UIViewController {
                     // Error - cannot squareroot a negative number
                     if (currentNumber < 0.0) {
                         result = "Error!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         return
                     }
                     
@@ -518,14 +518,14 @@ class DecimalViewController: UIViewController {
                     if (Double(result)! > 999999999 || Double(result)! < -999999999){
                         //Need to use scientific notation for this
                         result = "\(Double(result)!.scientificFormatted)"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         return
                     }
                     formatResult()
                 }
                 else {
                     runningNumber = ""
-                    outputLabel.text = "0"
+                    updateOutputLabel(value: "0")
                 }
             }
             else {
@@ -534,7 +534,7 @@ class DecimalViewController: UIViewController {
                 // Error - cannot squareroot a negative number
                 if (number < 0.0) {
                     result = "Error!"
-                    outputLabel.text = result
+                    updateOutputLabel(value: result)
                     return
                 }
                 
@@ -546,7 +546,7 @@ class DecimalViewController: UIViewController {
                 if (Double(result)! > 999999999 || Double(result)! < -999999999){
                     //Need to use scientific notation for this
                     result = "\(Double(result)!.scientificFormatted)"
-                    outputLabel.text = result
+                    updateOutputLabel(value: result)
                     return
                 }
                 formatResult()
@@ -601,16 +601,16 @@ class DecimalViewController: UIViewController {
                     }
 
                     if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
-                        outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
+                        updateOutputLabel(value: "\(Double(runningNumber)!.scientificFormatted)")
                     }
                     else {
-                        outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                        updateOutputLabel(value: self.formatDecimalString(stringToConvert: runningNumber))
                     }
                     quickUpdateStateController()
                 }
                 else {
                     runningNumber = ""
-                    outputLabel.text = "0"
+                    updateOutputLabel(value: "0")
                 }
             }
             else {
@@ -626,10 +626,10 @@ class DecimalViewController: UIViewController {
                 }
 
                 if (runningNumber.contains("e") || (Double(runningNumber)! > 999999999 || Double(runningNumber)! < -999999999)) {
-                    outputLabel.text = "\(Double(runningNumber)!.scientificFormatted)"
+                    updateOutputLabel(value: "\(Double(runningNumber)!.scientificFormatted)")
                 }
                 else {
-                    outputLabel.text = self.formatDecimalString(stringToConvert: runningNumber)
+                    updateOutputLabel(value: self.formatDecimalString(stringToConvert: runningNumber))
                 }
                 quickUpdateStateController()
             }
@@ -667,7 +667,7 @@ class DecimalViewController: UIViewController {
                     //Output Error! if division by 0
                     if Double(rightValue)! == 0.0 {
                         result = "Error!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         return
                     }
@@ -697,7 +697,7 @@ class DecimalViewController: UIViewController {
                 if (Double(result)! > 999999999 || Double(result)! < -999999999){
                     //Need to use scientific notation for this
                     result = "\(Double(result)!.scientificFormatted)"
-                    outputLabel.text = result
+                    updateOutputLabel(value: result)
                     currentOperation = operation
                     return
                 }
@@ -731,7 +731,7 @@ class DecimalViewController: UIViewController {
                 result = "\(Int(Double(result)!))"
             }
             
-            outputLabel.text = self.formatDecimalString(stringToConvert: result)
+            updateOutputLabel(value: self.formatDecimalString(stringToConvert: result))
         }
         else {
             if (result.count > 9 && !result.contains("e")) {
@@ -761,19 +761,19 @@ class DecimalViewController: UIViewController {
                     if ((decimalComponents[1].rangeOfCharacter(from: chars) == nil)) {
                         result = decimalComponents[0]
                         stateController?.convValues.decimalVal = result
-                        outputLabel.text = self.formatDecimalString(stringToConvert: result)
+                        updateOutputLabel(value: self.formatDecimalString(stringToConvert: result))
                         return
                     }
                 }
-                outputLabel.text = self.formatDecimalString(stringToConvert: roundedResult)
+                updateOutputLabel(value: self.formatDecimalString(stringToConvert: roundedResult))
                 stateController?.convValues.decimalVal = roundedResult
             }
             else {
                 if (result.contains("e")) {
-                    outputLabel.text = "\(Double(result)!.scientificFormatted)"
+                    updateOutputLabel(value: "\(Double(result)!.scientificFormatted)")
                 }
                 else {
-                    outputLabel.text = self.formatDecimalString(stringToConvert: result)
+                    updateOutputLabel(value: self.formatDecimalString(stringToConvert: result))
                 }
             }
         }
@@ -895,6 +895,12 @@ class DecimalViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // Standardized function to update the output label
+    private func updateOutputLabel(value: String) {
+        outputLabel.text = value
+        outputLabel.accessibilityLabel = value
     }
 }
 
