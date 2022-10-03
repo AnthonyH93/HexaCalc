@@ -81,7 +81,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
         // Set custom back button text to navigationItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         // Launching settings is a review worthy action, request a review if appropriate
         ReviewManager.requestReviewIfAppropriate()
@@ -113,9 +113,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         // Colour the navigation bar
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self.preferences.colour]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: self.preferences.colour]
-        navigationItem.backBarButtonItem?.tintColor = self.preferences.colour
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationItem.backBarButtonItem?.tintColor = .white
     }
     
     // Setup number of rows per section
