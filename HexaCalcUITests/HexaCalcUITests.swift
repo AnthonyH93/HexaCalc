@@ -34,19 +34,19 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["A"].tap()
         app.buttons["B"].tap()
                 
-        XCTAssert(app.staticTexts["AB"].label == "AB")
+        XCTAssert(assertResult(app: app, expected: "AB", isBinary: false))
         
         let tabBar = app.tabBars["Tab Bar"]
         
         tabBar.buttons["Binary"].tap()
                 
-        XCTAssert(app.buttons["0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1010 1011"].label == "0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1010 1011")
+        XCTAssert(assertResult(app: app, expected: "10101011", isBinary: true))
         
         app/*@START_MENU_TOKEN@*/.staticTexts["1"]/*[[".buttons[\"1\"].staticTexts[\"1\"]",".staticTexts[\"1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
         tabBar.buttons["Decimal"].tap()
         
-        XCTAssert(app.buttons["343"].label == "343")
+        XCTAssert(assertResult(app: app, expected: "343", isBinary: false))
         
         app.buttons["9"].tap()
         
@@ -59,7 +59,7 @@ class HexaCalcUITests: XCTestCase {
         
         tabBar.buttons["Hexadecimal"].tap()
         
-        XCTAssert(app.staticTexts["D6F"].label == "D6F")
+        XCTAssert(assertResult(app: app, expected: "D6F", isBinary: false))
     }
     
     func testHexadecimalBasicCalculations() throws {
@@ -77,7 +77,7 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["0"].tap()
         
-        XCTAssert(app.staticTexts["10"].label == "10")
+        XCTAssert(assertResult(app: app, expected: "10", isBinary: false))
         
         // Addition
         plusButton.tap()
@@ -85,11 +85,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["3"].tap()
         app.buttons["2"].tap()
         
-        XCTAssert(app.staticTexts["32"].label == "32")
+        XCTAssert(assertResult(app: app, expected: "32", isBinary: false))
         
         equalsButton.tap()
         
-        XCTAssert(app.staticTexts["42"].label == "42")
+        XCTAssert(assertResult(app: app, expected: "42", isBinary: false))
         
         // Subtraction
         subButton.tap()
@@ -97,11 +97,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["3"].tap()
         app.buttons["0"].tap()
         
-        XCTAssert(app.staticTexts["30"].label == "30")
+        XCTAssert(assertResult(app: app, expected: "30", isBinary: false))
         
         equalsButton.tap()
         
-        XCTAssert(app.staticTexts["12"].label == "12")
+        XCTAssert(assertResult(app: app, expected: "12", isBinary: false))
         
         // Multiplication
         multButton.tap()
@@ -109,11 +109,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["F"].tap()
         app.buttons["E"].tap()
         
-        XCTAssert(app.staticTexts["FE"].label == "FE")
+        XCTAssert(assertResult(app: app, expected: "FE", isBinary: false))
         
         equalsButton.tap()
         
-        XCTAssert(app.staticTexts["11DC"].label == "11DC")
+        XCTAssert(assertResult(app: app, expected: "11DC", isBinary: false))
         
         // Division
         divButton.tap()
@@ -121,11 +121,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["A"].tap()
         app.buttons["B"].tap()
         
-        XCTAssert(app.staticTexts["AB"].label == "AB")
+        XCTAssert(assertResult(app: app, expected: "AB", isBinary: false))
         
         equalsButton.tap()
         
-        XCTAssert(app.staticTexts["1A"].label == "1A")
+        XCTAssert(assertResult(app: app, expected: "1A", isBinary: false))
         
         acButton.tap()
                 
@@ -137,6 +137,10 @@ class HexaCalcUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
+        let tabBar = app.tabBars["Tab Bar"]
+        
+        tabBar.buttons["Binary"].tap()
+        
         let acButton = app.buttons["AC"]
         let divButton = app.buttons["÷"]
         let multButton = app.buttons["×"]
@@ -147,59 +151,58 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["0"].tap()
         
-        XCTAssert(app.staticTexts["10"].label == "10")
+        XCTAssert(assertResult(app: app, expected: "10", isBinary: true))
         
         // Addition
         plusButton.tap()
         
-        app.buttons["3"].tap()
-        app.buttons["2"].tap()
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
         
-        XCTAssert(app.staticTexts["32"].label == "32")
+        XCTAssert(assertResult(app: app, expected: "10", isBinary: true))
         
         equalsButton.tap()
         
-        XCTAssert(app.staticTexts["42"].label == "42")
+        XCTAssert(assertResult(app: app, expected: "100", isBinary: true))
         
         // Subtraction
         subButton.tap()
         
-        app.buttons["3"].tap()
-        app.buttons["0"].tap()
+        app.buttons["1"].tap()
         
-        XCTAssert(app.staticTexts["30"].label == "30")
+        XCTAssert(assertResult(app: app, expected: "1", isBinary: true))
         
         equalsButton.tap()
         
-        XCTAssert(app.staticTexts["12"].label == "12")
+        XCTAssert(assertResult(app: app, expected: "11", isBinary: true))
         
         // Multiplication
         multButton.tap()
         
-        app.buttons["F"].tap()
-        app.buttons["E"].tap()
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
         
-        XCTAssert(app.staticTexts["FE"].label == "FE")
+        XCTAssert(assertResult(app: app, expected: "11", isBinary: true))
         
         equalsButton.tap()
         
-        XCTAssert(app.staticTexts["11DC"].label == "11DC")
+        XCTAssert(assertResult(app: app, expected: "1001", isBinary: true))
         
         // Division
         divButton.tap()
         
-        app.buttons["A"].tap()
-        app.buttons["B"].tap()
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
         
-        XCTAssert(app.staticTexts["AB"].label == "AB")
+        XCTAssert(assertResult(app: app, expected: "11", isBinary: true))
         
         equalsButton.tap()
         
-        XCTAssert(app.staticTexts["1A"].label == "1A")
+        XCTAssert(assertResult(app: app, expected: "11", isBinary: true))
         
         acButton.tap()
                 
-        XCTAssert(!app.staticTexts["1A"].exists)
+        XCTAssert(!app.buttons[formatBinaryString(stringToConvert: "11")].exists)
     }
     
     // Helper functions
@@ -207,7 +210,7 @@ class HexaCalcUITests: XCTestCase {
     func assertResult(app: XCUIApplication, expected: String, isBinary: Bool) -> Bool {
         if isBinary {
             let text = formatBinaryString(stringToConvert: expected)
-            return app.staticTexts[text].label == text
+            return app.buttons[text].label == text
         }
         else {
             return app.staticTexts[expected].label == expected
@@ -219,15 +222,6 @@ class HexaCalcUITests: XCTestCase {
         while (manipulatedStringToConvert.count < 64){
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
-        return separate(every: 4, with: "")
-    }
-}
-
-// Redeclared here since
-extension String {
-    func separate(every: Int, with separator: String) -> String {
-        return String(stride(from: 0, to: Array(self).count, by: every).map {
-            Array(Array(self)[$0..<min($0 + every, Array(self).count)])
-        }.joined(separator: separator))
+        return manipulatedStringToConvert.separate(every: 4, with: " ")
     }
 }

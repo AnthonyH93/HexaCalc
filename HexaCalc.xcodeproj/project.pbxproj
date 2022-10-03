@@ -67,8 +67,9 @@
 		9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */; };
 		9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */; };
 		9DC758312804CD6200BB2953 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758302804CD6200BB2953 /* ReviewManager.swift */; };
-		9DE32E3628DEDBDF00BB222C /* HexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E3528DEDBDF00BB222C /* HexaCalcUITests.swift */; };
 		9DE32E3828DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E3728DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift */; };
+		9DE32E4028EA97AC00BB222C /* HexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E3528DEDBDF00BB222C /* HexaCalcUITests.swift */; };
+		9DE32E4228EA97FA00BB222C /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */; };
 		9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9FB4728DC220E00705A4F /* Operation.swift */; };
 		9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249624C553F000701F5B /* AppDelegate.swift */; };
 		9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249824C553F000701F5B /* SceneDelegate.swift */; };
@@ -163,6 +164,7 @@
 		9DE32E3328DEDBDF00BB222C /* HexaCalcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HexaCalcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE32E3528DEDBDF00BB222C /* HexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcUITests.swift; sourceTree = "<group>"; };
 		9DE32E3728DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
 		9DE9FB4728DC220E00705A4F /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		9DEF249324C553F000701F5B /* HexaCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexaCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEF249624C553F000701F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -303,8 +305,8 @@
 		9DAE268B24C68C090070B965 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */,
 				9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */,
+				9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */,
 				9D979A9925E767D500357754 /* UIWindow+isLandscape.swift */,
 			);
 			path = Extensions;
@@ -327,10 +329,19 @@
 		9DE32E3428DEDBDF00BB222C /* HexaCalcUITests */ = {
 			isa = PBXGroup;
 			children = (
+				9DE32E3E28EA979800BB222C /* Extensions */,
 				9DE32E3528DEDBDF00BB222C /* HexaCalcUITests.swift */,
 				9DE32E3728DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift */,
 			);
 			path = HexaCalcUITests;
+			sourceTree = "<group>";
+		};
+		9DE32E3E28EA979800BB222C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9DEF248A24C553F000701F5B = {
@@ -550,8 +561,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DE32E4028EA97AC00BB222C /* HexaCalcUITests.swift in Sources */,
+				9DE32E4228EA97FA00BB222C /* Formatter+BinaryString.swift in Sources */,
 				9DE32E3828DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift in Sources */,
-				9DE32E3628DEDBDF00BB222C /* HexaCalcUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
