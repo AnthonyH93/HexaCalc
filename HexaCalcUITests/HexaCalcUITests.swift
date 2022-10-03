@@ -42,7 +42,7 @@ class HexaCalcUITests: XCTestCase {
                 
         XCTAssert(assertResult(app: app, expected: "10101011", calculator: 1))
         
-        app/*@START_MENU_TOKEN@*/.staticTexts["1"]/*[[".buttons[\"1\"].staticTexts[\"1\"]",".staticTexts[\"1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.staticTexts["1"].tap()
         
         tabBar.buttons["Decimal"].tap()
         
@@ -205,6 +205,74 @@ class HexaCalcUITests: XCTestCase {
         XCTAssert(!app.buttons[formatBinaryString(stringToConvert: "11")].exists)
     }
     
+    func testDecimalBasicCalculations() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        
+        let tabBar = app.tabBars["Tab Bar"]
+        
+        tabBar.buttons["Decimal"].tap()
+        
+        let acButton = app.buttons["AC"]
+        let divButton = app.buttons["÷"]
+        let multButton = app.buttons["×"]
+        let subButton = app.buttons["-"]
+        let plusButton = app.buttons["+"]
+        let equalsButton = app.buttons["="]
+        
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        
+        XCTAssert(assertResult(app: app, expected: "10", calculator: 2))
+        
+        // Addition
+        plusButton.tap()
+        
+        app.buttons["7"].tap()
+        app.buttons["6"].tap()
+        
+        XCTAssert(assertResult(app: app, expected: "76", calculator: 2))
+        
+        equalsButton.tap()
+        
+        XCTAssert(assertResult(app: app, expected: "86", calculator: 2))
+        
+        // Subtraction
+        subButton.tap()
+        
+        app.buttons["9"].tap()
+        
+        equalsButton.tap()
+        
+        XCTAssert(assertResult(app: app, expected: "77", calculator: 2))
+        
+        // Multiplication
+        multButton.tap()
+        
+        app.buttons["5"].tap()
+        app.buttons["6"].tap()
+        
+        XCTAssert(assertResult(app: app, expected: "56", calculator: 2))
+        
+        equalsButton.tap()
+        
+        XCTAssert(assertResult(app: app, expected: "4312", calculator: 2))
+        
+        // Division
+        divButton.tap()
+        
+        app.buttons["4"].tap()
+        
+        equalsButton.tap()
+        
+        XCTAssert(assertResult(app: app, expected: "1078", calculator: 2))
+        
+        acButton.tap()
+                
+        XCTAssert(!app.buttons["196"].exists)
+    }
+    
     // Helper functions
     
     func assertResult(app: XCUIApplication, expected: String, calculator: Int) -> Bool {
@@ -219,7 +287,8 @@ class HexaCalcUITests: XCTestCase {
         }
         // Decimal
         else {
-            return app.buttons[expected].label == expected
+            let text = formatDecimalString(stringToConvert: expected)
+            return app.buttons[text].label == text
         }
     }
     
@@ -229,5 +298,10 @@ class HexaCalcUITests: XCTestCase {
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
         return manipulatedStringToConvert.separate(every: 4, with: " ")
+    }
+    
+    func formatDecimalString(stringToConvert: String) -> String {
+        let manipulatedStringToConvert = String(stringToConvert.reversed())
+        return String(manipulatedStringToConvert.separate(every: 3, with: ",").reversed())
     }
 }
