@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import UIKit
 
 class HexaCalcUITests: XCTestCase {
 
@@ -129,5 +130,104 @@ class HexaCalcUITests: XCTestCase {
         acButton.tap()
                 
         XCTAssert(!app.staticTexts["1A"].exists)
+    }
+    
+    func testBinaryBasicCalculations() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        
+        let acButton = app.buttons["AC"]
+        let divButton = app.buttons["÷"]
+        let multButton = app.buttons["×"]
+        let subButton = app.buttons["-"]
+        let plusButton = app.buttons["+"]
+        let equalsButton = app.buttons["="]
+        
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        
+        XCTAssert(app.staticTexts["10"].label == "10")
+        
+        // Addition
+        plusButton.tap()
+        
+        app.buttons["3"].tap()
+        app.buttons["2"].tap()
+        
+        XCTAssert(app.staticTexts["32"].label == "32")
+        
+        equalsButton.tap()
+        
+        XCTAssert(app.staticTexts["42"].label == "42")
+        
+        // Subtraction
+        subButton.tap()
+        
+        app.buttons["3"].tap()
+        app.buttons["0"].tap()
+        
+        XCTAssert(app.staticTexts["30"].label == "30")
+        
+        equalsButton.tap()
+        
+        XCTAssert(app.staticTexts["12"].label == "12")
+        
+        // Multiplication
+        multButton.tap()
+        
+        app.buttons["F"].tap()
+        app.buttons["E"].tap()
+        
+        XCTAssert(app.staticTexts["FE"].label == "FE")
+        
+        equalsButton.tap()
+        
+        XCTAssert(app.staticTexts["11DC"].label == "11DC")
+        
+        // Division
+        divButton.tap()
+        
+        app.buttons["A"].tap()
+        app.buttons["B"].tap()
+        
+        XCTAssert(app.staticTexts["AB"].label == "AB")
+        
+        equalsButton.tap()
+        
+        XCTAssert(app.staticTexts["1A"].label == "1A")
+        
+        acButton.tap()
+                
+        XCTAssert(!app.staticTexts["1A"].exists)
+    }
+    
+    // Helper functions
+    
+    func assertResult(app: XCUIApplication, expected: String, isBinary: Bool) -> Bool {
+        if isBinary {
+            let text = formatBinaryString(stringToConvert: expected)
+            return app.staticTexts[text].label == text
+        }
+        else {
+            return app.staticTexts[expected].label == expected
+        }
+    }
+    
+    func formatBinaryString(stringToConvert: String) -> String {
+        var manipulatedStringToConvert = stringToConvert
+        while (manipulatedStringToConvert.count < 64){
+            manipulatedStringToConvert = "0" + manipulatedStringToConvert
+        }
+        return separate(every: 4, with: "")
+    }
+}
+
+// Redeclared here since
+extension String {
+    func separate(every: Int, with separator: String) -> String {
+        return String(stride(from: 0, to: Array(self).count, by: every).map {
+            Array(Array(self)[$0..<min($0 + every, Array(self).count)])
+        }.joined(separator: separator))
     }
 }

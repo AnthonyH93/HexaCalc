@@ -60,7 +60,7 @@ class BinaryViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        outputLabel.text = binaryDefaultLabel
+        updateOutputLabel(value: binaryDefaultLabel)
         
         if let savedPreferences = DataPersistence.loadPreferences() {
             PLUSBtn.backgroundColor = savedPreferences.colour
@@ -116,7 +116,7 @@ class BinaryViewController: UIViewController {
         
         //Check for integer overflow first
         if ((stateController?.convValues.largerThan64Bits)!) {
-            outputLabel.text = "Error! Integer overflow!"
+            updateOutputLabel(value: result)
         }
         else {
             var newLabelValue = stateController?.convValues.binVal
@@ -139,7 +139,7 @@ class BinaryViewController: UIViewController {
                 currentOperation = .NULL
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
             }
-            outputLabel.text = newLabelValue
+            updateOutputLabel(value: newLabelValue ?? binaryDefaultLabel)
         }
         
         //Set button colour based on state controller
@@ -267,7 +267,7 @@ class BinaryViewController: UIViewController {
         if (isValidBinary && strippedSpacesBinary.count <= 64) {
             if (pastedInput == "0") {
                 runningNumber = ""
-                outputLabel.text = binaryDefaultLabel
+                updateOutputLabel(value: binaryDefaultLabel)
                 stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.decimalVal = "0"
                 stateController?.convValues.hexVal = "0"
@@ -276,7 +276,7 @@ class BinaryViewController: UIViewController {
             else {
                 runningNumber = strippedSpacesBinary
                 let newLabelValue = formatBinaryString(stringToConvert: runningNumber)
-                outputLabel.text = newLabelValue
+                updateOutputLabel(value: newLabelValue)
                 quickUpdateStateController()
             }
         }
@@ -357,7 +357,7 @@ class BinaryViewController: UIViewController {
                 runningNumber += stringToAdd
                 var newLabelValue = runningNumber
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-                outputLabel.text = newLabelValue
+                updateOutputLabel(value: newLabelValue)
                 quickUpdateStateController()
             }
         }
@@ -369,7 +369,7 @@ class BinaryViewController: UIViewController {
         rightValue = ""
         result = ""
         currentOperation = .NULL
-        outputLabel.text = binaryDefaultLabel
+        updateOutputLabel(value: binaryDefaultLabel)
         
         stateController?.convValues.largerThan64Bits = false
         stateController?.convValues.decimalVal = "0"
@@ -398,12 +398,12 @@ class BinaryViewController: UIViewController {
                 stateController?.convValues.decimalVal = "0"
                 stateController?.convValues.hexVal = "0"
                 stateController?.convValues.binVal = "0"
-                outputLabel.text = binaryDefaultLabel
+                updateOutputLabel(value: binaryDefaultLabel)
             }
             else {
                 currentLabel = runningNumber
                 currentLabel = formatBinaryString(stringToConvert: currentLabel ?? binaryDefaultLabel)
-                outputLabel.text = currentLabel
+                updateOutputLabel(value: currentLabel ?? binaryDefaultLabel)
                 quickUpdateStateController()
             }
         }
@@ -441,7 +441,7 @@ class BinaryViewController: UIViewController {
             }
             runningNumber = newLabelValue
             newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-            outputLabel.text = newLabelValue
+            updateOutputLabel(value: newLabelValue)
         }
     }
     
@@ -472,7 +472,7 @@ class BinaryViewController: UIViewController {
             }
             runningNumber = newLabelValue
             newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-            outputLabel.text = newLabelValue
+            updateOutputLabel(value: newLabelValue)
         }
     }
     
@@ -502,7 +502,7 @@ class BinaryViewController: UIViewController {
         }
         var newLabelValue = onesComplimentString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-        outputLabel.text = newLabelValue
+        updateOutputLabel(value: newLabelValue)
         
         quickUpdateStateController()
     }
@@ -533,7 +533,7 @@ class BinaryViewController: UIViewController {
         }
         var newLabelValue = twosComplimentString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-        outputLabel.text = newLabelValue
+        updateOutputLabel(value: newLabelValue)
         
         quickUpdateStateController()
     }
@@ -593,7 +593,7 @@ class BinaryViewController: UIViewController {
                     let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
                     if (overCheck.overflow) {
                         result = "Error! Integer Overflow!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         stateController?.convValues.largerThan64Bits = true
                         stateController?.convValues.decimalVal = "0"
@@ -609,7 +609,7 @@ class BinaryViewController: UIViewController {
                     let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
                     if (overCheck.overflow) {
                         result = "Error! Integer Overflow!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         stateController?.convValues.largerThan64Bits = true
                         stateController?.convValues.decimalVal = "0"
@@ -625,7 +625,7 @@ class BinaryViewController: UIViewController {
                     let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
                     if (overCheck.overflow) {
                         result = "Error! Integer Overflow!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         stateController?.convValues.largerThan64Bits = true
                         stateController?.convValues.decimalVal = "0"
@@ -639,14 +639,14 @@ class BinaryViewController: UIViewController {
                     //Output Error! if division by 0
                     if Int(rightValue)! == 0 {
                         result = "Error!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         return
                     }
                     let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
                     if (overCheck.overflow) {
                         result = "Error! Integer Overflow!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         stateController?.convValues.largerThan64Bits = true
                         stateController?.convValues.decimalVal = "0"
@@ -679,7 +679,7 @@ class BinaryViewController: UIViewController {
                     newLabelValue = formatNegativeBinaryString(stringToConvert: binaryRepresentation)
                 }
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-                outputLabel.text = newLabelValue
+                updateOutputLabel(value: newLabelValue)
             }
             currentOperation = operation
         }
@@ -791,6 +791,12 @@ class BinaryViewController: UIViewController {
         else {
             outputLabel.textColor = UIColor.white
         }
+    }
+    
+    // Standardized function to update the output label
+    private func updateOutputLabel(value: String) {
+        outputLabel.text = value
+        outputLabel.accessibilityLabel = value
     }
 }
 
