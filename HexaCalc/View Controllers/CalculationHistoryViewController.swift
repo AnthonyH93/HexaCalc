@@ -22,13 +22,6 @@ class CalculationHistoryViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    private func loadPrefrredColorFromPreferences() -> UIColor {
-        if let userPreferences = DataPersistence.loadPreferences() {
-            return userPreferences.colour
-        }
-        return .systemBlue
-    }
-    
 }
 
 extension CalculationHistoryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -55,13 +48,14 @@ extension CalculationHistoryViewController: UITableViewDelegate, UITableViewData
         let uiPasteboard = UIPasteboard.general
         uiPasteboard.string = calculationHistory[indexPath.row].result
         
-        let alert = UIAlertController(title: "Result copied to clipboard", message: nil, preferredStyle: .alert)
-        alert.view.tintColor = loadPrefrredColorFromPreferences()
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-        alert.overrideUserInterfaceStyle = .dark
+        let alert = UIAlertController(title: "Copied to clipboard", message: "\(calculationHistory[indexPath.row].result) has been added to your clipboard.", preferredStyle: .alert)
         
         present(alert, animated: true) {
             tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            alert.dismiss(animated: true, completion: nil)
         }
     }
     
