@@ -40,6 +40,7 @@ class DecimalViewController: UIViewController {
     @IBOutlet weak var Btn7: RoundButton!
     @IBOutlet weak var Btn8: RoundButton!
     @IBOutlet weak var Btn9: RoundButton!
+    @IBOutlet weak var calculationHistoryButton: UIButton!
     
     //MARK: Variables
     var runningNumber = ""
@@ -55,7 +56,7 @@ class DecimalViewController: UIViewController {
     
     var secondFunctionMode = false
     
-    var calculationHistory: [String] = []
+    var calculationHistory: [CalculationData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,7 @@ class DecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            calculationHistoryButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
@@ -151,6 +153,7 @@ class DecimalViewController: UIViewController {
             MULTBtn.backgroundColor = stateController?.convValues.colour
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
+            calculationHistoryButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary
@@ -651,15 +654,13 @@ class DecimalViewController: UIViewController {
     //MARK: Private Functions
     
     private func operation(operation: Operation) {
-        
+    
         if currentOperation != .NULL {
             if runningNumber != "" {
                 rightValue = runningNumber
                 runningNumber = ""
                 
-                // Create calculation representation to add to history of calculations
-                let calculationRepresentation = "\(leftValue) \(operation.rawValue) \(rightValue)"
-                calculationHistory.append(calculationRepresentation)
+               
                 
                 switch (currentOperation) {
                 case .Add:
@@ -693,6 +694,10 @@ class DecimalViewController: UIViewController {
                 default:
                     fatalError("Unexpected Operation...")
                 }
+                
+                // Create calculation data to add to history of calculations
+                let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result)
+                calculationHistory.append(calculationData)
                 
                 leftValue = result
                 

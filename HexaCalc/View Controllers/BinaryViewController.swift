@@ -42,12 +42,14 @@ class BinaryViewController: UIViewController {
     @IBOutlet weak var EQUALSBtn: RoundButton!
     @IBOutlet weak var Btn00: RoundButton!
     @IBOutlet weak var Btn11: RoundButton!
-    
+    @IBOutlet weak var calculationHistoryButton: UIButton!
     
     //MARK: Variables
     var runningNumber = ""
     var leftValue = ""
     var rightValue = ""
+    var leftBinValue = ""
+    var rightBinValue = ""
     var result = ""
     var currentOperation:Operation = .NULL
     
@@ -55,6 +57,8 @@ class BinaryViewController: UIViewController {
     var currentContraints: [NSLayoutConstraint] = []
     
     var currentlyRecognizingDoubleTap = false
+    
+    var calculationHistory: [CalculationData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,12 +72,19 @@ class BinaryViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            calculationHistoryButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
         
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CalculationHistoryViewController {
+            vc.calculationHistory = calculationHistory
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -149,6 +160,7 @@ class BinaryViewController: UIViewController {
             MULTBtn.backgroundColor = stateController?.convValues.colour
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
+            calculationHistoryButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary
@@ -578,6 +590,9 @@ class BinaryViewController: UIViewController {
     private func operation(operation: Operation) {
         if currentOperation != .NULL {
             if runningNumber != "" {
+                
+                leftBinValue = runningNumber
+                
                 if (runningNumber.first == "1" && runningNumber.count == 64){
                     rightValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
                 }
@@ -680,10 +695,17 @@ class BinaryViewController: UIViewController {
                 }
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
                 outputLabel.text = newLabelValue
+                
+                let calculationData = CalculationData(leftValue: leftBinValue, rightValue: rightBinValue, operation: operation, result: newLabelValue)
+                calculationHistory.append(calculationData)
+                
+                rightBinValue = newLabelValue
             }
             currentOperation = operation
         }
         else {
+            
+            rightBinValue = runningNumber
             //If string is empty it should be interpreted as a 0
             if runningNumber == "" {
                 if (leftValue == "") {

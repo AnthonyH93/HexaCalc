@@ -78,6 +78,7 @@
 		9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */; };
 		9DEF24B324C553F100701F5B /* HexaCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24B224C553F100701F5B /* HexaCalcTests.swift */; };
 		9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24BD24C5578300701F5B /* DecimalViewController.swift */; };
+		C272D50A28E75D7C00E6C374 /* CalculationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C272D50928E75D7C00E6C374 /* CalculationData.swift */; };
 		C2D2E1C428DDF90A0094DA13 /* CalculationHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D2E1C328DDF90A0094DA13 /* CalculationHistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -167,6 +168,7 @@
 		9DEF24B224C553F100701F5B /* HexaCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcTests.swift; sourceTree = "<group>"; };
 		9DEF24B424C553F100701F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DEF24BD24C5578300701F5B /* DecimalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalViewController.swift; sourceTree = "<group>"; };
+		C272D50928E75D7C00E6C374 /* CalculationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationData.swift; sourceTree = "<group>"; };
 		C2D2E1C328DDF90A0094DA13 /* CalculationHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,6 +214,7 @@
 				9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */,
 				9DC758302804CD6200BB2953 /* ReviewManager.swift */,
 				9DE9FB4728DC220E00705A4F /* Operation.swift */,
+				C272D50928E75D7C00E6C374 /* CalculationData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */,
 				9DC758292803C85200BB2953 /* SelectionSummaryTableViewCell.swift in Sources */,
 				9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */,
+				C272D50A28E75D7C00E6C374 /* CalculationData.swift in Sources */,
 				9DC242F225E1EE440038DD63 /* UIHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
