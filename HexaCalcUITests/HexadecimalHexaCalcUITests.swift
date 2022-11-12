@@ -25,12 +25,10 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     }
     
     func testDeletion() throws {
-        // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
         
         // Launched on Hexadecimal tab
-        
         app.buttons["A"].tap()
         for _ in 0..<5 {
             app.buttons["B"].tap()
@@ -50,9 +48,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         
         // Test delete after computation
         app.buttons["+"].tap()
-        
         app.buttons["A"].tap()
-        
         app.buttons["="].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "ABC5", calculator: 0))
@@ -60,5 +56,24 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         app.buttons["DEL"].tap()
         
         XCTAssert(!app.staticTexts["ABC5"].exists)
+    }
+    
+    func testIntegerOverflow() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        // Launched on Hexadecimal tab
+        app.buttons["7"].tap()
+        for _ in 0..<15 {
+            app.buttons["F"].tap()
+        }
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "7FFFFFFFFFFFFFFF", calculator: 0))
+        
+        app.buttons["×"].tap()
+        app.buttons["F"].tap()
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "Error! Integer Overflow!", calculator: 0))
     }
 }
