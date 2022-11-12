@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */; };
+		9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23DB291F6BE300151B44 /* UITestHelper.swift */; };
 		9D7C09BF25EC61E700771D52 /* HexaCalcIconIndigo-83.5@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@3x~ipad.png */; };
 		9D7C09C025EC61E700771D52 /* HexaCalcIconBlue@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */; };
 		9D7C09C125EC61E700771D52 /* HexaCalcIconOrange~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */; };
@@ -67,8 +69,7 @@
 		9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */; };
 		9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */; };
 		9DC758312804CD6200BB2953 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758302804CD6200BB2953 /* ReviewManager.swift */; };
-		9DE32E3828DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E3728DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift */; };
-		9DE32E4028EA97AC00BB222C /* HexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E3528DEDBDF00BB222C /* HexaCalcUITests.swift */; };
+		9DE32E4028EA97AC00BB222C /* BasicHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */; };
 		9DE32E4228EA97FA00BB222C /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */; };
 		9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9FB4728DC220E00705A4F /* Operation.swift */; };
 		9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF249624C553F000701F5B /* AppDelegate.swift */; };
@@ -101,6 +102,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexadecimalHexaCalcUITests.swift; sourceTree = "<group>"; };
+		9D3E23DB291F6BE300151B44 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
 		9D7C099625EC61E500771D52 /* HexaCalcIconIndigo-83.5@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo-83.5@3x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099725EC61E500771D52 /* HexaCalcIconBlue@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C099825EC61E500771D52 /* HexaCalcIconOrange~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconOrange~ipad.png"; sourceTree = "<group>"; };
@@ -162,8 +165,7 @@
 		9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		9DC758302804CD6200BB2953 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		9DE32E3328DEDBDF00BB222C /* HexaCalcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HexaCalcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DE32E3528DEDBDF00BB222C /* HexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcUITests.swift; sourceTree = "<group>"; };
-		9DE32E3728DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicHexaCalcUITests.swift; sourceTree = "<group>"; };
 		9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
 		9DE9FB4728DC220E00705A4F /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		9DEF249324C553F000701F5B /* HexaCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexaCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -330,8 +332,9 @@
 			isa = PBXGroup;
 			children = (
 				9DE32E3E28EA979800BB222C /* Extensions */,
-				9DE32E3528DEDBDF00BB222C /* HexaCalcUITests.swift */,
-				9DE32E3728DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift */,
+				9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */,
+				9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */,
+				9D3E23DB291F6BE300151B44 /* UITestHelper.swift */,
 			);
 			path = HexaCalcUITests;
 			sourceTree = "<group>";
@@ -561,9 +564,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DE32E4028EA97AC00BB222C /* HexaCalcUITests.swift in Sources */,
+				9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */,
+				9DE32E4028EA97AC00BB222C /* BasicHexaCalcUITests.swift in Sources */,
+				9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */,
 				9DE32E4228EA97FA00BB222C /* Formatter+BinaryString.swift in Sources */,
-				9DE32E3828DEDBDF00BB222C /* HexaCalcUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

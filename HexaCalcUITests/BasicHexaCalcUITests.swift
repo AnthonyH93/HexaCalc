@@ -1,6 +1,6 @@
 //
-//  HexaCalcUITests.swift
-//  HexaCalcUITests
+//  BasicHexaCalcUITests.swift
+//  BasicHexaCalcUITests
 //
 //  Created by Anthony Hopkins on 2022-09-24.
 //  Copyright © 2022 Anthony Hopkins. All rights reserved.
@@ -9,7 +9,7 @@
 import XCTest
 import UIKit
 
-class HexaCalcUITests: XCTestCase {
+class BasicHexaCalcUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -34,19 +34,19 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["A"].tap()
         app.buttons["B"].tap()
                 
-        XCTAssert(assertResult(app: app, expected: "AB", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "AB", calculator: 0))
         
         let tabBar = app.tabBars["Tab Bar"]
         
         tabBar.buttons["Binary"].tap()
                 
-        XCTAssert(assertResult(app: app, expected: "10101011", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "10101011", calculator: 1))
         
         app.staticTexts["1"].tap()
         
         tabBar.buttons["Decimal"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "343", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "343", calculator: 2))
         
         app.buttons["9"].tap()
         
@@ -59,7 +59,7 @@ class HexaCalcUITests: XCTestCase {
         
         tabBar.buttons["Hexadecimal"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "D6F", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "D6F", calculator: 0))
     }
     
     func testHexadecimalBasicCalculations() throws {
@@ -77,7 +77,7 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["0"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "10", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 0))
         
         // Addition
         plusButton.tap()
@@ -85,11 +85,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["3"].tap()
         app.buttons["2"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "32", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "32", calculator: 0))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "42", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "42", calculator: 0))
         
         // Subtraction
         subButton.tap()
@@ -97,11 +97,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["3"].tap()
         app.buttons["0"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "30", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "30", calculator: 0))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "12", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "12", calculator: 0))
         
         // Multiplication
         multButton.tap()
@@ -109,11 +109,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["F"].tap()
         app.buttons["E"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "FE", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "FE", calculator: 0))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "11DC", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11DC", calculator: 0))
         
         // Division
         divButton.tap()
@@ -121,11 +121,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["A"].tap()
         app.buttons["B"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "AB", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "AB", calculator: 0))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "1A", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1A", calculator: 0))
         
         acButton.tap()
                 
@@ -151,7 +151,7 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["0"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "10", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 1))
         
         // Addition
         plusButton.tap()
@@ -159,22 +159,22 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["0"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "10", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 1))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "100", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "100", calculator: 1))
         
         // Subtraction
         subButton.tap()
         
         app.buttons["1"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "1", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1", calculator: 1))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "11", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
         
         // Multiplication
         multButton.tap()
@@ -182,11 +182,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["1"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "11", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "1001", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1001", calculator: 1))
         
         // Division
         divButton.tap()
@@ -194,15 +194,15 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["1"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "11", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "11", calculator: 1))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
         
         acButton.tap()
                 
-        XCTAssert(!app.buttons[formatBinaryString(stringToConvert: "11")].exists)
+        XCTAssert(!app.buttons[UITestHelper.formatBinaryString(stringToConvert: "11")].exists)
     }
     
     func testDecimalBasicCalculations() throws {
@@ -224,7 +224,7 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["0"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "10", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 2))
         
         // Addition
         plusButton.tap()
@@ -232,11 +232,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["7"].tap()
         app.buttons["6"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "76", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "76", calculator: 2))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "86", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "86", calculator: 2))
         
         // Subtraction
         subButton.tap()
@@ -245,7 +245,7 @@ class HexaCalcUITests: XCTestCase {
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "77", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "77", calculator: 2))
         
         // Multiplication
         multButton.tap()
@@ -253,11 +253,11 @@ class HexaCalcUITests: XCTestCase {
         app.buttons["5"].tap()
         app.buttons["6"].tap()
         
-        XCTAssert(assertResult(app: app, expected: "56", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "56", calculator: 2))
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "4312", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "4312", calculator: 2))
         
         // Division
         divButton.tap()
@@ -266,42 +266,10 @@ class HexaCalcUITests: XCTestCase {
         
         equalsButton.tap()
         
-        XCTAssert(assertResult(app: app, expected: "1078", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1078", calculator: 2))
         
         acButton.tap()
                 
         XCTAssert(!app.buttons["196"].exists)
-    }
-    
-    // Helper functions
-    
-    func assertResult(app: XCUIApplication, expected: String, calculator: Int) -> Bool {
-        // Hexadecimal
-        if calculator == 0 {
-            return app.staticTexts[expected].label == expected
-        }
-        // Binary
-        else if calculator == 1 {
-            let text = formatBinaryString(stringToConvert: expected)
-            return app.buttons[text].label == text
-        }
-        // Decimal
-        else {
-            let text = formatDecimalString(stringToConvert: expected)
-            return app.buttons[text].label == text
-        }
-    }
-    
-    func formatBinaryString(stringToConvert: String) -> String {
-        var manipulatedStringToConvert = stringToConvert
-        while (manipulatedStringToConvert.count < 64){
-            manipulatedStringToConvert = "0" + manipulatedStringToConvert
-        }
-        return manipulatedStringToConvert.separate(every: 4, with: " ")
-    }
-    
-    func formatDecimalString(stringToConvert: String) -> String {
-        let manipulatedStringToConvert = String(stringToConvert.reversed())
-        return String(manipulatedStringToConvert.separate(every: 3, with: ",").reversed())
     }
 }
