@@ -489,7 +489,7 @@ class HexadecimalViewController: UIViewController {
         
         var currentValue = runningNumber
         if (runningNumber == ""){
-            currentValue = "0"
+            currentValue = outputLabel.text ?? "0"
         }
         
         let castInt = UInt64(currentValue, radix: 16)!
@@ -687,6 +687,7 @@ class HexadecimalViewController: UIViewController {
                 
                 let hexRepresentation = stateController?.convValues.hexVal ?? "0"
                 var newLabelValue = hexRepresentation.uppercased()
+                leftValueHex = newLabelValue
                 if ((hexRepresentation.contains("-"))){
                     newLabelValue = formatNegativeHex(hexToConvert: newLabelValue).uppercased()
                 }

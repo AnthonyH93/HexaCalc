@@ -180,4 +180,156 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
     }
+    
+    func testSecondFunctionsUI() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let basicFunctions = ["÷", "×", "-", "+", "="]
+        let secondFunctions = ["2's", "MOD", "<<X", ">>X", "="]
+        
+        for function in basicFunctions {
+            XCTAssert(app.buttons[function].exists)
+        }
+        
+        app.buttons["2nd"].tap()
+        
+        for function in secondFunctions {
+            XCTAssert(app.buttons[function].exists)
+        }
+     
+        app.buttons["2nd"].tap()
+        
+        for function in basicFunctions {
+            XCTAssert(app.buttons[function].exists)
+        }
+    }
+    
+    func test2sCompliment() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["2nd"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+        
+        app.buttons["2's"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+        
+        app.buttons["1"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1", calculator: 0))
+        
+        app.buttons["2's"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "FFFFFFFFFFFFFFFF", calculator: 0))
+        
+        app.buttons["2's"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1", calculator: 0))
+    }
+    
+    func testMOD() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["2nd"].tap()
+        
+        app.buttons["A"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "A", calculator: 0))
+        
+        app.buttons["MOD"].tap()
+        
+        app.buttons["0"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "Error!", calculator: 0))
+        
+        app.buttons["AC"].tap()
+        
+        app.buttons["A"].tap()
+        
+        app.buttons["MOD"].tap()
+        
+        app.buttons["1"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+        
+        app.buttons["MOD"].tap()
+        
+        app.buttons["2"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+        
+        app.buttons["AC"].tap()
+        
+        app.buttons["A"].tap()
+        
+        app.buttons["MOD"].tap()
+        
+        app.buttons["6"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "4", calculator: 0))
+        
+        app.buttons["MOD"].tap()
+        
+        app.buttons["6"].tap()
+        app.buttons["4"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "4", calculator: 0))
+        
+        app.buttons["MOD"].tap()
+        
+        app.buttons["2"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+    }
+    
+    func testShifts() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["2nd"].tap()
+        
+        app.buttons["8"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "8", calculator: 0))
+        
+        app.buttons["<<X"].tap()
+        
+        app.buttons["2"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "20", calculator: 0))
+        
+        app.buttons[">>X"].tap()
+        
+        app.buttons["2"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "8", calculator: 0))
+        
+        app.buttons["<<X"].tap()
+        
+        app.buttons["15"].tap()
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "20", calculator: 0))
+    }
 }

@@ -129,7 +129,7 @@ class BasicHexaCalcUITests: XCTestCase {
         
         acButton.tap()
                 
-        XCTAssert(!app.staticTexts["1A"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1A", calculator: 0))
     }
     
     func testBinaryBasicCalculations() throws {
@@ -202,7 +202,7 @@ class BasicHexaCalcUITests: XCTestCase {
         
         acButton.tap()
                 
-        XCTAssert(!app.buttons[UITestHelper.formatBinaryString(stringToConvert: "11")].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
     }
     
     func testDecimalBasicCalculations() throws {
@@ -270,6 +270,6 @@ class BasicHexaCalcUITests: XCTestCase {
         
         acButton.tap()
                 
-        XCTAssert(!app.buttons["196"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
     }
 }
