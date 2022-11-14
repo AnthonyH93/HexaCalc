@@ -76,4 +76,38 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "Error! Integer Overflow!", calculator: 0))
     }
+    
+    func testAllNumberButtons() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "0"]
+        
+        for digit in digits {
+            app.buttons[digit].tap()
+        }
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: digits.joined(), calculator: 0))
+    }
+    
+    func testXOR() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["A"].tap()
+        app.buttons["B"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "AB", calculator: 0))
+        
+        app.buttons["XOR"].tap()
+        
+        app.buttons["C"].tap()
+        app.buttons["D"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "CD", calculator: 0))
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "66", calculator: 0))
+    }
 }
