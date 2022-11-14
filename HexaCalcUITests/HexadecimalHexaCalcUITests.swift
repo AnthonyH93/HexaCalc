@@ -55,7 +55,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         
         app.buttons["DEL"].tap()
         
-        XCTAssert(!app.staticTexts["ABC5"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
     }
     
     func testIntegerOverflow() throws {
@@ -109,5 +109,75 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         app.buttons["="].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "66", calculator: 0))
+    }
+    
+    func testOR() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["A"].tap()
+        app.buttons["B"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "AB", calculator: 0))
+        
+        app.buttons["OR"].tap()
+        
+        app.buttons["C"].tap()
+        app.buttons["D"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "CD", calculator: 0))
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "EF", calculator: 0))
+    }
+    
+    func testAND() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["A"].tap()
+        app.buttons["B"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "AB", calculator: 0))
+        
+        app.buttons["AND"].tap()
+        
+        app.buttons["C"].tap()
+        app.buttons["D"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "CD", calculator: 0))
+        
+        app.buttons["="].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "89", calculator: 0))
+    }
+    
+    func testNOT() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["A"].tap()
+        app.buttons["B"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "AB", calculator: 0))
+        
+        app.buttons["NOT"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "FFFFFFFFFFFFFF54", calculator: 0))
+        
+        app.buttons["NOT"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "AB", calculator: 0))
+        
+        app.buttons["AC"].tap()
+        
+        app.buttons["NOT"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "FFFFFFFFFFFFFFFF", calculator: 0))
+        
+        app.buttons["AC"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
     }
 }

@@ -60,6 +60,7 @@ class BinaryViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        outputLabel.accessibilityIdentifier = "Binary Output Label"
         updateOutputLabel(value: binaryDefaultLabel)
         
         if let savedPreferences = DataPersistence.loadPreferences() {

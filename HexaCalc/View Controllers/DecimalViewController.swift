@@ -58,6 +58,7 @@ class DecimalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        outputLabel.accessibilityIdentifier = "Decimal Output Label"
         updateOutputLabel(value: "0")
         
         if let savedPreferences = DataPersistence.loadPreferences() {

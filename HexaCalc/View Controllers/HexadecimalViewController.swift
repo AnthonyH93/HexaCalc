@@ -74,6 +74,7 @@ class HexadecimalViewController: UIViewController {
         let originalViewControllers = tabBarController?.viewControllers
         stateController?.convValues.originalTabs = originalViewControllers
         
+        outputLabel.accessibilityIdentifier = "Hexadecimal Output Label"
         updateOutputLabel(value: "0")
         
         if let savedPreferences = DataPersistence.loadPreferences() {

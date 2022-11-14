@@ -14,17 +14,20 @@ class UITestHelper {
     static func assertResult(app: XCUIApplication, expected: String, calculator: Int) -> Bool {
         // Hexadecimal
         if calculator == 0 {
-            return app.staticTexts[expected].label == expected
+            let outputLabel = app.staticTexts["Hexadecimal Output Label"]
+            return expected == outputLabel.label
         }
         // Binary
         else if calculator == 1 {
+            let outputLabel = app.buttons["Binary Output Label"]
             let text = formatBinaryString(stringToConvert: expected)
-            return app.buttons[text].label == text
+            return outputLabel.label == text
         }
         // Decimal
         else {
+            let outputLabel = app.buttons["Decimal Output Label"]
             let text = formatDecimalString(stringToConvert: expected)
-            return app.buttons[text].label == text
+            return outputLabel.label == text
         }
     }
     
