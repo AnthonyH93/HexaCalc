@@ -20,13 +20,19 @@ class UITestHelper {
         // Binary
         else if calculator == 1 {
             let outputLabel = app.buttons["Binary Output Label"]
-            let text = formatBinaryString(stringToConvert: expected)
+            var text = expected
+            if stringHasNumbers(stringToCheck: expected) {
+                text = formatBinaryString(stringToConvert: expected)
+            }
             return outputLabel.label == text
         }
         // Decimal
         else {
             let outputLabel = app.buttons["Decimal Output Label"]
-            let text = formatDecimalString(stringToConvert: expected)
+            var text = expected
+            if stringHasNumbers(stringToCheck: expected) {
+                text = formatDecimalString(stringToConvert: expected)
+            }
             return outputLabel.label == text
         }
     }
@@ -42,5 +48,10 @@ class UITestHelper {
     static func formatDecimalString(stringToConvert: String) -> String {
         let manipulatedStringToConvert = String(stringToConvert.reversed())
         return String(manipulatedStringToConvert.separate(every: 3, with: ",").reversed())
+    }
+    
+    static func stringHasNumbers(stringToCheck: String) -> Bool {
+        let numbersRange = stringToCheck.rangeOfCharacter(from: .decimalDigits)
+        return numbersRange != nil
     }
 }

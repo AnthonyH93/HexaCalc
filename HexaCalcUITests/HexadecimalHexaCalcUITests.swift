@@ -75,6 +75,10 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         app.buttons["="].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "Error! Integer Overflow!", calculator: 0))
+        
+        app.buttons["AC"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
     }
     
     func testAllNumberButtons() throws {
@@ -326,10 +330,11 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         
         app.buttons["<<X"].tap()
         
-        app.buttons["15"].tap()
+        app.buttons["1"].tap()
+        app.buttons["5"].tap()
         
         app.buttons["="].tap()
         
-        XCTAssert(UITestHelper.assertResult(app: app, expected: "20", calculator: 0))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1000000", calculator: 0))
     }
 }
