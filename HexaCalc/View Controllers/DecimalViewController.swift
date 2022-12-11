@@ -493,7 +493,6 @@ class DecimalViewController: UIViewController {
         if secondFunctionMode {
             // Squareroot pressed
             if (outputLabel.text == "0" || runningNumber == "") {
-                //In the case that we want to negate the currently displayed number after a calculation
                 if (outputLabel.text != "0"){
 
                     //Need to reset the current operation as we are overriding a null running number state
@@ -516,13 +515,17 @@ class DecimalViewController: UIViewController {
                     setupStateControllerValues()
                     stateController?.convValues.largerThan64Bits = false
                     
-                    if (Double(result)! > 999999999 || Double(result)! < -999999999){
-                        //Need to use scientific notation for this
+                    if (Double(result)! > 999999999){
+                        // Need to use scientific notation for this
                         result = "\(Double(result)!.scientificFormatted)"
                         updateOutputLabel(value: result)
+                        runningNumber = result
+                        quickUpdateStateController()
                         return
                     }
                     formatResult()
+                    runningNumber = result
+                    quickUpdateStateController()
                 }
                 else {
                     runningNumber = ""
@@ -544,13 +547,17 @@ class DecimalViewController: UIViewController {
                 setupStateControllerValues()
                 stateController?.convValues.largerThan64Bits = false
                 
-                if (Double(result)! > 999999999 || Double(result)! < -999999999){
+                if (Double(result)! > 999999999){
                     //Need to use scientific notation for this
                     result = "\(Double(result)!.scientificFormatted)"
                     updateOutputLabel(value: result)
+                    runningNumber = result
+                    quickUpdateStateController()
                     return
                 }
                 formatResult()
+                runningNumber = result
+                quickUpdateStateController()
             }
         }
         else {
