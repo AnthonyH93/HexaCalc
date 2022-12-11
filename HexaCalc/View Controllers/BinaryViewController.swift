@@ -431,8 +431,8 @@ class BinaryViewController: UIViewController {
             
             //Update the state controller
             stateController?.convValues.decimalVal = currentValue
-            let hexConversion = String(Int(Double(currentValue)!), radix: 16)
-            let binConversion = String(Int(Double(currentValue)!), radix: 2)
+            let hexConversion = String(Int64(currentValue)!, radix: 16)
+            let binConversion = String(Int64(currentValue)!, radix: 2)
             stateController?.convValues.hexVal = hexConversion
             stateController?.convValues.binVal = binConversion
             
@@ -462,8 +462,8 @@ class BinaryViewController: UIViewController {
             
             //Update the state controller
             stateController?.convValues.decimalVal = rightShifted
-            let hexConversion = String(Int(rightShifted)!, radix: 16)
-            let binConversion = String(Int(rightShifted)!, radix: 2)
+            let hexConversion = String(Int64(rightShifted)!, radix: 16)
+            let binConversion = String(Int64(rightShifted)!, radix: 2)
             stateController?.convValues.hexVal = hexConversion
             stateController?.convValues.binVal = binConversion
             

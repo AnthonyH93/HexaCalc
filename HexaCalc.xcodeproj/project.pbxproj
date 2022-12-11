@@ -335,9 +335,9 @@
 			children = (
 				9DE32E3E28EA979800BB222C /* Extensions */,
 				9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */,
+				9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */,
 				9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */,
 				9D3E23DB291F6BE300151B44 /* UITestHelper.swift */,
-				9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */,
 			);
 			path = HexaCalcUITests;
 			sourceTree = "<group>";
