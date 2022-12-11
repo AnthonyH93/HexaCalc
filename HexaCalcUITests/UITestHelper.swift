@@ -10,6 +10,15 @@ import XCTest
 import UIKit
 
 class UITestHelper {
+    // Define button operation names
+    static let delete = "DEL"
+    static let clear = "AC"
+    static let divide = "÷"
+    static let multiply = "×"
+    static let subtract = "-"
+    static let add = "+"
+    static let equals = "="
+    
     // Helper functions
     static func assertResult(app: XCUIApplication, expected: String, calculator: Int) -> Bool {
         // Hexadecimal

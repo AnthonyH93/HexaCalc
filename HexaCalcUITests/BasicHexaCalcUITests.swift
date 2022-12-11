@@ -67,12 +67,12 @@ class BasicHexaCalcUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        let acButton = app.buttons["AC"]
-        let divButton = app.buttons["÷"]
-        let multButton = app.buttons["×"]
-        let subButton = app.buttons["-"]
-        let plusButton = app.buttons["+"]
-        let equalsButton = app.buttons["="]
+        let acButton = app.buttons[UITestHelper.clear]
+        let divButton = app.buttons[UITestHelper.divide]
+        let multButton = app.buttons[UITestHelper.multiply]
+        let subButton = app.buttons[UITestHelper.subtract]
+        let plusButton = app.buttons[UITestHelper.add]
+        let equalsButton = app.buttons[UITestHelper.equals]
         
         app.buttons["1"].tap()
         app.buttons["0"].tap()
@@ -141,12 +141,12 @@ class BasicHexaCalcUITests: XCTestCase {
         
         tabBar.buttons["Binary"].tap()
         
-        let acButton = app.buttons["AC"]
-        let divButton = app.buttons["÷"]
-        let multButton = app.buttons["×"]
-        let subButton = app.buttons["-"]
-        let plusButton = app.buttons["+"]
-        let equalsButton = app.buttons["="]
+        let acButton = app.buttons[UITestHelper.clear]
+        let divButton = app.buttons[UITestHelper.divide]
+        let multButton = app.buttons[UITestHelper.multiply]
+        let subButton = app.buttons[UITestHelper.subtract]
+        let plusButton = app.buttons[UITestHelper.add]
+        let equalsButton = app.buttons[UITestHelper.equals]
         
         app.buttons["1"].tap()
         app.buttons["0"].tap()
@@ -214,12 +214,12 @@ class BasicHexaCalcUITests: XCTestCase {
         
         tabBar.buttons["Decimal"].tap()
         
-        let acButton = app.buttons["AC"]
-        let divButton = app.buttons["÷"]
-        let multButton = app.buttons["×"]
-        let subButton = app.buttons["-"]
-        let plusButton = app.buttons["+"]
-        let equalsButton = app.buttons["="]
+        let acButton = app.buttons[UITestHelper.clear]
+        let divButton = app.buttons[UITestHelper.divide]
+        let multButton = app.buttons[UITestHelper.multiply]
+        let subButton = app.buttons[UITestHelper.subtract]
+        let plusButton = app.buttons[UITestHelper.add]
+        let equalsButton = app.buttons[UITestHelper.equals]
         
         app.buttons["1"].tap()
         app.buttons["0"].tap()

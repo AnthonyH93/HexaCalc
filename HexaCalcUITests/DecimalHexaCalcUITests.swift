@@ -39,7 +39,7 @@ class DecimalHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "100000", calculator: 2))
         
         // Test delete button
-        app.buttons["DEL"].tap()
+        app.buttons[UITestHelper.delete].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "10000", calculator: 2))
         
@@ -49,25 +49,25 @@ class DecimalHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1000", calculator: 2))
         
         // Test delete after computation
-        app.buttons["+"].tap()
+        app.buttons[UITestHelper.add].tap()
         app.buttons["1"].tap()
-        app.buttons["="].tap()
+        app.buttons[UITestHelper.equals].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1001", calculator: 2))
         
-        app.buttons["DEL"].tap()
+        app.buttons[UITestHelper.delete].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1001", calculator: 2))
         
         // Test deleting entire string
-        app.buttons["AC"].tap()
+        app.buttons[UITestHelper.clear].tap()
         app.buttons["1"].tap()
         app.buttons["0"].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 2))
         
-        app.buttons["DEL"].tap()
-        app.buttons["DEL"].tap()
+        app.buttons[UITestHelper.delete].tap()
+        app.buttons[UITestHelper.delete].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
     }
@@ -75,8 +75,8 @@ class DecimalHexaCalcUITests: XCTestCase {
     func testIntegerOverflow() throws {
         let app = XCUIApplication()
         
-        let multButton = app.buttons["×"]
-        let equalsButton = app.buttons["="]
+        let multButton = app.buttons[UITestHelper.multiply]
+        let equalsButton = app.buttons[UITestHelper.equals]
         
         app.buttons["1"].tap()
         for _ in 0..<8 {
@@ -131,7 +131,7 @@ class DecimalHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "7.2e25", calculator: 2))
         
         // Clear the integer overflow
-        app.buttons["AC"].tap()
+        app.buttons[UITestHelper.clear].tap()
         
         tabBar.buttons["Binary"].tap()
         
@@ -157,11 +157,11 @@ class DecimalHexaCalcUITests: XCTestCase {
     func testDecimalPointOperations() throws {
         let app = XCUIApplication()
         
-        let divButton = app.buttons["÷"]
-        let multButton = app.buttons["×"]
-        let subButton = app.buttons["-"]
-        let plusButton = app.buttons["+"]
-        let equalsButton = app.buttons["="]
+        let divButton = app.buttons[UITestHelper.divide]
+        let multButton = app.buttons[UITestHelper.multiply]
+        let subButton = app.buttons[UITestHelper.subtract]
+        let plusButton = app.buttons[UITestHelper.add]
+        let equalsButton = app.buttons[UITestHelper.equals]
         
         app.buttons["1"].tap()
         
@@ -207,9 +207,9 @@ class DecimalHexaCalcUITests: XCTestCase {
     func testScientificNotation() throws {
         let app = XCUIApplication()
         
-        let divButton = app.buttons["÷"]
-        let multButton = app.buttons["×"]
-        let equalsButton = app.buttons["="]
+        let divButton = app.buttons[UITestHelper.divide]
+        let multButton = app.buttons[UITestHelper.multiply]
+        let equalsButton = app.buttons[UITestHelper.equals]
         
         app.buttons["8"].tap()
         for _ in 0..<8 {
@@ -257,8 +257,8 @@ class DecimalHexaCalcUITests: XCTestCase {
         
         let secondFunc = app.buttons["2nd"]
         let plusMinus = app.buttons["±"]
-        let multButton = app.buttons["×"]
-        let equalsButton = app.buttons["="]
+        let multButton = app.buttons[UITestHelper.multiply]
+        let equalsButton = app.buttons[UITestHelper.equals]
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
         
@@ -320,7 +320,7 @@ class DecimalHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "-648", calculator: 2))
         
-        app.buttons["AC"].tap()
+        app.buttons[UITestHelper.clear].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
         
@@ -335,11 +335,11 @@ class DecimalHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "-98", calculator: 2))
         
-        app.buttons["DEL"].tap()
+        app.buttons[UITestHelper.delete].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "-9", calculator: 2))
         
-        app.buttons["DEL"].tap()
+        app.buttons[UITestHelper.delete].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
     }
