@@ -402,24 +402,21 @@ class HexadecimalViewController: UIViewController {
             return
         }
         
-        if (runningNumber == "0"){
-            //Do nothing
-        }
-        else {
+        if (runningNumber != "0"){
             if (runningNumber != ""){
                 runningNumber.removeLast()
-            }
-            //Need to be careful if runningNumber becomes NIL
-            if (runningNumber == ""){
-                stateController?.convValues.largerThan64Bits = false
-                stateController?.convValues.decimalVal = "0"
-                stateController?.convValues.hexVal = "0"
-                stateController?.convValues.binVal = "0"
-                updateOutputLabel(value: "0")
-            }
-            else {
-                updateOutputLabel(value: runningNumber)
-                quickUpdateStateController()
+                // Need to be careful if runningNumber becomes empty
+                if (runningNumber == "") {
+                    stateController?.convValues.largerThan64Bits = false
+                    stateController?.convValues.decimalVal = "0"
+                    stateController?.convValues.hexVal = "0"
+                    stateController?.convValues.binVal = "0"
+                    updateOutputLabel(value: "0")
+                }
+                else {
+                    updateOutputLabel(value: runningNumber)
+                    quickUpdateStateController()
+                }
             }
         }
     }

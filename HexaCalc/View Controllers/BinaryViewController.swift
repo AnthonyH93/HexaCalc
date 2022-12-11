@@ -386,26 +386,23 @@ class BinaryViewController: UIViewController {
         }
         
         var currentLabel = outputLabel.text
-        if (currentLabel == binaryDefaultLabel){
-            //Do nothing
-        }
-        else {
+        if (currentLabel != binaryDefaultLabel){
             if (runningNumber != ""){
                 runningNumber.removeLast()
-            }
-            //Need to be careful if runningNumber becomes NIL
-            if (runningNumber == ""){
-                stateController?.convValues.largerThan64Bits = false
-                stateController?.convValues.decimalVal = "0"
-                stateController?.convValues.hexVal = "0"
-                stateController?.convValues.binVal = "0"
-                updateOutputLabel(value: binaryDefaultLabel)
-            }
-            else {
-                currentLabel = runningNumber
-                currentLabel = formatBinaryString(stringToConvert: currentLabel ?? binaryDefaultLabel)
-                updateOutputLabel(value: currentLabel ?? binaryDefaultLabel)
-                quickUpdateStateController()
+                // Need to be careful if runningNumber becomes empty
+                if (runningNumber == "") {
+                    stateController?.convValues.largerThan64Bits = false
+                    stateController?.convValues.decimalVal = "0"
+                    stateController?.convValues.hexVal = "0"
+                    stateController?.convValues.binVal = "0"
+                    updateOutputLabel(value: "0")
+                }
+                else {
+                    currentLabel = runningNumber
+                    currentLabel = formatBinaryString(stringToConvert: currentLabel ?? binaryDefaultLabel)
+                    updateOutputLabel(value: currentLabel ?? binaryDefaultLabel)
+                    quickUpdateStateController()
+                }
             }
         }
     }

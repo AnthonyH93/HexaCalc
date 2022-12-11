@@ -60,6 +60,7 @@
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
 		9DC242F225E1EE440038DD63 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC242F125E1EE440038DD63 /* UIHelper.swift */; };
 		9DC4DA182944367500D1652E /* BinaryHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */; };
+		9DC4DA1A29457F2C00D1652E /* DecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC4DA1929457F2C00D1652E /* DecimalHexaCalcUITests.swift */; };
 		9DC7581727ED867F00BB2953 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */; };
 		9DC7581A27ED88A800BB2953 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */; };
 		9DC7581B27ED88A800BB2953 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */; };
@@ -156,6 +157,7 @@
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
 		9DC242F125E1EE440038DD63 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHexaCalcUITests.swift; sourceTree = "<group>"; };
+		9DC4DA1929457F2C00D1652E /* DecimalHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalHexaCalcUITests.swift; sourceTree = "<group>"; };
 		9DC7581627ED867F00BB2953 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		9DC7581827ED88A800BB2953 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		9DC7581927ED88A800BB2953 /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				9DE32E3E28EA979800BB222C /* Extensions */,
 				9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */,
 				9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */,
+				9DC4DA1929457F2C00D1652E /* DecimalHexaCalcUITests.swift */,
 				9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */,
 				9D3E23DB291F6BE300151B44 /* UITestHelper.swift */,
 			);
@@ -567,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC4DA1A29457F2C00D1652E /* DecimalHexaCalcUITests.swift in Sources */,
 				9DC4DA182944367500D1652E /* BinaryHexaCalcUITests.swift in Sources */,
 				9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */,
 				9DE32E4028EA97AC00BB222C /* BasicHexaCalcUITests.swift in Sources */,
