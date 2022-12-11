@@ -395,7 +395,7 @@ class BinaryViewController: UIViewController {
                     stateController?.convValues.decimalVal = "0"
                     stateController?.convValues.hexVal = "0"
                     stateController?.convValues.binVal = "0"
-                    updateOutputLabel(value: "0")
+                    updateOutputLabel(value: binaryDefaultLabel)
                 }
                 else {
                     currentLabel = runningNumber

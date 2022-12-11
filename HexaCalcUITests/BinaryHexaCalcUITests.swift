@@ -9,7 +9,7 @@
 import XCTest
 import UIKit
 
-class DecimalHexaCalcUITests: XCTestCase {
+class BinaryHexaCalcUITests: XCTestCase {
     
     override func setUpWithError() throws {
         // Navigate to the binary tab before running each test
@@ -55,6 +55,18 @@ class DecimalHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1001", calculator: 1))
         
+        app.buttons["DEL"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1001", calculator: 1))
+        
+        // Test deleting entire string
+        app.buttons["AC"].tap()
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
+        
+        app.buttons["DEL"].tap()
         app.buttons["DEL"].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))

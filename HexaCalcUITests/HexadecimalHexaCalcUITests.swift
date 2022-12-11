@@ -55,6 +55,18 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         
         app.buttons["DEL"].tap()
         
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "ABC5", calculator: 0))
+        
+        // Test deleting entire string
+        app.buttons["AC"].tap()
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 0))
+        
+        app.buttons["DEL"].tap()
+        app.buttons["DEL"].tap()
+        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
     }
     
