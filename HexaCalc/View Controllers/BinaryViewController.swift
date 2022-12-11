@@ -117,7 +117,7 @@ class BinaryViewController: UIViewController {
         
         //Check for integer overflow first
         if ((stateController?.convValues.largerThan64Bits)!) {
-            updateOutputLabel(value: result)
+            updateOutputLabel(value: "Error! Integer Overflow!")
         }
         else {
             var newLabelValue = stateController?.convValues.binVal

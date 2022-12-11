@@ -30,7 +30,7 @@ class UITestHelper {
         else {
             let outputLabel = app.buttons["Decimal Output Label"]
             var text = expected
-            if stringHasNumbers(stringToCheck: expected) {
+            if (stringHasNumbers(stringToCheck: expected) && !(expected.contains("e"))) {
                 text = formatDecimalString(stringToConvert: expected)
             }
             return outputLabel.label == text
@@ -46,8 +46,35 @@ class UITestHelper {
     }
     
     static func formatDecimalString(stringToConvert: String) -> String {
-        let manipulatedStringToConvert = String(stringToConvert.reversed())
-        return String(manipulatedStringToConvert.separate(every: 3, with: ",").reversed())
+        var isNegative = false
+        var hasDecimal = false
+        if (stringToConvert.hasPrefix("-")) {
+            isNegative = true
+        }
+        if (stringToConvert.contains(".")) {
+            hasDecimal = true
+        }
+        
+        var preparedString = stringToConvert
+        if (isNegative) {
+            preparedString.remove(at: preparedString.startIndex)
+        }
+        var fractionalComponent = ""
+        if (hasDecimal) {
+            let splits = preparedString.split(separator: ".")
+            preparedString = String(splits[0])
+            fractionalComponent = String(splits[1])
+        }
+        
+        let manipulatedStringToConvert = String(preparedString.reversed())
+        var result = String(manipulatedStringToConvert.separate(every: 3, with: ",").reversed())
+        if (isNegative) {
+            result = "-" + result
+        }
+        if (hasDecimal) {
+            result.append("." + fractionalComponent)
+        }
+        return result
     }
     
     static func stringHasNumbers(stringToCheck: String) -> Bool {

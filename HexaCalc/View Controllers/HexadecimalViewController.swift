@@ -172,7 +172,7 @@ class HexadecimalViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if ((stateController?.convValues.largerThan64Bits)!) {
-            updateOutputLabel(value: "Error! Integer overflow!")
+            updateOutputLabel(value: "Error! Integer Overflow!")
         }
         else {
             var newLabelValue = stateController?.convValues.hexVal.uppercased()
