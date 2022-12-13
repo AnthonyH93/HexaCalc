@@ -39,7 +39,7 @@ class BinaryHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "100000", calculator: 1))
         
         // Test delete button
-        app.buttons[UITestHelper.delete].tap()
+        UITestHelper.delete(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "10000", calculator: 1))
         
@@ -49,25 +49,25 @@ class BinaryHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1000", calculator: 1))
         
         // Test delete after computation
-        app.buttons[UITestHelper.add].tap()
+        UITestHelper.add(app: app)
         app.buttons["1"].tap()
-        app.buttons[UITestHelper.equals].tap()
+        UITestHelper.equals(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1001", calculator: 1))
         
-        app.buttons[UITestHelper.delete].tap()
+        UITestHelper.delete(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1001", calculator: 1))
         
         // Test deleting entire string
-        app.buttons[UITestHelper.clear].tap()
+        UITestHelper.clear(app: app)
         app.buttons["1"].tap()
         app.buttons["1"].tap()
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
         
-        app.buttons[UITestHelper.delete].tap()
-        app.buttons[UITestHelper.delete].tap()
+        UITestHelper.delete(app: app)
+        UITestHelper.delete(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
     }
@@ -84,13 +84,13 @@ class BinaryHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: expectedString, calculator: 1))
         
-        app.buttons[UITestHelper.multiply].tap()
+        UITestHelper.multiply(app: app)
         app.buttons["11"].tap()
-        app.buttons[UITestHelper.equals].tap()
+        UITestHelper.equals(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "Error! Integer Overflow!", calculator: 1))
         
-        app.buttons[UITestHelper.clear].tap()
+        UITestHelper.clear(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
     }
@@ -116,7 +116,7 @@ class BinaryHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1100", calculator: 1))
         
         // XOR
-        app.buttons["XOR"].tap()
+        UITestHelper.xor(app: app)
         
         app.buttons["11"].tap()
         app.buttons["00"].tap()
@@ -124,12 +124,12 @@ class BinaryHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "11000", calculator: 1))
         
-        app.buttons[UITestHelper.equals].tap()
+        UITestHelper.equals(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "10100", calculator: 1))
         
         // OR
-        app.buttons["OR"].tap()
+        UITestHelper.or(app: app)
         
         app.buttons["11"].tap()
         app.buttons["00"].tap()
@@ -137,12 +137,12 @@ class BinaryHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "11001", calculator: 1))
         
-        app.buttons[UITestHelper.equals].tap()
+        UITestHelper.equals(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "11101", calculator: 1))
         
         // AND
-        app.buttons["AND"].tap()
+        UITestHelper.and(app: app)
         
         app.buttons["11"].tap()
         app.buttons["1"].tap()
@@ -150,18 +150,18 @@ class BinaryHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1110", calculator: 1))
         
-        app.buttons[UITestHelper.equals].tap()
+        UITestHelper.equals(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1100", calculator: 1))
         
         // NOT
-        app.buttons["NOT"].tap()
+        UITestHelper.not(app: app)
         
         let notString = String(repeating: "1", count: 60) + "0011"
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: notString, calculator: 1))
         
-        app.buttons["NOT"].tap()
+        UITestHelper.not(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1100", calculator: 1))
     }
@@ -177,35 +177,35 @@ class BinaryHexaCalcUITests: XCTestCase {
         // 1's compliment
         var onesCompString = String(repeating: "1", count: 60) + "0000"
         
-        app.buttons["1's"].tap()
+        UITestHelper.ones(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: onesCompString, calculator: 1))
         
-        app.buttons["1's"].tap()
+        UITestHelper.ones(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1111", calculator: 1))
         
-        app.buttons[UITestHelper.clear].tap()
+        UITestHelper.clear(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
         
         onesCompString = String(repeating: "1", count: 64)
         
-        app.buttons["1's"].tap()
+        UITestHelper.ones(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: onesCompString, calculator: 1))
         
-        app.buttons["1's"].tap()
+        UITestHelper.ones(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
         
         // 2's compliment
         
-        app.buttons["2's"].tap()
+        UITestHelper.twos(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
         
-        app.buttons["2's"].tap()
+        UITestHelper.twos(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
         
@@ -216,11 +216,11 @@ class BinaryHexaCalcUITests: XCTestCase {
         
         let twosCompString = String(repeating: "1", count: 60) + "0001"
         
-        app.buttons["2's"].tap()
+        UITestHelper.twos(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: twosCompString, calculator: 1))
         
-        app.buttons["2's"].tap()
+        UITestHelper.twos(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1111", calculator: 1))
     }
@@ -230,11 +230,11 @@ class BinaryHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
         
-        app.buttons["<<"].tap()
+        UITestHelper.leftShift(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
         
-        app.buttons[">>"].tap()
+        UITestHelper.rightShift(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
         
@@ -243,19 +243,19 @@ class BinaryHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 1))
         
-        app.buttons["<<"].tap()
+        UITestHelper.leftShift(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "100", calculator: 1))
         
-        app.buttons[">>"].tap()
+        UITestHelper.rightShift(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 1))
         
-        app.buttons[">>"].tap()
+        UITestHelper.rightShift(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1", calculator: 1))
         
-        app.buttons[">>"].tap()
+        UITestHelper.rightShift(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
         
@@ -267,29 +267,29 @@ class BinaryHexaCalcUITests: XCTestCase {
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: expectedString, calculator: 1))
         
-        app.buttons["<<"].tap()
+        UITestHelper.leftShift(app: app)
         expectedString.append("0")
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: expectedString, calculator: 1))
         
-        app.buttons["<<"].tap()
+        UITestHelper.leftShift(app: app)
         expectedString.append("0")
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: expectedString, calculator: 1))
         
-        app.buttons["<<"].tap()
+        UITestHelper.leftShift(app: app)
         expectedString.remove(at: expectedString.startIndex)
         expectedString.append("0")
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: expectedString, calculator: 1))
         
-        app.buttons[">>"].tap()
+        UITestHelper.rightShift(app: app)
         expectedString.removeLast()
         expectedString = "0" + expectedString
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: expectedString, calculator: 1))
         
-        app.buttons[">>"].tap()
+        UITestHelper.rightShift(app: app)
         expectedString.removeLast()
         expectedString = "0" + expectedString
         
