@@ -26,7 +26,7 @@ class UITestHelper {
     static let ones = "1's"
     static let twos = "2's"
     static let mod = "MOD"
-    static let exp = "EXP"
+    static let exp = "xʸ"
     static let leftShift = "<<"
     static let rightShift = ">>"
     static let leftShiftX = "<<X"

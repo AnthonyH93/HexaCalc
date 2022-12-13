@@ -888,7 +888,7 @@ class DecimalViewController: UIViewController {
                 case 1:
                     button?.setTitle("MOD", for: .normal)
                 case 2:
-                    button?.setTitle("EXP", for: .normal)
+                    button?.setTitle("xʸ", for: .normal)
                 case 3:
                     button?.setTitle("√", for: .normal)
                 default:
