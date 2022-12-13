@@ -426,7 +426,85 @@ class DecimalHexaCalcUITests: XCTestCase {
     }
     
     func testEXP() throws {
+        let app = XCUIApplication()
         
+        let secondFunc = app.buttons["2nd"]
+        let expFunc = app.buttons["EXP"]
+        
+        secondFunc.tap()
+        
+        app.buttons["1"].tap()
+        
+        expFunc.tap()
+        
+        app.buttons["0"].tap()
+        
+        app.buttons[UITestHelper.equals].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1", calculator: 2))
+        
+        app.buttons[UITestHelper.clear].tap()
+        
+        app.buttons["5"].tap()
+        
+        expFunc.tap()
+        
+        app.buttons["1"].tap()
+        
+        app.buttons[UITestHelper.equals].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "5", calculator: 2))
+        
+        expFunc.tap()
+        
+        app.buttons["2"].tap()
+        
+        app.buttons[UITestHelper.equals].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "25", calculator: 2))
+        
+        expFunc.tap()
+        
+        app.buttons["8"].tap()
+        
+        app.buttons[UITestHelper.equals].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1.52588e11", calculator: 2))
+        
+        expFunc.tap()
+        
+        app.buttons["5"].tap()
+        app.buttons["±"].tap()
+        
+        app.buttons[UITestHelper.equals].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1.20893e-56", calculator: 2))
+        
+        app.buttons[UITestHelper.clear].tap()
+        
+        app.buttons["5"].tap()
+        
+        expFunc.tap()
+        
+        app.buttons["3"].tap()
+        app.buttons["±"].tap()
+        
+        app.buttons[UITestHelper.equals].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0.008", calculator: 2))
+        
+        app.buttons[UITestHelper.clear].tap()
+        
+        app.buttons["5"].tap()
+        app.buttons["±"].tap()
+        
+        expFunc.tap()
+        
+        app.buttons["3"].tap()
+        
+        app.buttons[UITestHelper.equals].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "-125", calculator: 2))
     }
     
     func testSQRT() throws {
