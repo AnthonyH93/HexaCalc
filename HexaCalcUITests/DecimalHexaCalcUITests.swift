@@ -481,9 +481,72 @@ class DecimalHexaCalcUITests: XCTestCase {
         UITestHelper.equals(app: app)
         
         XCTAssert(UITestHelper.assertResult(app: app, expected: "-125", calculator: 2))
+        
+        UITestHelper.clear(app: app)
+        
+        app.buttons["1"].tap()
+        app.buttons["."].tap()
+        app.buttons["5"].tap()
+        
+        UITestHelper.exp(app: app)
+        
+        app.buttons["2"].tap()
+        
+        UITestHelper.equals(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "2.25", calculator: 2))
+        
+        UITestHelper.exp(app: app)
+        
+        app.buttons["1"].tap()
+        app.buttons["."].tap()
+        app.buttons["5"].tap()
+        
+        UITestHelper.equals(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "3.375", calculator: 2))
     }
     
     func testSQRT() throws {
+        let app = XCUIApplication()
         
+        UITestHelper.second(app: app)
+        
+        app.buttons["1"].tap()
+        
+        UITestHelper.sqrt(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1", calculator: 2))
+        
+        UITestHelper.clear(app: app)
+        
+        app.buttons["4"].tap()
+        
+        UITestHelper.sqrt(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "2", calculator: 2))
+        
+        UITestHelper.sqrt(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1.41421356", calculator: 2))
+        
+        UITestHelper.clear(app: app)
+        
+        UITestHelper.sqrt(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+        
+        UITestHelper.clear(app: app)
+        
+        app.buttons["5"].tap()
+        UITestHelper.plusMinus(app: app)
+        
+        UITestHelper.sqrt(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "Error!", calculator: 2))
+        
+        UITestHelper.clear(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
     }
 }
