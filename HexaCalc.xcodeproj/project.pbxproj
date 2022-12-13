@@ -82,19 +82,11 @@
 		9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24A124C553F000701F5B /* HexaCalc.xcdatamodeld */; };
 		9DEF24A524C553F100701F5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A424C553F100701F5B /* Assets.xcassets */; };
 		9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */; };
-		9DEF24B324C553F100701F5B /* HexaCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24B224C553F100701F5B /* HexaCalcTests.swift */; };
 		9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24BD24C5578300701F5B /* DecimalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		9DE32E3928DEDBDF00BB222C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9DEF248B24C553F000701F5B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9DEF249224C553F000701F5B;
-			remoteInfo = HexaCalc;
-		};
-		9DEF24AF24C553F100701F5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9DEF248B24C553F000701F5B /* Project object */;
 			proxyType = 1;
@@ -182,9 +174,6 @@
 		9DEF24A424C553F100701F5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9DEF24A724C553F100701F5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DEF24A924C553F100701F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9DEF24AE24C553F100701F5B /* HexaCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HexaCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DEF24B224C553F100701F5B /* HexaCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcTests.swift; sourceTree = "<group>"; };
-		9DEF24B424C553F100701F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DEF24BD24C5578300701F5B /* DecimalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,13 +186,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9DEF249024C553F000701F5B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DEF24AB24C553F100701F5B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -357,7 +339,6 @@
 			isa = PBXGroup;
 			children = (
 				9DEF249524C553F000701F5B /* HexaCalc */,
-				9DEF24B124C553F100701F5B /* HexaCalcTests */,
 				9DE32E3428DEDBDF00BB222C /* HexaCalcUITests */,
 				9DEF249424C553F000701F5B /* Products */,
 			);
@@ -367,7 +348,6 @@
 			isa = PBXGroup;
 			children = (
 				9DEF249324C553F000701F5B /* HexaCalc.app */,
-				9DEF24AE24C553F100701F5B /* HexaCalcTests.xctest */,
 				9DE32E3328DEDBDF00BB222C /* HexaCalcUITests.xctest */,
 			);
 			name = Products;
@@ -386,15 +366,6 @@
 				9DEF24A924C553F100701F5B /* Info.plist */,
 			);
 			path = HexaCalc;
-			sourceTree = "<group>";
-		};
-		9DEF24B124C553F100701F5B /* HexaCalcTests */ = {
-			isa = PBXGroup;
-			children = (
-				9DEF24B224C553F100701F5B /* HexaCalcTests.swift */,
-				9DEF24B424C553F100701F5B /* Info.plist */,
-			);
-			path = HexaCalcTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,24 +406,6 @@
 			productReference = 9DEF249324C553F000701F5B /* HexaCalc.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9DEF24AD24C553F100701F5B /* HexaCalcTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9DEF24BA24C553F100701F5B /* Build configuration list for PBXNativeTarget "HexaCalcTests" */;
-			buildPhases = (
-				9DEF24AA24C553F100701F5B /* Sources */,
-				9DEF24AB24C553F100701F5B /* Frameworks */,
-				9DEF24AC24C553F100701F5B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9DEF24B024C553F100701F5B /* PBXTargetDependency */,
-			);
-			name = HexaCalcTests;
-			productName = HexaCalcTests;
-			productReference = 9DEF24AE24C553F100701F5B /* HexaCalcTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -470,10 +423,6 @@
 					9DEF249224C553F000701F5B = {
 						CreatedOnToolsVersion = 11.5;
 					};
-					9DEF24AD24C553F100701F5B = {
-						CreatedOnToolsVersion = 11.5;
-						TestTargetID = 9DEF249224C553F000701F5B;
-					};
 				};
 			};
 			buildConfigurationList = 9DEF248E24C553F000701F5B /* Build configuration list for PBXProject "HexaCalc" */;
@@ -490,7 +439,6 @@
 			projectRoot = "";
 			targets = (
 				9DEF249224C553F000701F5B /* HexaCalc */,
-				9DEF24AD24C553F100701F5B /* HexaCalcTests */,
 				9DE32E3228DEDBDF00BB222C /* HexaCalcUITests */,
 			);
 		};
@@ -556,13 +504,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9DEF24AC24C553F100701F5B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -611,14 +552,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9DEF24AA24C553F100701F5B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9DEF24B324C553F100701F5B /* HexaCalcTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -626,11 +559,6 @@
 			isa = PBXTargetDependency;
 			target = 9DEF249224C553F000701F5B /* HexaCalc */;
 			targetProxy = 9DE32E3928DEDBDF00BB222C /* PBXContainerItemProxy */;
-		};
-		9DEF24B024C553F100701F5B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9DEF249224C553F000701F5B /* HexaCalc */;
-			targetProxy = 9DEF24AF24C553F100701F5B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -658,14 +586,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QMBJV5C74X;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopkins.HexaCalcUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -677,14 +610,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QMBJV5C74X;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopkins.HexaCalcUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -852,50 +790,6 @@
 			};
 			name = Release;
 		};
-		9DEF24BB24C553F100701F5B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QMBJV5C74X;
-				INFOPLIST_FILE = HexaCalcTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalcTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HexaCalc.app/HexaCalc";
-			};
-			name = Debug;
-		};
-		9DEF24BC24C553F100701F5B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QMBJV5C74X;
-				INFOPLIST_FILE = HexaCalcTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalcTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HexaCalc.app/HexaCalc";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -922,15 +816,6 @@
 			buildConfigurations = (
 				9DEF24B824C553F100701F5B /* Debug */,
 				9DEF24B924C553F100701F5B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9DEF24BA24C553F100701F5B /* Build configuration list for PBXNativeTarget "HexaCalcTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9DEF24BB24C553F100701F5B /* Debug */,
-				9DEF24BC24C553F100701F5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

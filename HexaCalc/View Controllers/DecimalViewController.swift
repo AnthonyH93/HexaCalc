@@ -666,7 +666,16 @@ class DecimalViewController: UIViewController {
                     result = "\(Double(leftValue)! * Double(rightValue)!)"
                     
                 case .Modulus:
-                    result = "\(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!))"
+                    //Output Error! if division by 0
+                    if Double(rightValue)! == 0.0 {
+                        result = "Error!"
+                        updateOutputLabel(value: result)
+                        currentOperation = operation
+                        return
+                    }
+                    else {
+                        result = "\(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!))"
+                    }
                     
                 case .Exp:
                     result = "\(pow(Double(leftValue)!, Double(rightValue)!))"
