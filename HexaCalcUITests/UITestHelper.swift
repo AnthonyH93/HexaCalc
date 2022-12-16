@@ -150,6 +150,36 @@ class UITestHelper {
         }
     }
     
+    static func tapResult(app: XCUIApplication, calculator: Int) {
+        // Hexadecimal
+        if calculator == 0 {
+            app.staticTexts["Hexadecimal Output Label"].tap()
+        }
+        // Binary
+        else if calculator == 1 {
+            app.buttons["Binary Output Label"].tap()
+        }
+        // Decimal
+        else {
+            app.buttons["Decimal Output Label"].tap()
+        }
+    }
+    
+    static func doubleTapResult(app: XCUIApplication, calculator: Int) {
+        // Hexadecimal
+        if calculator == 0 {
+            app.staticTexts["Hexadecimal Output Label"].doubleTap()
+        }
+        // Binary
+        else if calculator == 1 {
+            app.buttons["Binary Output Label"].doubleTap()
+        }
+        // Decimal
+        else {
+            app.buttons["Decimal Output Label"].doubleTap()
+        }
+    }
+    
     static func formatBinaryString(stringToConvert: String) -> String {
         var manipulatedStringToConvert = stringToConvert
         while (manipulatedStringToConvert.count < 64){

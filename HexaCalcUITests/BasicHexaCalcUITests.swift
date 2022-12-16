@@ -25,7 +25,6 @@ class BasicHexaCalcUITests: XCTestCase {
     }
 
     func testBasicAppSetup() throws {
-        // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
 
@@ -58,7 +57,6 @@ class BasicHexaCalcUITests: XCTestCase {
     }
     
     func testHexadecimalBasicCalculations() throws {
-        // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
         
@@ -121,7 +119,6 @@ class BasicHexaCalcUITests: XCTestCase {
     }
     
     func testBinaryBasicCalculations() throws {
-        // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
         
@@ -187,7 +184,6 @@ class BasicHexaCalcUITests: XCTestCase {
     }
     
     func testDecimalBasicCalculations() throws {
-        // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
         
@@ -245,5 +241,87 @@ class BasicHexaCalcUITests: XCTestCase {
         UITestHelper.clear(app: app)
                 
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+    }
+    
+    func testCopyPaste() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let tabBar = app.tabBars["Tab Bar"]
+        
+        // Hexadecimal
+        app.buttons["7"].tap()
+        
+        UITestHelper.add(app: app)
+        
+        app.buttons["8"].tap()
+        
+        UITestHelper.equals(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "F", calculator: 0))
+        
+        UITestHelper.tapResult(app: app, calculator: 0)
+        
+        // Sleep to wait for alert to disappear
+        sleep(2)
+        
+        UITestHelper.clear(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+        
+        UITestHelper.doubleTapResult(app: app, calculator: 0)
+        
+        app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
+        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
+            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
+        }
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "F", calculator: 0))
+        
+        // Binary
+        tabBar.buttons["Binary"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1111", calculator: 1))
+        
+        UITestHelper.tapResult(app: app, calculator: 1)
+        
+        // Sleep to wait for alert to disappear
+        sleep(2)
+        
+        UITestHelper.clear(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
+        
+        UITestHelper.doubleTapResult(app: app, calculator: 1)
+        
+        app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
+        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
+            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
+        }
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1111", calculator: 1))
+        
+        // Decimal
+        tabBar.buttons["Decimal"].tap()
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 2))
+        
+        UITestHelper.tapResult(app: app, calculator: 2)
+        
+        // Sleep to wait for alert to disappear
+        sleep(2)
+        
+        UITestHelper.clear(app: app)
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+        
+        UITestHelper.doubleTapResult(app: app, calculator: 2)
+        
+        app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
+        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
+            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
+        }
+        
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 2))
     }
 }
