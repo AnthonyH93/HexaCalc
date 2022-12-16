@@ -83,6 +83,7 @@
 		9DEF24A524C553F100701F5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A424C553F100701F5B /* Assets.xcassets */; };
 		9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */; };
 		9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24BD24C5578300701F5B /* DecimalViewController.swift */; };
+		9DF9A11A294C30730074C07D /* SettingsHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,7 @@
 		9DEF24A724C553F100701F5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DEF24A924C553F100701F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DEF24BD24C5578300701F5B /* DecimalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalViewController.swift; sourceTree = "<group>"; };
+		9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHexaCalcUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 				9DC4DA1929457F2C00D1652E /* DecimalHexaCalcUITests.swift */,
 				9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */,
 				9D3E23DB291F6BE300151B44 /* UITestHelper.swift */,
+				9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */,
 			);
 			path = HexaCalcUITests;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DC4DA1A29457F2C00D1652E /* DecimalHexaCalcUITests.swift in Sources */,
+				9DF9A11A294C30730074C07D /* SettingsHexaCalcUITests.swift in Sources */,
 				9DC4DA182944367500D1652E /* BinaryHexaCalcUITests.swift in Sources */,
 				9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */,
 				9DE32E4028EA97AC00BB222C /* BasicHexaCalcUITests.swift in Sources */,
