@@ -39,10 +39,12 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9DAB822725F9AE3000F5C42E"
+               BlueprintIdentifier = "9DE32E3228DEDBDF00BB222C"
                BuildableName = "HexaCalcUITests.xctest"
                BlueprintName = "HexaCalcUITests"
                ReferencedContainer = "container:HexaCalc.xcodeproj">
