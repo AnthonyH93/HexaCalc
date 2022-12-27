@@ -82,7 +82,8 @@ class HexadecimalViewController: UIViewController {
         let originalViewControllers = tabBarController?.viewControllers
         stateController?.convValues.originalTabs = originalViewControllers
         
-        outputLabel.text = "0"
+        outputLabel.accessibilityIdentifier = "Hexadecimal Output Label"
+        updateOutputLabel(value: "0")
         
         if let savedPreferences = DataPersistence.loadPreferences() {
             
@@ -186,13 +187,13 @@ class HexadecimalViewController: UIViewController {
         super.viewWillAppear(animated)
 
         if ((stateController?.convValues.largerThan64Bits)!) {
-            outputLabel.text = "Error! Integer overflow!"
+            updateOutputLabel(value: "Error! Integer Overflow!")
         }
         else {
             var newLabelValue = stateController?.convValues.hexVal.uppercased()
             
             if (newLabelValue == "0"){
-                outputLabel.text = "0"
+                updateOutputLabel(value: "0")
                 runningNumber = ""
                 leftValue = ""
                 leftValueHex = ""
@@ -206,7 +207,7 @@ class HexadecimalViewController: UIViewController {
                 }
                 runningNumber = newLabelValue ?? "0"
                 currentOperation = .NULL
-                outputLabel.text = newLabelValue
+                updateOutputLabel(value: newLabelValue ?? "0")
             }
         }
         
@@ -331,7 +332,7 @@ class HexadecimalViewController: UIViewController {
                 leftValueHex = ""
                 rightValue = ""
                 result = ""
-                outputLabel.text = "0"
+                updateOutputLabel(value: "0")
                 stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.decimalVal = "0"
                 stateController?.convValues.hexVal = "0"
@@ -339,7 +340,7 @@ class HexadecimalViewController: UIViewController {
             }
             else {
                 runningNumber = strippedSpacesHexadecimal.uppercased()
-                outputLabel.text = runningNumber
+                updateOutputLabel(value: runningNumber)
                 quickUpdateStateController()
             }
         }
@@ -403,7 +404,7 @@ class HexadecimalViewController: UIViewController {
         rightValue = ""
         result = ""
         currentOperation = .NULL
-        outputLabel.text = "0"
+        updateOutputLabel(value: "0")
         
         stateController?.convValues.largerThan64Bits = false
         stateController?.convValues.decimalVal = "0"
@@ -417,24 +418,21 @@ class HexadecimalViewController: UIViewController {
             return
         }
         
-        if (runningNumber == "0"){
-            //Do nothing
-        }
-        else {
+        if (runningNumber != "0"){
             if (runningNumber != ""){
                 runningNumber.removeLast()
-            }
-            //Need to be careful if runningNumber becomes NIL
-            if (runningNumber == ""){
-                stateController?.convValues.largerThan64Bits = false
-                stateController?.convValues.decimalVal = "0"
-                stateController?.convValues.hexVal = "0"
-                stateController?.convValues.binVal = "0"
-                outputLabel.text = "0"
-            }
-            else {
-                outputLabel.text = runningNumber
-                quickUpdateStateController()
+                // Need to be careful if runningNumber becomes empty
+                if (runningNumber == "") {
+                    stateController?.convValues.largerThan64Bits = false
+                    stateController?.convValues.decimalVal = "0"
+                    stateController?.convValues.hexVal = "0"
+                    stateController?.convValues.binVal = "0"
+                    updateOutputLabel(value: "0")
+                }
+                else {
+                    updateOutputLabel(value: runningNumber)
+                    quickUpdateStateController()
+                }
             }
         }
     }
@@ -477,7 +475,7 @@ class HexadecimalViewController: UIViewController {
                 else {
                     runningNumber += convertedDigit
                 }
-                outputLabel.text = runningNumber
+                updateOutputLabel(value: runningNumber)
                 quickUpdateStateController()
             }
         }
@@ -504,7 +502,7 @@ class HexadecimalViewController: UIViewController {
         
         var currentValue = runningNumber
         if (runningNumber == ""){
-            currentValue = "0"
+            currentValue = outputLabel.text ?? "0"
         }
         
         let castInt = UInt64(currentValue, radix: 16)!
@@ -512,7 +510,7 @@ class HexadecimalViewController: UIViewController {
         
         runningNumber = String(onesComplimentInt, radix: 16).uppercased()
         
-        outputLabel.text = runningNumber
+        updateOutputLabel(value: runningNumber)
         
         quickUpdateStateController()
     }
@@ -530,7 +528,7 @@ class HexadecimalViewController: UIViewController {
             
             runningNumber = String(twosComplimentInt, radix: 16).uppercased()
             
-            outputLabel.text = runningNumber
+            updateOutputLabel(value: runningNumber)
             
             quickUpdateStateController()
         }
@@ -602,7 +600,7 @@ class HexadecimalViewController: UIViewController {
                     let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
                     if (overCheck.overflow) {
                         result = "Error! Integer Overflow!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         stateController?.convValues.largerThan64Bits = true
                         stateController?.convValues.decimalVal = "0"
@@ -618,7 +616,7 @@ class HexadecimalViewController: UIViewController {
                     let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
                     if (overCheck.overflow) {
                         result = "Error! Integer Overflow!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         stateController?.convValues.largerThan64Bits = true
                         stateController?.convValues.decimalVal = "0"
@@ -634,7 +632,7 @@ class HexadecimalViewController: UIViewController {
                     let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
                     if (overCheck.overflow) {
                         result = "Error! Integer Overflow!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         stateController?.convValues.largerThan64Bits = true
                         stateController?.convValues.decimalVal = "0"
@@ -648,7 +646,7 @@ class HexadecimalViewController: UIViewController {
                     //Output Error! if division by 0
                     if Int(rightValue)! == 0 {
                         result = "Error!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         return
                     }
@@ -658,14 +656,14 @@ class HexadecimalViewController: UIViewController {
                     //Output Error! if division by 0
                     if Int(rightValue)! == 0 {
                         result = "Error!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         return
                     }
                     let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
                     if (overCheck.overflow) {
                         result = "Error! Integer Overflow!"
-                        outputLabel.text = result
+                        updateOutputLabel(value: result)
                         currentOperation = operation
                         stateController?.convValues.largerThan64Bits = true
                         stateController?.convValues.decimalVal = "0"
@@ -710,10 +708,11 @@ class HexadecimalViewController: UIViewController {
                 
                 let hexRepresentation = stateController?.convValues.hexVal ?? "0"
                 var newLabelValue = hexRepresentation.uppercased()
+                leftValueHex = newLabelValue
                 if ((hexRepresentation.contains("-"))){
                     newLabelValue = formatNegativeHex(hexToConvert: newLabelValue).uppercased()
                 }
-                outputLabel.text = newLabelValue
+                updateOutputLabel(value: newLabelValue)
                 
                 let calculationData = CalculationData(leftValue: leftHexValue, rightValue: rightHexValue, operation: currentOperation, result: newLabelValue)
                 calculationHistory.append(calculationData)
@@ -1000,6 +999,12 @@ class HexadecimalViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // Standardized function to update the output label
+    private func updateOutputLabel(value: String) {
+        outputLabel.text = value
+        outputLabel.accessibilityLabel = value
     }
 }
 
