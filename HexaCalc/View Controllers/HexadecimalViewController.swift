@@ -51,7 +51,8 @@ class HexadecimalViewController: UIViewController {
     @IBOutlet weak var Btn2: RoundButton!
     @IBOutlet weak var Btn3: RoundButton!
     @IBOutlet weak var EQUALSBtn: RoundButton!
-    @IBOutlet weak var calculationHistoryButton: UIButton!
+    
+    @IBOutlet weak var historyButton: UIBarButtonItem!
     
     //MARK: Variables
     var runningNumber = ""
@@ -128,7 +129,7 @@ class HexadecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
-            calculationHistoryButton.tintColor = savedPreferences.colour
+            historyButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
             
@@ -219,7 +220,7 @@ class HexadecimalViewController: UIViewController {
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
             outputLabel.textColor = stateController?.convValues.colour
-            calculationHistoryButton.tintColor = stateController?.convValues.colour
+            historyButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary

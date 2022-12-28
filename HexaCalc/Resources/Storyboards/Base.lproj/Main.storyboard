@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -456,19 +457,25 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-0s-Vvk">
-                                        <rect key="frame" x="238.33333333333337" y="0.0" width="167.66666666666663" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Calculation History"/>
-                                        <connections>
-                                            <segue destination="mI5-fy-VRx" kind="show" id="a6X-bd-Zhu"/>
-                                        </connections>
-                                    </button>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYc-un-uoB">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <items>
+                                            <navigationItem largeTitleDisplayMode="always" id="Mnk-KF-Qcp">
+                                                <barButtonItem key="rightBarButtonItem" title="History" id="ru1-wY-3Di">
+                                                    <imageReference key="image" image="clock.arrow.circlepath" catalog="system" symbolScale="large"/>
+                                                    <connections>
+                                                        <segue destination="mI5-fy-VRx" kind="show" id="tzE-gp-TcC"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="ChW-0s-Vvk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4da-24-9uX" secondAttribute="leading" constant="20" symbolic="YES" id="K6C-m4-jY2"/>
-                                    <constraint firstAttribute="trailing" secondItem="ChW-0s-Vvk" secondAttribute="trailing" constant="8" id="PDU-iH-jMW"/>
                                     <constraint firstItem="e8g-mp-jBB" firstAttribute="bottom" secondItem="4da-24-9uX" secondAttribute="bottomMargin" id="Qox-fa-Lxj"/>
                                     <constraint firstItem="Z7g-zo-MXa" firstAttribute="centerX" secondItem="e8g-mp-jBB" secondAttribute="centerX" id="Shr-A0-ioB"/>
                                     <constraint firstItem="e8g-mp-jBB" firstAttribute="top" secondItem="Z7g-zo-MXa" secondAttribute="bottom" priority="250" constant="23" id="T3G-Qs-Vvf"/>
@@ -482,7 +489,6 @@
                             <constraint firstItem="4da-24-9uX" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="5zp-2V-Jd0"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="4da-24-9uX" secondAttribute="bottom" id="Js1-SX-7aq"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="4da-24-9uX" secondAttribute="trailing" id="RG6-a4-McA"/>
-                            <constraint firstItem="ChW-0s-Vvk" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="RXC-hZ-wci"/>
                             <constraint firstItem="4da-24-9uX" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="cdG-BT-a8F"/>
                         </constraints>
                     </view>
@@ -516,7 +522,6 @@
                         <outlet property="SUBBtn" destination="Gez-Xo-Kz8" id="JXu-j1-fKf"/>
                         <outlet property="SecondFunctionBtn" destination="6Pw-L1-6hK" id="vgp-XQ-F3U"/>
                         <outlet property="XORBtn" destination="orD-ym-tCe" id="hTE-nX-WMP"/>
-                        <outlet property="calculationHistoryButton" destination="ChW-0s-Vvk" id="Zl2-4g-E7m"/>
                         <outlet property="hexHStack1" destination="35y-Ac-0Gl" id="O1P-My-I3M"/>
                         <outlet property="hexHStack2" destination="oxv-2j-paj" id="Uha-eo-59l"/>
                         <outlet property="hexHStack3" destination="vZb-vh-zDY" id="CjJ-4F-tDk"/>
@@ -524,6 +529,7 @@
                         <outlet property="hexHStack5" destination="Uxn-g6-081" id="uXi-BF-VQl"/>
                         <outlet property="hexHStack6" destination="1cX-aU-Qkl" id="yXN-f6-iMf"/>
                         <outlet property="hexVStack" destination="e8g-mp-jBB" id="wcQ-oH-hCy"/>
+                        <outlet property="historyButton" destination="ru1-wY-3Di" id="kQE-Y3-h5k"/>
                         <outlet property="outputLabel" destination="Z7g-zo-MXa" id="qet-PS-mwE"/>
                     </connections>
                 </viewController>
@@ -897,20 +903,25 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQT-NH-z0d">
-                                        <rect key="frame" x="238.33333333333337" y="0.0" width="167.66666666666663" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Calculation History"/>
-                                        <connections>
-                                            <segue destination="mI5-fy-VRx" kind="show" id="3cW-T8-B0X"/>
-                                        </connections>
-                                    </button>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xK1-KZ-eDg">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <items>
+                                            <navigationItem largeTitleDisplayMode="always" id="tGy-ST-d9v">
+                                                <barButtonItem key="rightBarButtonItem" title="History" id="Kca-7j-jTk">
+                                                    <imageReference key="image" image="clock.arrow.circlepath" catalog="system" symbolScale="large"/>
+                                                    <connections>
+                                                        <segue destination="mI5-fy-VRx" kind="show" id="sC0-cE-mVT"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="55i-hd-IgX" firstAttribute="centerX" secondItem="HKc-mO-UCF" secondAttribute="centerX" id="1i1-53-J7H"/>
-                                    <constraint firstAttribute="trailing" secondItem="jQT-NH-z0d" secondAttribute="trailing" constant="8" id="5qg-yq-tZN"/>
-                                    <constraint firstItem="jQT-NH-z0d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HKc-mO-UCF" secondAttribute="leading" constant="20" symbolic="YES" id="AsZ-EB-c7f"/>
                                     <constraint firstItem="55i-hd-IgX" firstAttribute="top" secondItem="c3H-nl-HbE" secondAttribute="bottom" priority="250" constant="23" id="XBA-3T-MJ9"/>
                                     <constraint firstItem="55i-hd-IgX" firstAttribute="bottom" secondItem="HKc-mO-UCF" secondAttribute="bottomMargin" id="YdW-OG-G2P"/>
                                     <constraint firstItem="c3H-nl-HbE" firstAttribute="centerX" secondItem="55i-hd-IgX" secondAttribute="centerX" id="ch3-Ke-rPy"/>
@@ -922,7 +933,6 @@
                         <constraints>
                             <constraint firstItem="HKc-mO-UCF" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="aVR-RW-4WE"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="HKc-mO-UCF" secondAttribute="bottom" id="alG-PE-2Gp"/>
-                            <constraint firstItem="jQT-NH-z0d" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="fnc-Em-SWZ"/>
                             <constraint firstItem="HKc-mO-UCF" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="obL-ub-Bjo"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="HKc-mO-UCF" secondAttribute="trailing" id="t2U-vS-EVp"/>
                         </constraints>
@@ -954,7 +964,7 @@
                         <outlet property="binHStack4" destination="3IF-xw-PqV" id="xKI-CL-fgm"/>
                         <outlet property="binHStack5" destination="ggU-ns-mmy" id="nUn-z6-iCS"/>
                         <outlet property="binVStack" destination="55i-hd-IgX" id="fLD-4O-4fn"/>
-                        <outlet property="calculationHistoryButton" destination="jQT-NH-z0d" id="wru-4P-MYC"/>
+                        <outlet property="historyButton" destination="Kca-7j-jTk" id="ll5-tA-q16"/>
                         <outlet property="outputLabel" destination="c3H-nl-HbE" id="Ika-ID-pHJ"/>
                     </connections>
                 </viewController>
@@ -1276,24 +1286,27 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2z-BK-qG9">
-                                        <rect key="frame" x="238.33333333333337" y="0.0" width="167.66666666666663" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Calculation History"/>
-                                        <connections>
-                                            <segue destination="mI5-fy-VRx" kind="show" id="pm7-Mn-O33"/>
-                                        </connections>
-                                    </button>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPw-Rk-P2m">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <items>
+                                            <navigationItem largeTitleDisplayMode="always" id="nSW-4D-99F">
+                                                <barButtonItem key="rightBarButtonItem" title="History" image="clock.arrow.circlepath" catalog="system" id="CZY-Em-1pk">
+                                                    <connections>
+                                                        <segue destination="mI5-fy-VRx" kind="show" id="5CC-PW-4Pl"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="YRn-jp-boy" firstAttribute="top" secondItem="a2J-4m-Np0" secondAttribute="bottom" priority="250" constant="23" id="4Mn-Si-XTX"/>
                                     <constraint firstItem="YRn-jp-boy" firstAttribute="bottom" secondItem="2gC-fg-Gz8" secondAttribute="bottomMargin" id="HbO-rU-dvK"/>
-                                    <constraint firstItem="b2z-BK-qG9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2gC-fg-Gz8" secondAttribute="leading" constant="20" symbolic="YES" id="IBf-mI-WrA"/>
                                     <constraint firstItem="a2J-4m-Np0" firstAttribute="centerX" secondItem="YRn-jp-boy" secondAttribute="centerX" id="ZtP-6E-lmq"/>
-                                    <constraint firstAttribute="trailing" secondItem="b2z-BK-qG9" secondAttribute="trailing" constant="8" id="iyK-u9-M2r"/>
                                     <constraint firstItem="YRn-jp-boy" firstAttribute="centerX" secondItem="2gC-fg-Gz8" secondAttribute="centerX" id="kvT-4s-uJk"/>
-                                    <constraint firstItem="b2z-BK-qG9" firstAttribute="top" secondItem="2gC-fg-Gz8" secondAttribute="top" id="vCZ-Rm-wfA"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1327,13 +1340,13 @@
                         <outlet property="PLUSBtn" destination="FR4-Tm-oSL" id="UIb-PI-jJH"/>
                         <outlet property="SUBBtn" destination="dLL-MC-QGn" id="Edy-KV-upM"/>
                         <outlet property="SecondFunctionBtn" destination="0jA-8e-5dW" id="80F-rw-jXb"/>
-                        <outlet property="calculationHistoryButton" destination="b2z-BK-qG9" id="jmd-3O-Ko3"/>
                         <outlet property="decHStack1" destination="iy6-EE-Ni3" id="EwX-kn-7h6"/>
                         <outlet property="decHStack2" destination="VS6-jf-MsZ" id="txb-dV-zXZ"/>
                         <outlet property="decHStack3" destination="9os-7c-VOg" id="L7v-NX-f58"/>
                         <outlet property="decHStack4" destination="FlW-yi-Lcq" id="oti-qF-Sqg"/>
                         <outlet property="decHStack5" destination="LTM-03-4nc" id="4c4-f2-aUd"/>
                         <outlet property="decVStack" destination="YRn-jp-boy" id="0CW-Xw-Imw"/>
+                        <outlet property="historyButton" destination="CZY-Em-1pk" id="h9b-zI-b5m"/>
                         <outlet property="outputLabel" destination="a2J-4m-Np0" id="XnH-LW-htg"/>
                     </connections>
                 </viewController>
@@ -1395,7 +1408,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="883" y="303"/>
+            <point key="canvasLocation" x="894" y="384"/>
         </scene>
         <!--Settings-->
         <scene sceneID="8Nf-G7-6UM">
@@ -1626,11 +1639,12 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="3cW-T8-B0X"/>
+        <segue reference="sC0-cE-mVT"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemGreenColor"/>
     <resources>
         <image name="01.square" catalog="system" width="128" height="114"/>
+        <image name="clock.arrow.circlepath" catalog="system" width="128" height="112"/>
         <image name="dot.square" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="hexagon" catalog="system" width="128" height="123"/>

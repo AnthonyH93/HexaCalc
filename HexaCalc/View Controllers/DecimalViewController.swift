@@ -40,7 +40,8 @@ class DecimalViewController: UIViewController {
     @IBOutlet weak var Btn7: RoundButton!
     @IBOutlet weak var Btn8: RoundButton!
     @IBOutlet weak var Btn9: RoundButton!
-    @IBOutlet weak var calculationHistoryButton: UIButton!
+    
+    @IBOutlet weak var historyButton: UIBarButtonItem!
     
     //MARK: Variables
     var runningNumber = ""
@@ -70,7 +71,7 @@ class DecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
-            calculationHistoryButton.tintColor = savedPreferences.colour
+            historyButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
@@ -154,7 +155,7 @@ class DecimalViewController: UIViewController {
             MULTBtn.backgroundColor = stateController?.convValues.colour
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
-            calculationHistoryButton.tintColor = stateController?.convValues.colour
+            historyButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary
