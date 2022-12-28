@@ -81,6 +81,14 @@ class BinaryViewController: UIViewController {
         
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
+        
+        // Set bar button images
+        if #available(iOS 14.0, *) {
+            // Only available in iOS 14+
+            historyButton.image = UIImage(systemName: "clock.arrow.circlepath")
+        } else {
+            historyButton.image = UIImage(systemName: "clock")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -465,7 +465,7 @@
                                         <items>
                                             <navigationItem largeTitleDisplayMode="always" id="Mnk-KF-Qcp">
                                                 <barButtonItem key="rightBarButtonItem" title="History" id="ru1-wY-3Di">
-                                                    <imageReference key="image" image="clock.arrow.circlepath" catalog="system" symbolScale="large"/>
+                                                    <imageReference key="image" image="clock" catalog="system" symbolScale="large"/>
                                                     <connections>
                                                         <segue destination="mI5-fy-VRx" kind="show" id="tzE-gp-TcC"/>
                                                     </connections>
@@ -910,7 +910,7 @@
                                         <items>
                                             <navigationItem largeTitleDisplayMode="always" id="tGy-ST-d9v">
                                                 <barButtonItem key="rightBarButtonItem" title="History" id="Kca-7j-jTk">
-                                                    <imageReference key="image" image="clock.arrow.circlepath" catalog="system" symbolScale="large"/>
+                                                    <imageReference key="image" image="clock" catalog="system" symbolScale="large"/>
                                                     <connections>
                                                         <segue destination="mI5-fy-VRx" kind="show" id="sC0-cE-mVT"/>
                                                     </connections>
@@ -1292,7 +1292,7 @@
                                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <items>
                                             <navigationItem largeTitleDisplayMode="always" id="nSW-4D-99F">
-                                                <barButtonItem key="rightBarButtonItem" title="History" image="clock.arrow.circlepath" catalog="system" id="CZY-Em-1pk">
+                                                <barButtonItem key="rightBarButtonItem" title="History" image="clock" catalog="system" id="CZY-Em-1pk">
                                                     <connections>
                                                         <segue destination="mI5-fy-VRx" kind="show" id="5CC-PW-4Pl"/>
                                                     </connections>
@@ -1639,12 +1639,12 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="sC0-cE-mVT"/>
+        <segue reference="5CC-PW-4Pl"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemGreenColor"/>
     <resources>
         <image name="01.square" catalog="system" width="128" height="114"/>
-        <image name="clock.arrow.circlepath" catalog="system" width="128" height="112"/>
+        <image name="clock" catalog="system" width="128" height="123"/>
         <image name="dot.square" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="hexagon" catalog="system" width="128" height="123"/>
