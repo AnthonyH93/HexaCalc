@@ -83,9 +83,9 @@
 		9DEF24A524C553F100701F5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A424C553F100701F5B /* Assets.xcassets */; };
 		9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */; };
 		9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24BD24C5578300701F5B /* DecimalViewController.swift */; };
+		9DF9A11A294C30730074C07D /* SettingsHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */; };
 		C272D50A28E75D7C00E6C374 /* CalculationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C272D50928E75D7C00E6C374 /* CalculationData.swift */; };
 		C2D2E1C428DDF90A0094DA13 /* CalculationHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D2E1C328DDF90A0094DA13 /* CalculationHistoryViewController.swift */; };
-		9DF9A11A294C30730074C07D /* SettingsHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,9 +178,9 @@
 		9DEF24A724C553F100701F5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DEF24A924C553F100701F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DEF24BD24C5578300701F5B /* DecimalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalViewController.swift; sourceTree = "<group>"; };
+		9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHexaCalcUITests.swift; sourceTree = "<group>"; };
 		C272D50928E75D7C00E6C374 /* CalculationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationData.swift; sourceTree = "<group>"; };
 		C2D2E1C328DDF90A0094DA13 /* CalculationHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryViewController.swift; sourceTree = "<group>"; };
-		9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHexaCalcUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -772,7 +772,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -794,7 +794,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
