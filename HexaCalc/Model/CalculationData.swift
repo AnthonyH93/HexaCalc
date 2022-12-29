@@ -15,6 +15,13 @@ struct CalculationData {
     let result: String
     
     func generateEquation() -> String {
-        return "\(leftValue) \(operation.rawValue) \(rightValue) = \(result)"
+        // Binary operation
+        if operation != .NULL {
+            return "\(leftValue) \(operation.rawValue) \(rightValue) = \(result)"
+        }
+        // Unary operation
+        else {
+            return "\(leftValue) = \(result)"
+        }
     }
 }

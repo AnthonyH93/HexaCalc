@@ -750,9 +750,15 @@ class HexadecimalViewController: UIViewController {
                 }
             }
             runningNumber = ""
+            
+            let unaryCalculationResult = rightHexValue == "" ? "0" : rightHexValue
+            let calculationData = CalculationData(leftValue: unaryCalculationResult, rightValue: "", operation: currentOperation, result: unaryCalculationResult)
+            calculationHistory.append(calculationData)
+            
             currentOperation = operation
         }
     }
+    
     private func setupStateControllerValues() {
         stateController?.convValues.decimalVal = result
         let hexConversion = String(Int(result)!, radix: 16)
@@ -760,6 +766,7 @@ class HexadecimalViewController: UIViewController {
         stateController?.convValues.hexVal = hexConversion
         stateController?.convValues.binVal = binConversion
     }
+    
     //Perform a quick update to keep the state controller variables in sync with the calculator label
     private func quickUpdateStateController() {
         
