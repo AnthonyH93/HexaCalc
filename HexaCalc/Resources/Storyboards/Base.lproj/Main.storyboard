@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -463,8 +462,7 @@
                                         <color key="barTintColor" systemColor="labelColor"/>
                                         <items>
                                             <navigationItem largeTitleDisplayMode="always" id="Mnk-KF-Qcp">
-                                                <barButtonItem key="rightBarButtonItem" title="History" id="ru1-wY-3Di">
-                                                    <imageReference key="image" image="clock" catalog="system" symbolScale="large"/>
+                                                <barButtonItem key="rightBarButtonItem" title="Calculation History" id="ru1-wY-3Di">
                                                     <connections>
                                                         <segue destination="mI5-fy-VRx" kind="show" id="tzE-gp-TcC"/>
                                                     </connections>
@@ -908,8 +906,7 @@
                                         <color key="barTintColor" systemColor="labelColor"/>
                                         <items>
                                             <navigationItem largeTitleDisplayMode="always" id="tGy-ST-d9v">
-                                                <barButtonItem key="rightBarButtonItem" title="History" id="Kca-7j-jTk">
-                                                    <imageReference key="image" image="clock" catalog="system" symbolScale="large"/>
+                                                <barButtonItem key="rightBarButtonItem" title="Calculation History" id="Kca-7j-jTk">
                                                     <connections>
                                                         <segue destination="mI5-fy-VRx" kind="show" id="sC0-cE-mVT"/>
                                                     </connections>
@@ -1291,7 +1288,7 @@
                                         <color key="barTintColor" systemColor="labelColor"/>
                                         <items>
                                             <navigationItem largeTitleDisplayMode="always" id="nSW-4D-99F">
-                                                <barButtonItem key="rightBarButtonItem" title="History" image="clock" catalog="system" id="CZY-Em-1pk">
+                                                <barButtonItem key="rightBarButtonItem" title="Calculation History" id="CZY-Em-1pk">
                                                     <connections>
                                                         <segue destination="mI5-fy-VRx" kind="show" id="5CC-PW-4Pl"/>
                                                     </connections>
@@ -1643,7 +1640,6 @@
     <color key="tintColor" systemColor="systemGreenColor"/>
     <resources>
         <image name="01.square" catalog="system" width="128" height="114"/>
-        <image name="clock" catalog="system" width="128" height="123"/>
         <image name="dot.square" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="hexagon" catalog="system" width="128" height="123"/>
