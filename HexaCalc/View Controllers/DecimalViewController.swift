@@ -86,6 +86,9 @@ class DecimalViewController: UIViewController {
         } else {
             historyButton.image = UIImage(systemName: "clock")
         }
+        
+        // Force light mode to be used (for now) - to hide the navigation bar line
+        overrideUserInterfaceStyle = .light
     }
     
     override func viewDidLayoutSubviews() {
