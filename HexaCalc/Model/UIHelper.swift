@@ -116,7 +116,7 @@ class UIHelper {
         }
         else {
             let stackWidth = screenWidth - 20
-            var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
+            var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.7 : screenHeight/1.75
             var hStackHeight: CGFloat = 0
             
             // Vertical slide over needs special consideration
@@ -155,7 +155,7 @@ class UIHelper {
         }
         else {
             let stackWidth = screenWidth - 20
-            var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.5 : screenHeight/1.75
+            var vStackHeight = ((screenWidth * 2) > screenHeight) ? screenHeight/1.7 : screenHeight/1.75
             var buttonHeight: CGFloat = 0
             var singleButtonWidth: CGFloat = 0
             var doubleButtonWidth: CGFloat = 0
@@ -218,7 +218,7 @@ class UIHelper {
         else {
             constraints.append(label.widthAnchor.constraint(equalToConstant: labelWidth))
             
-            labelFontSize = (calculator == 2) ? 30*(min(screenWidth, screenHeight)/375) : 80*(min(screenWidth, screenHeight)/375)
+            labelFontSize = (calculator == 2) ? 30*(min(screenWidth, screenHeight)/375) : 90*(min(screenWidth, screenHeight)/375)
             labelHeight = (calculator == 2) ? (labelFontSize*2.5) : labelFontSize
             
             constraints.append(label.heightAnchor.constraint(equalToConstant: labelHeight))
