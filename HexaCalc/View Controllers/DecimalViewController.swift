@@ -541,7 +541,7 @@ class DecimalViewController: UIViewController {
                     
                     if (Double(result)! > 999999999){
                         // Add to calculation history
-                        let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+                        let unaryCalculationResult = result == "" ? "0" : result
                         let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
                         calculationHistory.append(calculationData)
                         
@@ -582,13 +582,22 @@ class DecimalViewController: UIViewController {
                 }
                 
                 result = "\(sqrt(number))"
-
-                setupStateControllerValues()
-                stateController?.convValues.largerThan64Bits = false
+                
+                //Cannot convert to binary or hexadecimal in this case -- overflow
+                if (Double(result)! >= Double(INT64_MAX) || Double(result)! <= Double((INT64_MAX * -1) - 1)){
+                    stateController?.convValues.largerThan64Bits = true
+                    stateController?.convValues.decimalVal = result
+                    stateController?.convValues.binVal = "0"
+                    stateController?.convValues.hexVal = "0"
+                }
+                else {
+                    setupStateControllerValues()
+                    stateController?.convValues.largerThan64Bits = false
+                }
                 
                 if (Double(result)! > 999999999){
                     // Add to calculation history
-                    let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+                    let unaryCalculationResult = result == "" ? "0" : result
                     let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
                     calculationHistory.append(calculationData)
                     
