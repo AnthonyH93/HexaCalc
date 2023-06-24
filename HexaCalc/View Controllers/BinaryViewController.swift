@@ -706,7 +706,7 @@ class BinaryViewController: UIViewController {
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
                 updateOutputLabel(value: newLabelValue)
                 
-                let calculationData = CalculationData(leftValue: leftBinValue, rightValue: rightBinValue, operation: operation, result: newLabelValue)
+                let calculationData = CalculationData(leftValue: leftBinValue, rightValue: rightBinValue, operation: operation, result: newLabelValue, isUnaryOperation: false)
                 calculationHistory.append(calculationData)
                 
                 rightBinValue = newLabelValue

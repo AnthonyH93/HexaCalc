@@ -725,7 +725,7 @@ class DecimalViewController: UIViewController {
                 }
                 
                 // Create calculation data to add to history of calculations
-                let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result)
+                let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result, isUnaryOperation: false)
                 calculationHistory.append(calculationData)
                 
                 leftValue = result

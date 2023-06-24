@@ -22,5 +22,6 @@ enum Operation: String {
     case XOR = "⊕"
     case LeftShift = "<<"
     case RightShift = ">>"
+    case Not = "!"
     case NULL = "Empty"
 }
