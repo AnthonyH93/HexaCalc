@@ -27,8 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let data = Data(referencing:nsData)
 
                 if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
-                    //Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0)
-                    let updatePreferencesVersions = ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.5.0"]
+                    // Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0)
+                    // To add a new preference in a future update, add the old version to the list below
+                    let updatePreferencesVersions = ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.4.1"]
                     if (updatePreferencesVersions.firstIndex(of: existingVersion) != nil) {
                         let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum,
                                                               hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState,
