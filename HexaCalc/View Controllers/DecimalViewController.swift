@@ -540,6 +540,13 @@ class DecimalViewController: UIViewController {
                     stateController?.convValues.largerThan64Bits = false
                     
                     if (Double(result)! > 999999999){
+                        // Add to calculation history
+                        let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+                        let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
+                        calculationHistory.append(calculationData)
+                        
+                        leftValue = result
+                        
                         // Need to use scientific notation for this
                         result = "\(Double(result)!.scientificFormatted)"
                         updateOutputLabel(value: result)
@@ -549,6 +556,14 @@ class DecimalViewController: UIViewController {
                     }
                     formatResult()
                     runningNumber = result
+                    
+                    // Add to calculation history
+                    let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+                    let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
+                    calculationHistory.append(calculationData)
+                    
+                    leftValue = result
+                    
                     quickUpdateStateController()
                 }
                 else {
@@ -572,6 +587,13 @@ class DecimalViewController: UIViewController {
                 stateController?.convValues.largerThan64Bits = false
                 
                 if (Double(result)! > 999999999){
+                    // Add to calculation history
+                    let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+                    let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
+                    calculationHistory.append(calculationData)
+                    
+                    leftValue = result
+                    
                     //Need to use scientific notation for this
                     result = "\(Double(result)!.scientificFormatted)"
                     updateOutputLabel(value: result)
@@ -581,6 +603,14 @@ class DecimalViewController: UIViewController {
                 }
                 formatResult()
                 runningNumber = result
+                
+                // Add to calculation history
+                let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+                let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
+                calculationHistory.append(calculationData)
+                
+                leftValue = result
+                
                 quickUpdateStateController()
             }
         }

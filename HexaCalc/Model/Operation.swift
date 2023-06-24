@@ -23,5 +23,6 @@ enum Operation: String {
     case LeftShift = "<<"
     case RightShift = ">>"
     case Not = "!"
+    case Sqrt = "√"
     case NULL = "Empty"
 }
