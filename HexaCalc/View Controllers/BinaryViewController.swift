@@ -522,7 +522,7 @@ class BinaryViewController: UIViewController {
             return
         }
         
-        let binLeftValue = runningNumber
+        let binLeftValue = runningNumber == "" ? "0" : runningNumber
         
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
