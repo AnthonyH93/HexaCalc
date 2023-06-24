@@ -731,7 +731,7 @@ class HexadecimalViewController: UIViewController {
                 }
                 updateOutputLabel(value: newLabelValue)
                 
-                let calculationData = CalculationData(leftValue: leftHexValue, rightValue: rightHexValue, operation: currentOperation, result: newLabelValue, isUnaryOperation: false)
+                let calculationData = CalculationData(leftValue: rightHexValue, rightValue: leftHexValue, operation: currentOperation, result: newLabelValue, isUnaryOperation: false)
                 calculationHistory.append(calculationData)
                 
                 rightHexValue = newLabelValue
