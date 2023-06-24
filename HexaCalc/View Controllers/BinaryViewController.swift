@@ -43,11 +43,14 @@ class BinaryViewController: UIViewController {
     @IBOutlet weak var Btn00: RoundButton!
     @IBOutlet weak var Btn11: RoundButton!
     
+    @IBOutlet weak var historyButton: UIBarButtonItem!
     
     //MARK: Variables
     var runningNumber = ""
     var leftValue = ""
     var rightValue = ""
+    var leftBinValue = ""
+    var rightBinValue = ""
     var result = ""
     var currentOperation:Operation = .NULL
     
@@ -55,6 +58,8 @@ class BinaryViewController: UIViewController {
     var currentContraints: [NSLayoutConstraint] = []
     
     var currentlyRecognizingDoubleTap = false
+    
+    var calculationHistory: [CalculationData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,12 +74,30 @@ class BinaryViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            historyButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
         
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
+        
+        // Set bar button images
+        if #available(iOS 14.0, *) {
+            // Only available in iOS 14+
+            historyButton.image = UIImage(systemName: "clock.arrow.circlepath")
+        } else {
+            historyButton.image = UIImage(systemName: "clock")
+        }
+        
+        // Force light mode to be used (for now) - to hide the navigation bar line
+        overrideUserInterfaceStyle = .light
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CalculationHistoryViewController {
+            vc.calculationHistory = calculationHistory
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -150,6 +173,7 @@ class BinaryViewController: UIViewController {
             MULTBtn.backgroundColor = stateController?.convValues.colour
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
+            historyButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary
@@ -418,12 +442,14 @@ class BinaryViewController: UIViewController {
         //If running number is empty then it will just stay as 0
         var currentValue = ""
         if runningNumber != "" {
-        if (runningNumber.first == "1" && runningNumber.count == 64){
-            currentValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
-        }
-        else {
-            currentValue = String(Int(runningNumber, radix: 2)!)
-        }
+            let binLeftValue = runningNumber
+            
+            if (runningNumber.first == "1" && runningNumber.count == 64){
+                currentValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
+            }
+            else {
+                currentValue = String(Int(runningNumber, radix: 2)!)
+            }
             currentValue = "\(Int(currentValue)! << 1)"
             
             //Update the state controller
@@ -438,8 +464,14 @@ class BinaryViewController: UIViewController {
                 newLabelValue = formatNegativeBinaryString(stringToConvert: binConversion)
             }
             runningNumber = newLabelValue
+            let labelValueBeforeSpaces = newLabelValue
             newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
             updateOutputLabel(value: newLabelValue)
+            
+            // Add to calculation history
+            let unaryCalculationResult = labelValueBeforeSpaces == "" ? "0" : labelValueBeforeSpaces
+            let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .LeftShift, result: unaryCalculationResult, isUnaryOperation: false)
+            calculationHistory.append(calculationData)
         }
     }
     
@@ -453,6 +485,8 @@ class BinaryViewController: UIViewController {
         
         //If running number is empty then it will just stay as 0
         if runningNumber != "" {
+            let binLeftValue = runningNumber
+            
             let currLabel = outputLabel.text
             let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
             let rightShifted = String(Int(UInt64(spacesRemoved.dropLast(), radix: 2)!))
@@ -469,8 +503,14 @@ class BinaryViewController: UIViewController {
                 newLabelValue = formatNegativeBinaryString(stringToConvert: binConversion)
             }
             runningNumber = newLabelValue
+            let labelValueBeforeSpaces = newLabelValue
             newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
             updateOutputLabel(value: newLabelValue)
+            
+            // Add to calculation history
+            let unaryCalculationResult = labelValueBeforeSpaces == "" ? "0" : labelValueBeforeSpaces
+            let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .RightShift, result: unaryCalculationResult, isUnaryOperation: false)
+            calculationHistory.append(calculationData)
         }
     }
     
@@ -481,6 +521,8 @@ class BinaryViewController: UIViewController {
         if (stateController?.convValues.largerThan64Bits == true){
             return
         }
+        
+        let binLeftValue = runningNumber == "" ? "0" : runningNumber
         
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
@@ -501,6 +543,11 @@ class BinaryViewController: UIViewController {
         var newLabelValue = onesComplimentString
         newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
         updateOutputLabel(value: newLabelValue)
+        
+        // Add to calculation history
+        let unaryCalculationResult = onesComplimentString == "" ? "0" : onesComplimentString
+        let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "", operation: .Not, result: unaryCalculationResult, isUnaryOperation: true)
+        calculationHistory.append(calculationData)
         
         quickUpdateStateController()
     }
@@ -576,6 +623,9 @@ class BinaryViewController: UIViewController {
     private func operation(operation: Operation) {
         if currentOperation != .NULL {
             if runningNumber != "" {
+                
+                leftBinValue = runningNumber
+                
                 if (runningNumber.first == "1" && runningNumber.count == 64){
                     rightValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
                 }
@@ -676,12 +726,20 @@ class BinaryViewController: UIViewController {
                 if ((binaryRepresentation.contains("-"))){
                     newLabelValue = formatNegativeBinaryString(stringToConvert: binaryRepresentation)
                 }
+                let labelValueBeforeSpaces = newLabelValue
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
                 updateOutputLabel(value: newLabelValue)
+                
+                let calculationData = CalculationData(leftValue: leftBinValue, rightValue: rightBinValue, operation: operation, result: labelValueBeforeSpaces, isUnaryOperation: false)
+                calculationHistory.append(calculationData)
+                
+                rightBinValue = newLabelValue
             }
             currentOperation = operation
         }
         else {
+            
+            rightBinValue = runningNumber
             //If string is empty it should be interpreted as a 0
             if runningNumber == "" {
                 if (leftValue == "") {

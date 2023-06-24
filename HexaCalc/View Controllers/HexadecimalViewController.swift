@@ -52,12 +52,18 @@ class HexadecimalViewController: UIViewController {
     @IBOutlet weak var Btn3: RoundButton!
     @IBOutlet weak var EQUALSBtn: RoundButton!
     
+    @IBOutlet weak var historyButton: UIBarButtonItem!
+    
     //MARK: Variables
     var runningNumber = ""
     var leftValue = ""
     var leftValueHex = ""
     var rightValue = ""
+    // Values used to store calculation history
+    var leftHexValue = ""
+    var rightHexValue = ""
     var result = ""
+    
     var currentOperation:Operation = .NULL
     
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
@@ -65,7 +71,10 @@ class HexadecimalViewController: UIViewController {
     
     var currentlyRecognizingDoubleTap = false
     
+
     var secondFunctionMode = false
+
+    var calculationHistory: [CalculationData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +129,7 @@ class HexadecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            historyButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
             
@@ -131,6 +141,23 @@ class HexadecimalViewController: UIViewController {
 
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
+        
+        // Set bar button images
+        if #available(iOS 14.0, *) {
+            // Only available in iOS 14+
+            historyButton.image = UIImage(systemName: "clock.arrow.circlepath")
+        } else {
+            historyButton.image = UIImage(systemName: "clock")
+        }
+        
+        // Force light mode to be used (for now) - to hide the navigation bar line
+        overrideUserInterfaceStyle = .light
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CalculationHistoryViewController {
+            vc.calculationHistory = calculationHistory
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -170,7 +197,7 @@ class HexadecimalViewController: UIViewController {
     //Load the current converted value from either of the other calculator screens
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if ((stateController?.convValues.largerThan64Bits)!) {
             updateOutputLabel(value: "Error! Integer Overflow!")
         }
@@ -204,6 +231,7 @@ class HexadecimalViewController: UIViewController {
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
             outputLabel.textColor = stateController?.convValues.colour
+            historyButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary
@@ -496,6 +524,11 @@ class HexadecimalViewController: UIViewController {
         
         updateOutputLabel(value: runningNumber)
         
+        // Add to calculation history
+        let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+        let calculationData = CalculationData(leftValue: currentValue, rightValue: "", operation: .Not, result: unaryCalculationResult, isUnaryOperation: true)
+        calculationHistory.append(calculationData)
+        
         quickUpdateStateController()
     }
     
@@ -557,7 +590,13 @@ class HexadecimalViewController: UIViewController {
     //MARK: Private Functions
     
     private func operation(operation: Operation) {
+        
         if currentOperation != .NULL {
+            
+            if runningNumber != "" {
+                leftHexValue = runningNumber
+            }
+            
             let binRightValue = hexToBin(hexToConvert: runningNumber)
             if binRightValue != "" {
                 if (binRightValue.first == "1" && binRightValue.count == 64) {
@@ -567,6 +606,8 @@ class HexadecimalViewController: UIViewController {
                     rightValue = String(Int(binRightValue, radix: 2)!)
                 }
                 runningNumber = ""
+                
+                
                 
                 switch (currentOperation) {
                     
@@ -689,10 +730,16 @@ class HexadecimalViewController: UIViewController {
                     newLabelValue = formatNegativeHex(hexToConvert: newLabelValue).uppercased()
                 }
                 updateOutputLabel(value: newLabelValue)
+                
+                let calculationData = CalculationData(leftValue: rightHexValue, rightValue: leftHexValue, operation: currentOperation, result: newLabelValue, isUnaryOperation: false)
+                calculationHistory.append(calculationData)
+                
+                rightHexValue = newLabelValue
             }
             currentOperation = operation
         }
         else {
+            rightHexValue = runningNumber
             //If string is empty it should be interpreted as a 0
             let binLeftValue = hexToBin(hexToConvert: runningNumber)
             if (runningNumber == "") {
@@ -711,9 +758,11 @@ class HexadecimalViewController: UIViewController {
                 }
             }
             runningNumber = ""
+            
             currentOperation = operation
         }
     }
+    
     private func setupStateControllerValues() {
         stateController?.convValues.decimalVal = result
         let hexConversion = String(Int(result)!, radix: 16)
@@ -721,6 +770,7 @@ class HexadecimalViewController: UIViewController {
         stateController?.convValues.hexVal = hexConversion
         stateController?.convValues.binVal = binConversion
     }
+    
     //Perform a quick update to keep the state controller variables in sync with the calculator label
     private func quickUpdateStateController() {
         

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -456,6 +456,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYc-un-uoB">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" systemColor="labelColor"/>
+                                        <items>
+                                            <navigationItem largeTitleDisplayMode="always" id="Mnk-KF-Qcp">
+                                                <barButtonItem key="rightBarButtonItem" title="Calculation History" id="ru1-wY-3Di">
+                                                    <connections>
+                                                        <segue destination="mI5-fy-VRx" kind="show" id="tzE-gp-TcC"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -512,12 +526,65 @@
                         <outlet property="hexHStack5" destination="Uxn-g6-081" id="uXi-BF-VQl"/>
                         <outlet property="hexHStack6" destination="1cX-aU-Qkl" id="yXN-f6-iMf"/>
                         <outlet property="hexVStack" destination="e8g-mp-jBB" id="wcQ-oH-hCy"/>
+                        <outlet property="historyButton" destination="ru1-wY-3Di" id="kQE-Y3-h5k"/>
                         <outlet property="outputLabel" destination="Z7g-zo-MXa" id="qet-PS-mwE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="99" y="-363"/>
+            <point key="canvasLocation" x="98.550724637681171" y="-363.61607142857139"/>
+        </scene>
+        <!--Calculation History View Controller-->
+        <scene sceneID="wwF-Pt-vzf">
+            <objects>
+                <viewController id="mI5-fy-VRx" customClass="CalculationHistoryViewController" customModule="HexaCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6JK-gY-jv2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculation History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Hm-d3-MZl">
+                                <rect key="frame" x="69.333333333333343" y="60" width="275.66666666666663" height="40.666666666666657"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Em7-TN-XCK">
+                                <rect key="frame" x="0.0" y="116.66666666666669" width="414" height="725.33333333333326"/>
+                                <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="calculationHistoryCell" id="nYd-PP-Ipo">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nYd-PP-Ipo" id="sHK-03-oDS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5O7-hT-DSb"/>
+                        <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="5O7-hT-DSb" firstAttribute="trailing" secondItem="Em7-TN-XCK" secondAttribute="trailing" id="18n-Zf-EUX"/>
+                            <constraint firstItem="Em7-TN-XCK" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="bottom" constant="16" id="8Y9-l3-4ag"/>
+                            <constraint firstItem="Em7-TN-XCK" firstAttribute="leading" secondItem="5O7-hT-DSb" secondAttribute="leading" id="CRR-n5-HLt"/>
+                            <constraint firstItem="5O7-hT-DSb" firstAttribute="bottom" secondItem="Em7-TN-XCK" secondAttribute="bottom" id="Ncg-02-Jkj"/>
+                            <constraint firstItem="5O7-hT-DSb" firstAttribute="top" secondItem="0Hm-d3-MZl" secondAttribute="top" constant="-16" id="XQs-5h-d9P"/>
+                            <constraint firstItem="0Hm-d3-MZl" firstAttribute="centerX" secondItem="5O7-hT-DSb" secondAttribute="centerX" id="pUN-U6-bys"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RUg-ak-FVQ"/>
+                    <connections>
+                        <outlet property="tableView" destination="Em7-TN-XCK" id="srK-1q-TUr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WOc-Mp-eaD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="882.60869565217399" y="-1021.2053571428571"/>
         </scene>
         <!--Binary-->
         <scene sceneID="wg7-f3-ORb">
@@ -833,6 +900,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xK1-KZ-eDg">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" systemColor="labelColor"/>
+                                        <items>
+                                            <navigationItem largeTitleDisplayMode="always" id="tGy-ST-d9v">
+                                                <barButtonItem key="rightBarButtonItem" title="Calculation History" id="Kca-7j-jTk">
+                                                    <connections>
+                                                        <segue destination="mI5-fy-VRx" kind="show" id="sC0-cE-mVT"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -879,6 +960,7 @@
                         <outlet property="binHStack4" destination="3IF-xw-PqV" id="xKI-CL-fgm"/>
                         <outlet property="binHStack5" destination="ggU-ns-mmy" id="nUn-z6-iCS"/>
                         <outlet property="binVStack" destination="55i-hd-IgX" id="fLD-4O-4fn"/>
+                        <outlet property="historyButton" destination="Kca-7j-jTk" id="ll5-tA-q16"/>
                         <outlet property="outputLabel" destination="c3H-nl-HbE" id="Ika-ID-pHJ"/>
                     </connections>
                 </viewController>
@@ -1200,6 +1282,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPw-Rk-P2m">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" systemColor="labelColor"/>
+                                        <items>
+                                            <navigationItem largeTitleDisplayMode="always" id="nSW-4D-99F">
+                                                <barButtonItem key="rightBarButtonItem" title="Calculation History" id="CZY-Em-1pk">
+                                                    <connections>
+                                                        <segue destination="mI5-fy-VRx" kind="show" id="5CC-PW-4Pl"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1246,12 +1342,13 @@
                         <outlet property="decHStack4" destination="FlW-yi-Lcq" id="oti-qF-Sqg"/>
                         <outlet property="decHStack5" destination="LTM-03-4nc" id="4c4-f2-aUd"/>
                         <outlet property="decVStack" destination="YRn-jp-boy" id="0CW-Xw-Imw"/>
+                        <outlet property="historyButton" destination="CZY-Em-1pk" id="h9b-zI-b5m"/>
                         <outlet property="outputLabel" destination="a2J-4m-Np0" id="XnH-LW-htg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zxz-Tp-VmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1599" y="-364"/>
+            <point key="canvasLocation" x="1598.5507246376812" y="-364.28571428571428"/>
         </scene>
         <!--Settings-->
         <scene sceneID="pFY-ga-fjx">
@@ -1307,7 +1404,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="883" y="303"/>
+            <point key="canvasLocation" x="894" y="384"/>
         </scene>
         <!--Settings-->
         <scene sceneID="8Nf-G7-6UM">
@@ -1537,11 +1634,18 @@
             <size key="intrinsicContentSize" width="30" height="53"/>
         </designable>
     </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="5CC-PW-4Pl"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" systemColor="systemGreenColor"/>
     <resources>
         <image name="01.square" catalog="system" width="128" height="114"/>
         <image name="dot.square" catalog="system" width="128" height="114"/>
-        <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="hexagon" catalog="system" width="128" height="124"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="hexagon" catalog="system" width="128" height="123"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

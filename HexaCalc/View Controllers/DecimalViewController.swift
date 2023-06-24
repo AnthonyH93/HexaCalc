@@ -41,6 +41,8 @@ class DecimalViewController: UIViewController {
     @IBOutlet weak var Btn8: RoundButton!
     @IBOutlet weak var Btn9: RoundButton!
     
+    @IBOutlet weak var historyButton: UIBarButtonItem!
+    
     //MARK: Variables
     var runningNumber = ""
     var leftValue = ""
@@ -55,6 +57,8 @@ class DecimalViewController: UIViewController {
     
     var secondFunctionMode = false
     
+    var calculationHistory: [CalculationData] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,12 +71,24 @@ class DecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
+            historyButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
         
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
+        
+        // Set bar button images
+        if #available(iOS 14.0, *) {
+            // Only available in iOS 14+
+            historyButton.image = UIImage(systemName: "clock.arrow.circlepath")
+        } else {
+            historyButton.image = UIImage(systemName: "clock")
+        }
+        
+        // Force light mode to be used (for now) - to hide the navigation bar line
+        overrideUserInterfaceStyle = .light
     }
     
     override func viewDidLayoutSubviews() {
@@ -150,6 +166,7 @@ class DecimalViewController: UIViewController {
             MULTBtn.backgroundColor = stateController?.convValues.colour
             DIVBtn.backgroundColor = stateController?.convValues.colour
             EQUALSBtn.backgroundColor = stateController?.convValues.colour
+            historyButton.tintColor = stateController?.convValues.colour
         }
         
         // Small optimization to only delay single tap if absolutely necessary
@@ -173,6 +190,13 @@ class DecimalViewController: UIViewController {
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             NSLayoutConstraint.deactivate(currentContraints)
             currentContraints.removeAll()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.destination is CalculationHistoryViewController) {
+            let vc = segue.destination as! CalculationHistoryViewController
+            vc.calculationHistory = calculationHistory
         }
     }
     
@@ -516,6 +540,13 @@ class DecimalViewController: UIViewController {
                     stateController?.convValues.largerThan64Bits = false
                     
                     if (Double(result)! > 999999999){
+                        // Add to calculation history
+                        let unaryCalculationResult = result == "" ? "0" : result
+                        let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
+                        calculationHistory.append(calculationData)
+                        
+                        leftValue = result
+                        
                         // Need to use scientific notation for this
                         result = "\(Double(result)!.scientificFormatted)"
                         updateOutputLabel(value: result)
@@ -525,6 +556,14 @@ class DecimalViewController: UIViewController {
                     }
                     formatResult()
                     runningNumber = result
+                    
+                    // Add to calculation history
+                    let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+                    let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
+                    calculationHistory.append(calculationData)
+                    
+                    leftValue = result
+                    
                     quickUpdateStateController()
                 }
                 else {
@@ -543,11 +582,27 @@ class DecimalViewController: UIViewController {
                 }
                 
                 result = "\(sqrt(number))"
-
-                setupStateControllerValues()
-                stateController?.convValues.largerThan64Bits = false
+                
+                //Cannot convert to binary or hexadecimal in this case -- overflow
+                if (Double(result)! >= Double(INT64_MAX) || Double(result)! <= Double((INT64_MAX * -1) - 1)){
+                    stateController?.convValues.largerThan64Bits = true
+                    stateController?.convValues.decimalVal = result
+                    stateController?.convValues.binVal = "0"
+                    stateController?.convValues.hexVal = "0"
+                }
+                else {
+                    setupStateControllerValues()
+                    stateController?.convValues.largerThan64Bits = false
+                }
                 
                 if (Double(result)! > 999999999){
+                    // Add to calculation history
+                    let unaryCalculationResult = result == "" ? "0" : result
+                    let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
+                    calculationHistory.append(calculationData)
+                    
+                    leftValue = result
+                    
                     //Need to use scientific notation for this
                     result = "\(Double(result)!.scientificFormatted)"
                     updateOutputLabel(value: result)
@@ -557,6 +612,14 @@ class DecimalViewController: UIViewController {
                 }
                 formatResult()
                 runningNumber = result
+                
+                // Add to calculation history
+                let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
+                let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
+                calculationHistory.append(calculationData)
+                
+                leftValue = result
+                
                 quickUpdateStateController()
             }
         }
@@ -650,10 +713,13 @@ class DecimalViewController: UIViewController {
     //MARK: Private Functions
     
     private func operation(operation: Operation) {
+    
         if currentOperation != .NULL {
             if runningNumber != "" {
                 rightValue = runningNumber
                 runningNumber = ""
+                
+               
                 
                 switch (currentOperation) {
                 case .Add:
@@ -697,6 +763,10 @@ class DecimalViewController: UIViewController {
                     fatalError("Unexpected Operation...")
                 }
                 
+                // Create calculation data to add to history of calculations
+                let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result, isUnaryOperation: false)
+                calculationHistory.append(calculationData)
+                
                 leftValue = result
                 
                 //Cannot convert to binary or hexadecimal in this case -- overflow
@@ -720,6 +790,7 @@ class DecimalViewController: UIViewController {
                 }
                 formatResult()
             }
+            
             currentOperation = operation
         }
         else {
