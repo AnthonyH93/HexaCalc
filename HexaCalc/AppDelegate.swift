@@ -28,12 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                 if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
                     //Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0)
-                    let updatePreferencesVersions = ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1"]
+                    let updatePreferencesVersions = ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.5.0"]
                     if (updatePreferencesVersions.firstIndex(of: existingVersion) != nil) {
                         let userPreferences = UserPreferences(colour: loadedPreferences.colour, colourNum: loadedPreferences.colourNum,
                                                               hexTabState: true, binTabState: loadedPreferences.binTabState, decTabState: loadedPreferences.decTabState,
                                                               setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
-                                                              copyActionIndex: 0, pasteActionIndex: 1)
+                                                              copyActionIndex: loadedPreferences.copyActionIndex, pasteActionIndex: loadedPreferences.pasteActionIndex,
+                                                              historyButtonViewIndex: 0)
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
                     }

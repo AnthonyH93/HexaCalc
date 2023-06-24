@@ -113,6 +113,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Reload UI only when necessary
             self.tableView.reloadSections([1], with: .none)
         }
+        else if (self.preferences.historyButtonViewIndex != stateController?.convValues.historyButtonViewIndex) {
+            self.preferences.historyButtonViewIndex = stateController?.convValues.historyButtonViewIndex ?? self.preferences.historyButtonViewIndex
+            // Reload UI only when necessary
+            self.tableView.reloadSections([3], with: .none)
+        }
         
         // Colour the navigation bar
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -213,7 +218,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Select history button display preference
             if indexPath.row == 0 {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "HistoryButtonSelection", for: indexPath) as! SelectionSummaryTableViewCell
-                cell.configure(rightText: HistoryButtonViewConverter.getViewFromIndex(index: Int(self.preferences.pasteActionIndex)), colour: UIColor.systemGray)
+                cell.configure(rightText: HistoryButtonViewConverter.getViewFromIndex(index: Int(self.preferences.historyButtonViewIndex)), colour: UIColor.systemGray)
                 cell.textLabel?.text = "History Button View"
                 return cell
             }
@@ -310,9 +315,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Navigate to history button selection view
             if indexPath.row == 0 {
                 if let _ = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
-                    destinationViewController.selectionList = ["Icon", "Text Label", "Off"]
+                    destinationViewController.selectionList = ["Icon Image", "Text Label", "Off"]
                     destinationViewController.preferences = self.preferences
-                    destinationViewController.selectedIndex = self.preferences.colourNum == -1 ? 3 : Int(self.preferences.colourNum)
+                    destinationViewController.selectedIndex = Int(self.preferences.historyButtonViewIndex)
                     destinationViewController.selectionType = SelectionType.historyButtonView
                     destinationViewController.stateController = stateController
                     destinationViewController.name = "History Button View"
@@ -367,7 +372,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
                                               hexTabState: sender.isOn, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
-                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex)
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
@@ -399,7 +405,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
                                               hexTabState: preferences.hexTabState, binTabState: sender.isOn, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
-                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex)
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
@@ -457,7 +464,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
                                               hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: sender.isOn,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
-                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex)
         if sender.isOn {
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
@@ -511,7 +519,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
                                               hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: sender.isOn,
-                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = sender.isOn
         self.preferences = userPreferences

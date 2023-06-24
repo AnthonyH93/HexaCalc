@@ -120,7 +120,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                     userPreferences = UserPreferences(colour: colour, colourNum: Int64(index),
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
-                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex)
+                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex)
                     
                     // Set tab bar icon colour to new colour
                     tabBarController?.tabBar.tintColor = colour
@@ -139,7 +140,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                     userPreferences = UserPreferences(colour: preferences.colour, colourNum: preferences.colourNum,
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
-                                                      copyActionIndex: Int32(index), pasteActionIndex: preferences.pasteActionIndex)
+                                                      copyActionIndex: Int32(index), pasteActionIndex: preferences.pasteActionIndex,
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex)
                     stateController?.convValues.copyActionIndex = Int32(index)
                 }
             case .pasteAction:
@@ -149,8 +151,20 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                     userPreferences = UserPreferences(colour: preferences.colour, colourNum: preferences.colourNum,
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
-                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index))
+                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index),
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex)
                     stateController?.convValues.pasteActionIndex = Int32(index)
+                }
+            case .historyButtonView:
+                // Ensure that a different selection was made
+                if preferences.historyButtonViewIndex != index {
+                    shouldSavePreferences = true
+                    userPreferences = UserPreferences(colour: preferences.colour, colourNum: preferences.colourNum,
+                                                      hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                                      setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index),
+                                                      historyButtonViewIndex: Int32(index))
+                    stateController?.convValues.historyButtonViewIndex = Int32(index)
                 }
             default:
                 fatalError("SelectionType is not defined")

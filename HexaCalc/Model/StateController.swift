@@ -20,6 +20,7 @@ struct convVals{
     var setCalculatorTextColour: Bool = false
     var copyActionIndex: Int32 = 0
     var pasteActionIndex: Int32 = 1
+    var historyButtonViewIndex: Int32 = 0
     // Acts as a binary flag (1 bit for each calculator)
     var clearLocalHistory: Int32 = 0
 }
