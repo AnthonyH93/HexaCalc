@@ -14,6 +14,7 @@ enum SelectionType {
     case colour
     case copyAction
     case pasteAction
+    case historyButtonView
 }
 
 class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {

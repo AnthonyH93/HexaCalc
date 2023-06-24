@@ -18,11 +18,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let sectionTitles = [ "Tab Bar",
                           "Gestures",
                           "Customization",
+                          "Calculation History",
                           "About the app",
                           "Support" ]
-    let rowsPerSection = [3, 2, 2, 4, 3]
-    
-    var actions = ["One tap", "Two tap"]
+    let rowsPerSection = [3, 2, 2, 2, 4, 3]
     
     let supportURLs = [ "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
                         "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
@@ -42,13 +41,16 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "PrivacyPolicy")
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "TermsAndConditions")
         table.register(TextTableViewCell.self, forCellReuseIdentifier: "EmailFeedback")
+        table.register(TextTableViewCell.self, forCellReuseIdentifier: "ClearHistory")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "SetCalculatorColourSwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "HexadecimalSwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "BinarySwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "DecimalSwitch")
+        table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "HistorySwitch")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "ColourSelection")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "CopyActionSelection")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "PasteActionSelection")
+        table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "HistoryButtonSelection")
         table.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.identifier)
         
         table.sectionHeaderHeight = 40
@@ -206,8 +208,24 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.textLabel?.text = "Colour"
                 return cell
             }
-        // About the app section
+        // Calculation history section
         case 3:
+            // Select history button display preference
+            if indexPath.row == 0 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "HistoryButtonSelection", for: indexPath) as! SelectionSummaryTableViewCell
+                cell.configure(rightText: HistoryButtonViewConverter.getViewFromIndex(index: Int(self.preferences.pasteActionIndex)), colour: UIColor.systemGray)
+                cell.textLabel?.text = "History Button View"
+                return cell
+            }
+            // Clear local history
+            else {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "ClearHistory", for: indexPath) as! TextTableViewCell
+                cell.textLabel?.text = "Clear Local History"
+                cell.textLabel?.textColor = preferences.colour
+                return cell
+            }
+        // About the app section
+        case 4:
             // App version
             if indexPath.row == 0 {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "AppVersion", for: indexPath) as! TextTableViewCell
@@ -239,7 +257,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 return cell
             }
         // Support section
-        case 4:
+        case 5:
             if indexPath.row < 2 {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: indexPath.row == 0 ? "PrivacyPolicy" : "TermsAndConditions", for: indexPath)
                 cell.textLabel?.text = indexPath.row == 0 ? "View Privacy Policy" : "View Terms and Conditions"
@@ -287,8 +305,30 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 navigationController?.pushViewController(destinationViewController, animated: true)
             }
         }
+        // Calculation history operations
+        if indexPath.section == 3 {
+            // Navigate to history button selection view
+            if indexPath.row == 0 {
+                if let _ = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
+                    destinationViewController.selectionList = ["Icon", "Text Label", "Off"]
+                    destinationViewController.preferences = self.preferences
+                    destinationViewController.selectedIndex = self.preferences.colourNum == -1 ? 3 : Int(self.preferences.colourNum)
+                    destinationViewController.selectionType = SelectionType.historyButtonView
+                    destinationViewController.stateController = stateController
+                    destinationViewController.name = "History Button View"
+                    
+                    // Navigate to new view
+                    navigationController?.pushViewController(destinationViewController, animated: true)
+                }
+            }
+            // Clear local history
+            else {
+                // Set the flag to 7 (111 in binary)
+                stateController?.convValues.clearLocalHistory = 7
+            }
+        }
         // Open an about the app URL or open share detail menu
-        if indexPath.section == 3 && indexPath.row > 0 {
+        if indexPath.section == 4 && indexPath.row > 0 {
             if indexPath.row == 3 {
                 if let currentURL = ReviewManager.getWriteReviewURL() {
                     UIApplication.shared.open(currentURL)
@@ -308,7 +348,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         // Open a support URL
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             if indexPath.row < 2 {
                 let currentURL = NSURL(string: supportURLs[indexPath.row])! as URL
                 UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)

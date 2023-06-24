@@ -50,6 +50,7 @@
 		9D7C09E525EC61E700771D52 /* HexaCalcIconIndigo@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C09BC25EC61E700771D52 /* HexaCalcIconIndigo@2x~ipad.png */; };
 		9D7C09E625EC61E700771D52 /* HexaCalcIconBlue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C09BD25EC61E700771D52 /* HexaCalcIconBlue@3x.png */; };
 		9D7C09E725EC61E700771D52 /* HexaCalcIconRed@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7C09BE25EC61E700771D52 /* HexaCalcIconRed@2x~ipad.png */; };
+		9D8460252A46C182008C5A99 /* HistoryButtonViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8460242A46C182008C5A99 /* HistoryButtonViewConverter.swift */; };
 		9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */; };
 		9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */; };
 		9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */; };
@@ -142,6 +143,7 @@
 		9D7C09BC25EC61E700771D52 /* HexaCalcIconIndigo@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo@2x~ipad.png"; sourceTree = "<group>"; };
 		9D7C09BD25EC61E700771D52 /* HexaCalcIconBlue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconBlue@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIconFinal/HexaCalcIconBlue@3x.png"; sourceTree = "<group>"; };
 		9D7C09BE25EC61E700771D52 /* HexaCalcIconRed@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconRed@2x~ipad.png"; sourceTree = "<group>"; };
+		9D8460242A46C182008C5A99 /* HistoryButtonViewConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryButtonViewConverter.swift; sourceTree = "<group>"; };
 		9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
 		9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				9DC242F125E1EE440038DD63 /* UIHelper.swift */,
 				9DC758262802A83500BB2953 /* ColourNumberConverter.swift */,
 				9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */,
+				9D8460242A46C182008C5A99 /* HistoryButtonViewConverter.swift */,
 				9DC758302804CD6200BB2953 /* ReviewManager.swift */,
 				9DE9FB4728DC220E00705A4F /* Operation.swift */,
 				C272D50928E75D7C00E6C374 /* CalculationData.swift */,
@@ -550,6 +553,7 @@
 				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
 				9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
+				9D8460252A46C182008C5A99 /* HistoryButtonViewConverter.swift in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
 				9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,

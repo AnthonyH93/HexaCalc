@@ -241,6 +241,14 @@ class HexadecimalViewController: UIViewController {
             self.setupOutputLabelGestureRecognizers()
         }
         
+        // Check if local history needs to be cleared (MSB of flag)
+        let flag = ((stateController?.convValues.clearLocalHistory ?? 0) & 4) >> 2
+        if flag == 1 {
+            calculationHistory = []
+            // Clear the MSB (third bit)
+            stateController?.convValues.clearLocalHistory &= 3
+        }
+        
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }

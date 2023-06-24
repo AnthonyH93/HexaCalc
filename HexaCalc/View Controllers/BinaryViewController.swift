@@ -183,6 +183,14 @@ class BinaryViewController: UIViewController {
             self.setupOutputLabelGestureRecognizers()
         }
         
+        // Check if local history needs to be cleared (middle/second bit of flag)
+        let flag = ((stateController?.convValues.clearLocalHistory ?? 0) & 2) >> 1
+        if flag == 1 {
+            calculationHistory = []
+            // Clear the middle (second bit)
+            stateController?.convValues.clearLocalHistory &= 5
+        }
+        
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
     }
