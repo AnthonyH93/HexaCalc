@@ -79,14 +79,6 @@ class DecimalViewController: UIViewController {
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
         
-        // Set bar button images
-        if #available(iOS 14.0, *) {
-            // Only available in iOS 14+
-            historyButton.image = UIImage(systemName: "clock.arrow.circlepath")
-        } else {
-            historyButton.image = UIImage(systemName: "clock")
-        }
-        
         // Force light mode to be used (for now) - to hide the navigation bar line
         overrideUserInterfaceStyle = .light
     }
@@ -182,6 +174,32 @@ class DecimalViewController: UIViewController {
             calculationHistory = []
             // Clear the LSB (first bit)
             stateController?.convValues.clearLocalHistory &= 6
+        }
+        
+        // Set bar button images
+        historyButton.isEnabled = true
+        
+        if #available(iOS 14.0, *) {
+            // Only available in iOS 14+
+            historyButton.image = UIImage(systemName: "clock.arrow.circlepath")
+        } else {
+            historyButton.image = UIImage(systemName: "clock")
+        }
+        
+        // Check what setting the user has for calculation history
+        switch stateController?.convValues.historyButtonViewIndex ?? 0 {
+            case 0:
+                return
+            case 1:
+                historyButton.image = nil
+                historyButton.title = "Calculation History"
+            case 2:
+                historyButton.title = nil
+                historyButton.image = nil
+                historyButton.isEnabled = false
+            // Should not occur
+            default:
+                fatalError("Unexpected Operation...")
         }
         
         //Set calculator text colour
