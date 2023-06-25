@@ -162,7 +162,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                     userPreferences = UserPreferences(colour: preferences.colour, colourNum: preferences.colourNum,
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
-                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index),
+                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                                       historyButtonViewIndex: Int32(index))
                     stateController?.convValues.historyButtonViewIndex = Int32(index)
                 }

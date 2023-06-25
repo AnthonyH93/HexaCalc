@@ -137,6 +137,7 @@ class HexadecimalViewController: UIViewController {
             stateController?.convValues.colour = savedPreferences.colour
             stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
             stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
+            stateController?.convValues.historyButtonViewIndex = savedPreferences.historyButtonViewIndex
         }
 
         //Setup gesture recognizers
