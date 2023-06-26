@@ -330,6 +330,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             else {
                 // Set the flag to 7 (111 in binary)
                 stateController?.convValues.clearLocalHistory = 7
+                
+                // Tell the user that the history was cleared
+                let alert = UIAlertController(title: "Local History Cleared", message: "The local calculation history for all calculators has been cleared.", preferredStyle: .alert)
+                
+                present(alert, animated: true) {
+                    tableView.deselectRow(at: indexPath, animated: true)
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    alert.dismiss(animated: true, completion: nil)
+                }
             }
         }
         // Open an about the app URL or open share detail menu
