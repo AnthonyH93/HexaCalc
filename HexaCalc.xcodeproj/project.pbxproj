@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -424,8 +424,9 @@
 		9DEF248B24C553F000701F5B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Anthony Hopkins";
 				TargetAttributes = {
 					9DE32E3228DEDBDF00BB222C = {

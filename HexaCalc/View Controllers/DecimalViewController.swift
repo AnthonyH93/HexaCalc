@@ -189,7 +189,7 @@ class DecimalViewController: UIViewController {
         // Check what setting the user has for calculation history
         switch stateController?.convValues.historyButtonViewIndex ?? 0 {
             case 0:
-                return
+                break
             case 1:
                 historyButton.image = nil
                 historyButton.title = "Calculation History"
