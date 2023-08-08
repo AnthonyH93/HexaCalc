@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                 let data = Data(referencing:nsData)
 
-                if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
+                if let loadedPreferences = try NSKeyedUnarchiver.unarchivedObject(ofClass: UserPreferences.self, from: data) {
                     // Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0)
                     // To add a new preference in a future update, add the old version to the list below
                     let updatePreferencesVersions = ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.4.1"]

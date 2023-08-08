@@ -37,7 +37,7 @@ struct DataPersistence {
                 
                 let data = Data(referencing:nsData)
                 
-                if let loadedPreferences = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserPreferences{
+                if let loadedPreferences = try NSKeyedUnarchiver.unarchivedObject(ofClass: UserPreferences.self, from: data) {
                     return loadedPreferences
                 }
             } catch {
