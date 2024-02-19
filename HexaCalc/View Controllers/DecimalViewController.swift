@@ -569,7 +569,7 @@ class DecimalViewController: UIViewController {
                         // Add to calculation history
                         let unaryCalculationResult = result == "" ? "0" : result
                         let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
-                        calculationHistory.append(calculationData)
+                        calculationHistory.insert(calculationData, at: 0)
                         
                         leftValue = result
                         
@@ -586,7 +586,7 @@ class DecimalViewController: UIViewController {
                     // Add to calculation history
                     let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
                     let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
-                    calculationHistory.append(calculationData)
+                    calculationHistory.insert(calculationData, at: 0)
                     
                     leftValue = result
                     
@@ -625,7 +625,7 @@ class DecimalViewController: UIViewController {
                     // Add to calculation history
                     let unaryCalculationResult = result == "" ? "0" : result
                     let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
-                    calculationHistory.append(calculationData)
+                    calculationHistory.insert(calculationData, at: 0)
                     
                     leftValue = result
                     
@@ -642,7 +642,7 @@ class DecimalViewController: UIViewController {
                 // Add to calculation history
                 let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
                 let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
-                calculationHistory.append(calculationData)
+                calculationHistory.insert(calculationData, at: 0)
                 
                 leftValue = result
                 
@@ -791,7 +791,7 @@ class DecimalViewController: UIViewController {
                 
                 // Create calculation data to add to history of calculations
                 let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result, isUnaryOperation: false)
-                calculationHistory.append(calculationData)
+                calculationHistory.insert(calculationData, at: 0)
                 
                 leftValue = result
                 

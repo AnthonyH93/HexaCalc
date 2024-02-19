@@ -497,7 +497,7 @@ class BinaryViewController: UIViewController {
             // Add to calculation history
             let unaryCalculationResult = labelValueBeforeSpaces == "" ? "0" : labelValueBeforeSpaces
             let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .LeftShift, result: unaryCalculationResult, isUnaryOperation: false)
-            calculationHistory.append(calculationData)
+            calculationHistory.insert(calculationData, at: 0)
         }
     }
     
@@ -536,7 +536,7 @@ class BinaryViewController: UIViewController {
             // Add to calculation history
             let unaryCalculationResult = labelValueBeforeSpaces == "" ? "0" : labelValueBeforeSpaces
             let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .RightShift, result: unaryCalculationResult, isUnaryOperation: false)
-            calculationHistory.append(calculationData)
+            calculationHistory.insert(calculationData, at: 0)
         }
     }
     
@@ -573,7 +573,7 @@ class BinaryViewController: UIViewController {
         // Add to calculation history
         let unaryCalculationResult = onesComplimentString == "" ? "0" : onesComplimentString
         let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "", operation: .Not, result: unaryCalculationResult, isUnaryOperation: true)
-        calculationHistory.append(calculationData)
+        calculationHistory.insert(calculationData, at: 0)
         
         quickUpdateStateController()
     }
@@ -757,7 +757,7 @@ class BinaryViewController: UIViewController {
                 updateOutputLabel(value: newLabelValue)
                 
                 let calculationData = CalculationData(leftValue: leftBinValue, rightValue: rightBinValue, operation: operation, result: labelValueBeforeSpaces, isUnaryOperation: false)
-                calculationHistory.append(calculationData)
+                calculationHistory.insert(calculationData, at: 0)
                 
                 rightBinValue = newLabelValue
             }
