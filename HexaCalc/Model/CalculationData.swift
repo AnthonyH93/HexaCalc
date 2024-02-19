@@ -18,15 +18,15 @@ struct CalculationData {
     func generateEquation() -> String {
         // Base case
         if operation == .NULL {
-            return "\(leftValue) = \(result)"
+            return "\(leftValue == "" ? "0" : leftValue) = \(result)"
         }
         // Unary operation
         else if isUnaryOperation {
-            return "\(operation.rawValue) \(leftValue) = \(result)"
+            return "\(operation.rawValue) \(leftValue == "" ? "0" : leftValue) = \(result)"
         }
         // Binary operation
         else {
-            return "\(leftValue) \(operation.rawValue) \(rightValue) = \(result)"
+            return "\(leftValue == "" ? "0" : leftValue) \(operation.rawValue) \(rightValue == "" ? "0" : rightValue) = \(result)"
         }
     }
 }
