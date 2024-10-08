@@ -9,7 +9,13 @@
 import UIKit
 import os.log
 
-class UserPreferences : NSObject, NSCoding {
+class UserPreferences : NSObject, NSCoding, NSSecureCoding {
+    
+    // Required to conform to NSSecureCoding
+    static var supportsSecureCoding: Bool {
+        return true
+    }
+    
     
     //MARK: Initialization
     
@@ -75,7 +81,7 @@ class UserPreferences : NSObject, NSCoding {
     
     required convenience init?(coder aDecoder: NSCoder) {
         
-        let colour = aDecoder.decodeObject(forKey: PropertyKey.colour) as! UIColor
+        let colour = aDecoder.decodeObject(of: UIColor.self, forKey: PropertyKey.colour)!
         
         let colourNum = aDecoder.decodeInt64(forKey: PropertyKey.colourNum)
         

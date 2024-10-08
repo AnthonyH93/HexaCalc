@@ -41,7 +41,7 @@ struct DataPersistence {
                     return loadedPreferences
                 }
             } catch {
-                print("Couldn't read file.")
+                print("Couldn't read file. Error: \(error)")
                 return nil
             }
         }
