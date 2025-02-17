@@ -299,7 +299,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // Navigate to colour selection view
         if indexPath.section == 2 && indexPath.row == 0 {
             if let _ = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
-                destinationViewController.selectionList = ["Red", "Orange", "Yellow", "Green", "Blue", "Teal", "Indigo", "Violet"]
+                destinationViewController.selectionList = ["Red", "Orange", "Yellow", "Green", "Blue", "Teal", "Indigo", "Violet", "Pink", "Brown"]
                 destinationViewController.preferences = self.preferences
                 destinationViewController.selectedIndex = self.preferences.colourNum == -1 ? 3 : Int(self.preferences.colourNum)
                 destinationViewController.selectionType = SelectionType.colour

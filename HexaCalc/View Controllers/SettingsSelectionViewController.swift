@@ -32,7 +32,10 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
     
     var numberOfRows = 0
     
-    let textColour = [UIColor.systemRed, UIColor.systemOrange, UIColor.systemYellow, UIColor.systemGreen, UIColor.systemBlue, UIColor.systemTeal, UIColor.systemIndigo, UIColor.systemPurple]
+    let textColour = [UIColor.systemRed, UIColor.systemOrange, UIColor.systemYellow,
+                      UIColor.systemGreen, UIColor.systemBlue, UIColor.systemTeal,
+                      UIColor.systemIndigo, UIColor.systemPurple, UIColor.systemPink,
+                      UIColor.systemBrown]
     
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
