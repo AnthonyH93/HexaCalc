@@ -82,11 +82,11 @@ class ColourNumberConverter {
         case 6:
             return "HexaCalcIconIndigo"
         case 7:
-            return "HexaCalcIconPurple"
+            return "HexaCalcIconViolet"
         case 8:
-            return "HexaCalcIconGreen"
+            return "HexaCalcIconPink"
         case 9:
-            return "HexaCalcIconGreen"
+            return "HexaCalcIconBrown"
         default:
             return "HexaCalcIconGreen"
         }

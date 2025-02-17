@@ -48,15 +48,6 @@
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
 			</dict>
-			<key>HexaCalcIconPurple</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>HexaCalcIconPurple</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
-			</dict>
 			<key>HexaCalcIconRed</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -75,11 +66,38 @@
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
 			</dict>
+			<key>HexaCalcIconViolet</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconViolet</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
 			<key>HexaCalcIconYellow</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>HexaCalcIconYellow</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
+			<key>HexaCalcIconPink</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconPink</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
+			<key>HexaCalcIconBrown</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconBrown</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
@@ -135,15 +153,8 @@
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
 			</dict>
-			<key>HexaCalcIconPurple</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>HexaCalcIconPurple</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
-			</dict>
+			<key>HexaCalcIconPink</key>
+			<dict/>
 			<key>HexaCalcIconRed</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -162,11 +173,38 @@
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
 			</dict>
+			<key>HexaCalcIconViolet</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconViolet</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
 			<key>HexaCalcIconYellow</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>HexaCalcIconYellow</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
+			<key>HexaCalcIconPink</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconPink</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
+			<key>HexaCalcIconBrown</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconBrown</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
