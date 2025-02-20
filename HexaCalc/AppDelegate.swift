@@ -54,6 +54,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
                     }
                     UITabBar.appearance().tintColor = loadedPreferences.colour
+                    
+                    // Special case for when app icon was changed, we want to reset the default colour
+                    // The reason for the colour reset is since the app icon will be green now
+                    if !updatedIconSetupComplete {
+                        let userPreferences = UserPreferences(
+                            colour: UIColor.systemGreen,
+                            colourNum: Int64(ColourNumberConverter.getIndexFromColour(colour: UIColor.systemGreen)),
+                            hexTabState: loadedPreferences.hexTabState,
+                            binTabState: loadedPreferences.binTabState,
+                            decTabState: loadedPreferences.decTabState,
+                            setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
+                            copyActionIndex: loadedPreferences.copyActionIndex,
+                            pasteActionIndex: loadedPreferences.pasteActionIndex,
+                            historyButtonViewIndex: 0
+                        )
+                        DataPersistence.savePreferences(userPreferences: userPreferences)
+                        UITabBar.appearance().tintColor = UIColor.systemGreen
+                        // Reset alternate icon to nil - needs to be async after a delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            UIApplication.shared.setAlternateIconName(nil)
+                        }
+                        UserDefaults.standard.set(true, forKey: "UpdatedIconSetupComplete")
+                    }
                 }
             } catch {
                 print("Couldn't read file. Error: \(error)")
