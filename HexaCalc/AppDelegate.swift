@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let existingVersion = UserDefaults.standard.object(forKey: "CurrentVersionNumber") as? String ?? appVersionNumber
         
+        // Special case for updating app icon in version 1.6.0
+        let updatedIconSetupComplete = UserDefaults.standard.object(forKey: "UpdatedIconSetupComplete") as? Bool ?? false
+        
         if let nsData = NSData(contentsOf: fullPath) {
             do {
 
@@ -29,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let loadedPreferences = try NSKeyedUnarchiver.unarchivedObject(ofClass: UserPreferences.self, from: data) {
                     // Make sure Hexadecimal tab is not disabled by default (new user preference added in version 1.2.0)
                     // To add a new preference in a future update, add the old version to the list below
-                    let updatePreferencesVersions = ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.4.1", "1.6.0"]
+                    let updatePreferencesVersions = ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.4.1"]
                     if (updatePreferencesVersions.firstIndex(of: existingVersion) != nil) {
                         let userPreferences = UserPreferences(
                             colour: loadedPreferences.colour,
@@ -43,6 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             historyButtonViewIndex: 0
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
+                        UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
+                    }
+                    // Otherwise, always set the existing version key to the current app version
+                    // This allows future uses of the updated preferences flow above to work
+                    else {
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
                     }
                     UITabBar.appearance().tintColor = loadedPreferences.colour
