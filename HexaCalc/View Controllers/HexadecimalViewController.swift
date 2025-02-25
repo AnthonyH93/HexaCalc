@@ -99,11 +99,24 @@ class HexadecimalViewController: UIViewController {
                 }
                 if (savedPreferences.binTabState == false) {
                     tabBarController?.tabBar.items![1].isEnabled = false
-                    initialTabIndex = initialTabIndex == 1 ? 2 : initialTabIndex
+                    if (initialTabIndex == 1 && savedPreferences.hexTabState) {
+                        initialTabIndex = 0
+                    }
+                    else {
+                        initialTabIndex = initialTabIndex == 1 ? 2 : initialTabIndex
+                    }
                 }
                 if (savedPreferences.decTabState == false) {
                     tabBarController?.tabBar.items![2].isEnabled = false
-                    initialTabIndex = initialTabIndex == 2 ? 3 : initialTabIndex
+                    if (initialTabIndex == 2 && savedPreferences.hexTabState) {
+                        initialTabIndex = 0
+                    }
+                    else if (initialTabIndex == 2 && savedPreferences.binTabState) {
+                        initialTabIndex = 1
+                    }
+                    else {
+                        initialTabIndex = initialTabIndex == 2 ? 3 : initialTabIndex
+                    }
                 }
                 if (removeHexTab == true) {
                     //Remove hexadecimal tab after setting state values
