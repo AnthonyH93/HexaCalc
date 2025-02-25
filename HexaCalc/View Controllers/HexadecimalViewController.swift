@@ -76,6 +76,9 @@ class HexadecimalViewController: UIViewController {
 
     var calculationHistory: [CalculationData] = []
     
+    // Decide which tab to be default in viewDidLoad, but set the selected tab after the view appears
+    var initialTabIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,19 +86,22 @@ class HexadecimalViewController: UIViewController {
         updateOutputLabel(value: "0")
         
         if let savedPreferences = DataPersistence.loadPreferences() {
-            
-            //Remove tabs which are disabled by the user
+
+            // Remove tabs which are disabled by the user
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             var removeHexTab = false
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
                 if (savedPreferences.hexTabState == false) {
                     removeHexTab = true
+                    initialTabIndex = 1
                 }
                 if (savedPreferences.binTabState == false) {
                     tabBarController?.tabBar.items![1].isEnabled = false
+                    initialTabIndex = initialTabIndex == 1 ? 2 : 0
                 }
                 if (savedPreferences.decTabState == false) {
                     tabBarController?.tabBar.items![2].isEnabled = false
+                    initialTabIndex = initialTabIndex == 1 ? 3 : 0
                 }
                 if (removeHexTab == true) {
                     //Remove hexadecimal tab after setting state values
@@ -253,6 +259,12 @@ class HexadecimalViewController: UIViewController {
         
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
+        
+        // Set the initial tab (if it is not the Hexadecimal tab) after the view has loaded
+        if initialTabIndex != 0 {
+            // Set the correct selected tab item
+            tabBarController?.selectedViewController = tabBarController?.viewControllers![initialTabIndex]
+        }
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
