@@ -21,6 +21,15 @@
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
 			</dict>
+			<key>HexaCalcIconBrown</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconBrown</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
 			<key>HexaCalcIconGreen</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -44,6 +53,15 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>HexaCalcIconOrange</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
+			<key>HexaCalcIconPink</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconPink</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
@@ -80,24 +98,6 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>HexaCalcIconYellow</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
-			</dict>
-			<key>HexaCalcIconPink</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>HexaCalcIconPink</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
-			</dict>
-			<key>HexaCalcIconBrown</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>HexaCalcIconBrown</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
@@ -126,6 +126,15 @@
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
 			</dict>
+			<key>HexaCalcIconBrown</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconBrown</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
 			<key>HexaCalcIconGreen</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -154,7 +163,14 @@
 				<string>NO</string>
 			</dict>
 			<key>HexaCalcIconPink</key>
-			<dict/>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>HexaCalcIconPink</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<string>NO</string>
+			</dict>
 			<key>HexaCalcIconRed</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -187,24 +203,6 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>HexaCalcIconYellow</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
-			</dict>
-			<key>HexaCalcIconPink</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>HexaCalcIconPink</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
-			</dict>
-			<key>HexaCalcIconBrown</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>HexaCalcIconBrown</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
 				<string>NO</string>
@@ -286,6 +284,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Dark</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
