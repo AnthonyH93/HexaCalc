@@ -43,7 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
                             copyActionIndex: loadedPreferences.copyActionIndex,
                             pasteActionIndex: loadedPreferences.pasteActionIndex,
-                            historyButtonViewIndex: 0
+                            historyButtonViewIndex: 0,
+                            defaultTabIndex: 3
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
@@ -67,7 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
                             copyActionIndex: loadedPreferences.copyActionIndex,
                             pasteActionIndex: loadedPreferences.pasteActionIndex,
-                            historyButtonViewIndex: 0
+                            historyButtonViewIndex: 0,
+                            defaultTabIndex: 3
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UITabBar.appearance().tintColor = UIColor.systemGreen

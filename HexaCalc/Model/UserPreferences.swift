@@ -20,7 +20,8 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
     //MARK: Initialization
     
     //Prepares and instance of a class for use
-    init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool, copyActionIndex: Int32, pasteActionIndex: Int32, historyButtonViewIndex: Int32) {
+    init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool, copyActionIndex: Int32, pasteActionIndex: Int32,
+         historyButtonViewIndex: Int32, defaultTabIndex: Int32) {
         //Initialize stored properties.
         self.colour = colour
         self.colourNum = colourNum
@@ -31,6 +32,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         self.copyActionIndex = copyActionIndex
         self.pasteActionIndex = pasteActionIndex
         self.historyButtonViewIndex = historyButtonViewIndex
+        self.defaultTabIndex = defaultTabIndex
     }
     
     //MARK: Properties
@@ -44,6 +46,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
     var copyActionIndex: Int32
     var pasteActionIndex: Int32
     var historyButtonViewIndex: Int32
+    var defaultTabIndex: Int32
     
     //MARK: Archiving Paths
     
@@ -63,6 +66,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         static let copyActionIndex = "copyActionIndex"
         static let pasteActionIndex = "pasteActionIndex"
         static let historyButtonViewIndex = "historyButtonViewIndex"
+        static let defaultTabIndex = "defaultTabIndex"
     }
     
     //MARK: NSCoding
@@ -77,6 +81,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         aCoder.encode(copyActionIndex, forKey: PropertyKey.copyActionIndex)
         aCoder.encode(pasteActionIndex, forKey: PropertyKey.pasteActionIndex)
         aCoder.encode(historyButtonViewIndex, forKey: PropertyKey.historyButtonViewIndex)
+        aCoder.encode(defaultTabIndex, forKey: PropertyKey.defaultTabIndex)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -99,12 +104,36 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         
         let historyButtonViewIndex = aDecoder.decodeInt32(forKey: PropertyKey.historyButtonViewIndex)
         
+        let defaultTabIndex = aDecoder.decodeInt32(forKey: PropertyKey.defaultTabIndex)
+        
         //Must call designated initializer
-        self.init(colour: colour, colourNum: colourNum, hexTabState: hexTabState, binTabState: binTabState, decTabState: decTabState, setCalculatorTextColour: setCalculatorTextColour, copyActionIndex: copyActionIndex, pasteActionIndex: pasteActionIndex, historyButtonViewIndex: historyButtonViewIndex)
+        self.init(
+            colour: colour,
+            colourNum: colourNum,
+            hexTabState: hexTabState,
+            binTabState: binTabState,
+            decTabState: decTabState,
+            setCalculatorTextColour: setCalculatorTextColour,
+            copyActionIndex: copyActionIndex,
+            pasteActionIndex: pasteActionIndex,
+            historyButtonViewIndex: historyButtonViewIndex,
+            defaultTabIndex: defaultTabIndex
+        )
     }
     
     static func getDefaultPreferences() -> UserPreferences {
-        return UserPreferences(colour: .systemGreen, colourNum: 3, hexTabState: true, binTabState: true, decTabState: true, setCalculatorTextColour: true, copyActionIndex: 0, pasteActionIndex: 0, historyButtonViewIndex: 0)
+        return UserPreferences(
+            colour: .systemGreen,
+            colourNum: 3,
+            hexTabState: true,
+            binTabState: true,
+            decTabState: true,
+            setCalculatorTextColour: true,
+            copyActionIndex: 0,
+            pasteActionIndex: 0,
+            historyButtonViewIndex: 0,
+            defaultTabIndex: 3
+        )
     }
 }
 

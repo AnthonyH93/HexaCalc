@@ -59,6 +59,7 @@
 		9D13A9952D63F2AC00C8BFBE /* HexaCalcIconYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9902D63F2AC00C8BFBE /* HexaCalcIconYellow@2x.png */; };
 		9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */; };
 		9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23DB291F6BE300151B44 /* UITestHelper.swift */; };
+		9D6199612D6D82B000F93648 /* DefaultTabViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */; };
 		9D8460252A46C182008C5A99 /* HistoryButtonViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8460242A46C182008C5A99 /* HistoryButtonViewConverter.swift */; };
 		9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */; };
 		9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */; };
@@ -161,6 +162,7 @@
 		9D13A9902D63F2AC00C8BFBE /* HexaCalcIconYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconYellow@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Yellow/Assets.xcassets/Renamed/HexaCalcIconYellow@2x.png"; sourceTree = "<group>"; };
 		9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexadecimalHexaCalcUITests.swift; sourceTree = "<group>"; };
 		9D3E23DB291F6BE300151B44 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
+		9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabViewConverter.swift; sourceTree = "<group>"; };
 		9D8460242A46C182008C5A99 /* HistoryButtonViewConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryButtonViewConverter.swift; sourceTree = "<group>"; };
 		9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
 		9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				9DC758262802A83500BB2953 /* ColourNumberConverter.swift */,
 				9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */,
 				9D8460242A46C182008C5A99 /* HistoryButtonViewConverter.swift */,
+				9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */,
 				9DC758302804CD6200BB2953 /* ReviewManager.swift */,
 				9DE9FB4728DC220E00705A4F /* Operation.swift */,
 				C272D50928E75D7C00E6C374 /* CalculationData.swift */,
@@ -591,6 +594,7 @@
 				9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
 				9D8460252A46C182008C5A99 /* HistoryButtonViewConverter.swift in Sources */,
+				9D6199612D6D82B000F93648 /* DefaultTabViewConverter.swift in Sources */,
 				9DAE269524C7F77A0070B965 /* StateController.swift in Sources */,
 				9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */,
 				9DEF249724C553F000701F5B /* AppDelegate.swift in Sources */,
