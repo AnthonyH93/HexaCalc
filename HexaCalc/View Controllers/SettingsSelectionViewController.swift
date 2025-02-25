@@ -172,7 +172,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                 }
             case .defaultTabIndex:
                 // Ensure that a different selection was made
-                if preferences.historyButtonViewIndex != index {
+                if preferences.defaultTabIndex != index {
                     shouldSavePreferences = true
                     userPreferences = UserPreferences(colour: preferences.colour, colourNum: preferences.colourNum,
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,

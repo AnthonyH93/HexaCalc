@@ -85,6 +85,9 @@ class HexadecimalViewController: UIViewController {
         updateOutputLabel(value: "0")
         
         if let savedPreferences = DataPersistence.loadPreferences() {
+            
+            // Initialize initial tab to user saved preference
+            initialTabIndex = Int(savedPreferences.defaultTabIndex == 3 ? 0 : savedPreferences.defaultTabIndex)
 
             // Remove tabs which are disabled by the user
             let arrayOfTabBarItems = tabBarController?.tabBar.items
@@ -92,15 +95,15 @@ class HexadecimalViewController: UIViewController {
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
                 if (savedPreferences.hexTabState == false) {
                     removeHexTab = true
-                    initialTabIndex = 1
+                    initialTabIndex = initialTabIndex == 0 ? 1 : initialTabIndex
                 }
                 if (savedPreferences.binTabState == false) {
                     tabBarController?.tabBar.items![1].isEnabled = false
-                    initialTabIndex = initialTabIndex == 1 ? 2 : 0
+                    initialTabIndex = initialTabIndex == 1 ? 2 : initialTabIndex
                 }
                 if (savedPreferences.decTabState == false) {
                     tabBarController?.tabBar.items![2].isEnabled = false
-                    initialTabIndex = initialTabIndex == 1 ? 3 : 0
+                    initialTabIndex = initialTabIndex == 2 ? 3 : initialTabIndex
                 }
                 if (removeHexTab == true) {
                     //Remove hexadecimal tab after setting state values
@@ -126,6 +129,7 @@ class HexadecimalViewController: UIViewController {
             stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
             stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
             stateController?.convValues.historyButtonViewIndex = savedPreferences.historyButtonViewIndex
+            stateController?.convValues.defaultTabIndex = savedPreferences.defaultTabIndex
         }
 
         //Setup gesture recognizers
