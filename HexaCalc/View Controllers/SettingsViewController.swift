@@ -67,8 +67,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // Force dark mode to be used (for now)
         overrideUserInterfaceStyle = .dark
         
-        
-        
         // Check if prefereces are saved
         if let savedPreferences = DataPersistence.loadPreferences() {
             self.preferences = savedPreferences

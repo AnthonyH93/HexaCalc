@@ -71,7 +71,6 @@ class HexadecimalViewController: UIViewController {
     
     var currentlyRecognizingDoubleTap = false
     
-
     var secondFunctionMode = false
 
     var calculationHistory: [CalculationData] = []
