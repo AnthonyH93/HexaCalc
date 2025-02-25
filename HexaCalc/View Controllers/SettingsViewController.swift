@@ -386,28 +386,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex)
         if sender.isOn {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                if (barItems[0].title! != "Hexadecimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[0])!, at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                }
-            }
+            tabBarController?.tabBar.items![0].isEnabled = true
         }
         else {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (barItems[0].title! == "Hexadecimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                }
-            }
+            tabBarController?.tabBar.items![0].isEnabled = false
         }
         self.preferences = userPreferences
     }
@@ -419,54 +403,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex)
         if sender.isOn {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                switch barItems.count {
-                case 1:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                case 2:
-                    if (barItems[0].title! == "Hexadecimal") {
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
-                        tabBarController?.viewControllers = viewControllers
-                    }
-                    else if (barItems[0].title == "Binary") {
-                        //Do nothing
-                    }
-                    else {
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 0)
-                        tabBarController?.viewControllers = viewControllers
-                    }
-                case 3:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                default:
-                    fatalError("Invalid number of tabs")
-                }
-            }
+            tabBarController?.tabBar.items![1].isEnabled = true
         }
         else {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (barItems[0].title! == "Binary"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                }
-                else if (barItems[1].title! == "Binary"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                }
-            }
+            tabBarController?.tabBar.items![1].isEnabled = false
         }
         self.preferences = userPreferences
     }
@@ -478,49 +420,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex)
         if sender.isOn {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                switch barItems.count {
-                case 1:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                case 2:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                case 3:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 2)
-                    tabBarController?.viewControllers = viewControllers
-                default:
-                    fatalError("Invalid number of tabs")
-                }
-            }
+            tabBarController?.tabBar.items![2].isEnabled = true
         }
         else {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (barItems[0].title! == "Decimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                }
-                else if (barItems[1].title! == "Decimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                }
-                else if (barItems[2].title! == "Decimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 2)
-                    tabBarController?.viewControllers = viewControllers
-                }
-            }
+            tabBarController?.tabBar.items![2].isEnabled = false
         }
         self.preferences = userPreferences
     }

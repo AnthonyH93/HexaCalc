@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = self.window ?? UIWindow()
 
-        //Grab the storyboard and ensure that the tab bar controller is reinstantiated with the details below.
+        // Grab the storyboard and ensure that the tab bar controller is reinstantiated with the details below.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
 
@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
 
-        //Set the rootViewController to our modified version with the StateController instances
+        // Set the rootViewController to our modified version with the StateController instances
         self.window!.rootViewController = tabBarController
         self.window!.makeKeyAndVisible()
 

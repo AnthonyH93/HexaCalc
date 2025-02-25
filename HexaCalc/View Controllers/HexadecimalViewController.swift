@@ -79,10 +79,6 @@ class HexadecimalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Saving the original view controllers
-        let originalViewControllers = tabBarController?.viewControllers
-        stateController?.convValues.originalTabs = originalViewControllers
-        
         outputLabel.accessibilityIdentifier = "Hexadecimal Output Label"
         updateOutputLabel(value: "0")
         
@@ -96,21 +92,10 @@ class HexadecimalViewController: UIViewController {
                     removeHexTab = true
                 }
                 if (savedPreferences.binTabState == false) {
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 1)
-                    tabBarController?.viewControllers = viewControllers
+                    tabBarController?.tabBar.items![1].isEnabled = false
                 }
                 if (savedPreferences.decTabState == false) {
-                    if (savedPreferences.binTabState == false) {
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.remove(at: 1)
-                        tabBarController?.viewControllers = viewControllers
-                    }
-                    else {
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.remove(at: 2)
-                        tabBarController?.viewControllers = viewControllers
-                    }
+                    tabBarController?.tabBar.items![2].isEnabled = false
                 }
                 if (removeHexTab == true) {
                     //Remove hexadecimal tab after setting state values
@@ -118,9 +103,7 @@ class HexadecimalViewController: UIViewController {
                     stateController?.convValues.colour = savedPreferences.colour
                     stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
                     stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 0)
-                    tabBarController?.viewControllers = viewControllers
+                    tabBarController?.tabBar.items![0].isEnabled = false
                 }
             }
             
