@@ -76,7 +76,9 @@ class HexadecimalViewController: UIViewController {
     var calculationHistory: [CalculationData] = []
     
     // Decide which tab to be default in viewDidLoad, but set the selected tab after the view appears
+    // Only do this on the first launch
     var initialTabIndex = 0
+    var initialLaunch = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -277,7 +279,9 @@ class HexadecimalViewController: UIViewController {
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
         
         // Set the initial tab (if it is not the Hexadecimal tab) after the view has loaded
-        if initialTabIndex != 0 {
+        if initialTabIndex != 0 && initialLaunch {
+            // Only change the selected tab on the first launch
+            initialLaunch = false
             // Set the correct selected tab item
             tabBarController?.selectedViewController = tabBarController?.viewControllers![initialTabIndex]
         }
