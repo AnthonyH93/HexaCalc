@@ -60,6 +60,7 @@
 		9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */; };
 		9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23DB291F6BE300151B44 /* UITestHelper.swift */; };
 		9D6199612D6D82B000F93648 /* DefaultTabViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */; };
+		9D6199632D6EE13A00F93648 /* HexaCalcTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199622D6EE13A00F93648 /* HexaCalcTabBarController.swift */; };
 		9D8460252A46C182008C5A99 /* HistoryButtonViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8460242A46C182008C5A99 /* HistoryButtonViewConverter.swift */; };
 		9D8A805524CB82A0008CDECE /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */; };
 		9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */; };
@@ -163,6 +164,7 @@
 		9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexadecimalHexaCalcUITests.swift; sourceTree = "<group>"; };
 		9D3E23DB291F6BE300151B44 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
 		9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabViewConverter.swift; sourceTree = "<group>"; };
+		9D6199622D6EE13A00F93648 /* HexaCalcTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcTabBarController.swift; sourceTree = "<group>"; };
 		9D8460242A46C182008C5A99 /* HistoryButtonViewConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryButtonViewConverter.swift; sourceTree = "<group>"; };
 		9D8A805424CB82A0008CDECE /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
 		9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				9D8F9A2824E6438800F32A2C /* SettingsViewController.swift */,
 				9DC758202802842E00BB2953 /* SettingsSelectionViewController.swift */,
 				C2D2E1C328DDF90A0094DA13 /* CalculationHistoryViewController.swift */,
+				9D6199622D6EE13A00F93648 /* HexaCalcTabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				9DEF249B24C553F000701F5B /* HexadecimalViewController.swift in Sources */,
 				9D8F9A2924E6438800F32A2C /* SettingsViewController.swift in Sources */,
 				9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */,
+				9D6199632D6EE13A00F93648 /* HexaCalcTabBarController.swift in Sources */,
 				9DC7581A27ED88A800BB2953 /* SwitchTableViewCell.swift in Sources */,
 				C2D2E1C428DDF90A0094DA13 /* CalculationHistoryViewController.swift in Sources */,
 				9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */,

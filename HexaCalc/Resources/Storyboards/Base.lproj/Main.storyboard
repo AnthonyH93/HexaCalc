@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -539,17 +539,17 @@
             <objects>
                 <viewController id="mI5-fy-VRx" customClass="CalculationHistoryViewController" customModule="HexaCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6JK-gY-jv2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculation History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Hm-d3-MZl">
-                                <rect key="frame" x="69.333333333333343" y="60" width="275.66666666666663" height="40.666666666666657"/>
+                                <rect key="frame" x="69.333333333333343" y="15.999999999999996" width="275.66666666666663" height="40.666666666666657"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Em7-TN-XCK">
-                                <rect key="frame" x="0.0" y="116.66666666666669" width="414" height="725.33333333333326"/>
+                                <rect key="frame" x="0.0" y="72.666666666666686" width="414" height="813.33333333333326"/>
                                 <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -1380,10 +1380,10 @@
             </objects>
             <point key="canvasLocation" x="2387" y="963"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Hexa Calc Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController storyboardIdentifier="tabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="49e-Tb-3d3" customClass="HexaCalcTabBarController" customModule="HexaCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1434,223 +1434,23 @@
             <point key="canvasLocation" x="883" y="963"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="0jA-8e-5dW">
-            <size key="intrinsicContentSize" width="55" height="53"/>
-        </designable>
-        <designable name="100-1S-VjQ">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="20M-zv-LsB">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="2jt-QL-6HL">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="39t-2m-b1f">
-            <size key="intrinsicContentSize" width="45" height="53"/>
-        </designable>
-        <designable name="3Zk-72-2JA">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="4iD-VD-Nfg">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="4o4-aX-KfG">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="4x4-Cz-LL6">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="6Pw-L1-6hK">
-            <size key="intrinsicContentSize" width="50" height="49"/>
-        </designable>
-        <designable name="7qR-TY-uyZ">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="7tu-Vi-hcn">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="9fm-vl-7ec">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="D2r-eu-AmU">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="EJa-MM-1Zh">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="Eom-pu-5Jp">
-            <size key="intrinsicContentSize" width="61" height="49"/>
-        </designable>
-        <designable name="FR4-Tm-oSL">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="Fd9-3O-EiD">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="GKx-jy-StE">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="Gez-Xo-Kz8">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="Gl7-nE-VdG">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="H0R-SQ-pp9">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="IHa-5E-F5t">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="IxU-Uv-ERW">
-            <size key="intrinsicContentSize" width="40" height="53"/>
-        </designable>
-        <designable name="JDN-r5-ppP">
-            <size key="intrinsicContentSize" width="40" height="53"/>
-        </designable>
-        <designable name="LPa-Ui-a7P">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="Mn8-rC-aGV">
-            <size key="intrinsicContentSize" width="59" height="49"/>
-        </designable>
-        <designable name="SKC-3T-8cx">
-            <size key="intrinsicContentSize" width="42" height="53"/>
-        </designable>
-        <designable name="Sij-Yn-oNW">
-            <size key="intrinsicContentSize" width="57" height="53"/>
-        </designable>
-        <designable name="U1A-va-aP4">
-            <size key="intrinsicContentSize" width="30" height="51"/>
-        </designable>
-        <designable name="Uxe-EP-a1f">
-            <size key="intrinsicContentSize" width="68" height="53"/>
-        </designable>
-        <designable name="Vu7-Jp-Iwf">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="XYA-Dk-uvT">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="Y3I-sD-UOM">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="Y5d-XQ-8me">
-            <size key="intrinsicContentSize" width="64" height="53"/>
-        </designable>
-        <designable name="Ydo-vE-RTm">
-            <size key="intrinsicContentSize" width="41" height="53"/>
-        </designable>
-        <designable name="bSG-bo-Kqa">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="ckg-ug-m1d">
-            <size key="intrinsicContentSize" width="66" height="53"/>
-        </designable>
-        <designable name="d46-2F-KNS">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="dLL-MC-QGn">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="diM-XB-4lV">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="eIS-kh-BsJ">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="f1L-do-5TF">
-            <size key="intrinsicContentSize" width="57" height="53"/>
-        </designable>
-        <designable name="fDE-6X-Dgl">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="fws-FY-nc0">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="gf0-fY-7VF">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="i3q-Dh-2ps">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="ii9-LZ-xrx">
-            <size key="intrinsicContentSize" width="37" height="53"/>
-        </designable>
-        <designable name="jjF-4y-iCl">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="l3d-yL-2Bv">
-            <size key="intrinsicContentSize" width="40" height="49"/>
-        </designable>
-        <designable name="lFW-Xu-MGc">
-            <size key="intrinsicContentSize" width="42" height="53"/>
-        </designable>
-        <designable name="lSD-iO-cST">
-            <size key="intrinsicContentSize" width="57" height="53"/>
-        </designable>
-        <designable name="myN-cA-UId">
-            <size key="intrinsicContentSize" width="38" height="49"/>
-        </designable>
-        <designable name="nb5-ih-FLz">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="orD-ym-tCe">
-            <size key="intrinsicContentSize" width="57" height="49"/>
-        </designable>
-        <designable name="pDP-oH-8mG">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="rAv-IB-DwS">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="riD-mq-Hgo">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="sDe-dc-EtK">
-            <size key="intrinsicContentSize" width="41" height="53"/>
-        </designable>
-        <designable name="smO-xS-RkX">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="tBV-dh-STG">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="ty1-ux-gmg">
-            <size key="intrinsicContentSize" width="30" height="49"/>
-        </designable>
-        <designable name="uZk-z6-Dqu">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="xyC-0x-fbI">
-            <size key="intrinsicContentSize" width="37" height="53"/>
-        </designable>
-        <designable name="zC8-mX-mk0">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-        <designable name="zCK-9B-i1G">
-            <size key="intrinsicContentSize" width="30" height="53"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="5CC-PW-4Pl"/>
+        <segue reference="sC0-cE-mVT"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemGreenColor"/>
     <resources>
         <image name="01.square" catalog="system" width="128" height="114"/>
         <image name="dot.square" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="122"/>
-        <image name="hexagon" catalog="system" width="128" height="123"/>
+        <image name="hexagon" catalog="system" width="125" height="128"/>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

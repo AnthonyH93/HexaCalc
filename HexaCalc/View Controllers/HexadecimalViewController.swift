@@ -152,6 +152,10 @@ class HexadecimalViewController: UIViewController {
         
         // Force light mode to be used (for now) - to hide the navigation bar line
         overrideUserInterfaceStyle = .light
+        
+        if #available(iOS 17.0, *) {
+            traitOverrides.horizontalSizeClass = .compact
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
