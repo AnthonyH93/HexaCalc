@@ -15,6 +15,7 @@ enum SelectionType {
     case copyAction
     case pasteAction
     case historyButtonView
+    case defaultTabIndex
 }
 
 class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -32,7 +33,10 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
     
     var numberOfRows = 0
     
-    let textColour = [UIColor.systemRed, UIColor.systemOrange, UIColor.systemYellow, UIColor.systemGreen, UIColor.systemBlue, UIColor.systemTeal, UIColor.systemIndigo, UIColor.systemPurple]
+    let textColour = [UIColor.systemRed, UIColor.systemOrange, UIColor.systemYellow,
+                      UIColor.systemGreen, UIColor.systemBlue, UIColor.systemTeal,
+                      UIColor.systemIndigo, UIColor.systemPurple, UIColor.systemPink,
+                      UIColor.systemBrown]
     
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
@@ -121,7 +125,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                                      historyButtonViewIndex: preferences.historyButtonViewIndex)
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
                     
                     // Set tab bar icon colour to new colour
                     tabBarController?.tabBar.tintColor = colour
@@ -141,7 +145,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: Int32(index), pasteActionIndex: preferences.pasteActionIndex,
-                                                      historyButtonViewIndex: preferences.historyButtonViewIndex)
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
                     stateController?.convValues.copyActionIndex = Int32(index)
                 }
             case .pasteAction:
@@ -152,7 +156,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index),
-                                                      historyButtonViewIndex: preferences.historyButtonViewIndex)
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
                     stateController?.convValues.pasteActionIndex = Int32(index)
                 }
             case .historyButtonView:
@@ -163,8 +167,19 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                                      historyButtonViewIndex: Int32(index))
+                                                      historyButtonViewIndex: Int32(index), defaultTabIndex: preferences.defaultTabIndex)
                     stateController?.convValues.historyButtonViewIndex = Int32(index)
+                }
+            case .defaultTabIndex:
+                // Ensure that a different selection was made
+                if preferences.defaultTabIndex != index {
+                    shouldSavePreferences = true
+                    userPreferences = UserPreferences(colour: preferences.colour, colourNum: preferences.colourNum,
+                                                      hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                                      setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                                      copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: Int32(index))
+                    stateController?.convValues.defaultTabIndex = Int32(index)
                 }
             default:
                 fatalError("SelectionType is not defined")

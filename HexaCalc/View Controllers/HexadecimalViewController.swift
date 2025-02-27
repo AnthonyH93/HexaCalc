@@ -71,45 +71,53 @@ class HexadecimalViewController: UIViewController {
     
     var currentlyRecognizingDoubleTap = false
     
-
     var secondFunctionMode = false
 
     var calculationHistory: [CalculationData] = []
     
+    // Decide which tab to be default in viewDidLoad, but set the selected tab after the view appears
+    // Only do this on the first launch
+    var initialTabIndex = 0
+    var initialLaunch = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Saving the original view controllers
-        let originalViewControllers = tabBarController?.viewControllers
-        stateController?.convValues.originalTabs = originalViewControllers
         
         outputLabel.accessibilityIdentifier = "Hexadecimal Output Label"
         updateOutputLabel(value: "0")
         
         if let savedPreferences = DataPersistence.loadPreferences() {
             
-            //Remove tabs which are disabled by the user
+            // Initialize initial tab to user saved preference
+            initialTabIndex = Int(savedPreferences.defaultTabIndex == 3 ? 0 : savedPreferences.defaultTabIndex)
+
+            // Remove tabs which are disabled by the user
             let arrayOfTabBarItems = tabBarController?.tabBar.items
             var removeHexTab = false
             if let barItems = arrayOfTabBarItems, barItems.count > 0 {
                 if (savedPreferences.hexTabState == false) {
                     removeHexTab = true
+                    initialTabIndex = initialTabIndex == 0 ? 1 : initialTabIndex
                 }
                 if (savedPreferences.binTabState == false) {
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                }
-                if (savedPreferences.decTabState == false) {
-                    if (savedPreferences.binTabState == false) {
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.remove(at: 1)
-                        tabBarController?.viewControllers = viewControllers
+                    tabBarController?.tabBar.items![1].isEnabled = false
+                    if (initialTabIndex == 1 && savedPreferences.hexTabState) {
+                        initialTabIndex = 0
                     }
                     else {
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.remove(at: 2)
-                        tabBarController?.viewControllers = viewControllers
+                        initialTabIndex = initialTabIndex == 1 ? 2 : initialTabIndex
+                    }
+                }
+                if (savedPreferences.decTabState == false) {
+                    tabBarController?.tabBar.items![2].isEnabled = false
+                    if (initialTabIndex == 2 && savedPreferences.hexTabState) {
+                        initialTabIndex = 0
+                    }
+                    else if (initialTabIndex == 2 && savedPreferences.binTabState) {
+                        initialTabIndex = 1
+                    }
+                    else {
+                        initialTabIndex = initialTabIndex == 2 ? 3 : initialTabIndex
                     }
                 }
                 if (removeHexTab == true) {
@@ -118,9 +126,7 @@ class HexadecimalViewController: UIViewController {
                     stateController?.convValues.colour = savedPreferences.colour
                     stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
                     stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 0)
-                    tabBarController?.viewControllers = viewControllers
+                    tabBarController?.tabBar.items![0].isEnabled = false
                 }
             }
             
@@ -138,6 +144,7 @@ class HexadecimalViewController: UIViewController {
             stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
             stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
             stateController?.convValues.historyButtonViewIndex = savedPreferences.historyButtonViewIndex
+            stateController?.convValues.defaultTabIndex = savedPreferences.defaultTabIndex
         }
 
         //Setup gesture recognizers
@@ -145,6 +152,10 @@ class HexadecimalViewController: UIViewController {
         
         // Force light mode to be used (for now) - to hide the navigation bar line
         overrideUserInterfaceStyle = .light
+        
+        if #available(iOS 17.0, *) {
+            traitOverrides.horizontalSizeClass = .compact
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -270,6 +281,14 @@ class HexadecimalViewController: UIViewController {
         
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
+        
+        // Set the initial tab (if it is not the Hexadecimal tab) after the view has loaded
+        if initialTabIndex != 0 && initialLaunch {
+            // Only change the selected tab on the first launch
+            initialLaunch = false
+            // Set the correct selected tab item
+            tabBarController?.selectedViewController = tabBarController?.viewControllers![initialTabIndex]
+        }
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation

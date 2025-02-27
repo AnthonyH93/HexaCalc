@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                           "Calculation History",
                           "About the app",
                           "Support" ]
-    let rowsPerSection = [3, 2, 2, 2, 4, 3]
+    let rowsPerSection = [4, 2, 2, 2, 4, 3]
     
     let supportURLs = [ "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
                         "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
@@ -51,6 +51,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "CopyActionSelection")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "PasteActionSelection")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "HistoryButtonSelection")
+        table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "DefaultTabSelection")
         table.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.identifier)
         
         table.sectionHeaderHeight = 40
@@ -118,6 +119,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             // Reload UI only when necessary
             self.tableView.reloadSections([3], with: .none)
         }
+        else if (self.preferences.defaultTabIndex != stateController?.convValues.defaultTabIndex) {
+            self.preferences.defaultTabIndex = stateController?.convValues.defaultTabIndex ?? self.preferences.defaultTabIndex
+            // Reload UI only when necessary
+            self.tableView.reloadSections([0], with: .none)
+        }
         
         // Colour the navigation bar
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -168,12 +174,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 return cell
             }
             // Decimal
-            else {
+            else if indexPath.row == 2 {
                 // Show switch
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "DecimalSwitch", for: indexPath) as! SwitchTableViewCell
                 cell.configure(isOn: preferences.decTabState, colour: self.preferences.colour)
                 cell.textLabel?.text = "Decimal"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.decimalSwitchPressed), for: .touchUpInside)
+                return cell
+            }
+            // Default tab
+            else {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "DefaultTabSelection", for: indexPath) as! SelectionSummaryTableViewCell
+                cell.configure(rightText: DefaultTabViewConverter.getViewFromIndex(index: Int(self.preferences.defaultTabIndex)), colour: UIColor.systemGray)
+                cell.textLabel?.text = "Override Default Selected Tab"
                 return cell
             }
         // Gestures section
@@ -282,6 +295,21 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Override default selected tab
+        if indexPath.section == 0 && indexPath.row == 3 {
+            // Navigate to Override default selected tab view
+            if let _ = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
+                destinationViewController.selectionList = ["Hexadecimal", "Binary", "Decimal", "Off"]
+                destinationViewController.preferences = self.preferences
+                destinationViewController.selectedIndex = Int(self.preferences.defaultTabIndex)
+                destinationViewController.selectionType = SelectionType.defaultTabIndex
+                destinationViewController.stateController = stateController
+                destinationViewController.name = "Default Selected Tab"
+                
+                // Navigate to new view
+                navigationController?.pushViewController(destinationViewController, animated: true)
+            }
+            }
         // Navigate to copy or paste action selection view
         if indexPath.section == 1 {
             if let _ = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
@@ -299,7 +327,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // Navigate to colour selection view
         if indexPath.section == 2 && indexPath.row == 0 {
             if let _ = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
-                destinationViewController.selectionList = ["Red", "Orange", "Yellow", "Green", "Blue", "Teal", "Indigo", "Violet"]
+                destinationViewController.selectionList = ["Red", "Orange", "Yellow", "Green", "Blue", "Teal", "Indigo", "Violet", "Pink", "Brown"]
                 destinationViewController.preferences = self.preferences
                 destinationViewController.selectedIndex = self.preferences.colourNum == -1 ? 3 : Int(self.preferences.colourNum)
                 destinationViewController.selectionType = SelectionType.colour
@@ -384,30 +412,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               hexTabState: sender.isOn, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                              historyButtonViewIndex: preferences.historyButtonViewIndex)
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
         if sender.isOn {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                if (barItems[0].title! != "Hexadecimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[0])!, at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                }
-            }
+            tabBarController?.tabBar.items![0].isEnabled = true
         }
         else {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (barItems[0].title! == "Hexadecimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                }
-            }
+            tabBarController?.tabBar.items![0].isEnabled = false
         }
         self.preferences = userPreferences
     }
@@ -417,56 +429,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               hexTabState: preferences.hexTabState, binTabState: sender.isOn, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                              historyButtonViewIndex: preferences.historyButtonViewIndex)
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
         if sender.isOn {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                switch barItems.count {
-                case 1:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                case 2:
-                    if (barItems[0].title! == "Hexadecimal") {
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
-                        tabBarController?.viewControllers = viewControllers
-                    }
-                    else if (barItems[0].title == "Binary") {
-                        //Do nothing
-                    }
-                    else {
-                        var viewControllers = tabBarController?.viewControllers
-                        viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 0)
-                        tabBarController?.viewControllers = viewControllers
-                    }
-                case 3:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[1])!, at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                default:
-                    fatalError("Invalid number of tabs")
-                }
-            }
+            tabBarController?.tabBar.items![1].isEnabled = true
         }
         else {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (barItems[0].title! == "Binary"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                }
-                else if (barItems[1].title! == "Binary"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                }
-            }
+            tabBarController?.tabBar.items![1].isEnabled = false
         }
         self.preferences = userPreferences
     }
@@ -476,51 +446,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: sender.isOn,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                              historyButtonViewIndex: preferences.historyButtonViewIndex)
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
         if sender.isOn {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                switch barItems.count {
-                case 1:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                case 2:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                case 3:
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.insert((stateController?.convValues.originalTabs?[2])!, at: 2)
-                    tabBarController?.viewControllers = viewControllers
-                default:
-                    fatalError("Invalid number of tabs")
-                }
-            }
+            tabBarController?.tabBar.items![2].isEnabled = true
         }
         else {
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
             DataPersistence.savePreferences(userPreferences: userPreferences)
-
-            if let barItems = arrayOfTabBarItems, barItems.count > 1 {
-                if (barItems[0].title! == "Decimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 0)
-                    tabBarController?.viewControllers = viewControllers
-                }
-                else if (barItems[1].title! == "Decimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 1)
-                    tabBarController?.viewControllers = viewControllers
-                }
-                else if (barItems[2].title! == "Decimal"){
-                    var viewControllers = tabBarController?.viewControllers
-                    viewControllers?.remove(at: 2)
-                    tabBarController?.viewControllers = viewControllers
-                }
-            }
+            tabBarController?.tabBar.items![2].isEnabled = false
         }
         self.preferences = userPreferences
     }
@@ -531,7 +464,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: sender.isOn,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                              historyButtonViewIndex: preferences.historyButtonViewIndex)
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = sender.isOn
         self.preferences = userPreferences

@@ -23,6 +23,7 @@ struct convVals{
     var historyButtonViewIndex: Int32 = 0
     // Acts as a binary flag (1 bit for each calculator)
     var clearLocalHistory: Int32 = 0
+    var defaultTabIndex: Int32 = 3
 }
 
 protocol StateControllerProtocol {

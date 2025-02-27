@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let existingVersion = UserDefaults.standard.object(forKey: "CurrentVersionNumber") as? String ?? appVersionNumber
         
+        // Special case for updating app icon in version 1.6.0
+        let updatedIconSetupComplete = UserDefaults.standard.object(forKey: "UpdatedIconSetupComplete") as? Bool ?? false
+        
         if let nsData = NSData(contentsOf: fullPath) {
             do {
 
@@ -40,12 +43,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
                             copyActionIndex: loadedPreferences.copyActionIndex,
                             pasteActionIndex: loadedPreferences.pasteActionIndex,
-                            historyButtonViewIndex: 0
+                            historyButtonViewIndex: 0,
+                            defaultTabIndex: 3
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
                     }
+                    // Otherwise, always set the existing version key to the current app version
+                    // This allows future uses of the updated preferences flow above to work
+                    else {
+                        UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
+                    }
                     UITabBar.appearance().tintColor = loadedPreferences.colour
+                    
+                    // Special case for when app icon was changed, we want to reset the default colour
+                    // The reason for the colour reset is since the app icon will be green now
+                    if !updatedIconSetupComplete {
+                        let userPreferences = UserPreferences(
+                            colour: UIColor.systemGreen,
+                            colourNum: Int64(ColourNumberConverter.getIndexFromColour(colour: UIColor.systemGreen)),
+                            hexTabState: loadedPreferences.hexTabState,
+                            binTabState: loadedPreferences.binTabState,
+                            decTabState: loadedPreferences.decTabState,
+                            setCalculatorTextColour: loadedPreferences.setCalculatorTextColour,
+                            copyActionIndex: loadedPreferences.copyActionIndex,
+                            pasteActionIndex: loadedPreferences.pasteActionIndex,
+                            historyButtonViewIndex: 0,
+                            defaultTabIndex: 3
+                        )
+                        DataPersistence.savePreferences(userPreferences: userPreferences)
+                        UITabBar.appearance().tintColor = UIColor.systemGreen
+                        // Reset alternate icon to nil - needs to be async after a delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            UIApplication.shared.setAlternateIconName(nil)
+                        }
+                        UserDefaults.standard.set(true, forKey: "UpdatedIconSetupComplete")
+                    }
                 }
             } catch {
                 print("Couldn't read file. Error: \(error)")

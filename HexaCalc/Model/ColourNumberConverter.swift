@@ -29,6 +29,10 @@ class ColourNumberConverter {
             return UIColor.systemIndigo
         case 7:
             return UIColor.systemPurple
+        case 8:
+            return UIColor.systemPink
+        case 9:
+            return UIColor.systemBrown
         default:
             return UIColor.systemGreen
         }
@@ -52,6 +56,10 @@ class ColourNumberConverter {
             return 6
         case .systemPurple:
             return 7
+        case .systemPink:
+            return 8
+        case .systemBrown:
+            return 9
         default:
                 return -1
         }
@@ -74,7 +82,11 @@ class ColourNumberConverter {
         case 6:
             return "HexaCalcIconIndigo"
         case 7:
-            return "HexaCalcIconPurple"
+            return "HexaCalcIconViolet"
+        case 8:
+            return "HexaCalcIconPink"
+        case 9:
+            return "HexaCalcIconBrown"
         default:
             return "HexaCalcIconGreen"
         }
@@ -98,6 +110,10 @@ class ColourNumberConverter {
             return "Indigo"
         case 7:
             return "Violet"
+        case 8:
+            return "Pink"
+        case 9:
+            return "Brown"
         default:
             return "Green"
         }
