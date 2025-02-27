@@ -31,6 +31,7 @@ For iPads this includes support for both landscape and portrait modes as well as
 ### Hexadecimal Calculator
 * Addition, subtraction, multiplication, division
 * AND, OR, XOR, NOT
+* 2's compliment, left shift, right shift
 * All clear, delete
 
 ### Device Screenshots for Hexacdecimal Calculator
@@ -53,6 +54,7 @@ Green Positive Binary Output | Green Negative Binary Output | Red Negative Binar
 
 ### Decimal Calculator
 * Addition, subtraction, multiplication, division
+* Modulus, exponentiation, square root
 * All clear, delete, plus/minus, dot
 
 ### Device Screenshots for Decimal Calculator
@@ -66,10 +68,13 @@ Green Positive Decimal Output | Green Negative Decimal Output | Red Negative Dec
 This app uses data persistance to implement saved user customization allowing each user to choose their customizations through a settings menu.
 
 ### Customization options
-* 8 different system colours which change the colour of buttons and the app icon
+* 10 different system colours which change the colour of buttons and the app icon
 * The ability to disable or enable any combination of calculator tabs allowing the user to focus on what is important for them
 * The option to change the default calculator text colour from white to your selected colour
 * Options for the copy and paste clipboard gestures as well as the ability to disable them
+* The option to override the default selected tab on app launch
+* Control over the appearance of the calculation history button
+* Ability to clear the local history
 
 The settings menu also includes navigation to the About HexaCalc view which has links to the privacy policy and terms and conditions documents.
 
@@ -81,18 +86,18 @@ Default Settings View | Default About HexaCalc View | Red Two Tab Settings View 
 
 ## Future Development
 There are many features that I would like to add to HexaCalc and these are some of the ones that I will look into implementing next:
-* Localization
+- [ ] Localization
   * As of now, the app only supports English, it would be great to add support for many more languages
-* Improve the bit shift operations
+- [x] Improve the bit shift operations
   * Bit shifting is a common operation, but it is only implemented on the binary calculator and only with shifts of 1
   * Add X>>Y and X<<Y to both the binary and hexadecimal calculators
-* Modulo operator
+- [x] Modulo operator
   * The modulo operation would be a good addition to the hexadecimal/decimal calculators
-* History
+- [x] History
   * Adding calculation history for each of the calculators
-* Support for any number base
+- [ ] Support for any number base
   * The app only includes binary, hexadecimal and decimal, more number bases could be added (such as octal)
-* Full calculator customization
+- [ ] Full calculator customization
   * Add more optional calculator buttons and let users create their own layout with their desired operations
 
 Thank you for looking at this project!
