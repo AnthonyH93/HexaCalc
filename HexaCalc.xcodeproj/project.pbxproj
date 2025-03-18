@@ -83,6 +83,7 @@
 		9DC7582B2803EDF200BB2953 /* CopyOrPasteActionConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */; };
 		9DC7582F2803F78B00BB2953 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */; };
 		9DC758312804CD6200BB2953 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758302804CD6200BB2953 /* ReviewManager.swift */; };
+		9DC845392D89324C0068519E /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 9DC845382D89324C0068519E /* TelemetryDeck */; };
 		9DE32E4028EA97AC00BB222C /* BasicHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */; };
 		9DE32E4228EA97FA00BB222C /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */; };
 		9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9FB4728DC220E00705A4F /* Operation.swift */; };
@@ -187,6 +188,7 @@
 		9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyOrPasteActionConverter.swift; sourceTree = "<group>"; };
 		9DC7582E2803F78B00BB2953 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		9DC758302804CD6200BB2953 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		9DC8453C2D893B1C0068519E /* TelemetryDeck.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = TelemetryDeck.xcconfig; sourceTree = "<group>"; };
 		9DE32E3328DEDBDF00BB222C /* HexaCalcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HexaCalcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicHexaCalcUITests.swift; sourceTree = "<group>"; };
 		9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC845392D89324C0068519E /* TelemetryDeck in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +386,7 @@
 		9DEF248A24C553F000701F5B = {
 			isa = PBXGroup;
 			children = (
+				9DC8453C2D893B1C0068519E /* TelemetryDeck.xcconfig */,
 				9DEF249524C553F000701F5B /* HexaCalc */,
 				9DE32E3428DEDBDF00BB222C /* HexaCalcUITests */,
 				9DEF249424C553F000701F5B /* Products */,
@@ -480,6 +484,9 @@
 				Base,
 			);
 			mainGroup = 9DEF248A24C553F000701F5B;
+			packageReferences = (
+				9DC845372D89324C0068519E /* XCRemoteSwiftPackageReference "SwiftSDK" */,
+			);
 			productRefGroup = 9DEF249424C553F000701F5B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -811,6 +818,7 @@
 		};
 		9DEF24B824C553F100701F5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DC8453C2D893B1C0068519E /* TelemetryDeck.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -833,6 +841,7 @@
 		};
 		9DEF24B924C553F100701F5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DC8453C2D893B1C0068519E /* TelemetryDeck.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -884,6 +893,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9DC845372D89324C0068519E /* XCRemoteSwiftPackageReference "SwiftSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TelemetryDeck/SwiftSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9DC845382D89324C0068519E /* TelemetryDeck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9DC845372D89324C0068519E /* XCRemoteSwiftPackageReference "SwiftSDK" */;
+			productName = TelemetryDeck;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9DEF24A124C553F000701F5B /* HexaCalc.xcdatamodeld */ = {
