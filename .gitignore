@@ -5,3 +5,5 @@ xcuserdata/
 *.xcconfig
 
 .build/
+
+build/
