@@ -80,8 +80,13 @@ class HexadecimalViewController: UIViewController {
     var initialTabIndex = 0
     var initialLaunch = true
     
+    // Access singleton TelemetryManager class object
+    let telemetryManager = TelemetryManager.sharedTelemetryManager
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        telemetryManager.sendSignal()
         
         outputLabel.accessibilityIdentifier = "Hexadecimal Output Label"
         updateOutputLabel(value: "0")

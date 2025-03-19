@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Attempt to find App ID
         if let appID = Bundle.main.object(forInfoDictionaryKey: "HexaCalcAppID") {
-            let config = TelemetryDeck.Config(appID: appID as! String)
-            TelemetryDeck.initialize(config: config)
+            // Setup the singleton class
+            TelemetryManager.setup(TelemetryManager.TelemetryManagerConfig(appID: appID as! String))
         }
         
         // Override point for customization after application launch
