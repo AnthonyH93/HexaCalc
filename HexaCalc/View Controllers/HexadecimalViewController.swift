@@ -86,8 +86,6 @@ class HexadecimalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        telemetryManager.sendSignal()
-        
         outputLabel.accessibilityIdentifier = "Hexadecimal Output Label"
         updateOutputLabel(value: "0")
         

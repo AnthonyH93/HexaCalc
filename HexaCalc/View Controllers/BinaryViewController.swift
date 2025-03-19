@@ -61,6 +61,9 @@ class BinaryViewController: UIViewController {
     
     var calculationHistory: [CalculationData] = []
     
+    // Access singleton TelemetryManager class object
+    let telemetryManager = TelemetryManager.sharedTelemetryManager
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

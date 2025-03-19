@@ -33,6 +33,7 @@ class TelemetryManager {
         // Choose mode based on whether configuration is complete
         if let config = TelemetryManager.config {
             let telemetryDeckConfig = TelemetryDeck.Config(appID: config.appID)
+            telemetryDeckConfig.defaultSignalPrefix = "HexaCalc"
             TelemetryDeck.initialize(config: telemetryDeckConfig)
             TelemetryManager.telemetryOn = true
         }
@@ -41,9 +42,65 @@ class TelemetryManager {
         }
     }
     
-    func sendSignal() {
+    func sendCalculatorSignal(tab: TelemetryTab, action: TelemetryCalculatorAction) {
         if TelemetryManager.telemetryOn ?? false {
-            TelemetryDeck.signal("Oven.Bake.startBaking2")
+            TelemetryDeck.signal("\(tab).\(action)")
         }
     }
+    
+    func sendSettingsSignal(section: TelemetrySettingsSection, action: TelemetrySettingsAction) {
+        if TelemetryManager.telemetryOn ?? false {
+            TelemetryDeck.signal("\(TelemetryTab.Settings).\(section).\(action)")
+        }
+    }
+}
+
+// Enums to control types of signals
+enum TelemetryTab: String {
+    case Hexadecimal = "Hexadecimal"
+    case Binary = "Binary"
+    case Decimal = "Decimal"
+    case Settings = "Settings"
+}
+
+enum TelemetryCalculatorAction: String {
+    // Calculator actions
+    case Equals = "equalsPressed"
+    case Second = "2ndPressed"
+    case Copy = "valueCopied"
+    case Paste = "valuePasted"
+    case History = "historyPressed"
+    case HistoryCopy = "History.valueCopied"
+}
+
+enum TelemetrySettingsSection: String {
+    case TabBar = "TabBar"
+    case Gestures = "Gestures"
+    case Customization = "Customization"
+    case History = "CalculationHistory"
+    case About = "AboutTheApp"
+    case Support = "Support"
+}
+
+enum TelemetrySettingsAction: String {
+    // TabBar actions
+    case Hexadecimal = "hexadecimalSwitchPressed"
+    case Binary = "binarySwitchPressed"
+    case Decimal = "decimalSwitchPressed"
+    case DefaultTab = "defaultSelectedTabChanged"
+    // Gestures actions
+    case Copy = "copyActionChanged"
+    case Paste = "pasteActionChanged"
+    // Customization actions
+    case Colour = "colourChanged"
+    case TextColour = "setCalculatorTextColourSwitchPressed"
+    // Calculation history actions
+    case History = "historyButtonViewChanged"
+    case ClearHistory = "clearLocalHistory"
+    // About the app actions
+    case OpenSource = "openSourcePressed"
+    case Share = "sharePressed"
+    case Review = "reviewPressed"
+    // Support actions
+    case Email = "emailFeedbackPressed"
 }
