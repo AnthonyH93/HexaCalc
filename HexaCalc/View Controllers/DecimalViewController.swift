@@ -61,6 +61,7 @@ class DecimalViewController: UIViewController {
     
     // Access singleton TelemetryManager class object
     let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.Decimal
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,6 +210,8 @@ class DecimalViewController: UIViewController {
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
         
         updateOutputLabel(value: decimalLabelText ?? "0")
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Appeared)
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation

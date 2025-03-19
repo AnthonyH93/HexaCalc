@@ -61,6 +61,7 @@ enum TelemetryTab: String {
     case Binary = "Binary"
     case Decimal = "Decimal"
     case Settings = "Settings"
+    case History = "History"
 }
 
 enum TelemetryCalculatorAction: String {
@@ -69,8 +70,10 @@ enum TelemetryCalculatorAction: String {
     case Second = "2ndPressed"
     case Copy = "valueCopied"
     case Paste = "valuePasted"
-    case History = "historyPressed"
-    case HistoryCopy = "History.valueCopied"
+    case CopyAndPaste = "copyAndPastePopupShown"
+    case Overflow = "integerOverflow"
+    case DeleteSwipe = "swipedToDelete"
+    case Appeared = "appeared"
 }
 
 enum TelemetrySettingsSection: String {

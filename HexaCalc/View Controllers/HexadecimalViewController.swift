@@ -82,6 +82,7 @@ class HexadecimalViewController: UIViewController {
     
     // Access singleton TelemetryManager class object
     let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.Hexadecimal
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,12 +202,13 @@ class HexadecimalViewController: UIViewController {
             NSLayoutConstraint.activate(labelConstraints)
         }
     }
-    //Load the current converted value from either of the other calculator screens
+    // Load the current converted value from either of the other calculator screens
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         if ((stateController?.convValues.largerThan64Bits)!) {
             updateOutputLabel(value: "Error! Integer Overflow!")
+            telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Overflow)
         }
         else {
             var newLabelValue = stateController?.convValues.hexVal.uppercased()
@@ -292,6 +294,8 @@ class HexadecimalViewController: UIViewController {
             // Set the correct selected tab item
             tabBarController?.selectedViewController = tabBarController?.viewControllers![initialTabIndex]
         }
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Appeared)
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
@@ -352,6 +356,8 @@ class HexadecimalViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             alert.dismiss(animated: true, completion: nil)
         }
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Copy)
     }
     
     func pasteSelected() {
@@ -361,6 +367,8 @@ class HexadecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         
         self.present(alert, animated: true)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Paste)
     }
     
     func copyAndPasteSelected() {
@@ -370,6 +378,8 @@ class HexadecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToHexadecimalCalculator()}))
         
         self.present(alert, animated: true)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.CopyAndPaste)
     }
     
     // Function to get and format content from clipboard
@@ -427,6 +437,7 @@ class HexadecimalViewController: UIViewController {
         
         if (sender.direction == .left || sender.direction == .right) {
             deletePressed(DELBtn)
+            telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.DeleteSwipe)
         }
     }
     
@@ -513,6 +524,8 @@ class HexadecimalViewController: UIViewController {
         }
         
         self.secondFunctionMode.toggle()
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Second)
     }
     
     @IBAction func digitPressed(_ sender: RoundButton) {
@@ -634,6 +647,8 @@ class HexadecimalViewController: UIViewController {
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
         operation(operation: currentOperation)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
     }
     
     //MARK: Private Functions

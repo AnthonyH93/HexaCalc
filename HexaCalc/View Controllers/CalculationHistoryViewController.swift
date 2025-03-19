@@ -12,12 +12,18 @@ class CalculationHistoryViewController: UIViewController {
     
     var calculationHistory: [CalculationData] = []
     
+    // Access singleton TelemetryManager class object
+    let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.History
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Appeared)
     }
     
 }
@@ -55,6 +61,8 @@ extension CalculationHistoryViewController: UITableViewDelegate, UITableViewData
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             alert.dismiss(animated: true, completion: nil)
         }
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Copy)
     }
     
 }

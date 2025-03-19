@@ -63,6 +63,7 @@ class BinaryViewController: UIViewController {
     
     // Access singleton TelemetryManager class object
     let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.Binary
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -214,6 +215,8 @@ class BinaryViewController: UIViewController {
         
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Appeared)
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation

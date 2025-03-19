@@ -33,6 +33,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // Access singleton TelemetryManager class object
     let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.Settings
     
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
