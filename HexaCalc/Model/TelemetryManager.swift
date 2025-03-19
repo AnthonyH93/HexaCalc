@@ -44,13 +44,13 @@ class TelemetryManager {
     
     func sendCalculatorSignal(tab: TelemetryTab, action: TelemetryCalculatorAction) {
         if TelemetryManager.telemetryOn ?? false {
-            TelemetryDeck.signal("\(tab).\(action)")
+            TelemetryDeck.signal(".\(tab).\(action)")
         }
     }
     
     func sendSettingsSignal(section: TelemetrySettingsSection, action: TelemetrySettingsAction) {
         if TelemetryManager.telemetryOn ?? false {
-            TelemetryDeck.signal("\(TelemetryTab.Settings).\(section).\(action)")
+            TelemetryDeck.signal(".\(TelemetryTab.Settings).\(section).\(action)")
         }
     }
 }
