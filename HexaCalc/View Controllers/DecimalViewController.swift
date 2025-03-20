@@ -210,8 +210,6 @@ class DecimalViewController: UIViewController {
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
         
         updateOutputLabel(value: decimalLabelText ?? "0")
-        
-        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Appeared)
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation

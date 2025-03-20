@@ -215,8 +215,6 @@ class BinaryViewController: UIViewController {
         
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
-        
-        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Appeared)
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation

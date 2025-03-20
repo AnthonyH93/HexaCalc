@@ -294,8 +294,6 @@ class HexadecimalViewController: UIViewController {
             // Set the correct selected tab item
             tabBarController?.selectedViewController = tabBarController?.viewControllers![initialTabIndex]
         }
-        
-        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Appeared)
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
