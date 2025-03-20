@@ -48,9 +48,17 @@ class TelemetryManager {
         }
     }
     
-    func sendSettingsSignal(section: TelemetrySettingsSection, action: TelemetrySettingsAction) {
+    func sendSettingsSignal(section: TelemetrySettingsSection, action: TelemetrySettingsAction, parameters: [String : String]? = nil) {
         if TelemetryManager.telemetryOn ?? false {
-            TelemetryDeck.signal(".\(TelemetryTab.Settings).\(section).\(action)")
+            if let params = parameters {
+                TelemetryDeck.signal(
+                    ".\(TelemetryTab.Settings).\(section).\(action)",
+                    parameters: params
+                )
+            }
+            else {
+                TelemetryDeck.signal(".\(TelemetryTab.Settings).\(section).\(action)")
+            }
         }
     }
 }

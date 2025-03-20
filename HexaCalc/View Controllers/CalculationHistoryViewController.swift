@@ -25,6 +25,7 @@ class CalculationHistoryViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Appeared)
     }
     

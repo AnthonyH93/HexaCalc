@@ -100,6 +100,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Set the preferences that might have been changed by a child view
         if (self.preferences.colourNum != stateController?.convValues.colourNum) {
             self.preferences.colourNum = stateController?.convValues.colourNum ?? self.preferences.colourNum

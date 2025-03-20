@@ -38,6 +38,10 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                       UIColor.systemIndigo, UIColor.systemPurple, UIColor.systemPink,
                       UIColor.systemBrown]
     
+    // Access singleton TelemetryManager class object
+    let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.Settings
+    
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         
@@ -132,6 +136,15 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                     
                     // Change icon to new colour
                     self.changeIcon(to: ColourNumberConverter.getAppIconNameFromIndex(index: index))
+                    
+                    telemetryManager.sendSettingsSignal(
+                        section: TelemetrySettingsSection.Customization,
+                        action: TelemetrySettingsAction.Colour,
+                        parameters: [
+                            "oldColour": "\(stateController?.convValues.colour ?? .systemGreen)",
+                            "newColour": "\(colour)"
+                        ]
+                    )
                     
                     // Set state controller such that all calculators know the new colour without a reload
                     stateController?.convValues.colour = colour
