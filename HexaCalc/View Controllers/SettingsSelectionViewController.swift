@@ -141,8 +141,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                         section: TelemetrySettingsSection.Customization,
                         action: TelemetrySettingsAction.Colour,
                         parameters: [
-                            "oldColour": "\(stateController?.convValues.colour ?? .systemGreen)",
-                            "newColour": "\(colour)"
+                            "oldColour": "\(ColourNumberConverter.getColourNameFromIndex(index: Int(stateController?.convValues.colourNum ?? 3)))",
+                            "newColour": "\(ColourNumberConverter.getColourNameFromIndex(index: index))"
                         ]
                     )
                     
@@ -160,6 +160,14 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       copyActionIndex: Int32(index), pasteActionIndex: preferences.pasteActionIndex,
                                                       historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
                     stateController?.convValues.copyActionIndex = Int32(index)
+                    
+                    telemetryManager.sendSettingsSignal(
+                        section: TelemetrySettingsSection.Gestures,
+                        action: TelemetrySettingsAction.Copy,
+                        parameters: [
+                            "selectedAction": "\(CopyOrPasteActionConverter.getActionFromIndex(index: index, paste: false))"
+                        ]
+                    )
                 }
             case .pasteAction:
                 // Ensure that a different selection was made
@@ -171,6 +179,14 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index),
                                                       historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
                     stateController?.convValues.pasteActionIndex = Int32(index)
+                    
+                    telemetryManager.sendSettingsSignal(
+                        section: TelemetrySettingsSection.Gestures,
+                        action: TelemetrySettingsAction.Paste,
+                        parameters: [
+                            "selectedAction": "\(CopyOrPasteActionConverter.getActionFromIndex(index: index, paste: true))"
+                        ]
+                    )
                 }
             case .historyButtonView:
                 // Ensure that a different selection was made
@@ -182,6 +198,14 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                                       historyButtonViewIndex: Int32(index), defaultTabIndex: preferences.defaultTabIndex)
                     stateController?.convValues.historyButtonViewIndex = Int32(index)
+                    
+                    telemetryManager.sendSettingsSignal(
+                        section: TelemetrySettingsSection.History,
+                        action: TelemetrySettingsAction.History,
+                        parameters: [
+                            "selectedView": "\(HistoryButtonViewConverter.getViewFromIndex(index: index))"
+                        ]
+                    )
                 }
             case .defaultTabIndex:
                 // Ensure that a different selection was made
@@ -193,6 +217,14 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                                       historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: Int32(index))
                     stateController?.convValues.defaultTabIndex = Int32(index)
+                    
+                    telemetryManager.sendSettingsSignal(
+                        section: TelemetrySettingsSection.TabBar,
+                        action: TelemetrySettingsAction.DefaultTab,
+                        parameters: [
+                            "selectedDefault": "\(DefaultTabViewConverter.getViewFromIndex(index: index))"
+                        ]
+                    )
                 }
             default:
                 fatalError("SelectionType is not defined")
