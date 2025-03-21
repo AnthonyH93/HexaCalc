@@ -59,6 +59,10 @@ class DecimalViewController: UIViewController {
     
     var calculationHistory: [CalculationData] = []
     
+    // Access singleton TelemetryManager class object
+    let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.Decimal
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -275,6 +279,8 @@ class DecimalViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             alert.dismiss(animated: true, completion: nil)
         }
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Copy)
     }
     
     func pasteSelected() {
@@ -284,6 +290,8 @@ class DecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         
         self.present(alert, animated: true)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Paste)
     }
     
     func copyAndPasteSelected() {
@@ -293,6 +301,8 @@ class DecimalViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToDecimalCalculator()}))
         
         self.present(alert, animated: true)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.CopyAndPaste)
     }
     
     //Function to get and format content from clipboard
@@ -389,6 +399,7 @@ class DecimalViewController: UIViewController {
         
         if (sender.direction == .left || sender.direction == .right) {
             deletePressed(DELBtn)
+            telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.DeleteSwipe)
         }
     }
     
@@ -479,6 +490,8 @@ class DecimalViewController: UIViewController {
         }
         
         self.secondFunctionMode.toggle()
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Second)
     }
     
     @IBAction func deletePressed(_ sender: RoundButton) {
@@ -537,6 +550,8 @@ class DecimalViewController: UIViewController {
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
         operation(operation: currentOperation)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
     }
     
     @IBAction func plusPressed(_ sender: RoundButton) {

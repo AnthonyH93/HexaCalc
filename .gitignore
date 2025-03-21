@@ -1,3 +1,9 @@
 xcuserdata/
 
 *.DS_Store
+
+*.xcconfig
+
+.build/
+
+build/

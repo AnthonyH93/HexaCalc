@@ -61,6 +61,10 @@ class BinaryViewController: UIViewController {
     
     var calculationHistory: [CalculationData] = []
     
+    // Access singleton TelemetryManager class object
+    let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.Binary
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -133,6 +137,7 @@ class BinaryViewController: UIViewController {
         //Check for integer overflow first
         if ((stateController?.convValues.largerThan64Bits)!) {
             updateOutputLabel(value: "Error! Integer Overflow!")
+            telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Overflow)
         }
         else {
             var newLabelValue = stateController?.convValues.binVal
@@ -286,6 +291,8 @@ class BinaryViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             alert.dismiss(animated: true, completion: nil)
         }
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Copy)
     }
     
     func pasteSelected() {
@@ -295,6 +302,8 @@ class BinaryViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         
         self.present(alert, animated: true)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Paste)
     }
     
     func copyAndPasteSelected() {
@@ -304,6 +313,8 @@ class BinaryViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: {_ in self.pasteFromClipboardToBinaryCalculator()}))
         
         self.present(alert, animated: true)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.CopyAndPaste)
     }
     
     func pasteFromClipboardToBinaryCalculator() {
@@ -353,6 +364,7 @@ class BinaryViewController: UIViewController {
         
         if (sender.direction == .left || sender.direction == .right) {
             deletePressed(DELBtn)
+            telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.DeleteSwipe)
         }
     }
     
@@ -643,6 +655,8 @@ class BinaryViewController: UIViewController {
     
     @IBAction func equalsPressed(_ sender: RoundButton) {
         operation(operation: currentOperation)
+        
+        telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
     }
     
     //MARK: Private Functions

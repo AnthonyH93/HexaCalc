@@ -8,11 +8,20 @@
 
 import UIKit
 import CoreData
+import TelemetryDeck
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // Initialize TelemetryDeck
+        
+        // Attempt to find App ID
+        if let appID = Bundle.main.object(forInfoDictionaryKey: "HexaCalcAppID") {
+            // Setup the singleton class
+            TelemetryManager.setup(TelemetryManager.TelemetryManagerConfig(appID: appID as! String))
+        }
         
         // Override point for customization after application launch
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)

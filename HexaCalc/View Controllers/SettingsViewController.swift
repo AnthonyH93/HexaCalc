@@ -31,6 +31,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var preferences = UserPreferences.getDefaultPreferences()
     
+    // Access singleton TelemetryManager class object
+    let telemetryManager = TelemetryManager.sharedTelemetryManager
+    let telemetryTab = TelemetryTab.Settings
+    
     private let tableView: UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         
@@ -96,6 +100,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Set the preferences that might have been changed by a child view
         if (self.preferences.colourNum != stateController?.convValues.colourNum) {
             self.preferences.colourNum = stateController?.convValues.colourNum ?? self.preferences.colourNum
@@ -369,12 +375,21 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     alert.dismiss(animated: true, completion: nil)
                 }
+                
+                telemetryManager.sendSettingsSignal(
+                    section: TelemetrySettingsSection.History,
+                    action: TelemetrySettingsAction.ClearHistory
+                )
             }
         }
         // Open an about the app URL or open share detail menu
         if indexPath.section == 4 && indexPath.row > 0 {
             if indexPath.row == 3 {
                 if let currentURL = ReviewManager.getWriteReviewURL() {
+                    telemetryManager.sendSettingsSignal(
+                        section: TelemetrySettingsSection.About,
+                        action: TelemetrySettingsAction.Review
+                    )
                     UIApplication.shared.open(currentURL)
                 }
             }
@@ -384,10 +399,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 // To prevent crashes on iPads
                 activityViewController.popoverPresentationController?.sourceView = self.tableView.cellForRow(at: indexPath)
                 present(activityViewController, animated: true, completion: nil)
+                
+                telemetryManager.sendSettingsSignal(
+                    section: TelemetrySettingsSection.About,
+                    action: TelemetrySettingsAction.Share
+                )
             }
             // Open link to GitHub
             else {
                 let currentURL = NSURL(string: aboutAppURLs[indexPath.row - 1])! as URL
+                telemetryManager.sendSettingsSignal(
+                    section: TelemetrySettingsSection.About,
+                    action: TelemetrySettingsAction.OpenSource
+                )
                 UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)
             }
         }
@@ -398,6 +422,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 UIApplication.shared.open(currentURL, options: [:], completionHandler: nil)
             }
             else {
+                telemetryManager.sendSettingsSignal(
+                    section: TelemetrySettingsSection.Support,
+                    action: TelemetrySettingsAction.Email
+                )
                 self.promptForEmail()
             }
         }
@@ -422,6 +450,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             tabBarController?.tabBar.items![0].isEnabled = false
         }
         self.preferences = userPreferences
+        
+        telemetryManager.sendSettingsSignal(
+            section: TelemetrySettingsSection.TabBar,
+            action: TelemetrySettingsAction.Hexadecimal,
+            parameters: [
+                "switchState": "\(sender.isOn)"
+            ]
+        )
     }
     
     @IBAction func binarySwitchPressed(_ sender: UISwitch) {
@@ -439,6 +475,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             tabBarController?.tabBar.items![1].isEnabled = false
         }
         self.preferences = userPreferences
+        
+        telemetryManager.sendSettingsSignal(
+            section: TelemetrySettingsSection.TabBar,
+            action: TelemetrySettingsAction.Binary,
+            parameters: [
+                "switchState": "\(sender.isOn)"
+            ]
+        )
     }
 
     @IBAction func decimalSwitchPressed(_ sender: UISwitch) {
@@ -456,6 +500,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             tabBarController?.tabBar.items![2].isEnabled = false
         }
         self.preferences = userPreferences
+        
+        telemetryManager.sendSettingsSignal(
+            section: TelemetrySettingsSection.TabBar,
+            action: TelemetrySettingsAction.Decimal,
+            parameters: [
+                "switchState": "\(sender.isOn)"
+            ]
+        )
     }
     
     // Function to toggle the optional setting of the calculator text colour
@@ -468,6 +520,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = sender.isOn
         self.preferences = userPreferences
+        
+        telemetryManager.sendSettingsSignal(
+            section: TelemetrySettingsSection.Customization,
+            action: TelemetrySettingsAction.TextColour,
+            parameters: [
+                "switchState": "\(sender.isOn)"
+            ]
+        )
     }
     
     //MARK: Private functions
