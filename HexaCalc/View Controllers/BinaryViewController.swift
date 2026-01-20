@@ -88,6 +88,8 @@ class BinaryViewController: UIViewController {
         
         // Force light mode to be used (for now) - to hide the navigation bar line
         overrideUserInterfaceStyle = .light
+        
+        ReviewManager.requestReviewIfAppropriate()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -657,6 +659,9 @@ class BinaryViewController: UIViewController {
         operation(operation: currentOperation)
         
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
+        
+        // Completing calculation is a review worthy action
+        ReviewManager.incrementReviewWorthyCount()
     }
     
     //MARK: Private Functions

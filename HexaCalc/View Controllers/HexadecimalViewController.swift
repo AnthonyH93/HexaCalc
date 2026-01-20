@@ -160,6 +160,8 @@ class HexadecimalViewController: UIViewController {
         if #available(iOS 17.0, *) {
             traitOverrides.horizontalSizeClass = .compact
         }
+        
+        ReviewManager.requestReviewIfAppropriate()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -647,6 +649,9 @@ class HexadecimalViewController: UIViewController {
         operation(operation: currentOperation)
         
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
+        
+        // Completing calculation is a review worthy action
+        ReviewManager.incrementReviewWorthyCount()
     }
     
     //MARK: Private Functions
