@@ -7,56 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D13A9372D63EDB100C8BFBE /* HexaCalcIconGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9322D63EDB100C8BFBE /* HexaCalcIconGreen@2x.png */; };
-		9D13A9382D63EDB100C8BFBE /* HexaCalcIconGreen~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9332D63EDB100C8BFBE /* HexaCalcIconGreen~ipad.png */; };
-		9D13A9392D63EDB100C8BFBE /* HexaCalcIconGreen@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9342D63EDB100C8BFBE /* HexaCalcIconGreen@2x~ipad.png */; };
-		9D13A93A2D63EDB100C8BFBE /* HexaCalcIconGreen-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9352D63EDB100C8BFBE /* HexaCalcIconGreen-83.5@2x.png */; };
-		9D13A93B2D63EDB100C8BFBE /* HexaCalcIconGreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9362D63EDB100C8BFBE /* HexaCalcIconGreen@3x.png */; };
-		9D13A9412D63F06C00C8BFBE /* HexaCalcIconBlue~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A93C2D63F06B00C8BFBE /* HexaCalcIconBlue~ipad.png */; };
-		9D13A9422D63F06C00C8BFBE /* HexaCalcIconBlue-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A93D2D63F06B00C8BFBE /* HexaCalcIconBlue-83.5@2x.png */; };
-		9D13A9432D63F06C00C8BFBE /* HexaCalcIconBlue@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A93E2D63F06C00C8BFBE /* HexaCalcIconBlue@2x~ipad.png */; };
-		9D13A9442D63F06C00C8BFBE /* HexaCalcIconBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A93F2D63F06C00C8BFBE /* HexaCalcIconBlue@2x.png */; };
-		9D13A9452D63F06C00C8BFBE /* HexaCalcIconBlue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9402D63F06C00C8BFBE /* HexaCalcIconBlue@3x.png */; };
-		9D13A94B2D63F0EA00C8BFBE /* HexaCalcIconBrown@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9462D63F0E900C8BFBE /* HexaCalcIconBrown@2x~ipad.png */; };
-		9D13A94C2D63F0EA00C8BFBE /* HexaCalcIconBrown-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9472D63F0EA00C8BFBE /* HexaCalcIconBrown-83.5@2x.png */; };
-		9D13A94D2D63F0EA00C8BFBE /* HexaCalcIconBrown~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9482D63F0EA00C8BFBE /* HexaCalcIconBrown~ipad.png */; };
-		9D13A94E2D63F0EA00C8BFBE /* HexaCalcIconBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9492D63F0EA00C8BFBE /* HexaCalcIconBrown@2x.png */; };
-		9D13A94F2D63F0EA00C8BFBE /* HexaCalcIconBrown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A94A2D63F0EA00C8BFBE /* HexaCalcIconBrown@3x.png */; };
-		9D13A9552D63F14D00C8BFBE /* HexaCalcIconIndigo-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9502D63F14C00C8BFBE /* HexaCalcIconIndigo-83.5@2x.png */; };
-		9D13A9562D63F14D00C8BFBE /* HexaCalcIconIndigo@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9512D63F14D00C8BFBE /* HexaCalcIconIndigo@2x~ipad.png */; };
-		9D13A9572D63F14D00C8BFBE /* HexaCalcIconIndigo~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9522D63F14D00C8BFBE /* HexaCalcIconIndigo~ipad.png */; };
-		9D13A9582D63F14D00C8BFBE /* HexaCalcIconIndigo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9532D63F14D00C8BFBE /* HexaCalcIconIndigo@3x.png */; };
-		9D13A9592D63F14D00C8BFBE /* HexaCalcIconIndigo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9542D63F14D00C8BFBE /* HexaCalcIconIndigo@2x.png */; };
-		9D13A95F2D63F18F00C8BFBE /* HexaCalcIconOrange~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A95A2D63F18F00C8BFBE /* HexaCalcIconOrange~ipad.png */; };
-		9D13A9602D63F18F00C8BFBE /* HexaCalcIconOrange@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A95B2D63F18F00C8BFBE /* HexaCalcIconOrange@2x~ipad.png */; };
-		9D13A9612D63F18F00C8BFBE /* HexaCalcIconOrange-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A95C2D63F18F00C8BFBE /* HexaCalcIconOrange-83.5@2x.png */; };
-		9D13A9622D63F18F00C8BFBE /* HexaCalcIconOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A95D2D63F18F00C8BFBE /* HexaCalcIconOrange@2x.png */; };
-		9D13A9632D63F18F00C8BFBE /* HexaCalcIconOrange@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A95E2D63F18F00C8BFBE /* HexaCalcIconOrange@3x.png */; };
-		9D13A9692D63F1CB00C8BFBE /* HexaCalcIconPink-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9642D63F1CB00C8BFBE /* HexaCalcIconPink-83.5@2x.png */; };
-		9D13A96A2D63F1CB00C8BFBE /* HexaCalcIconPink@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9652D63F1CB00C8BFBE /* HexaCalcIconPink@3x.png */; };
-		9D13A96B2D63F1CB00C8BFBE /* HexaCalcIconPink@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9662D63F1CB00C8BFBE /* HexaCalcIconPink@2x~ipad.png */; };
-		9D13A96C2D63F1CB00C8BFBE /* HexaCalcIconPink~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9672D63F1CB00C8BFBE /* HexaCalcIconPink~ipad.png */; };
-		9D13A96D2D63F1CB00C8BFBE /* HexaCalcIconPink@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9682D63F1CB00C8BFBE /* HexaCalcIconPink@2x.png */; };
-		9D13A9732D63F20B00C8BFBE /* HexaCalcIconRed~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A96E2D63F20A00C8BFBE /* HexaCalcIconRed~ipad.png */; };
-		9D13A9742D63F20B00C8BFBE /* HexaCalcIconRed@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A96F2D63F20B00C8BFBE /* HexaCalcIconRed@2x~ipad.png */; };
-		9D13A9752D63F20B00C8BFBE /* HexaCalcIconRed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9702D63F20B00C8BFBE /* HexaCalcIconRed@3x.png */; };
-		9D13A9762D63F20B00C8BFBE /* HexaCalcIconRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9712D63F20B00C8BFBE /* HexaCalcIconRed@2x.png */; };
-		9D13A9772D63F20B00C8BFBE /* HexaCalcIconRed-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9722D63F20B00C8BFBE /* HexaCalcIconRed-83.5@2x.png */; };
-		9D13A97D2D63F24300C8BFBE /* HexaCalcIconTeal@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9782D63F24200C8BFBE /* HexaCalcIconTeal@2x~ipad.png */; };
-		9D13A97E2D63F24300C8BFBE /* HexaCalcIconTeal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9792D63F24200C8BFBE /* HexaCalcIconTeal@2x.png */; };
-		9D13A97F2D63F24300C8BFBE /* HexaCalcIconTeal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A97A2D63F24300C8BFBE /* HexaCalcIconTeal@3x.png */; };
-		9D13A9802D63F24300C8BFBE /* HexaCalcIconTeal~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A97B2D63F24300C8BFBE /* HexaCalcIconTeal~ipad.png */; };
-		9D13A9812D63F24300C8BFBE /* HexaCalcIconTeal-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A97C2D63F24300C8BFBE /* HexaCalcIconTeal-83.5@2x.png */; };
-		9D13A9872D63F27900C8BFBE /* HexaCalcIconViolet~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9822D63F27800C8BFBE /* HexaCalcIconViolet~ipad.png */; };
-		9D13A9882D63F27900C8BFBE /* HexaCalcIconViolet@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9832D63F27800C8BFBE /* HexaCalcIconViolet@2x~ipad.png */; };
-		9D13A9892D63F27900C8BFBE /* HexaCalcIconViolet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9842D63F27800C8BFBE /* HexaCalcIconViolet@2x.png */; };
-		9D13A98A2D63F27900C8BFBE /* HexaCalcIconViolet-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9852D63F27800C8BFBE /* HexaCalcIconViolet-83.5@2x.png */; };
-		9D13A98B2D63F27900C8BFBE /* HexaCalcIconViolet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9862D63F27900C8BFBE /* HexaCalcIconViolet@3x.png */; };
-		9D13A9912D63F2AC00C8BFBE /* HexaCalcIconYellow~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A98C2D63F2AC00C8BFBE /* HexaCalcIconYellow~ipad.png */; };
-		9D13A9922D63F2AC00C8BFBE /* HexaCalcIconYellow@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A98D2D63F2AC00C8BFBE /* HexaCalcIconYellow@2x~ipad.png */; };
-		9D13A9932D63F2AC00C8BFBE /* HexaCalcIconYellow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A98E2D63F2AC00C8BFBE /* HexaCalcIconYellow@3x.png */; };
-		9D13A9942D63F2AC00C8BFBE /* HexaCalcIconYellow-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A98F2D63F2AC00C8BFBE /* HexaCalcIconYellow-83.5@2x.png */; };
-		9D13A9952D63F2AC00C8BFBE /* HexaCalcIconYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D13A9902D63F2AC00C8BFBE /* HexaCalcIconYellow@2x.png */; };
 		9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */; };
 		9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23DB291F6BE300151B44 /* UITestHelper.swift */; };
 		9D6199612D6D82B000F93648 /* DefaultTabViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */; };
@@ -85,6 +35,11 @@
 		9DC758312804CD6200BB2953 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC758302804CD6200BB2953 /* ReviewManager.swift */; };
 		9DC845392D89324C0068519E /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 9DC845382D89324C0068519E /* TelemetryDeck */; };
 		9DC8453E2D8A77170068519E /* TelemetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC8453D2D8A77100068519E /* TelemetryManager.swift */; };
+		9DDEC4BB2F1F16B60078BD35 /* HexaCalcIconBlue@2x~ipad 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDEC4B82F1F16B60078BD35 /* HexaCalcIconBlue@2x~ipad 2.png */; };
+		9DDEC4BC2F1F16B60078BD35 /* HexaCalcIconBlue@2x 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDEC4B72F1F16B60078BD35 /* HexaCalcIconBlue@2x 2.png */; };
+		9DDEC4BD2F1F16B60078BD35 /* HexaCalcIconBlue-83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDEC4B62F1F16B60078BD35 /* HexaCalcIconBlue-83.5@2x.png */; };
+		9DDEC4BE2F1F16B60078BD35 /* HexaCalcIconBlue@3x 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDEC4B92F1F16B60078BD35 /* HexaCalcIconBlue@3x 2.png */; };
+		9DDEC4BF2F1F16B60078BD35 /* HexaCalcIconBlue~ipad 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDEC4BA2F1F16B60078BD35 /* HexaCalcIconBlue~ipad 2.png */; };
 		9DE32E4028EA97AC00BB222C /* BasicHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */; };
 		9DE32E4228EA97FA00BB222C /* Formatter+BinaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */; };
 		9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9FB4728DC220E00705A4F /* Operation.swift */; };
@@ -113,56 +68,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9D13A9322D63EDB100C8BFBE /* HexaCalcIconGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconGreen@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Green/Assets.xcassets/Renamed/HexaCalcIconGreen@2x.png"; sourceTree = "<group>"; };
-		9D13A9332D63EDB100C8BFBE /* HexaCalcIconGreen~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconGreen~ipad.png"; sourceTree = "<group>"; };
-		9D13A9342D63EDB100C8BFBE /* HexaCalcIconGreen@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconGreen@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A9352D63EDB100C8BFBE /* HexaCalcIconGreen-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconGreen-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A9362D63EDB100C8BFBE /* HexaCalcIconGreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconGreen@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Green/Assets.xcassets/Renamed/HexaCalcIconGreen@3x.png"; sourceTree = "<group>"; };
-		9D13A93C2D63F06B00C8BFBE /* HexaCalcIconBlue~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue~ipad.png"; sourceTree = "<group>"; };
-		9D13A93D2D63F06B00C8BFBE /* HexaCalcIconBlue-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A93E2D63F06C00C8BFBE /* HexaCalcIconBlue@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A93F2D63F06C00C8BFBE /* HexaCalcIconBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconBlue@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Blue/Assets.xcassets/Renamed/HexaCalcIconBlue@2x.png"; sourceTree = "<group>"; };
-		9D13A9402D63F06C00C8BFBE /* HexaCalcIconBlue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconBlue@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Blue/Assets.xcassets/Renamed/HexaCalcIconBlue@3x.png"; sourceTree = "<group>"; };
-		9D13A9462D63F0E900C8BFBE /* HexaCalcIconBrown@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBrown@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A9472D63F0EA00C8BFBE /* HexaCalcIconBrown-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBrown-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A9482D63F0EA00C8BFBE /* HexaCalcIconBrown~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBrown~ipad.png"; sourceTree = "<group>"; };
-		9D13A9492D63F0EA00C8BFBE /* HexaCalcIconBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBrown@2x.png"; sourceTree = "<group>"; };
-		9D13A94A2D63F0EA00C8BFBE /* HexaCalcIconBrown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBrown@3x.png"; sourceTree = "<group>"; };
-		9D13A9502D63F14C00C8BFBE /* HexaCalcIconIndigo-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A9512D63F14D00C8BFBE /* HexaCalcIconIndigo@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A9522D63F14D00C8BFBE /* HexaCalcIconIndigo~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconIndigo~ipad.png"; sourceTree = "<group>"; };
-		9D13A9532D63F14D00C8BFBE /* HexaCalcIconIndigo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconIndigo@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Indigo/Assets.xcassets/Renamed/HexaCalcIconIndigo@3x.png"; sourceTree = "<group>"; };
-		9D13A9542D63F14D00C8BFBE /* HexaCalcIconIndigo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconIndigo@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Indigo/Assets.xcassets/Renamed/HexaCalcIconIndigo@2x.png"; sourceTree = "<group>"; };
-		9D13A95A2D63F18F00C8BFBE /* HexaCalcIconOrange~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconOrange~ipad.png"; sourceTree = "<group>"; };
-		9D13A95B2D63F18F00C8BFBE /* HexaCalcIconOrange@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconOrange@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A95C2D63F18F00C8BFBE /* HexaCalcIconOrange-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconOrange-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A95D2D63F18F00C8BFBE /* HexaCalcIconOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconOrange@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Orange/Assets.xcassets/Renamed/HexaCalcIconOrange@2x.png"; sourceTree = "<group>"; };
-		9D13A95E2D63F18F00C8BFBE /* HexaCalcIconOrange@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconOrange@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Orange/Assets.xcassets/Renamed/HexaCalcIconOrange@3x.png"; sourceTree = "<group>"; };
-		9D13A9642D63F1CB00C8BFBE /* HexaCalcIconPink-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconPink-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A9652D63F1CB00C8BFBE /* HexaCalcIconPink@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconPink@3x.png"; sourceTree = "<group>"; };
-		9D13A9662D63F1CB00C8BFBE /* HexaCalcIconPink@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconPink@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A9672D63F1CB00C8BFBE /* HexaCalcIconPink~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconPink~ipad.png"; sourceTree = "<group>"; };
-		9D13A9682D63F1CB00C8BFBE /* HexaCalcIconPink@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconPink@2x.png"; sourceTree = "<group>"; };
-		9D13A96E2D63F20A00C8BFBE /* HexaCalcIconRed~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconRed~ipad.png"; sourceTree = "<group>"; };
-		9D13A96F2D63F20B00C8BFBE /* HexaCalcIconRed@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconRed@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A9702D63F20B00C8BFBE /* HexaCalcIconRed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconRed@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Red/Assets.xcassets/Renamed/HexaCalcIconRed@3x.png"; sourceTree = "<group>"; };
-		9D13A9712D63F20B00C8BFBE /* HexaCalcIconRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconRed@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Red/Assets.xcassets/Renamed/HexaCalcIconRed@2x.png"; sourceTree = "<group>"; };
-		9D13A9722D63F20B00C8BFBE /* HexaCalcIconRed-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconRed-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A9782D63F24200C8BFBE /* HexaCalcIconTeal@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconTeal@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A9792D63F24200C8BFBE /* HexaCalcIconTeal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconTeal@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Teal/Assets.xcassets/Renamed/HexaCalcIconTeal@2x.png"; sourceTree = "<group>"; };
-		9D13A97A2D63F24300C8BFBE /* HexaCalcIconTeal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconTeal@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Teal/Assets.xcassets/Renamed/HexaCalcIconTeal@3x.png"; sourceTree = "<group>"; };
-		9D13A97B2D63F24300C8BFBE /* HexaCalcIconTeal~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconTeal~ipad.png"; sourceTree = "<group>"; };
-		9D13A97C2D63F24300C8BFBE /* HexaCalcIconTeal-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconTeal-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A9822D63F27800C8BFBE /* HexaCalcIconViolet~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconViolet~ipad.png"; sourceTree = "<group>"; };
-		9D13A9832D63F27800C8BFBE /* HexaCalcIconViolet@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconViolet@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A9842D63F27800C8BFBE /* HexaCalcIconViolet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconViolet@2x.png"; sourceTree = "<group>"; };
-		9D13A9852D63F27800C8BFBE /* HexaCalcIconViolet-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconViolet-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A9862D63F27900C8BFBE /* HexaCalcIconViolet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconViolet@3x.png"; sourceTree = "<group>"; };
-		9D13A98C2D63F2AC00C8BFBE /* HexaCalcIconYellow~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconYellow~ipad.png"; sourceTree = "<group>"; };
-		9D13A98D2D63F2AC00C8BFBE /* HexaCalcIconYellow@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconYellow@2x~ipad.png"; sourceTree = "<group>"; };
-		9D13A98E2D63F2AC00C8BFBE /* HexaCalcIconYellow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconYellow@3x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Yellow/Assets.xcassets/Renamed/HexaCalcIconYellow@3x.png"; sourceTree = "<group>"; };
-		9D13A98F2D63F2AC00C8BFBE /* HexaCalcIconYellow-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconYellow-83.5@2x.png"; sourceTree = "<group>"; };
-		9D13A9902D63F2AC00C8BFBE /* HexaCalcIconYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HexaCalcIconYellow@2x.png"; path = "../../../../AppIcons/HexaCalc/HexaCalcIcon_Feb_2025/AppIcons_Yellow/Assets.xcassets/Renamed/HexaCalcIconYellow@2x.png"; sourceTree = "<group>"; };
 		9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexadecimalHexaCalcUITests.swift; sourceTree = "<group>"; };
 		9D3E23DB291F6BE300151B44 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
 		9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabViewConverter.swift; sourceTree = "<group>"; };
@@ -191,6 +96,11 @@
 		9DC758302804CD6200BB2953 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		9DC8453C2D893B1C0068519E /* TelemetryDeck.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = TelemetryDeck.xcconfig; sourceTree = "<group>"; };
 		9DC8453D2D8A77100068519E /* TelemetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryManager.swift; sourceTree = "<group>"; };
+		9DDEC4B62F1F16B60078BD35 /* HexaCalcIconBlue-83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue-83.5@2x.png"; sourceTree = "<group>"; };
+		9DDEC4B72F1F16B60078BD35 /* HexaCalcIconBlue@2x 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@2x 2.png"; sourceTree = "<group>"; };
+		9DDEC4B82F1F16B60078BD35 /* HexaCalcIconBlue@2x~ipad 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@2x~ipad 2.png"; sourceTree = "<group>"; };
+		9DDEC4B92F1F16B60078BD35 /* HexaCalcIconBlue@3x 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue@3x 2.png"; sourceTree = "<group>"; };
+		9DDEC4BA2F1F16B60078BD35 /* HexaCalcIconBlue~ipad 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HexaCalcIconBlue~ipad 2.png"; sourceTree = "<group>"; };
 		9DE32E3328DEDBDF00BB222C /* HexaCalcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HexaCalcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE32E3528DEDBDF00BB222C /* BasicHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicHexaCalcUITests.swift; sourceTree = "<group>"; };
 		9DE32E4128EA97FA00BB222C /* Formatter+BinaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+BinaryString.swift"; sourceTree = "<group>"; };
@@ -286,56 +196,11 @@
 		9D8F9A2C24EA011500F32A2C /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
-				9D13A9352D63EDB100C8BFBE /* HexaCalcIconGreen-83.5@2x.png */,
-				9D13A9322D63EDB100C8BFBE /* HexaCalcIconGreen@2x.png */,
-				9D13A9342D63EDB100C8BFBE /* HexaCalcIconGreen@2x~ipad.png */,
-				9D13A9362D63EDB100C8BFBE /* HexaCalcIconGreen@3x.png */,
-				9D13A9332D63EDB100C8BFBE /* HexaCalcIconGreen~ipad.png */,
-				9D13A93D2D63F06B00C8BFBE /* HexaCalcIconBlue-83.5@2x.png */,
-				9D13A93F2D63F06C00C8BFBE /* HexaCalcIconBlue@2x.png */,
-				9D13A93E2D63F06C00C8BFBE /* HexaCalcIconBlue@2x~ipad.png */,
-				9D13A9402D63F06C00C8BFBE /* HexaCalcIconBlue@3x.png */,
-				9D13A93C2D63F06B00C8BFBE /* HexaCalcIconBlue~ipad.png */,
-				9D13A9472D63F0EA00C8BFBE /* HexaCalcIconBrown-83.5@2x.png */,
-				9D13A9492D63F0EA00C8BFBE /* HexaCalcIconBrown@2x.png */,
-				9D13A9462D63F0E900C8BFBE /* HexaCalcIconBrown@2x~ipad.png */,
-				9D13A94A2D63F0EA00C8BFBE /* HexaCalcIconBrown@3x.png */,
-				9D13A9482D63F0EA00C8BFBE /* HexaCalcIconBrown~ipad.png */,
-				9D13A9502D63F14C00C8BFBE /* HexaCalcIconIndigo-83.5@2x.png */,
-				9D13A9542D63F14D00C8BFBE /* HexaCalcIconIndigo@2x.png */,
-				9D13A9512D63F14D00C8BFBE /* HexaCalcIconIndigo@2x~ipad.png */,
-				9D13A9532D63F14D00C8BFBE /* HexaCalcIconIndigo@3x.png */,
-				9D13A9522D63F14D00C8BFBE /* HexaCalcIconIndigo~ipad.png */,
-				9D13A95C2D63F18F00C8BFBE /* HexaCalcIconOrange-83.5@2x.png */,
-				9D13A95D2D63F18F00C8BFBE /* HexaCalcIconOrange@2x.png */,
-				9D13A95B2D63F18F00C8BFBE /* HexaCalcIconOrange@2x~ipad.png */,
-				9D13A95E2D63F18F00C8BFBE /* HexaCalcIconOrange@3x.png */,
-				9D13A95A2D63F18F00C8BFBE /* HexaCalcIconOrange~ipad.png */,
-				9D13A9642D63F1CB00C8BFBE /* HexaCalcIconPink-83.5@2x.png */,
-				9D13A9682D63F1CB00C8BFBE /* HexaCalcIconPink@2x.png */,
-				9D13A9662D63F1CB00C8BFBE /* HexaCalcIconPink@2x~ipad.png */,
-				9D13A9652D63F1CB00C8BFBE /* HexaCalcIconPink@3x.png */,
-				9D13A9672D63F1CB00C8BFBE /* HexaCalcIconPink~ipad.png */,
-				9D13A9722D63F20B00C8BFBE /* HexaCalcIconRed-83.5@2x.png */,
-				9D13A9712D63F20B00C8BFBE /* HexaCalcIconRed@2x.png */,
-				9D13A96F2D63F20B00C8BFBE /* HexaCalcIconRed@2x~ipad.png */,
-				9D13A9702D63F20B00C8BFBE /* HexaCalcIconRed@3x.png */,
-				9D13A96E2D63F20A00C8BFBE /* HexaCalcIconRed~ipad.png */,
-				9D13A97C2D63F24300C8BFBE /* HexaCalcIconTeal-83.5@2x.png */,
-				9D13A9792D63F24200C8BFBE /* HexaCalcIconTeal@2x.png */,
-				9D13A9782D63F24200C8BFBE /* HexaCalcIconTeal@2x~ipad.png */,
-				9D13A97A2D63F24300C8BFBE /* HexaCalcIconTeal@3x.png */,
-				9D13A97B2D63F24300C8BFBE /* HexaCalcIconTeal~ipad.png */,
-				9D13A9852D63F27800C8BFBE /* HexaCalcIconViolet-83.5@2x.png */,
-				9D13A9842D63F27800C8BFBE /* HexaCalcIconViolet@2x.png */,
-				9D13A9832D63F27800C8BFBE /* HexaCalcIconViolet@2x~ipad.png */,
-				9D13A9862D63F27900C8BFBE /* HexaCalcIconViolet@3x.png */,
-				9D13A9822D63F27800C8BFBE /* HexaCalcIconViolet~ipad.png */,
-				9D13A98F2D63F2AC00C8BFBE /* HexaCalcIconYellow-83.5@2x.png */,
-				9D13A9902D63F2AC00C8BFBE /* HexaCalcIconYellow@2x.png */,
-				9D13A98D2D63F2AC00C8BFBE /* HexaCalcIconYellow@2x~ipad.png */,
-				9D13A98E2D63F2AC00C8BFBE /* HexaCalcIconYellow@3x.png */,
-				9D13A98C2D63F2AC00C8BFBE /* HexaCalcIconYellow~ipad.png */,
+				9DDEC4B62F1F16B60078BD35 /* HexaCalcIconBlue-83.5@2x.png */,
+				9DDEC4B72F1F16B60078BD35 /* HexaCalcIconBlue@2x 2.png */,
+				9DDEC4B82F1F16B60078BD35 /* HexaCalcIconBlue@2x~ipad 2.png */,
+				9DDEC4B92F1F16B60078BD35 /* HexaCalcIconBlue@3x 2.png */,
+				9DDEC4BA2F1F16B60078BD35 /* HexaCalcIconBlue~ipad 2.png */,
 			);
 			path = "App Icons";
 			sourceTree = "<group>";
@@ -466,7 +331,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 2600;
 				ORGANIZATIONNAME = "Anthony Hopkins";
 				TargetAttributes = {
 					9DE32E3228DEDBDF00BB222C = {
@@ -512,60 +377,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D13A93A2D63EDB100C8BFBE /* HexaCalcIconGreen-83.5@2x.png in Resources */,
-				9D13A97F2D63F24300C8BFBE /* HexaCalcIconTeal@3x.png in Resources */,
-				9D13A96A2D63F1CB00C8BFBE /* HexaCalcIconPink@3x.png in Resources */,
-				9D13A9602D63F18F00C8BFBE /* HexaCalcIconOrange@2x~ipad.png in Resources */,
-				9D13A94E2D63F0EA00C8BFBE /* HexaCalcIconBrown@2x.png in Resources */,
-				9D13A9562D63F14D00C8BFBE /* HexaCalcIconIndigo@2x~ipad.png in Resources */,
-				9D13A9732D63F20B00C8BFBE /* HexaCalcIconRed~ipad.png in Resources */,
-				9D13A9762D63F20B00C8BFBE /* HexaCalcIconRed@2x.png in Resources */,
-				9D13A9622D63F18F00C8BFBE /* HexaCalcIconOrange@2x.png in Resources */,
-				9D13A9552D63F14D00C8BFBE /* HexaCalcIconIndigo-83.5@2x.png in Resources */,
-				9D13A9942D63F2AC00C8BFBE /* HexaCalcIconYellow-83.5@2x.png in Resources */,
-				9D13A94B2D63F0EA00C8BFBE /* HexaCalcIconBrown@2x~ipad.png in Resources */,
-				9D13A94F2D63F0EA00C8BFBE /* HexaCalcIconBrown@3x.png in Resources */,
-				9D13A9882D63F27900C8BFBE /* HexaCalcIconViolet@2x~ipad.png in Resources */,
-				9D13A96B2D63F1CB00C8BFBE /* HexaCalcIconPink@2x~ipad.png in Resources */,
-				9D13A9912D63F2AC00C8BFBE /* HexaCalcIconYellow~ipad.png in Resources */,
-				9D13A9422D63F06C00C8BFBE /* HexaCalcIconBlue-83.5@2x.png in Resources */,
 				9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */,
-				9D13A9432D63F06C00C8BFBE /* HexaCalcIconBlue@2x~ipad.png in Resources */,
-				9D13A9812D63F24300C8BFBE /* HexaCalcIconTeal-83.5@2x.png in Resources */,
-				9D13A9772D63F20B00C8BFBE /* HexaCalcIconRed-83.5@2x.png in Resources */,
-				9D13A9412D63F06C00C8BFBE /* HexaCalcIconBlue~ipad.png in Resources */,
-				9D13A95F2D63F18F00C8BFBE /* HexaCalcIconOrange~ipad.png in Resources */,
-				9D13A9632D63F18F00C8BFBE /* HexaCalcIconOrange@3x.png in Resources */,
-				9D13A9692D63F1CB00C8BFBE /* HexaCalcIconPink-83.5@2x.png in Resources */,
-				9D13A9582D63F14D00C8BFBE /* HexaCalcIconIndigo@3x.png in Resources */,
-				9D13A97D2D63F24300C8BFBE /* HexaCalcIconTeal@2x~ipad.png in Resources */,
-				9D13A94D2D63F0EA00C8BFBE /* HexaCalcIconBrown~ipad.png in Resources */,
 				9DC7581B27ED88A800BB2953 /* SwitchTableViewCell.xib in Resources */,
-				9D13A98A2D63F27900C8BFBE /* HexaCalcIconViolet-83.5@2x.png in Resources */,
-				9D13A9892D63F27900C8BFBE /* HexaCalcIconViolet@2x.png in Resources */,
+				9DDEC4BB2F1F16B60078BD35 /* HexaCalcIconBlue@2x~ipad 2.png in Resources */,
+				9DDEC4BC2F1F16B60078BD35 /* HexaCalcIconBlue@2x 2.png in Resources */,
+				9DDEC4BD2F1F16B60078BD35 /* HexaCalcIconBlue-83.5@2x.png in Resources */,
+				9DDEC4BE2F1F16B60078BD35 /* HexaCalcIconBlue@3x 2.png in Resources */,
+				9DDEC4BF2F1F16B60078BD35 /* HexaCalcIconBlue~ipad 2.png in Resources */,
 				9DEF24A524C553F100701F5B /* Assets.xcassets in Resources */,
-				9D13A9612D63F18F00C8BFBE /* HexaCalcIconOrange-83.5@2x.png in Resources */,
-				9D13A9452D63F06C00C8BFBE /* HexaCalcIconBlue@3x.png in Resources */,
-				9D13A97E2D63F24300C8BFBE /* HexaCalcIconTeal@2x.png in Resources */,
 				9DEF24A024C553F000701F5B /* Main.storyboard in Resources */,
-				9D13A98B2D63F27900C8BFBE /* HexaCalcIconViolet@3x.png in Resources */,
-				9D13A9802D63F24300C8BFBE /* HexaCalcIconTeal~ipad.png in Resources */,
-				9D13A9742D63F20B00C8BFBE /* HexaCalcIconRed@2x~ipad.png in Resources */,
-				9D13A9872D63F27900C8BFBE /* HexaCalcIconViolet~ipad.png in Resources */,
-				9D13A9382D63EDB100C8BFBE /* HexaCalcIconGreen~ipad.png in Resources */,
-				9D13A9572D63F14D00C8BFBE /* HexaCalcIconIndigo~ipad.png in Resources */,
-				9D13A9922D63F2AC00C8BFBE /* HexaCalcIconYellow@2x~ipad.png in Resources */,
-				9D13A96C2D63F1CB00C8BFBE /* HexaCalcIconPink~ipad.png in Resources */,
-				9D13A9592D63F14D00C8BFBE /* HexaCalcIconIndigo@2x.png in Resources */,
-				9D13A96D2D63F1CB00C8BFBE /* HexaCalcIconPink@2x.png in Resources */,
-				9D13A93B2D63EDB100C8BFBE /* HexaCalcIconGreen@3x.png in Resources */,
-				9D13A9372D63EDB100C8BFBE /* HexaCalcIconGreen@2x.png in Resources */,
-				9D13A9952D63F2AC00C8BFBE /* HexaCalcIconYellow@2x.png in Resources */,
-				9D13A9392D63EDB100C8BFBE /* HexaCalcIconGreen@2x~ipad.png in Resources */,
-				9D13A9442D63F06C00C8BFBE /* HexaCalcIconBlue@2x.png in Resources */,
-				9D13A9932D63F2AC00C8BFBE /* HexaCalcIconYellow@3x.png in Resources */,
-				9D13A94C2D63F0EA00C8BFBE /* HexaCalcIconBrown-83.5@2x.png in Resources */,
-				9D13A9752D63F20B00C8BFBE /* HexaCalcIconRed@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +481,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QMBJV5C74X;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
@@ -685,7 +504,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QMBJV5C74X;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
@@ -737,6 +555,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = QMBJV5C74X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -759,6 +578,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -799,6 +619,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = QMBJV5C74X;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -814,6 +635,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -827,7 +649,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QMBJV5C74X;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -850,7 +671,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QMBJV5C74X;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
