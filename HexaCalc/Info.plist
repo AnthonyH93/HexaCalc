@@ -19,7 +19,7 @@
 					<string>HexaCalcIconBlue</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconBrown</key>
 			<dict>
@@ -28,7 +28,7 @@
 					<string>HexaCalcIconBrown</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconGreen</key>
 			<dict>
@@ -37,7 +37,7 @@
 					<string>HexaCalcIconGreen</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconIndigo</key>
 			<dict>
@@ -46,7 +46,7 @@
 					<string>HexaCalcIconIndigo</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconOrange</key>
 			<dict>
@@ -55,7 +55,7 @@
 					<string>HexaCalcIconOrange</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconPink</key>
 			<dict>
@@ -64,7 +64,7 @@
 					<string>HexaCalcIconPink</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconRed</key>
 			<dict>
@@ -73,7 +73,7 @@
 					<string>HexaCalcIconRed</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconTeal</key>
 			<dict>
@@ -82,7 +82,7 @@
 					<string>HexaCalcIconTeal</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconViolet</key>
 			<dict>
@@ -91,7 +91,7 @@
 					<string>HexaCalcIconViolet</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconYellow</key>
 			<dict>
@@ -100,7 +100,7 @@
 					<string>HexaCalcIconYellow</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
@@ -124,7 +124,7 @@
 					<string>HexaCalcIconBlue</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconBrown</key>
 			<dict>
@@ -133,7 +133,7 @@
 					<string>HexaCalcIconBrown</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconGreen</key>
 			<dict>
@@ -142,7 +142,7 @@
 					<string>HexaCalcIconGreen</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconIndigo</key>
 			<dict>
@@ -151,7 +151,7 @@
 					<string>HexaCalcIconIndigo</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconOrange</key>
 			<dict>
@@ -160,7 +160,7 @@
 					<string>HexaCalcIconOrange</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconPink</key>
 			<dict>
@@ -169,7 +169,7 @@
 					<string>HexaCalcIconPink</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconRed</key>
 			<dict>
@@ -178,7 +178,7 @@
 					<string>HexaCalcIconRed</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconTeal</key>
 			<dict>
@@ -187,7 +187,7 @@
 					<string>HexaCalcIconTeal</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconViolet</key>
 			<dict>
@@ -196,7 +196,7 @@
 					<string>HexaCalcIconViolet</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<key>HexaCalcIconYellow</key>
 			<dict>
@@ -205,7 +205,7 @@
 					<string>HexaCalcIconYellow</string>
 				</array>
 				<key>UIPrerenderedIcon</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
