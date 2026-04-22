@@ -54,14 +54,14 @@ extension HistoryButtonHost where Self: UIViewController {
                 var config = UIButton.Configuration.plain()
                 config.image = UIImage(systemName: "clock.arrow.circlepath")
                 config.baseForegroundColor = colour
-                config.background.backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
+                config.background.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
                 config.background.cornerRadius = 22
                 historyButton.configuration = config
             } else {
                 historyButton.setImage(UIImage(systemName: "clock"), for: .normal)
                 historyButton.setTitle(nil, for: .normal)
                 historyButton.tintColor = colour
-                historyButton.backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
+                historyButton.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
             }
             historyButton.isHidden = false
             historyButtonWidthConstraint?.constant = 44
@@ -70,8 +70,13 @@ extension HistoryButtonHost where Self: UIViewController {
             if #available(iOS 15.0, *) {
                 var config = UIButton.Configuration.plain()
                 config.title = "Calculation History"
+                config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                    var outgoing = incoming
+                    outgoing.font = UIFont.boldSystemFont(ofSize: 17)
+                    return outgoing
+                }
                 config.baseForegroundColor = colour
-                config.background.backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
+                config.background.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
                 config.background.cornerRadius = 22
                 config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
                 historyButton.configuration = config
@@ -79,7 +84,7 @@ extension HistoryButtonHost where Self: UIViewController {
                 historyButton.setImage(nil, for: .normal)
                 historyButton.setTitle("Calculation History", for: .normal)
                 historyButton.tintColor = colour
-                historyButton.backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
+                historyButton.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
             }
             historyButton.isHidden = false
             // Deactivate old width constraint, let button size itself
