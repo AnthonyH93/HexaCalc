@@ -53,7 +53,7 @@ class DecimalViewController: UIViewController, HistoryButtonHost {
     var currentOperation: Operation = .NULL
     
     // Current contraints are stored for the iPad such that rotating the screen allows constraints to be replaced
-    var currentContraints: [NSLayoutConstraint] = []
+    var currentConstraints: [NSLayoutConstraint] = []
     
     var currentlyRecognizingDoubleTap = false
     
@@ -102,15 +102,15 @@ class DecimalViewController: UIViewController, HistoryButtonHost {
         
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: decVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
-            currentContraints.append(contentsOf: stackConstraints)
+            currentConstraints.append(contentsOf: stackConstraints)
             
             let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
-            currentContraints.append(contentsOf: buttonConstraints)
+            currentConstraints.append(contentsOf: buttonConstraints)
             
             let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 1)
-            currentContraints.append(contentsOf: labelConstraints)
+            currentConstraints.append(contentsOf: labelConstraints)
             
-            NSLayoutConstraint.activate(currentContraints)
+            NSLayoutConstraint.activate(currentConstraints)
         }
         else {
             let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: decVStack, outputLabel: outputLabel, screenWidth: screenWidth)
@@ -198,8 +198,8 @@ class DecimalViewController: UIViewController, HistoryButtonHost {
         
         // Deactivate current contraints and remove them from the list, new constraints will be calculated and activated as device rotates
         if (UIDevice.current.userInterfaceIdiom == .pad) {
-            NSLayoutConstraint.deactivate(currentContraints)
-            currentContraints.removeAll()
+            NSLayoutConstraint.deactivate(currentConstraints)
+            currentConstraints.removeAll()
         }
     }
     
