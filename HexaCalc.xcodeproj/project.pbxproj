@@ -20,6 +20,7 @@
 		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
+		9DC1BDD22F90ACC3003D5CB5 /* HistoryButtonHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC1BDD12F90ACC3003D5CB5 /* HistoryButtonHost.swift */; };
 		9DC242F225E1EE440038DD63 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC242F125E1EE440038DD63 /* UIHelper.swift */; };
 		9DC4DA182944367500D1652E /* BinaryHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */; };
 		9DC4DA1A29457F2C00D1652E /* DecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC4DA1929457F2C00D1652E /* DecimalHexaCalcUITests.swift */; };
@@ -126,6 +127,7 @@
 		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
+		9DC1BDD12F90ACC3003D5CB5 /* HistoryButtonHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryButtonHost.swift; sourceTree = "<group>"; };
 		9DC242F125E1EE440038DD63 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHexaCalcUITests.swift; sourceTree = "<group>"; };
 		9DC4DA1929457F2C00D1652E /* DecimalHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalHexaCalcUITests.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		9D6DE93124D3CCFB005018E5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9DC1BDD12F90ACC3003D5CB5 /* HistoryButtonHost.swift */,
 				9DC8453D2D8A77100068519E /* TelemetryManager.swift */,
 				9DAE269424C7F77A0070B965 /* StateController.swift */,
 				9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */,
@@ -620,6 +623,7 @@
 				9DC758292803C85200BB2953 /* SelectionSummaryTableViewCell.swift in Sources */,
 				9DEF249924C553F000701F5B /* SceneDelegate.swift in Sources */,
 				C272D50A28E75D7C00E6C374 /* CalculationData.swift in Sources */,
+				9DC1BDD22F90ACC3003D5CB5 /* HistoryButtonHost.swift in Sources */,
 				9DC242F225E1EE440038DD63 /* UIHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
