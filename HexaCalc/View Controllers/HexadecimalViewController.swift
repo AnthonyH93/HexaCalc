@@ -54,6 +54,7 @@ class HexadecimalViewController: UIViewController, HistoryButtonHost {
     
     // Programmatic UIButton
     var historyButton: UIButton!
+    var historyButtonWidthConstraint: NSLayoutConstraint?
     
     //MARK: Variables
     var runningNumber = ""
@@ -161,8 +162,6 @@ class HexadecimalViewController: UIViewController, HistoryButtonHost {
             traitOverrides.horizontalSizeClass = .compact
         }
         
-        setupHistoryButton()
-        
         ReviewManager.requestReviewIfAppropriate()
     }
     
@@ -236,6 +235,7 @@ class HexadecimalViewController: UIViewController, HistoryButtonHost {
             }
         }
         
+        setupHistoryButton()
         updateHistoryButton(stateController: stateController)
         
         //Set button colour based on state controller
