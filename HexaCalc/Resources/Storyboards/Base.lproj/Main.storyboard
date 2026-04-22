@@ -899,13 +899,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="barTintColor" systemColor="labelColor"/>
                                         <items>
-                                            <navigationItem largeTitleDisplayMode="always" id="tGy-ST-d9v">
-                                                <barButtonItem key="rightBarButtonItem" title="Calculation History" id="Kca-7j-jTk">
-                                                    <connections>
-                                                        <segue destination="mI5-fy-VRx" kind="show" id="sC0-cE-mVT"/>
-                                                    </connections>
-                                                </barButtonItem>
-                                            </navigationItem>
+                                            <navigationItem largeTitleDisplayMode="always" id="tGy-ST-d9v"/>
                                         </items>
                                     </navigationBar>
                                 </subviews>
@@ -954,8 +948,8 @@
                         <outlet property="binHStack4" destination="3IF-xw-PqV" id="xKI-CL-fgm"/>
                         <outlet property="binHStack5" destination="ggU-ns-mmy" id="nUn-z6-iCS"/>
                         <outlet property="binVStack" destination="55i-hd-IgX" id="fLD-4O-4fn"/>
-                        <outlet property="historyButton" destination="Kca-7j-jTk" id="ll5-tA-q16"/>
                         <outlet property="outputLabel" destination="c3H-nl-HbE" id="Ika-ID-pHJ"/>
+                        <segue destination="mI5-fy-VRx" kind="show" identifier="showHistory" id="rvY-gH-XsG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -1281,13 +1275,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="barTintColor" systemColor="labelColor"/>
                                         <items>
-                                            <navigationItem largeTitleDisplayMode="always" id="nSW-4D-99F">
-                                                <barButtonItem key="rightBarButtonItem" title="Calculation History" id="CZY-Em-1pk">
-                                                    <connections>
-                                                        <segue destination="mI5-fy-VRx" kind="show" id="5CC-PW-4Pl"/>
-                                                    </connections>
-                                                </barButtonItem>
-                                            </navigationItem>
+                                            <navigationItem largeTitleDisplayMode="always" id="nSW-4D-99F"/>
                                         </items>
                                     </navigationBar>
                                 </subviews>
@@ -1336,8 +1324,8 @@
                         <outlet property="decHStack4" destination="FlW-yi-Lcq" id="oti-qF-Sqg"/>
                         <outlet property="decHStack5" destination="LTM-03-4nc" id="4c4-f2-aUd"/>
                         <outlet property="decVStack" destination="YRn-jp-boy" id="0CW-Xw-Imw"/>
-                        <outlet property="historyButton" destination="CZY-Em-1pk" id="h9b-zI-b5m"/>
                         <outlet property="outputLabel" destination="a2J-4m-Np0" id="XnH-LW-htg"/>
+                        <segue destination="mI5-fy-VRx" kind="show" identifier="showHistory" id="TDV-LP-OBP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zxz-Tp-VmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1429,7 +1417,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="no2-8M-uCH"/>
+        <segue reference="TDV-LP-OBP"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemGreenColor"/>
     <resources>

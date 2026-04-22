@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DecimalViewController: UIViewController {
+class DecimalViewController: UIViewController, HistoryButtonHost {
     
     //MARK: Properties
     var stateController: StateController?
@@ -41,7 +41,9 @@ class DecimalViewController: UIViewController {
     @IBOutlet weak var Btn8: RoundButton!
     @IBOutlet weak var Btn9: RoundButton!
     
-    @IBOutlet weak var historyButton: UIBarButtonItem!
+    // Programmatic UIButton
+    var historyButton: UIButton!
+    var historyButtonWidthConstraint: NSLayoutConstraint?
     
     //MARK: Variables
     var runningNumber = ""
@@ -75,7 +77,6 @@ class DecimalViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
-            historyButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
@@ -157,6 +158,9 @@ class DecimalViewController: UIViewController {
             }
         }
         
+        setupHistoryButton()
+        updateHistoryButton(stateController: stateController)
+        
         // Set button colour based on state controller
         if (stateController?.convValues.colour != nil){
             PLUSBtn.backgroundColor = stateController?.convValues.colour
@@ -180,32 +184,6 @@ class DecimalViewController: UIViewController {
             calculationHistory = []
             // Clear the LSB (first bit)
             stateController?.convValues.clearLocalHistory &= 6
-        }
-        
-        // Set bar button images
-        historyButton.isEnabled = true
-        
-        if #available(iOS 14.0, *) {
-            // Only available in iOS 14+
-            historyButton.image = UIImage(systemName: "clock.arrow.circlepath")
-        } else {
-            historyButton.image = UIImage(systemName: "clock")
-        }
-        
-        // Check what setting the user has for calculation history
-        switch stateController?.convValues.historyButtonViewIndex ?? 0 {
-            case 0:
-                break
-            case 1:
-                historyButton.image = nil
-                historyButton.title = "Calculation History"
-            case 2:
-                historyButton.title = nil
-                historyButton.image = nil
-                historyButton.isEnabled = false
-            // Should not occur
-            default:
-                fatalError("Unexpected Operation...")
         }
         
         //Set calculator text colour
@@ -262,6 +240,10 @@ class DecimalViewController: UIViewController {
                 self.pasteSelected()
             }
         }
+    }
+    
+    @objc func historyButtonTapped() {
+        performSegue(withIdentifier: "showHistory", sender: true)
     }
     
     func copySelected() {

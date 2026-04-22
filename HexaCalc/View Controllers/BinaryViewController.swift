@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BinaryViewController: UIViewController {
+class BinaryViewController: UIViewController, HistoryButtonHost {
     
     //MARK: Properties
     var stateController: StateController?
@@ -43,7 +43,9 @@ class BinaryViewController: UIViewController {
     @IBOutlet weak var Btn00: RoundButton!
     @IBOutlet weak var Btn11: RoundButton!
     
-    @IBOutlet weak var historyButton: UIBarButtonItem!
+    // Programmatic UIButton
+    var historyButton: UIButton!
+    var historyButtonWidthConstraint: NSLayoutConstraint?
     
     //MARK: Variables
     var runningNumber = ""
@@ -78,7 +80,6 @@ class BinaryViewController: UIViewController {
             MULTBtn.backgroundColor = savedPreferences.colour
             DIVBtn.backgroundColor = savedPreferences.colour
             EQUALSBtn.backgroundColor = savedPreferences.colour
-            historyButton.tintColor = savedPreferences.colour
             
             setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
         }
@@ -165,6 +166,9 @@ class BinaryViewController: UIViewController {
             updateOutputLabel(value: newLabelValue ?? binaryDefaultLabel)
         }
         
+        setupHistoryButton()
+        updateHistoryButton(stateController: stateController)
+        
         //Set button colour based on state controller
         if (stateController?.convValues.colour != nil){
             PLUSBtn.backgroundColor = stateController?.convValues.colour
@@ -188,32 +192,6 @@ class BinaryViewController: UIViewController {
             calculationHistory = []
             // Clear the middle (second bit)
             stateController?.convValues.clearLocalHistory &= 5
-        }
-        
-        // Set bar button images
-        historyButton.isEnabled = true
-        
-        if #available(iOS 14.0, *) {
-            // Only available in iOS 14+
-            historyButton.image = UIImage(systemName: "clock.arrow.circlepath")
-        } else {
-            historyButton.image = UIImage(systemName: "clock")
-        }
-        
-        // Check what setting the user has for calculation history
-        switch stateController?.convValues.historyButtonViewIndex ?? 0 {
-            case 0:
-                break
-            case 1:
-                historyButton.image = nil
-                historyButton.title = "Calculation History"
-            case 2:
-                historyButton.title = nil
-                historyButton.image = nil
-                historyButton.isEnabled = false
-            // Should not occur
-            default:
-                fatalError("Unexpected Operation...")
         }
         
         //Set calculator text colour
@@ -261,6 +239,10 @@ class BinaryViewController: UIViewController {
                 self.pasteSelected()
             }
         }
+    }
+    
+    @objc func historyButtonTapped() {
+        performSegue(withIdentifier: "showHistory", sender: true)
     }
     
     func copySelected() {
