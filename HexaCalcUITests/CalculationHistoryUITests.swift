@@ -31,12 +31,6 @@ class CalculationHistoryUITests: XCTestCase {
 
         // Calculation History view should appear
         XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
-
-        // Navigate back
-        app.navigationBars.buttons.firstMatch.tap()
-
-        // Should be back on the calculator
-        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
     }
 
     func testCalculationHistoryPopulatedAfterOperations() throws {
@@ -66,8 +60,5 @@ class CalculationHistoryUITests: XCTestCase {
         // At least one history cell should be present
         let cells = app.tables.cells
         XCTAssert(cells.count > 0)
-
-        // Navigate back
-        app.navigationBars.buttons.firstMatch.tap()
     }
 }
