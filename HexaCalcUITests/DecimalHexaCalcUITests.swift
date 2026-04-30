@@ -606,25 +606,27 @@ class DecimalHexaCalcUITests: XCTestCase {
     func testDecimalSQRTOnComputedResult() throws {
         let app = XCUIApplication()
 
-        // Compute 3 * 3 = 9, then take sqrt of the result
-        app.buttons["3"].tap()
+        UITestHelper.second(app: app)
+
+        // Compute 4 × 9 = 36, then sqrt(36) = 6
+        // Using different operands avoids button label ambiguity with the output label
+        app.buttons["4"].tap()
         UITestHelper.multiply(app: app)
-        app.buttons["3"].tap()
+        app.buttons["9"].tap()
         UITestHelper.equals(app: app)
 
-        XCTAssert(UITestHelper.assertResult(app: app, expected: "9", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "36", calculator: 2))
 
-        UITestHelper.second(app: app)
         UITestHelper.sqrt(app: app)
 
-        XCTAssert(UITestHelper.assertResult(app: app, expected: "3", calculator: 2))
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "6", calculator: 2))
 
         UITestHelper.clear(app: app)
 
-        // Compute 2 + 2 = 4, then sqrt = 2
-        app.buttons["2"].tap()
+        // 3 + 1 = 4, then sqrt = 2
+        app.buttons["3"].tap()
         UITestHelper.add(app: app)
-        app.buttons["2"].tap()
+        app.buttons["1"].tap()
         UITestHelper.equals(app: app)
 
         XCTAssert(UITestHelper.assertResult(app: app, expected: "4", calculator: 2))
@@ -635,7 +637,7 @@ class DecimalHexaCalcUITests: XCTestCase {
 
         UITestHelper.clear(app: app)
 
-        // Negate a result and sqrt it — should give Error!
+        // Negate 9 and take sqrt — should give Error!
         app.buttons["9"].tap()
         UITestHelper.plusMinus(app: app)
 

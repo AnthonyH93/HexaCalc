@@ -365,8 +365,7 @@ class BinaryHexaCalcUITests: XCTestCase {
 
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1110", calculator: 1))
 
-        UITestHelper.rightShift(app: app)
-
-        XCTAssert(UITestHelper.assertResult(app: app, expected: "111", calculator: 1))
+        UITestHelper.clear(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
     }
 }

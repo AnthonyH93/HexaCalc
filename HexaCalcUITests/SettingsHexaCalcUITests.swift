@@ -74,48 +74,38 @@ class SettingsHexaCalcUITests: XCTestCase {
     func testThemeColourChange() throws {
         let app = XCUIApplication()
 
-        // Navigate to Colour selection
+        // Navigate to Colour selection — tapping a row auto-pops back to Settings
         app.tables.staticTexts["Colour"].tap()
 
         // The selection list shows ["Red", "Orange", "Yellow", "Green", "Blue", "Teal", "Indigo", "Violet", "Pink", "Brown"]
-        // Select "Red" (first option)
+        // Select "Red" — this saves the selection and automatically navigates back
         app.tables.staticTexts["Red"].tap()
 
-        // Go back to settings
-        app.navigationBars.buttons.firstMatch.tap()
+        // Back on Settings — colour cell summary should now show "Red"
+        XCTAssert(app.staticTexts["Red"].waitForExistence(timeout: 2))
 
-        // Colour cell should now show "Red" as the selection
-        XCTAssert(app.staticTexts["Red"].exists)
-
-        // Restore to Green (default)
+        // Restore to Green (default) — same auto-pop pattern
         app.tables.staticTexts["Colour"].tap()
         app.tables.staticTexts["Green"].tap()
-        app.navigationBars.buttons.firstMatch.tap()
 
-        XCTAssert(app.staticTexts["Green"].exists)
+        XCTAssert(app.staticTexts["Green"].waitForExistence(timeout: 2))
     }
 
     func testDefaultTabSetting() throws {
         let app = XCUIApplication()
 
-        // Navigate to Default Selected Tab selection
+        // Navigate to Default Selected Tab selection — tapping a row auto-pops back
         app.tables.staticTexts["Override Default Selected Tab"].tap()
 
         // The selection list shows ["Hexadecimal", "Binary", "Decimal", "Off"]
-        // Select "Binary"
-        app.tables.staticTexts["Binary"].tap()
+        // Select "Decimal" and auto-pop back to Settings
+        app.tables.staticTexts["Decimal"].tap()
 
-        // Go back to settings
-        app.navigationBars.buttons.firstMatch.tap()
-
-        // The cell summary should now show "Binary"
-        XCTAssert(app.staticTexts["Binary"].exists)
-
-        // Restore to Off (default)
+        // Navigate back into the selection to restore to Off
         app.tables.staticTexts["Override Default Selected Tab"].tap()
         app.tables.staticTexts["Off"].tap()
-        app.navigationBars.buttons.firstMatch.tap()
 
-        XCTAssert(app.staticTexts["Off"].exists)
+        // "Off" is unique to the summary — not a tab switch label
+        XCTAssert(app.staticTexts["Off"].waitForExistence(timeout: 2))
     }
 }
