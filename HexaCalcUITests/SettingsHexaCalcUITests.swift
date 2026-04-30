@@ -70,4 +70,52 @@ class SettingsHexaCalcUITests: XCTestCase {
         XCTAssert(tabBar.buttons["Decimal"].exists)
         XCTAssert(tabBar.buttons["Settings"].exists)
     }
+
+    func testThemeColourChange() throws {
+        let app = XCUIApplication()
+
+        // Navigate to Colour selection
+        app.tables.staticTexts["Colour"].tap()
+
+        // The selection list shows ["Red", "Orange", "Yellow", "Green", "Blue", "Teal", "Indigo", "Violet", "Pink", "Brown"]
+        // Select "Red" (first option)
+        app.tables.staticTexts["Red"].tap()
+
+        // Go back to settings
+        app.navigationBars.buttons.firstMatch.tap()
+
+        // Colour cell should now show "Red" as the selection
+        XCTAssert(app.staticTexts["Red"].exists)
+
+        // Restore to Green (default)
+        app.tables.staticTexts["Colour"].tap()
+        app.tables.staticTexts["Green"].tap()
+        app.navigationBars.buttons.firstMatch.tap()
+
+        XCTAssert(app.staticTexts["Green"].exists)
+    }
+
+    func testDefaultTabSetting() throws {
+        let app = XCUIApplication()
+
+        // Navigate to Default Selected Tab selection
+        app.tables.staticTexts["Override Default Selected Tab"].tap()
+
+        // The selection list shows ["Hexadecimal", "Binary", "Decimal", "Off"]
+        // Select "Binary"
+        app.tables.staticTexts["Binary"].tap()
+
+        // Go back to settings
+        app.navigationBars.buttons.firstMatch.tap()
+
+        // The cell summary should now show "Binary"
+        XCTAssert(app.staticTexts["Binary"].exists)
+
+        // Restore to Off (default)
+        app.tables.staticTexts["Override Default Selected Tab"].tap()
+        app.tables.staticTexts["Off"].tap()
+        app.navigationBars.buttons.firstMatch.tap()
+
+        XCTAssert(app.staticTexts["Off"].exists)
+    }
 }

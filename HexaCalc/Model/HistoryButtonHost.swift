@@ -38,6 +38,7 @@ extension HistoryButtonHost where Self: UIViewController {
             historyButton.heightAnchor.constraint(equalToConstant: 44)
         ])
 
+        historyButton.accessibilityIdentifier = "History Button"
         historyButton.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
     }
 
