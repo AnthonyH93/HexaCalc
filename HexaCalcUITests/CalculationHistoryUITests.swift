@@ -22,6 +22,9 @@ class CalculationHistoryUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
+        // App may start on a non-Hex tab due to persisted UserDefaults from prior runs
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
         // History button should be visible by default (icon mode)
         let historyButton = app.buttons["History Button"]
         XCTAssert(historyButton.exists)

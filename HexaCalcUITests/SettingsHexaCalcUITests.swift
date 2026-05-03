@@ -13,13 +13,24 @@ class SettingsHexaCalcUITests: XCTestCase {
     
     override func setUpWithError() throws {
         // Navigate to the settings tab before running each test
-        
+
         let app = XCUIApplication()
         app.launch()
-        
+
         let tabBar = app.tabBars["Tab Bar"]
+
+        // Reset any tab switches left disabled by a previous failed run, then load the
+        // Hexadecimal VC so that tab-enable/disable actions work correctly in all tests.
         tabBar.buttons["Settings"].tap()
-        
+        for name in ["Hexadecimal", "Binary", "Decimal"] {
+            let sw = app.switches[name]
+            if sw.exists, (sw.value as? String) == "0" {
+                sw.tap()
+            }
+        }
+        tabBar.buttons["Hexadecimal"].tap()
+        tabBar.buttons["Settings"].tap()
+
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
     }
