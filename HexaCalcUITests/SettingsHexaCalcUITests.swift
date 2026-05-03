@@ -45,6 +45,7 @@ class SettingsHexaCalcUITests: XCTestCase {
             if sw.exists, (sw.value as? String) == "0" { sw.tap() }
         }
 
+<<<<<<< HEAD
         // All tabs visible at start
         XCTAssert(tabBar.buttons["Hexadecimal"].exists)
         XCTAssert(tabBar.buttons["Binary"].exists)
@@ -80,12 +81,50 @@ class SettingsHexaCalcUITests: XCTestCase {
         XCTAssertFalse(tabBar.buttons["Binary"].exists)
         XCTAssert(tabBar.buttons["Decimal"].exists)
         XCTAssert(tabBar.buttons["Settings"].exists)
+=======
+        // Ensure all tabs are enabled at start
+        // isEnabled reflects UITabBarItem.isEnabled; exists is always true even when disabled
+        XCTAssert(tabBar.buttons["Hexadecimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Binary"].isEnabled)
+        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+
+        app.switches["Hexadecimal"].tap()
+        XCTAssertFalse(tabBar.buttons["Hexadecimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Binary"].isEnabled)
+        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Settings"].isEnabled)
 
         app.switches["Binary"].tap()
-        XCTAssert(tabBar.buttons["Hexadecimal"].exists)
-        XCTAssert(tabBar.buttons["Binary"].exists)
-        XCTAssert(tabBar.buttons["Decimal"].exists)
-        XCTAssert(tabBar.buttons["Settings"].exists)
+        XCTAssertFalse(tabBar.buttons["Hexadecimal"].isEnabled)
+        XCTAssertFalse(tabBar.buttons["Binary"].isEnabled)
+        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+
+        app.switches["Decimal"].tap()
+        XCTAssertFalse(tabBar.buttons["Hexadecimal"].isEnabled)
+        XCTAssertFalse(tabBar.buttons["Binary"].isEnabled)
+        XCTAssertFalse(tabBar.buttons["Decimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+
+        app.switches["Hexadecimal"].tap()
+        XCTAssert(tabBar.buttons["Hexadecimal"].isEnabled)
+        XCTAssertFalse(tabBar.buttons["Binary"].isEnabled)
+        XCTAssertFalse(tabBar.buttons["Decimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+
+        app.switches["Decimal"].tap()
+        XCTAssert(tabBar.buttons["Hexadecimal"].isEnabled)
+        XCTAssertFalse(tabBar.buttons["Binary"].isEnabled)
+        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+>>>>>>> 0f440d1... Fix testTabDisabling to use isEnabled instead of exists
+
+        app.switches["Binary"].tap()
+        XCTAssert(tabBar.buttons["Hexadecimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Binary"].isEnabled)
+        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
+        XCTAssert(tabBar.buttons["Settings"].isEnabled)
     }
 
     func testThemeColourChange() throws {
