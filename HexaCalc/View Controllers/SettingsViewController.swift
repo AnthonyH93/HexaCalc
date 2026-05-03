@@ -441,14 +441,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
-        if sender.isOn {
-            DataPersistence.savePreferences(userPreferences: userPreferences)
-            tabBarController?.tabBar.items![0].isEnabled = true
-        }
-        else {
-            DataPersistence.savePreferences(userPreferences: userPreferences)
-            tabBarController?.tabBar.items![0].isEnabled = false
-        }
+        DataPersistence.savePreferences(userPreferences: userPreferences)
+        (tabBarController as? HexaCalcTabBarController)?.setTab(0, enabled: sender.isOn)
         self.preferences = userPreferences
         
         telemetryManager.sendSettingsSignal(
@@ -466,14 +460,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
-        if sender.isOn {
-            DataPersistence.savePreferences(userPreferences: userPreferences)
-            tabBarController?.tabBar.items![1].isEnabled = true
-        }
-        else {
-            DataPersistence.savePreferences(userPreferences: userPreferences)
-            tabBarController?.tabBar.items![1].isEnabled = false
-        }
+        DataPersistence.savePreferences(userPreferences: userPreferences)
+        (tabBarController as? HexaCalcTabBarController)?.setTab(1, enabled: sender.isOn)
         self.preferences = userPreferences
         
         telemetryManager.sendSettingsSignal(
@@ -491,14 +479,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
-        if sender.isOn {
-            DataPersistence.savePreferences(userPreferences: userPreferences)
-            tabBarController?.tabBar.items![2].isEnabled = true
-        }
-        else {
-            DataPersistence.savePreferences(userPreferences: userPreferences)
-            tabBarController?.tabBar.items![2].isEnabled = false
-        }
+        DataPersistence.savePreferences(userPreferences: userPreferences)
+        (tabBarController as? HexaCalcTabBarController)?.setTab(2, enabled: sender.isOn)
         self.preferences = userPreferences
         
         telemetryManager.sendSettingsSignal(

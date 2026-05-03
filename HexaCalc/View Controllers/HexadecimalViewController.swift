@@ -77,11 +77,6 @@ class HexadecimalViewController: UIViewController, HistoryButtonHost {
 
     var calculationHistory: [CalculationData] = []
     
-    // Decide which tab to be default in viewDidLoad, but set the selected tab after the view appears
-    // Only do this on the first launch
-    var initialTabIndex = 0
-    var initialLaunch = true
-    
     // Access singleton TelemetryManager class object
     let telemetryManager = TelemetryManager.sharedTelemetryManager
     let telemetryTab = TelemetryTab.Hexadecimal
@@ -92,65 +87,18 @@ class HexadecimalViewController: UIViewController, HistoryButtonHost {
         outputLabel.accessibilityIdentifier = "Hexadecimal Output Label"
         updateOutputLabel(value: "0")
         
-        if let savedPreferences = DataPersistence.loadPreferences() {
-            
-            // Initialize initial tab to user saved preference
-            initialTabIndex = Int(savedPreferences.defaultTabIndex == 3 ? 0 : savedPreferences.defaultTabIndex)
-
-            // Remove tabs which are disabled by the user
-            let arrayOfTabBarItems = tabBarController?.tabBar.items
-            var removeHexTab = false
-            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                if (savedPreferences.hexTabState == false) {
-                    removeHexTab = true
-                    initialTabIndex = initialTabIndex == 0 ? 1 : initialTabIndex
-                }
-                if (savedPreferences.binTabState == false) {
-                    tabBarController?.tabBar.items![1].isEnabled = false
-                    if (initialTabIndex == 1 && savedPreferences.hexTabState) {
-                        initialTabIndex = 0
-                    }
-                    else {
-                        initialTabIndex = initialTabIndex == 1 ? 2 : initialTabIndex
-                    }
-                }
-                if (savedPreferences.decTabState == false) {
-                    tabBarController?.tabBar.items![2].isEnabled = false
-                    if (initialTabIndex == 2 && savedPreferences.hexTabState) {
-                        initialTabIndex = 0
-                    }
-                    else if (initialTabIndex == 2 && savedPreferences.binTabState) {
-                        initialTabIndex = 1
-                    }
-                    else {
-                        initialTabIndex = initialTabIndex == 2 ? 3 : initialTabIndex
-                    }
-                }
-                if (removeHexTab == true) {
-                    //Remove hexadecimal tab after setting state values
-                    stateController?.convValues.setCalculatorTextColour = savedPreferences.setCalculatorTextColour
-                    stateController?.convValues.colour = savedPreferences.colour
-                    stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
-                    stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
-                    tabBarController?.tabBar.items![0].isEnabled = false
-                }
-            }
-            
-            PLUSBtn.backgroundColor = savedPreferences.colour
-            SUBBtn.backgroundColor = savedPreferences.colour
-            MULTBtn.backgroundColor = savedPreferences.colour
-            DIVBtn.backgroundColor = savedPreferences.colour
-            EQUALSBtn.backgroundColor = savedPreferences.colour
-            
-            setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
-            
-            stateController?.convValues.setCalculatorTextColour = savedPreferences.setCalculatorTextColour
-            stateController?.convValues.colour = savedPreferences.colour
-            stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
-            stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
-            stateController?.convValues.historyButtonViewIndex = savedPreferences.historyButtonViewIndex
-            stateController?.convValues.defaultTabIndex = savedPreferences.defaultTabIndex
+        // convValues is pre-populated by HexaCalcTabBarController.viewDidLoad before any child VC loads
+        if let colour = stateController?.convValues.colour {
+            PLUSBtn.backgroundColor = colour
+            SUBBtn.backgroundColor = colour
+            MULTBtn.backgroundColor = colour
+            DIVBtn.backgroundColor = colour
+            EQUALSBtn.backgroundColor = colour
         }
+        setupCalculatorTextColour(
+            state: stateController?.convValues.setCalculatorTextColour ?? false,
+            colourToSet: stateController?.convValues.colour ?? .systemGreen
+        )
 
         //Setup gesture recognizers
         self.setupOutputLabelGestureRecognizers()
@@ -267,13 +215,6 @@ class HexadecimalViewController: UIViewController, HistoryButtonHost {
         //Set calculator text colour
         setupCalculatorTextColour(state: stateController?.convValues.setCalculatorTextColour ?? false, colourToSet: stateController?.convValues.colour ?? UIColor.systemGreen)
         
-        // Set the initial tab (if it is not the Hexadecimal tab) after the view has loaded
-        if initialTabIndex != 0 && initialLaunch {
-            // Only change the selected tab on the first launch
-            initialLaunch = false
-            // Set the correct selected tab item
-            tabBarController?.selectedViewController = tabBarController?.viewControllers![initialTabIndex]
-        }
     }
     
     // iPad support is for portrait and landscape mode, need to alter constraints on device rotation
