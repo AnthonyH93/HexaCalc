@@ -37,6 +37,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
 
+        // Inject state into the tab bar controller itself so it can initialize
+        // convValues and apply tab states before any child VC loads
+        if let hexaTabBar = tabBarController as? HexaCalcTabBarController {
+            hexaTabBar.setState(state: stateController)
+        }
+
         // Set the rootViewController to our modified version with the StateController instances
         self.window!.rootViewController = tabBarController
         self.window!.makeKeyAndVisible()
