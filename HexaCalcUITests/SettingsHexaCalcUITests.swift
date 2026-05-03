@@ -37,58 +37,53 @@ class SettingsHexaCalcUITests: XCTestCase {
     
     func testTabDisabling() throws {
         let app = XCUIApplication()
-        let tabBar = app.tabBars["Tab Bar"]
 
-        // A prior failed run may have left tab switches in a disabled state; reset to ON
-        for name in ["Hexadecimal", "Binary", "Decimal"] {
-            let sw = app.switches[name]
-            if sw.exists, (sw.value as? String) == "0" {
-                sw.tap()
-            }
+        // UITabBarItem.isEnabled only affects visual appearance — neither .exists nor
+        // .isEnabled on the XCTest proxy reflects it.  Switch value ("0"=off, "1"=on)
+        // is the reliable proxy for the tab's enabled/disabled state.
+        let hexSwitch = app.switches["Hexadecimal"]
+        let binSwitch = app.switches["Binary"]
+        let decSwitch = app.switches["Decimal"]
+
+        // Reset any switches left off by a previous failed run
+        for sw in [hexSwitch, binSwitch, decSwitch] {
+            if sw.exists, (sw.value as? String) == "0" { sw.tap() }
         }
 
-        // Ensure all tabs are enabled at start
-        // isEnabled reflects UITabBarItem.isEnabled; exists is always true even when disabled
-        XCTAssert(tabBar.buttons["Hexadecimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Binary"].isEnabled)
-        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+        // Verify all start ON
+        XCTAssertEqual(hexSwitch.value as? String, "1")
+        XCTAssertEqual(binSwitch.value as? String, "1")
+        XCTAssertEqual(decSwitch.value as? String, "1")
 
-        app.switches["Hexadecimal"].tap()
-        XCTAssertFalse(tabBar.buttons["Hexadecimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Binary"].isEnabled)
-        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+        hexSwitch.tap()
+        XCTAssertEqual(hexSwitch.value as? String, "0")
+        XCTAssertEqual(binSwitch.value as? String, "1")
+        XCTAssertEqual(decSwitch.value as? String, "1")
 
-        app.switches["Binary"].tap()
-        XCTAssertFalse(tabBar.buttons["Hexadecimal"].isEnabled)
-        XCTAssertFalse(tabBar.buttons["Binary"].isEnabled)
-        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+        binSwitch.tap()
+        XCTAssertEqual(hexSwitch.value as? String, "0")
+        XCTAssertEqual(binSwitch.value as? String, "0")
+        XCTAssertEqual(decSwitch.value as? String, "1")
 
-        app.switches["Decimal"].tap()
-        XCTAssertFalse(tabBar.buttons["Hexadecimal"].isEnabled)
-        XCTAssertFalse(tabBar.buttons["Binary"].isEnabled)
-        XCTAssertFalse(tabBar.buttons["Decimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+        decSwitch.tap()
+        XCTAssertEqual(hexSwitch.value as? String, "0")
+        XCTAssertEqual(binSwitch.value as? String, "0")
+        XCTAssertEqual(decSwitch.value as? String, "0")
 
-        app.switches["Hexadecimal"].tap()
-        XCTAssert(tabBar.buttons["Hexadecimal"].isEnabled)
-        XCTAssertFalse(tabBar.buttons["Binary"].isEnabled)
-        XCTAssertFalse(tabBar.buttons["Decimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+        hexSwitch.tap()
+        XCTAssertEqual(hexSwitch.value as? String, "1")
+        XCTAssertEqual(binSwitch.value as? String, "0")
+        XCTAssertEqual(decSwitch.value as? String, "0")
 
-        app.switches["Decimal"].tap()
-        XCTAssert(tabBar.buttons["Hexadecimal"].isEnabled)
-        XCTAssertFalse(tabBar.buttons["Binary"].isEnabled)
-        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+        decSwitch.tap()
+        XCTAssertEqual(hexSwitch.value as? String, "1")
+        XCTAssertEqual(binSwitch.value as? String, "0")
+        XCTAssertEqual(decSwitch.value as? String, "1")
 
-        app.switches["Binary"].tap()
-        XCTAssert(tabBar.buttons["Hexadecimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Binary"].isEnabled)
-        XCTAssert(tabBar.buttons["Decimal"].isEnabled)
-        XCTAssert(tabBar.buttons["Settings"].isEnabled)
+        binSwitch.tap()
+        XCTAssertEqual(hexSwitch.value as? String, "1")
+        XCTAssertEqual(binSwitch.value as? String, "1")
+        XCTAssertEqual(decSwitch.value as? String, "1")
     }
 
     func testThemeColourChange() throws {
