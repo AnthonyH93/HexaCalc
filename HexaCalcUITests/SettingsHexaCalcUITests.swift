@@ -27,7 +27,15 @@ class SettingsHexaCalcUITests: XCTestCase {
     func testTabDisabling() throws {
         let app = XCUIApplication()
         let tabBar = app.tabBars["Tab Bar"]
-        
+
+        // A prior failed run may have left tab switches in a disabled state; reset to ON
+        for name in ["Hexadecimal", "Binary", "Decimal"] {
+            let sw = app.switches[name]
+            if sw.exists, (sw.value as? String) == "0" {
+                sw.tap()
+            }
+        }
+
         // Ensure all tabs appear at start
         XCTAssert(tabBar.buttons["Hexadecimal"].exists)
         XCTAssert(tabBar.buttons["Binary"].exists)

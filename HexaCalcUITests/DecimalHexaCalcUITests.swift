@@ -606,10 +606,7 @@ class DecimalHexaCalcUITests: XCTestCase {
     func testDecimalSQRTOnComputedResult() throws {
         let app = XCUIApplication()
 
-        UITestHelper.second(app: app)
-
-        // Compute 4 × 9 = 36, then sqrt(36) = 6
-        // Using different operands avoids button label ambiguity with the output label
+        // 4 × 9 = 36 in normal mode (× only exists outside second mode)
         app.buttons["4"].tap()
         UITestHelper.multiply(app: app)
         app.buttons["9"].tap()
@@ -617,13 +614,16 @@ class DecimalHexaCalcUITests: XCTestCase {
 
         XCTAssert(UITestHelper.assertResult(app: app, expected: "36", calculator: 2))
 
+        // sqrt(36) = 6 — requires second mode
+        UITestHelper.second(app: app)
         UITestHelper.sqrt(app: app)
 
         XCTAssert(UITestHelper.assertResult(app: app, expected: "6", calculator: 2))
 
         UITestHelper.clear(app: app)
+        UITestHelper.second(app: app)  // exit second mode before arithmetic
 
-        // 3 + 1 = 4, then sqrt = 2
+        // 3 + 1 = 4, then sqrt(4) = 2
         app.buttons["3"].tap()
         UITestHelper.add(app: app)
         app.buttons["1"].tap()
@@ -631,14 +631,17 @@ class DecimalHexaCalcUITests: XCTestCase {
 
         XCTAssert(UITestHelper.assertResult(app: app, expected: "4", calculator: 2))
 
+        UITestHelper.second(app: app)
         UITestHelper.sqrt(app: app)
 
         XCTAssert(UITestHelper.assertResult(app: app, expected: "2", calculator: 2))
 
         UITestHelper.clear(app: app)
+        UITestHelper.second(app: app)  // exit second mode before entering 9
 
         // Negate 9 and take sqrt — should give Error!
         app.buttons["9"].tap()
+        UITestHelper.second(app: app)  // enter second mode for ± and √
         UITestHelper.plusMinus(app: app)
 
         XCTAssert(UITestHelper.assertResult(app: app, expected: "-9", calculator: 2))
