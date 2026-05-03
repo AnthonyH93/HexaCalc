@@ -125,4 +125,38 @@ class SettingsHexaCalcUITests: XCTestCase {
         // "Off" is unique to the summary — not a tab switch label
         XCTAssert(app.staticTexts["Off"].waitForExistence(timeout: 2))
     }
+
+    func testDefaultTabIndexAppliedOnRelaunch() throws {
+        let app = XCUIApplication()
+        let tabBar = app.tabBars["Tab Bar"]
+
+        // Set default tab to Binary
+        app.tables.staticTexts["Override Default Selected Tab"].tap()
+        app.tables.staticTexts["Binary"].tap()
+
+        // Relaunch and verify Binary is the selected tab
+        app.terminate()
+        app.launch()
+        XCTAssert(tabBar.buttons["Binary"].isSelected)
+        XCTAssertFalse(tabBar.buttons["Hexadecimal"].isSelected)
+
+        // Set default tab to Decimal
+        tabBar.buttons["Settings"].tap()
+        app.tables.staticTexts["Override Default Selected Tab"].tap()
+        app.tables.staticTexts["Decimal"].tap()
+
+        app.terminate()
+        app.launch()
+        XCTAssert(tabBar.buttons["Decimal"].isSelected)
+        XCTAssertFalse(tabBar.buttons["Binary"].isSelected)
+
+        // Restore to Off and verify Hexadecimal is selected by default
+        tabBar.buttons["Settings"].tap()
+        app.tables.staticTexts["Override Default Selected Tab"].tap()
+        app.tables.staticTexts["Off"].tap()
+
+        app.terminate()
+        app.launch()
+        XCTAssert(tabBar.buttons["Hexadecimal"].isSelected)
+    }
 }
