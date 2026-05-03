@@ -37,53 +37,55 @@ class SettingsHexaCalcUITests: XCTestCase {
     
     func testTabDisabling() throws {
         let app = XCUIApplication()
-
-        // UITabBarItem.isEnabled only affects visual appearance — neither .exists nor
-        // .isEnabled on the XCTest proxy reflects it.  Switch value ("0"=off, "1"=on)
-        // is the reliable proxy for the tab's enabled/disabled state.
-        let hexSwitch = app.switches["Hexadecimal"]
-        let binSwitch = app.switches["Binary"]
-        let decSwitch = app.switches["Decimal"]
+        let tabBar = app.tabBars["Tab Bar"]
 
         // Reset any switches left off by a previous failed run
-        for sw in [hexSwitch, binSwitch, decSwitch] {
+        for name in ["Hexadecimal", "Binary", "Decimal"] {
+            let sw = app.switches[name]
             if sw.exists, (sw.value as? String) == "0" { sw.tap() }
         }
 
-        // Verify all start ON
-        XCTAssertEqual(hexSwitch.value as? String, "1")
-        XCTAssertEqual(binSwitch.value as? String, "1")
-        XCTAssertEqual(decSwitch.value as? String, "1")
+        // Ensure all tabs appear at start
+        XCTAssert(tabBar.buttons["Hexadecimal"].exists)
+        XCTAssert(tabBar.buttons["Binary"].exists)
+        XCTAssert(tabBar.buttons["Decimal"].exists)
+        XCTAssert(tabBar.buttons["Settings"].exists)
 
-        hexSwitch.tap()
-        XCTAssertEqual(hexSwitch.value as? String, "0")
-        XCTAssertEqual(binSwitch.value as? String, "1")
-        XCTAssertEqual(decSwitch.value as? String, "1")
+        app.switches["Hexadecimal"].tap()
+        XCTAssertFalse(tabBar.buttons["Hexadecimal"].exists)
+        XCTAssert(tabBar.buttons["Binary"].exists)
+        XCTAssert(tabBar.buttons["Decimal"].exists)
+        XCTAssert(tabBar.buttons["Settings"].exists)
 
-        binSwitch.tap()
-        XCTAssertEqual(hexSwitch.value as? String, "0")
-        XCTAssertEqual(binSwitch.value as? String, "0")
-        XCTAssertEqual(decSwitch.value as? String, "1")
+        app.switches["Binary"].tap()
+        XCTAssertFalse(tabBar.buttons["Hexadecimal"].exists)
+        XCTAssertFalse(tabBar.buttons["Binary"].exists)
+        XCTAssert(tabBar.buttons["Decimal"].exists)
+        XCTAssert(tabBar.buttons["Settings"].exists)
 
-        decSwitch.tap()
-        XCTAssertEqual(hexSwitch.value as? String, "0")
-        XCTAssertEqual(binSwitch.value as? String, "0")
-        XCTAssertEqual(decSwitch.value as? String, "0")
+        app.switches["Decimal"].tap()
+        XCTAssertFalse(tabBar.buttons["Hexadecimal"].exists)
+        XCTAssertFalse(tabBar.buttons["Binary"].exists)
+        XCTAssertFalse(tabBar.buttons["Decimal"].exists)
+        XCTAssert(tabBar.buttons["Settings"].exists)
 
-        hexSwitch.tap()
-        XCTAssertEqual(hexSwitch.value as? String, "1")
-        XCTAssertEqual(binSwitch.value as? String, "0")
-        XCTAssertEqual(decSwitch.value as? String, "0")
+        app.switches["Hexadecimal"].tap()
+        XCTAssert(tabBar.buttons["Hexadecimal"].exists)
+        XCTAssertFalse(tabBar.buttons["Binary"].exists)
+        XCTAssertFalse(tabBar.buttons["Decimal"].exists)
+        XCTAssert(tabBar.buttons["Settings"].exists)
 
-        decSwitch.tap()
-        XCTAssertEqual(hexSwitch.value as? String, "1")
-        XCTAssertEqual(binSwitch.value as? String, "0")
-        XCTAssertEqual(decSwitch.value as? String, "1")
+        app.switches["Decimal"].tap()
+        XCTAssert(tabBar.buttons["Hexadecimal"].exists)
+        XCTAssertFalse(tabBar.buttons["Binary"].exists)
+        XCTAssert(tabBar.buttons["Decimal"].exists)
+        XCTAssert(tabBar.buttons["Settings"].exists)
 
-        binSwitch.tap()
-        XCTAssertEqual(hexSwitch.value as? String, "1")
-        XCTAssertEqual(binSwitch.value as? String, "1")
-        XCTAssertEqual(decSwitch.value as? String, "1")
+        app.switches["Binary"].tap()
+        XCTAssert(tabBar.buttons["Hexadecimal"].exists)
+        XCTAssert(tabBar.buttons["Binary"].exists)
+        XCTAssert(tabBar.buttons["Decimal"].exists)
+        XCTAssert(tabBar.buttons["Settings"].exists)
     }
 
     func testThemeColourChange() throws {
