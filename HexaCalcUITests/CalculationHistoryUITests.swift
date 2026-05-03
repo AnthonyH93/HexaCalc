@@ -37,6 +37,9 @@ class CalculationHistoryUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
+        // App may start on a non-Hex tab due to persisted UserDefaults from prior runs
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
         // Perform a calculation so history is non-empty
         app.buttons["A"].tap()
         UITestHelper.add(app: app)
