@@ -170,7 +170,10 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
     }
 
     @objc func historyButtonTapped() {
-        presentHistory(calculationHistory: calculationHistory)
+        guard let historyVC = storyboard?.instantiateViewController(withIdentifier: "CalculationHistoryViewController") as? CalculationHistoryViewController else { return }
+        historyVC.calculationHistory = calculationHistory
+        let nav = UINavigationController(rootViewController: historyVC)
+        present(nav, animated: true)
     }
 
     @objc func handleLabelSwipes(_ sender: UISwipeGestureRecognizer) {
