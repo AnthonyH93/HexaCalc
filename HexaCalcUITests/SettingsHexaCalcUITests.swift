@@ -128,28 +128,65 @@ class SettingsHexaCalcUITests: XCTestCase {
 
     func testCalculatorTextColourToggle() throws {
         let app = XCUIApplication()
+        let tabBar = app.tabBars["Tab Bar"]
         let sw = app.switches["Set Calculator Text Colour"]
 
         // Ensure switch starts off
         if (sw.value as? String) == "1" { sw.tap() }
         XCTAssertEqual(sw.value as? String, "0")
 
-        // Toggle on
+        // Toggle on — navigate to each calculator and confirm output labels are still accessible
         sw.tap()
         XCTAssertEqual(sw.value as? String, "1")
 
-        // Toggle off again to restore default
+        tabBar.buttons["Hexadecimal"].tap()
+        XCTAssert(app.staticTexts["Hexadecimal Output Label"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+
+        tabBar.buttons["Binary"].tap()
+        XCTAssert(app.buttons["Binary Output Label"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
+
+        tabBar.buttons["Decimal"].tap()
+        XCTAssert(app.buttons["Decimal Output Label"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+
+        // Toggle off and verify labels are still accessible
+        tabBar.buttons["Settings"].tap()
         sw.tap()
         XCTAssertEqual(sw.value as? String, "0")
+
+        tabBar.buttons["Hexadecimal"].tap()
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
     }
 
     func testClearLocalHistory() throws {
         let app = XCUIApplication()
+        let tabBar = app.tabBars["Tab Bar"]
 
+        // Populate history with a calculation first
+        tabBar.buttons["Hexadecimal"].tap()
+        app.buttons["A"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["B"].tap()
+        UITestHelper.equals(app: app)
+
+        // Confirm history is non-empty
+        app.buttons["History Button"].tap()
+        XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
+        XCTAssert(app.tables.cells.count > 0)
+        app.navigationBars.buttons.firstMatch.tap()
+
+        // Clear history from Settings
+        tabBar.buttons["Settings"].tap()
         app.tables.staticTexts["Clear Local History"].tap()
-
-        // Alert appears and auto-dismisses after 1.5 seconds — no button to tap
         XCTAssert(app.alerts["Local History Cleared"].waitForExistence(timeout: 2))
+
+        // Navigate to Hexadecimal and confirm history is now empty
+        tabBar.buttons["Hexadecimal"].tap()
+        app.buttons["History Button"].tap()
+        XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
+        XCTAssertEqual(app.tables.cells.count, 0)
     }
 
     func testDefaultTabIndexAppliedOnRelaunch() throws {
