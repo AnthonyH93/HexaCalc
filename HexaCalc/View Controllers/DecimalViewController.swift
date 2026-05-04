@@ -203,13 +203,6 @@ class DecimalViewController: UIViewController, HistoryButtonHost {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.destination is CalculationHistoryViewController) {
-            let vc = segue.destination as! CalculationHistoryViewController
-            vc.calculationHistory = calculationHistory
-        }
-    }
-    
     @objc func labelSingleTapped(_ sender: UITapGestureRecognizer) {
         // Only perform action on single tap if user has that setting option enabled
         if (stateController?.convValues.copyActionIndex == 0 || stateController?.convValues.pasteActionIndex == 0) {
