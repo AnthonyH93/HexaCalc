@@ -442,6 +442,40 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "FFFFFFFFFFFFFFFF", calculator: 0))
     }
 
+    func testHexChainedArithmetic() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        // A + B = 15 (10 + 11 = 21 = 0x15)
+        app.buttons["A"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["B"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 0))
+
+        // 15 * 2 = 2A (21 * 2 = 42 = 0x2A)
+        UITestHelper.multiply(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "2A", calculator: 0))
+
+        // 2A - A = 20 (42 - 10 = 32 = 0x20)
+        UITestHelper.subtract(app: app)
+        app.buttons["A"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "20", calculator: 0))
+
+        // 20 / 4 = 8 (32 / 4 = 8)
+        UITestHelper.divide(app: app)
+        app.buttons["4"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "8", calculator: 0))
+
+        UITestHelper.clear(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+    }
+
     func testHexDivisionByZero() throws {
         let app = XCUIApplication()
         app.launch()

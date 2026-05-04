@@ -126,6 +126,32 @@ class SettingsHexaCalcUITests: XCTestCase {
         XCTAssert(app.staticTexts["Off"].waitForExistence(timeout: 2))
     }
 
+    func testCalculatorTextColourToggle() throws {
+        let app = XCUIApplication()
+        let sw = app.switches["Set Calculator Text Colour"]
+
+        // Ensure switch starts off
+        if (sw.value as? String) == "1" { sw.tap() }
+        XCTAssertEqual(sw.value as? String, "0")
+
+        // Toggle on
+        sw.tap()
+        XCTAssertEqual(sw.value as? String, "1")
+
+        // Toggle off again to restore default
+        sw.tap()
+        XCTAssertEqual(sw.value as? String, "0")
+    }
+
+    func testClearLocalHistory() throws {
+        let app = XCUIApplication()
+
+        app.tables.staticTexts["Clear Local History"].tap()
+
+        // Alert appears and auto-dismisses after 1.5 seconds — no button to tap
+        XCTAssert(app.alerts["Local History Cleared"].waitForExistence(timeout: 2))
+    }
+
     func testDefaultTabIndexAppliedOnRelaunch() throws {
         let app = XCUIApplication()
         let tabBar = app.tabBars["Tab Bar"]

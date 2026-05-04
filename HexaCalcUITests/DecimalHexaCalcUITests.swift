@@ -603,6 +603,38 @@ class DecimalHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
     }
 
+    func testDecimalChainedOperations() throws {
+        let app = XCUIApplication()
+
+        // 2 + 3 = 5
+        app.buttons["2"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["3"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "5", calculator: 2))
+
+        // result * 4 = 20
+        UITestHelper.multiply(app: app)
+        app.buttons["4"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "20", calculator: 2))
+
+        // result - 8 = 12
+        UITestHelper.subtract(app: app)
+        app.buttons["8"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "12", calculator: 2))
+
+        // result / 4 = 3
+        UITestHelper.divide(app: app)
+        app.buttons["4"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "3", calculator: 2))
+
+        UITestHelper.clear(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+    }
+
     func testDecimalSQRTOnComputedResult() throws {
         let app = XCUIApplication()
 

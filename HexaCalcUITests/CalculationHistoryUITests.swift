@@ -67,4 +67,28 @@ class CalculationHistoryUITests: XCTestCase {
         let cells = app.tables.cells
         XCTAssert(cells.count > 0)
     }
+
+    func testCalculationHistoryCopyToClipboard() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        // Perform a calculation to ensure history is non-empty
+        app.buttons["A"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["B"].tap()
+        UITestHelper.equals(app: app)
+
+        app.buttons["History Button"].tap()
+        XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
+
+        // Tapping a cell copies the result and shows a confirmation alert
+        let cells = app.tables.cells
+        XCTAssert(cells.count > 0)
+        cells.firstMatch.tap()
+
+        XCTAssert(app.alerts["Copied to clipboard"].waitForExistence(timeout: 2))
+        // Alert auto-dismisses after 1.5 seconds — no button to tap
+    }
 }

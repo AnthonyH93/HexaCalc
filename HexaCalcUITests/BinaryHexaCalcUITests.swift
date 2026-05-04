@@ -337,6 +337,39 @@ class BinaryHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: expectedString, calculator: 1))
     }
 
+    func testBinarySubtractionAndDivision() throws {
+        let app = XCUIApplication()
+
+        // 1100 (12) - 11 (3) = 1001 (9)
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        app.buttons["00"].tap()
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1100", calculator: 1))
+
+        UITestHelper.subtract(app: app)
+        app.buttons["11"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1001", calculator: 1))
+
+        // 1001 (9) / 11 (3) = 11 (3)
+        UITestHelper.divide(app: app)
+        app.buttons["11"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
+
+        UITestHelper.clear(app: app)
+
+        // Division by zero returns Error!
+        app.buttons["1"].tap()
+        UITestHelper.divide(app: app)
+        app.buttons["0"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "Error!", calculator: 1))
+
+        UITestHelper.clear(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
+    }
+
     func testBinaryShiftThenArithmetic() throws {
         let app = XCUIApplication()
 
