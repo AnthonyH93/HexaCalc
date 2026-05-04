@@ -75,7 +75,29 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
         fatalError("Subclass must override updateThemeColour(_:)")
     }
 
+    var outputLabelAccessibilityIdentifier: String {
+        fatalError("Subclass must override outputLabelAccessibilityIdentifier")
+    }
+
+    var defaultLabelValue: String {
+        fatalError("Subclass must override defaultLabelValue")
+    }
+
     // MARK: Common lifecycle
+
+    func setupCommonViewDidLoad() {
+        updateOutputLabel(value: defaultLabelValue)
+        if let colour = stateController?.convValues.colour {
+            updateThemeColour(colour)
+        }
+        setupCalculatorTextColour(
+            state: stateController?.convValues.setCalculatorTextColour ?? false,
+            colourToSet: stateController?.convValues.colour ?? .systemGreen
+        )
+        setupOutputLabelGestureRecognizers()
+        overrideUserInterfaceStyle = .light
+        ReviewManager.requestReviewIfAppropriate()
+    }
 
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

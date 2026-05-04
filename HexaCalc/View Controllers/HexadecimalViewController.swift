@@ -77,6 +77,9 @@ class HexadecimalViewController: CalculatorViewController {
         return runningNumber
     }
 
+    override var outputLabelAccessibilityIdentifier: String { "Hexadecimal Output Label" }
+    override var defaultLabelValue: String { "0" }
+
     override func updateThemeColour(_ colour: UIColor) {
         PLUSBtn.backgroundColor = colour
         SUBBtn.backgroundColor = colour
@@ -85,29 +88,14 @@ class HexadecimalViewController: CalculatorViewController {
         EQUALSBtn.backgroundColor = colour
         outputLabel.textColor = colour
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        outputLabel.accessibilityIdentifier = "Hexadecimal Output Label"
-        updateOutputLabel(value: "0")
-
-        // convValues is pre-populated by HexaCalcTabBarController.viewDidLoad before any child VC loads
-        if let colour = stateController?.convValues.colour {
-            updateThemeColour(colour)
-        }
-        setupCalculatorTextColour(
-            state: stateController?.convValues.setCalculatorTextColour ?? false,
-            colourToSet: stateController?.convValues.colour ?? .systemGreen
-        )
-
-        setupOutputLabelGestureRecognizers()
-        overrideUserInterfaceStyle = .light
-
+        outputLabel.accessibilityIdentifier = outputLabelAccessibilityIdentifier
+        setupCommonViewDidLoad()
         if #available(iOS 17.0, *) {
             traitOverrides.horizontalSizeClass = .compact
         }
-
-        ReviewManager.requestReviewIfAppropriate()
     }
 
     override func viewDidLayoutSubviews() {

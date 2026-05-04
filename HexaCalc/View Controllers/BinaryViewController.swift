@@ -77,6 +77,9 @@ class BinaryViewController: CalculatorViewController {
         return runningNumber
     }
 
+    override var outputLabelAccessibilityIdentifier: String { "Binary Output Label" }
+    override var defaultLabelValue: String { binaryDefaultLabel }
+
     override func updateThemeColour(_ colour: UIColor) {
         PLUSBtn.backgroundColor = colour
         SUBBtn.backgroundColor = colour
@@ -87,18 +90,8 @@ class BinaryViewController: CalculatorViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        outputLabel.accessibilityIdentifier = "Binary Output Label"
-        updateOutputLabel(value: binaryDefaultLabel)
-
-        if let savedPreferences = DataPersistence.loadPreferences() {
-            updateThemeColour(savedPreferences.colour)
-            setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
-        }
-
-        setupOutputLabelGestureRecognizers()
-        overrideUserInterfaceStyle = .light
-        ReviewManager.requestReviewIfAppropriate()
+        outputLabel.accessibilityIdentifier = outputLabelAccessibilityIdentifier
+        setupCommonViewDidLoad()
     }
 
     override func viewDidLayoutSubviews() {

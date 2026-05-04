@@ -64,6 +64,9 @@ class DecimalViewController: CalculatorViewController {
         return runningNumber
     }
 
+    override var outputLabelAccessibilityIdentifier: String { "Decimal Output Label" }
+    override var defaultLabelValue: String { "0" }
+
     override func updateThemeColour(_ colour: UIColor) {
         PLUSBtn.backgroundColor = colour
         SUBBtn.backgroundColor = colour
@@ -74,18 +77,8 @@ class DecimalViewController: CalculatorViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        outputLabel.accessibilityIdentifier = "Decimal Output Label"
-        updateOutputLabel(value: "0")
-
-        if let savedPreferences = DataPersistence.loadPreferences() {
-            updateThemeColour(savedPreferences.colour)
-            setupCalculatorTextColour(state: savedPreferences.setCalculatorTextColour, colourToSet: savedPreferences.colour)
-        }
-
-        setupOutputLabelGestureRecognizers()
-        overrideUserInterfaceStyle = .light
-        ReviewManager.requestReviewIfAppropriate()
+        outputLabel.accessibilityIdentifier = outputLabelAccessibilityIdentifier
+        setupCommonViewDidLoad()
     }
 
     override func viewDidLayoutSubviews() {
