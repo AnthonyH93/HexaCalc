@@ -113,12 +113,6 @@ class HexadecimalViewController: UIViewController, HistoryButtonHost {
         ReviewManager.requestReviewIfAppropriate()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? CalculationHistoryViewController {
-            vc.calculationHistory = calculationHistory
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         // Setup Hexadecimal View Controller constraints
         let screenWidth = view.bounds.width
@@ -261,7 +255,7 @@ class HexadecimalViewController: UIViewController, HistoryButtonHost {
     }
     
     @objc func historyButtonTapped() {
-        performSegue(withIdentifier: "showHistory", sender: true)
+        presentHistory(calculationHistory: calculationHistory)
     }
     
     func copySelected() {

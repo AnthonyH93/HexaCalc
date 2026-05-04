@@ -546,7 +546,143 @@ class DecimalHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "Error!", calculator: 2))
         
         UITestHelper.clear(app: app)
-        
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+    }
+
+    func testDecimalDivisionByZero() throws {
+        let app = XCUIApplication()
+
+        app.buttons["7"].tap()
+
+        UITestHelper.divide(app: app)
+        app.buttons["0"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "Error!", calculator: 2))
+
+        UITestHelper.clear(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+
+        // Verify recovery: 6 / 2 = 3
+        app.buttons["6"].tap()
+        UITestHelper.divide(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "3", calculator: 2))
+    }
+
+    func testDecimalDotButton() throws {
+        let app = XCUIApplication()
+
+        // Valid decimal: 1.5
+        app.buttons["1"].tap()
+        app.buttons["."].tap()
+        app.buttons["5"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1.5", calculator: 2))
+
+        // Second dot press is blocked — still 1.5
+        app.buttons["."].tap()
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1.5", calculator: 2))
+
+        app.buttons["9"].tap()
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1.59", calculator: 2))
+
+        UITestHelper.clear(app: app)
+
+        // Leading dot: .5 becomes 0.5
+        app.buttons["."].tap()
+        app.buttons["5"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0.5", calculator: 2))
+
+        UITestHelper.clear(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+    }
+
+    func testDecimalChainedOperations() throws {
+        let app = XCUIApplication()
+
+        // 2 + 3 = 5
+        app.buttons["2"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["3"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "5", calculator: 2))
+
+        // result * 4 = 20
+        UITestHelper.multiply(app: app)
+        app.buttons["4"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "20", calculator: 2))
+
+        // result - 8 = 12
+        UITestHelper.subtract(app: app)
+        app.buttons["8"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "12", calculator: 2))
+
+        // result / 4 = 3
+        UITestHelper.divide(app: app)
+        app.buttons["4"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "3", calculator: 2))
+
+        UITestHelper.clear(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+    }
+
+    func testDecimalSQRTOnComputedResult() throws {
+        let app = XCUIApplication()
+
+        // 4 × 9 = 36 in normal mode (× only exists outside second mode)
+        app.buttons["4"].tap()
+        UITestHelper.multiply(app: app)
+        app.buttons["9"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "36", calculator: 2))
+
+        // sqrt(36) = 6 — requires second mode
+        UITestHelper.second(app: app)
+        UITestHelper.sqrt(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "6", calculator: 2))
+
+        UITestHelper.clear(app: app)
+        UITestHelper.second(app: app)  // exit second mode before arithmetic
+
+        // 3 + 1 = 4, then sqrt(4) = 2
+        app.buttons["3"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "4", calculator: 2))
+
+        UITestHelper.second(app: app)
+        UITestHelper.sqrt(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "2", calculator: 2))
+
+        UITestHelper.clear(app: app)
+        UITestHelper.second(app: app)  // exit second mode before entering 9
+
+        // Negate 9 and take sqrt — should give Error!
+        app.buttons["9"].tap()
+        UITestHelper.second(app: app)  // enter second mode for ± and √
+        UITestHelper.plusMinus(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "-9", calculator: 2))
+
+        UITestHelper.sqrt(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "Error!", calculator: 2))
+
+        UITestHelper.clear(app: app)
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
     }
 }

@@ -16,6 +16,13 @@ import UIKit
 
 extension HistoryButtonHost where Self: UIViewController {
 
+    func presentHistory(calculationHistory: [CalculationData]) {
+        guard let historyVC = storyboard?.instantiateViewController(withIdentifier: "CalculationHistoryViewController") as? CalculationHistoryViewController else { return }
+        historyVC.calculationHistory = calculationHistory
+        let nav = UINavigationController(rootViewController: historyVC)
+        present(nav, animated: true)
+    }
+
     func setupHistoryButton() {
         if historyButton?.superview != nil {
             return
@@ -38,6 +45,7 @@ extension HistoryButtonHost where Self: UIViewController {
             historyButton.heightAnchor.constraint(equalToConstant: 44)
         ])
 
+        historyButton.accessibilityIdentifier = "History Button"
         historyButton.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
     }
 

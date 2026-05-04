@@ -35,6 +35,16 @@ class SettingsHexaCalcUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    override func tearDownWithError() throws {
+        // Re-enable any tabs left disabled by a failing test so disk state is clean for the next run.
+        let app = XCUIApplication()
+        app.tabBars["Tab Bar"].buttons["Settings"].tap()
+        for name in ["Hexadecimal", "Binary", "Decimal"] {
+            let sw = app.switches[name]
+            if sw.exists, (sw.value as? String) == "0" { sw.tap() }
+        }
+    }
+
     func testTabDisabling() throws {
         let app = XCUIApplication()
         let tabBar = app.tabBars["Tab Bar"]
@@ -124,5 +134,103 @@ class SettingsHexaCalcUITests: XCTestCase {
 
         // "Off" is unique to the summary — not a tab switch label
         XCTAssert(app.staticTexts["Off"].waitForExistence(timeout: 2))
+    }
+
+    func testCalculatorTextColourToggle() throws {
+        let app = XCUIApplication()
+        let tabBar = app.tabBars["Tab Bar"]
+        let sw = app.switches["Set Calculator Text Colour"]
+
+        // Ensure switch starts off
+        if (sw.value as? String) == "1" { sw.tap() }
+        XCTAssertEqual(sw.value as? String, "0")
+
+        // Toggle on — navigate to each calculator and confirm output labels are still accessible
+        sw.tap()
+        XCTAssertEqual(sw.value as? String, "1")
+
+        tabBar.buttons["Hexadecimal"].tap()
+        XCTAssert(app.staticTexts["Hexadecimal Output Label"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+
+        tabBar.buttons["Binary"].tap()
+        XCTAssert(app.buttons["Binary Output Label"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
+
+        tabBar.buttons["Decimal"].tap()
+        XCTAssert(app.buttons["Decimal Output Label"].exists)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
+
+        // Toggle off and verify labels are still accessible
+        tabBar.buttons["Settings"].tap()
+        sw.tap()
+        XCTAssertEqual(sw.value as? String, "0")
+
+        tabBar.buttons["Hexadecimal"].tap()
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+    }
+
+    func testClearLocalHistory() throws {
+        let app = XCUIApplication()
+        let tabBar = app.tabBars["Tab Bar"]
+
+        // Populate history with a calculation first
+        tabBar.buttons["Hexadecimal"].tap()
+        app.buttons["A"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["B"].tap()
+        UITestHelper.equals(app: app)
+
+        // Confirm history is non-empty
+        app.buttons["History Button"].tap()
+        XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
+        XCTAssert(app.tables.cells.count > 0)
+        app.buttons["close"].tap()
+
+        // Clear history from Settings
+        tabBar.buttons["Settings"].tap()
+        let clearHistoryRow = app.tables.staticTexts["Clear Local History"]
+        XCTAssert(clearHistoryRow.waitForExistence(timeout: 3))
+        clearHistoryRow.tap()
+
+        // Navigate to Hexadecimal and confirm history is now empty
+        tabBar.buttons["Hexadecimal"].tap()
+        app.buttons["History Button"].tap()
+        XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
+        XCTAssertEqual(app.tables.cells.count, 0)
+    }
+
+    func testDefaultTabIndexAppliedOnRelaunch() throws {
+        let app = XCUIApplication()
+        let tabBar = app.tabBars["Tab Bar"]
+
+        // Set default tab to Binary
+        app.tables.staticTexts["Override Default Selected Tab"].tap()
+        app.tables.staticTexts["Binary"].tap()
+
+        // Relaunch and verify Binary is the selected tab
+        app.terminate()
+        app.launch()
+        XCTAssert(tabBar.buttons["Binary"].isSelected)
+        XCTAssertFalse(tabBar.buttons["Hexadecimal"].isSelected)
+
+        // Set default tab to Decimal
+        tabBar.buttons["Settings"].tap()
+        app.tables.staticTexts["Override Default Selected Tab"].tap()
+        app.tables.staticTexts["Decimal"].tap()
+
+        app.terminate()
+        app.launch()
+        XCTAssert(tabBar.buttons["Decimal"].isSelected)
+        XCTAssertFalse(tabBar.buttons["Binary"].isSelected)
+
+        // Restore to Off and verify Hexadecimal is selected by default
+        tabBar.buttons["Settings"].tap()
+        app.tables.staticTexts["Override Default Selected Tab"].tap()
+        app.tables.staticTexts["Off"].tap()
+
+        app.terminate()
+        app.launch()
+        XCTAssert(tabBar.buttons["Hexadecimal"].isSelected)
     }
 }

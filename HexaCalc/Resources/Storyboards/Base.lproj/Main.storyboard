@@ -531,7 +531,7 @@
         <!--Calculation History View Controller-->
         <scene sceneID="wwF-Pt-vzf">
             <objects>
-                <viewController id="mI5-fy-VRx" customClass="CalculationHistoryViewController" customModule="HexaCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mI5-fy-VRx" storyboardIdentifier="CalculationHistoryViewController" customClass="CalculationHistoryViewController" customModule="HexaCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6JK-gY-jv2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -27,6 +27,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testDeletion() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         // Launched on Hexadecimal tab
         app.buttons["A"].tap()
@@ -73,6 +74,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testIntegerOverflow() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         // Launched on Hexadecimal tab
         app.buttons["7"].tap()
@@ -96,6 +98,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testAllNumberButtons() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         let digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "0"]
         
@@ -109,6 +112,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testXOR() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["A"].tap()
         app.buttons["B"].tap()
@@ -130,6 +134,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testOR() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["A"].tap()
         app.buttons["B"].tap()
@@ -151,6 +156,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testAND() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["A"].tap()
         app.buttons["B"].tap()
@@ -172,6 +178,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testNOT() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["A"].tap()
         app.buttons["B"].tap()
@@ -200,6 +207,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testSecondFunctionsUI() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         let basicFunctions = [UITestHelper.divide, UITestHelper.multiply, UITestHelper.subtract, UITestHelper.add, UITestHelper.equals]
         let secondFunctions = ["2's", "MOD", "<<X", ">>X", UITestHelper.equals]
@@ -224,6 +232,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func test2sCompliment() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         UITestHelper.second(app: app)
         
@@ -249,6 +258,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testMOD() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         UITestHelper.second(app: app)
         
@@ -317,6 +327,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     func testShifts() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         UITestHelper.second(app: app)
         
@@ -341,12 +352,155 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "8", calculator: 0))
         
         UITestHelper.leftShiftX(app: app)
-        
+
         app.buttons["1"].tap()
         app.buttons["5"].tap()
-        
+
         UITestHelper.equals(app: app)
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1000000", calculator: 0))
+    }
+
+    func testHexShiftToZero() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        UITestHelper.second(app: app)
+
+        app.buttons["8"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "8", calculator: 0))
+
+        // 8 >> 1 = 4
+        UITestHelper.rightShiftX(app: app)
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "4", calculator: 0))
+
+        // 4 >> 1 = 2
+        UITestHelper.rightShiftX(app: app)
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "2", calculator: 0))
+
+        // 2 >> 1 = 1
+        UITestHelper.rightShiftX(app: app)
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1", calculator: 0))
+
+        // 1 >> 1 = 0
+        UITestHelper.rightShiftX(app: app)
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+    }
+
+    func testHexSecondFunctionCalculations() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        UITestHelper.second(app: app)
+
+        // A mod 3 = 1 (10 mod 3 = 1)
+        app.buttons["A"].tap()
+        UITestHelper.mod(app: app)
+        app.buttons["3"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1", calculator: 0))
+
+        UITestHelper.clear(app: app)
+
+        // 1 left-shift by 4 = 10 (hex 16)
+        app.buttons["1"].tap()
+        UITestHelper.leftShiftX(app: app)
+        app.buttons["4"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 0))
+
+        // 10 right-shift by 2 = 4
+        UITestHelper.rightShiftX(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "4", calculator: 0))
+
+        UITestHelper.clear(app: app)
+
+        // 2's complement of 1 = FFFFFFFFFFFFFFFF
+        app.buttons["1"].tap()
+        UITestHelper.twos(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "FFFFFFFFFFFFFFFF", calculator: 0))
+    }
+
+    func testHexChainedArithmetic() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        // A + B = 15 (10 + 11 = 21 = 0x15)
+        app.buttons["A"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["B"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 0))
+
+        // 15 * 2 = 2A (21 * 2 = 42 = 0x2A)
+        UITestHelper.multiply(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "2A", calculator: 0))
+
+        // 2A - A = 20 (42 - 10 = 32 = 0x20)
+        UITestHelper.subtract(app: app)
+        app.buttons["A"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "20", calculator: 0))
+
+        // 20 / 4 = 8 (32 / 4 = 8)
+        UITestHelper.divide(app: app)
+        app.buttons["4"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "8", calculator: 0))
+
+        UITestHelper.clear(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+    }
+
+    func testHexDivisionByZero() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        app.buttons["A"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "A", calculator: 0))
+
+        UITestHelper.divide(app: app)
+        app.buttons["0"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "Error!", calculator: 0))
+
+        UITestHelper.clear(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
+
+        // Verify recovery: 5 + 5 = A
+        app.buttons["5"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["5"].tap()
+        UITestHelper.equals(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "A", calculator: 0))
     }
 }

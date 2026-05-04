@@ -12,12 +12,7 @@ import UIKit
 class BasicHexaCalcUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
     override func tearDownWithError() throws {
@@ -27,6 +22,7 @@ class BasicHexaCalcUITests: XCTestCase {
     func testBasicAppSetup() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         // Launched on Hexadecimal tab
         
@@ -59,6 +55,7 @@ class BasicHexaCalcUITests: XCTestCase {
     func testHexadecimalBasicCalculations() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["1"].tap()
         app.buttons["0"].tap()
@@ -121,6 +118,7 @@ class BasicHexaCalcUITests: XCTestCase {
     func testBinaryBasicCalculations() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         let tabBar = app.tabBars["Tab Bar"]
         
@@ -186,6 +184,7 @@ class BasicHexaCalcUITests: XCTestCase {
     func testDecimalBasicCalculations() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         let tabBar = app.tabBars["Tab Bar"]
         
@@ -246,82 +245,137 @@ class BasicHexaCalcUITests: XCTestCase {
     func testCopyPaste() throws {
         let app = XCUIApplication()
         app.launch()
-        
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
         let tabBar = app.tabBars["Tab Bar"]
-        
+
+        // Handle the iOS system paste-permission dialog whenever it appears
+        addUIInterruptionMonitor(withDescription: "Clipboard access") { alert in
+            let allow = alert.buttons["Allow Paste"]
+            if allow.exists { allow.tap(); return true }
+            return false
+        }
+
         // Hexadecimal
         app.buttons["7"].tap()
-        
         UITestHelper.add(app: app)
-        
         app.buttons["8"].tap()
-        
         UITestHelper.equals(app: app)
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "F", calculator: 0))
-        
+
         UITestHelper.tapResult(app: app, calculator: 0)
-        
-        // Sleep to wait for alert to disappear
         sleep(2)
-        
+
         UITestHelper.clear(app: app)
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
-        
+
         UITestHelper.doubleTapResult(app: app, calculator: 0)
-        
         app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
-        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
-            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
-        }
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "F", calculator: 0))
-        
+
         // Binary
         tabBar.buttons["Binary"].tap()
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1111", calculator: 1))
-        
+
         UITestHelper.tapResult(app: app, calculator: 1)
-        
-        // Sleep to wait for alert to disappear
         sleep(2)
-        
+
         UITestHelper.clear(app: app)
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
-        
+
         UITestHelper.doubleTapResult(app: app, calculator: 1)
-        
         app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
-        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
-            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
-        }
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1111", calculator: 1))
-        
+
         // Decimal
         tabBar.buttons["Decimal"].tap()
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 2))
-        
+
         UITestHelper.tapResult(app: app, calculator: 2)
-        
-        // Sleep to wait for alert to disappear
         sleep(2)
-        
+
         UITestHelper.clear(app: app)
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
-        
+
         UITestHelper.doubleTapResult(app: app, calculator: 2)
-        
         app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
-        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
-            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
-        }
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 2))
+    }
+
+    func testHexToBinaryConversion() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        // Enter FF (255 decimal) on hex tab
+        app.buttons["F"].tap()
+        app.buttons["F"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "FF", calculator: 0))
+
+        let tabBar = app.tabBars["Tab Bar"]
+        tabBar.buttons["Binary"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11111111", calculator: 1))
+
+        tabBar.buttons["Decimal"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "255", calculator: 2))
+    }
+
+    func testDecimalToBinaryConversion() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        let tabBar = app.tabBars["Tab Bar"]
+        tabBar.buttons["Decimal"].tap()
+
+        app.buttons["4"].tap()
+        app.buttons["2"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "42", calculator: 2))
+
+        tabBar.buttons["Binary"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "101010", calculator: 1))
+
+        tabBar.buttons["Hexadecimal"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "2A", calculator: 0))
+    }
+
+    func testNegativeValueConversion() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        let tabBar = app.tabBars["Tab Bar"]
+        tabBar.buttons["Decimal"].tap()
+
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+
+        // Negate to -10
+        UITestHelper.second(app: app)
+        UITestHelper.plusMinus(app: app)
+        UITestHelper.second(app: app)
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "-10", calculator: 2))
+
+        // -10 in two's complement 64-bit hex is FFFFFFFFFFFFFFF6
+        tabBar.buttons["Hexadecimal"].tap()
+
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "FFFFFFFFFFFFFFF6", calculator: 0))
+
+        // -10 in binary: 60 ones followed by 0110
+        tabBar.buttons["Binary"].tap()
+
+        let negTenBinary = String(repeating: "1", count: 60) + "0110"
+        XCTAssert(UITestHelper.assertResult(app: app, expected: negTenBinary, calculator: 1))
     }
 }
