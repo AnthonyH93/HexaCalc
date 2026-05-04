@@ -243,7 +243,7 @@ class DecimalViewController: UIViewController, HistoryButtonHost {
     }
     
     @objc func historyButtonTapped() {
-        performSegue(withIdentifier: "showHistory", sender: true)
+        presentHistory(calculationHistory: calculationHistory)
     }
     
     func copySelected() {

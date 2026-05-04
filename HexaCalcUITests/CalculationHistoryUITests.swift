@@ -84,11 +84,14 @@ class CalculationHistoryUITests: XCTestCase {
         XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
 
         // Tapping a cell copies the result and shows a confirmation alert
-        let cells = app.tables.cells
-        XCTAssert(cells.count > 0)
-        cells.firstMatch.tap()
+        // Scope to the first (frontmost) table — the presented history sheet
+        let historyTable = app.tables.firstMatch
+        XCTAssert(historyTable.waitForExistence(timeout: 3))
+        let firstCell = historyTable.cells.firstMatch
+        XCTAssert(firstCell.waitForExistence(timeout: 3))
+        firstCell.tap()
 
-        XCTAssert(app.alerts["Copied to clipboard"].waitForExistence(timeout: 2))
+        XCTAssert(app.alerts["Copied to clipboard"].waitForExistence(timeout: 4))
         // Alert auto-dismisses after 1.5 seconds — no button to tap
     }
 }

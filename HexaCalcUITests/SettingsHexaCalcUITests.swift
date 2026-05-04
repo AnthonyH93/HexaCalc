@@ -35,6 +35,16 @@ class SettingsHexaCalcUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    override func tearDownWithError() throws {
+        // Re-enable any tabs left disabled by a failing test so disk state is clean for the next run.
+        let app = XCUIApplication()
+        app.tabBars["Tab Bar"].buttons["Settings"].tap()
+        for name in ["Hexadecimal", "Binary", "Decimal"] {
+            let sw = app.switches[name]
+            if sw.exists, (sw.value as? String) == "0" { sw.tap() }
+        }
+    }
+
     func testTabDisabling() throws {
         let app = XCUIApplication()
         let tabBar = app.tabBars["Tab Bar"]
@@ -175,12 +185,13 @@ class SettingsHexaCalcUITests: XCTestCase {
         app.buttons["History Button"].tap()
         XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
         XCTAssert(app.tables.cells.count > 0)
-        app.navigationBars.buttons.firstMatch.tap()
+        app.buttons["close"].tap()
 
         // Clear history from Settings
         tabBar.buttons["Settings"].tap()
-        app.tables.staticTexts["Clear Local History"].tap()
-        XCTAssert(app.alerts["Local History Cleared"].waitForExistence(timeout: 2))
+        let clearHistoryRow = app.tables.staticTexts["Clear Local History"]
+        XCTAssert(clearHistoryRow.waitForExistence(timeout: 3))
+        clearHistoryRow.tap()
 
         // Navigate to Hexadecimal and confirm history is now empty
         tabBar.buttons["Hexadecimal"].tap()

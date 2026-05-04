@@ -34,16 +34,6 @@ class UITestHelper {
     static let plusMinus = "±"
     static let sqrt = "√"
     
-    // Navigates to Settings and re-enables any disabled calculator tabs, saving corrected
-    // preferences to disk so the next app.launch() in a test method sees all tabs present.
-    static func ensureAllTabsEnabled(app: XCUIApplication) {
-        app.tabBars["Tab Bar"].buttons["Settings"].tap()
-        for name in ["Hexadecimal", "Binary", "Decimal"] {
-            let sw = app.switches[name]
-            if sw.exists, (sw.value as? String) == "0" { sw.tap() }
-        }
-    }
-
     // Button tap functions
     static func delete(app: XCUIApplication) {
         app.buttons[delete].tap()

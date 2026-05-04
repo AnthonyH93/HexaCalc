@@ -22,6 +22,11 @@ class CalculationHistoryViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissSelf))
+    }
+
+    @objc private func dismissSelf() {
+        dismiss(animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {

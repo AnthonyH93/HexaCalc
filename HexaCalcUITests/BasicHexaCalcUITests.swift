@@ -13,12 +13,6 @@ class BasicHexaCalcUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
-
-        // Each test does its own app.launch(). Launch here first to fix any stale
-        // disabled-tab preferences on disk so the test’s launch sees all tabs.
-        let app = XCUIApplication()
-        app.launch()
-        UITestHelper.ensureAllTabsEnabled(app: app)
     }
 
     override func tearDownWithError() throws {
@@ -252,82 +246,63 @@ class BasicHexaCalcUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
-        
+
         let tabBar = app.tabBars["Tab Bar"]
-        
+
+        // Handle the iOS system paste-permission dialog whenever it appears
+        addUIInterruptionMonitor(withDescription: "Clipboard access") { alert in
+            let allow = alert.buttons["Allow Paste"]
+            if allow.exists { allow.tap(); return true }
+            return false
+        }
+
         // Hexadecimal
         app.buttons["7"].tap()
-        
         UITestHelper.add(app: app)
-        
         app.buttons["8"].tap()
-        
         UITestHelper.equals(app: app)
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "F", calculator: 0))
-        
+
         UITestHelper.tapResult(app: app, calculator: 0)
-        
-        // Sleep to wait for alert to disappear
         sleep(2)
-        
+
         UITestHelper.clear(app: app)
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 0))
-        
+
         UITestHelper.doubleTapResult(app: app, calculator: 0)
-        
         app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
-        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
-            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
-        }
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "F", calculator: 0))
-        
+
         // Binary
         tabBar.buttons["Binary"].tap()
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1111", calculator: 1))
-        
+
         UITestHelper.tapResult(app: app, calculator: 1)
-        
-        // Sleep to wait for alert to disappear
         sleep(2)
-        
+
         UITestHelper.clear(app: app)
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 1))
-        
+
         UITestHelper.doubleTapResult(app: app, calculator: 1)
-        
         app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
-        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
-            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
-        }
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "1111", calculator: 1))
-        
+
         // Decimal
         tabBar.buttons["Decimal"].tap()
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 2))
-        
+
         UITestHelper.tapResult(app: app, calculator: 2)
-        
-        // Sleep to wait for alert to disappear
         sleep(2)
-        
+
         UITestHelper.clear(app: app)
-        
         XCTAssert(UITestHelper.assertResult(app: app, expected: "0", calculator: 2))
-        
+
         UITestHelper.doubleTapResult(app: app, calculator: 2)
-        
         app.alerts["Paste from Clipboard"].scrollViews.otherElements.buttons["Confirm"].tap()
-        if (app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].exists) {
-            app.alerts["“HexaCalc” would like to paste from “HexaCalc”"].scrollViews.otherElements.buttons["Allow Paste"].tap()
-        }
-        
+
         XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 2))
     }
 
