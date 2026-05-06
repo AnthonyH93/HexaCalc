@@ -247,6 +247,13 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.CopyAndPaste)
     }
 
+    // MARK: History
+
+    func appendToHistory(_ entry: CalculationData) {
+        guard stateController?.convValues.historyEnabled ?? true else { return }
+        calculationHistory.insert(entry, at: 0)
+    }
+
     // MARK: UI helpers
 
     func setupCalculatorTextColour(state: Bool, colourToSet: UIColor) {

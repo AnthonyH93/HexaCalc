@@ -37,6 +37,7 @@ class HexaCalcTabBarController: UITabBarController, StateControllerProtocol {
         stateController?.convValues.copyActionIndex = savedPreferences.copyActionIndex
         stateController?.convValues.pasteActionIndex = savedPreferences.pasteActionIndex
         stateController?.convValues.historyButtonViewIndex = savedPreferences.historyButtonViewIndex
+        stateController?.convValues.historyEnabled = savedPreferences.historyEnabled
         stateController?.convValues.defaultTabIndex = savedPreferences.defaultTabIndex
 
         // Remove disabled tabs before any child VC loads (avoids mutating viewControllers

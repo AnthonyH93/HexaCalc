@@ -16,8 +16,6 @@ class HistoryButtonViewConverter {
             return "Icon Image"
         case 1:
             return "Text Label"
-        case 2:
-            return "Off"
         default:
             return "Icon Image"
         }

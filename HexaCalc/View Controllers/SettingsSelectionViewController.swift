@@ -129,7 +129,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                                      historyEnabled: preferences.historyEnabled)
                     
                     // Set tab bar icon colour to new colour
                     tabBarController?.tabBar.tintColor = colour
@@ -158,7 +159,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: Int32(index), pasteActionIndex: preferences.pasteActionIndex,
-                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                                      historyEnabled: preferences.historyEnabled)
                     stateController?.convValues.copyActionIndex = Int32(index)
                     
                     telemetryManager.sendSettingsSignal(
@@ -177,7 +179,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index),
-                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                                      historyEnabled: preferences.historyEnabled)
                     stateController?.convValues.pasteActionIndex = Int32(index)
                     
                     telemetryManager.sendSettingsSignal(
@@ -196,7 +199,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                                      historyButtonViewIndex: Int32(index), defaultTabIndex: preferences.defaultTabIndex)
+                                                      historyButtonViewIndex: Int32(index), defaultTabIndex: preferences.defaultTabIndex,
+                                                      historyEnabled: preferences.historyEnabled)
                     stateController?.convValues.historyButtonViewIndex = Int32(index)
                     
                     telemetryManager.sendSettingsSignal(
@@ -215,7 +219,8 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: Int32(index))
+                                                      historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: Int32(index),
+                                                      historyEnabled: preferences.historyEnabled)
                     stateController?.convValues.defaultTabIndex = Int32(index)
                     
                     telemetryManager.sendSettingsSignal(

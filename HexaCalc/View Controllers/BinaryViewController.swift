@@ -260,7 +260,7 @@ class BinaryViewController: CalculatorViewController {
 
             let unaryCalculationResult = labelValueBeforeSpaces == "" ? "0" : labelValueBeforeSpaces
             let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .LeftShift, result: unaryCalculationResult, isUnaryOperation: false)
-            calculationHistory.insert(calculationData, at: 0)
+            appendToHistory(calculationData)
         }
     }
 
@@ -292,7 +292,7 @@ class BinaryViewController: CalculatorViewController {
 
             let unaryCalculationResult = labelValueBeforeSpaces == "" ? "0" : labelValueBeforeSpaces
             let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .RightShift, result: unaryCalculationResult, isUnaryOperation: false)
-            calculationHistory.insert(calculationData, at: 0)
+            appendToHistory(calculationData)
         }
     }
 
@@ -322,7 +322,7 @@ class BinaryViewController: CalculatorViewController {
 
         let unaryCalculationResult = onesComplimentString == "" ? "0" : onesComplimentString
         let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "", operation: .Not, result: unaryCalculationResult, isUnaryOperation: true)
-        calculationHistory.insert(calculationData, at: 0)
+        appendToHistory(calculationData)
 
         quickUpdateStateController()
     }
@@ -496,7 +496,7 @@ class BinaryViewController: CalculatorViewController {
                 updateOutputLabel(value: newLabelValue)
 
                 let calculationData = CalculationData(leftValue: leftBinValue, rightValue: rightBinValue, operation: operation, result: labelValueBeforeSpaces, isUnaryOperation: false)
-                calculationHistory.insert(calculationData, at: 0)
+                appendToHistory(calculationData)
 
                 rightBinValue = newLabelValue
             }

@@ -108,6 +108,7 @@ enum TelemetrySettingsAction: String {
     // Calculation history actions
     case History = "historyButtonViewChanged"
     case ClearHistory = "clearLocalHistory"
+    case HistoryEnabled = "historyEnabledSwitchPressed"
     // About the app actions
     case OpenSource = "openSourcePressed"
     case Share = "sharePressed"

@@ -272,7 +272,7 @@ class HexadecimalViewController: CalculatorViewController {
 
         let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
         let calculationData = CalculationData(leftValue: currentValue, rightValue: "", operation: .Not, result: unaryCalculationResult, isUnaryOperation: true)
-        calculationHistory.insert(calculationData, at: 0)
+        appendToHistory(calculationData)
 
         quickUpdateStateController()
     }
@@ -462,7 +462,7 @@ class HexadecimalViewController: CalculatorViewController {
                 updateOutputLabel(value: newLabelValue)
 
                 let calculationData = CalculationData(leftValue: rightHexValue, rightValue: leftHexValue, operation: currentOperation, result: newLabelValue, isUnaryOperation: false)
-                calculationHistory.insert(calculationData, at: 0)
+                appendToHistory(calculationData)
 
                 rightHexValue = newLabelValue
             }

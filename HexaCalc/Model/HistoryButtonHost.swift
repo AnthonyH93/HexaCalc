@@ -50,9 +50,17 @@ extension HistoryButtonHost where Self: UIViewController {
     }
 
     func updateHistoryButton(stateController: StateController?) {
+        let historyEnabled = stateController?.convValues.historyEnabled ?? true
+
+        guard historyEnabled else {
+            historyButton.isHidden = true
+            historyButton.alpha = 1
+            return
+        }
+
         let colour = stateController?.convValues.colour ?? .systemGreen
         let viewIndex = stateController?.convValues.historyButtonViewIndex ?? 0
-        
+
         // Start invisible for fade-in animation
         historyButton.alpha = 0
 
@@ -103,16 +111,10 @@ extension HistoryButtonHost where Self: UIViewController {
             historyButtonWidthConstraint = historyButton.widthAnchor.constraint(equalToConstant: newWidth > 0 ? newWidth : 220)
             historyButtonWidthConstraint?.isActive = true
 
-        case 2:
-            historyButton.isHidden = true
-            // No animation needed when hidden
-            historyButton.alpha = 1
-            return
-
         default:
             fatalError("Unexpected historyButtonViewIndex")
         }
-        
+
         // Fade in to match tab bar transition timing
         UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn) {
             self.historyButton.alpha = 1
