@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8DC73473DF154A1AB56A8AD4 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A663F08D8745E2B3469E80 /* CalculatorViewController.swift */; };
 		9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */; };
 		9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23DB291F6BE300151B44 /* UITestHelper.swift */; };
 		9D6199612D6D82B000F93648 /* DefaultTabViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */; };
@@ -20,7 +21,6 @@
 		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
-		8DC73473DF154A1AB56A8AD4 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A663F08D8745E2B3469E80 /* CalculatorViewController.swift */; };
 		9DC1BDD22F90ACC3003D5CB5 /* HistoryButtonHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC1BDD12F90ACC3003D5CB5 /* HistoryButtonHost.swift */; };
 		9DC242F225E1EE440038DD63 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC242F125E1EE440038DD63 /* UIHelper.swift */; };
 		9DC4DA182944367500D1652E /* BinaryHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */; };
@@ -100,9 +100,9 @@
 		9DEF24A824C553F100701F5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF24A624C553F100701F5B /* LaunchScreen.storyboard */; };
 		9DEF24BE24C5578300701F5B /* DecimalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEF24BD24C5578300701F5B /* DecimalViewController.swift */; };
 		9DF9A11A294C30730074C07D /* SettingsHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */; };
-		CAFE001234567890ABCDEF02 /* CalculationHistoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE001234567890ABCDEF01 /* CalculationHistoryUITests.swift */; };
 		C272D50A28E75D7C00E6C374 /* CalculationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C272D50928E75D7C00E6C374 /* CalculationData.swift */; };
 		C2D2E1C428DDF90A0094DA13 /* CalculationHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D2E1C328DDF90A0094DA13 /* CalculationHistoryViewController.swift */; };
+		CAFE001234567890ABCDEF02 /* CalculationHistoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE001234567890ABCDEF01 /* CalculationHistoryUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,7 +129,6 @@
 		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
-		E8A663F08D8745E2B3469E80 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		9DC1BDD12F90ACC3003D5CB5 /* HistoryButtonHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryButtonHost.swift; sourceTree = "<group>"; };
 		9DC242F125E1EE440038DD63 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHexaCalcUITests.swift; sourceTree = "<group>"; };
@@ -212,9 +211,10 @@
 		9DEF24A924C553F100701F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DEF24BD24C5578300701F5B /* DecimalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalViewController.swift; sourceTree = "<group>"; };
 		9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHexaCalcUITests.swift; sourceTree = "<group>"; };
-		CAFE001234567890ABCDEF01 /* CalculationHistoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryUITests.swift; sourceTree = "<group>"; };
 		C272D50928E75D7C00E6C374 /* CalculationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationData.swift; sourceTree = "<group>"; };
 		C2D2E1C328DDF90A0094DA13 /* CalculationHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryViewController.swift; sourceTree = "<group>"; };
+		CAFE001234567890ABCDEF01 /* CalculationHistoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryUITests.swift; sourceTree = "<group>"; };
+		E8A663F08D8745E2B3469E80 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -840,7 +840,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -848,7 +848,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.3;
+				MARKETING_VERSION = 1.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -862,7 +862,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -870,7 +870,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.3;
+				MARKETING_VERSION = 1.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
