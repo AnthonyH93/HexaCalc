@@ -11,6 +11,8 @@ import UIKit
 @objc protocol HistoryButtonHost: AnyObject {
     var historyButton: UIButton! { get set }
     var historyButtonWidthConstraint: NSLayoutConstraint? { get set }
+    var historyButtonHorizontalConstraint: NSLayoutConstraint? { get set }
+    var historyButtonTopConstraint: NSLayoutConstraint? { get set }
     func historyButtonTapped()
 }
 
@@ -27,32 +29,63 @@ extension HistoryButtonHost where Self: UIViewController {
         if historyButton?.superview != nil {
             return
         }
-        
+
         historyButton = UIButton(type: .system)
         historyButton.translatesAutoresizingMaskIntoConstraints = false
         historyButton.layer.cornerRadius = 22
         historyButton.clipsToBounds = true
-        
+
         view.addSubview(historyButton)
 
         let widthConstraint = historyButton.widthAnchor.constraint(equalToConstant: 44)
         widthConstraint.isActive = true
         historyButtonWidthConstraint = widthConstraint
 
-        NSLayoutConstraint.activate([
-            historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            historyButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            historyButton.heightAnchor.constraint(equalToConstant: 44)
-        ])
+        let horizontalConstraint = historyButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        horizontalConstraint.isActive = true
+        historyButtonHorizontalConstraint = horizontalConstraint
+
+        let topConstraint = historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
+        topConstraint.isActive = true
+        historyButtonTopConstraint = topConstraint
+
+        historyButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         historyButton.accessibilityIdentifier = "History Button"
         historyButton.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
     }
 
+    func repositionHistoryButton(for targetSize: CGSize? = nil) {
+        guard historyButton?.superview != nil else { return }
+
+        let size = targetSize ?? view.bounds.size
+        let isLandscape = size.width > size.height
+
+        historyButtonTopConstraint?.isActive = false
+        let topConstraint: NSLayoutConstraint
+        if isLandscape {
+            topConstraint = historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+        } else {
+            topConstraint = historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
+        }
+        topConstraint.isActive = true
+        historyButtonTopConstraint = topConstraint
+    }
+
     func updateHistoryButton(stateController: StateController?) {
+        let historyEnabled = stateController?.convValues.historyEnabled ?? true
+
+        guard historyEnabled else {
+            historyButton.isHidden = true
+            historyButton.alpha = 1
+            return
+        }
+
+        repositionHistoryButton()
+
         let colour = stateController?.convValues.colour ?? .systemGreen
         let viewIndex = stateController?.convValues.historyButtonViewIndex ?? 0
-        
+
         // Start invisible for fade-in animation
         historyButton.alpha = 0
 
@@ -103,16 +136,10 @@ extension HistoryButtonHost where Self: UIViewController {
             historyButtonWidthConstraint = historyButton.widthAnchor.constraint(equalToConstant: newWidth > 0 ? newWidth : 220)
             historyButtonWidthConstraint?.isActive = true
 
-        case 2:
-            historyButton.isHidden = true
-            // No animation needed when hidden
-            historyButton.alpha = 1
-            return
-
         default:
             fatalError("Unexpected historyButtonViewIndex")
         }
-        
+
         // Fade in to match tab bar transition timing
         UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn) {
             self.historyButton.alpha = 1

@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                           "Calculation History",
                           "About the app",
                           "Support" ]
-    let rowsPerSection = [4, 2, 2, 2, 4, 3]
+    let rowsPerSection = [4, 2, 2, 3, 4, 3]
     
     let supportURLs = [ "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
                         "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
@@ -155,6 +155,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
         return nil
     }
+
+    // Setup section footers
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 3 && !preferences.historyEnabled {
+            return "Enable Calculation History to configure the button appearance."
+        }
+        return nil
+    }
     
     // Build table cell layout
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -234,18 +242,30 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         // Calculation history section
         case 3:
-            // Select history button display preference
+            // History enabled toggle
             if indexPath.row == 0 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "HistorySwitch", for: indexPath) as! SwitchTableViewCell
+                cell.configure(isOn: preferences.historyEnabled, colour: self.preferences.colour)
+                cell.textLabel?.text = "Calculation History"
+                cell.self.cellSwitch.addTarget(self, action: #selector(self.historySwitchPressed), for: .touchUpInside)
+                return cell
+            }
+            // Select history button display preference
+            else if indexPath.row == 1 {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "HistoryButtonSelection", for: indexPath) as! SelectionSummaryTableViewCell
                 cell.configure(rightText: HistoryButtonViewConverter.getViewFromIndex(index: Int(self.preferences.historyButtonViewIndex)), colour: UIColor.systemGray)
                 cell.textLabel?.text = "History Button View"
+                cell.isUserInteractionEnabled = preferences.historyEnabled
+                cell.alpha = preferences.historyEnabled ? 1.0 : 0.4
                 return cell
             }
             // Clear local history
             else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "ClearHistory", for: indexPath) as! TextTableViewCell
                 cell.textLabel?.text = "Clear Local History"
-                cell.textLabel?.textColor = preferences.colour
+                cell.textLabel?.textColor = preferences.historyEnabled ? preferences.colour : .systemGray
+                cell.isUserInteractionEnabled = preferences.historyEnabled
+                cell.alpha = preferences.historyEnabled ? 1.0 : 0.4
                 return cell
             }
         // About the app section
@@ -346,36 +366,37 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         // Calculation history operations
         if indexPath.section == 3 {
+            // Row 0 is the history enabled switch — handled by IBAction, no navigation needed
             // Navigate to history button selection view
-            if indexPath.row == 0 {
+            if indexPath.row == 1 {
                 if let _ = tableView.cellForRow(at: indexPath), let destinationViewController = navigationController?.storyboard?.instantiateViewController(withIdentifier: SettingsSelectionViewController.identifier) as? SettingsSelectionViewController {
-                    destinationViewController.selectionList = ["Icon Image", "Text Label", "Off"]
+                    destinationViewController.selectionList = ["Icon Image", "Text Label"]
                     destinationViewController.preferences = self.preferences
                     destinationViewController.selectedIndex = Int(self.preferences.historyButtonViewIndex)
                     destinationViewController.selectionType = SelectionType.historyButtonView
                     destinationViewController.stateController = stateController
                     destinationViewController.name = "History Button View"
-                    
+
                     // Navigate to new view
                     navigationController?.pushViewController(destinationViewController, animated: true)
                 }
             }
             // Clear local history
-            else {
+            else if indexPath.row == 2 {
                 // Set the flag to 7 (111 in binary)
                 stateController?.convValues.clearLocalHistory = 7
-                
+
                 // Tell the user that the history was cleared
                 let alert = UIAlertController(title: "Local History Cleared", message: "The local calculation history for all calculators has been cleared.", preferredStyle: .alert)
-                
+
                 present(alert, animated: true) {
                     tableView.deselectRow(at: indexPath, animated: true)
                 }
-                
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     alert.dismiss(animated: true, completion: nil)
                 }
-                
+
                 telemetryManager.sendSettingsSignal(
                     section: TelemetrySettingsSection.History,
                     action: TelemetrySettingsAction.ClearHistory
@@ -440,7 +461,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               hexTabState: sender.isOn, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                              historyEnabled: preferences.historyEnabled)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(0, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -459,7 +481,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               hexTabState: preferences.hexTabState, binTabState: sender.isOn, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                              historyEnabled: preferences.historyEnabled)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(1, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -478,7 +501,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: sender.isOn,
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                              historyEnabled: preferences.historyEnabled)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(2, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -498,7 +522,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
                                               setCalculatorTextColour: sender.isOn,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
-                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex)
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                              historyEnabled: preferences.historyEnabled)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = sender.isOn
         self.preferences = userPreferences
@@ -512,6 +537,30 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         )
     }
     
+    @IBAction func historySwitchPressed(_ sender: UISwitch) {
+        let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                              setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                              historyEnabled: sender.isOn)
+        DataPersistence.savePreferences(userPreferences: userPreferences)
+        stateController?.convValues.historyEnabled = sender.isOn
+        if !sender.isOn {
+            stateController?.convValues.clearLocalHistory = 7
+        }
+        self.preferences = userPreferences
+        self.tableView.reloadSections([3], with: .none)
+
+        telemetryManager.sendSettingsSignal(
+            section: TelemetrySettingsSection.History,
+            action: TelemetrySettingsAction.HistoryEnabled,
+            parameters: [
+                "switchState": "\(sender.isOn)"
+            ]
+        )
+    }
+
     //MARK: Private functions
     
     // Prompt user to send feedback email

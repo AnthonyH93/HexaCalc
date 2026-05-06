@@ -21,6 +21,7 @@ struct convVals{
     var copyActionIndex: Int32 = 0
     var pasteActionIndex: Int32 = 1
     var historyButtonViewIndex: Int32 = 0
+    var historyEnabled: Bool = true
     // Acts as a binary flag (1 bit for each calculator)
     var clearLocalHistory: Int32 = 0
     var defaultTabIndex: Int32 = 3

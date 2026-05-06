@@ -20,6 +20,8 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
     // MARK: HistoryButtonHost
     var historyButton: UIButton!
     var historyButtonWidthConstraint: NSLayoutConstraint?
+    var historyButtonHorizontalConstraint: NSLayoutConstraint?
+    var historyButtonTopConstraint: NSLayoutConstraint?
 
     // MARK: Shared state
     var stateController: StateController?
@@ -106,6 +108,9 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
             NSLayoutConstraint.deactivate(currentConstraints)
             currentConstraints.removeAll()
         }
+        coordinator.animate(alongsideTransition: { _ in
+            self.repositionHistoryButton(for: size)
+        })
     }
 
     // MARK: viewWillAppear helper
@@ -245,6 +250,13 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
         alert.addAction(UIAlertAction(title: "Paste", style: .default, handler: { _ in self.pasteFromClipboard() }))
         present(alert, animated: true)
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.CopyAndPaste)
+    }
+
+    // MARK: History
+
+    func appendToHistory(_ entry: CalculationData) {
+        guard stateController?.convValues.historyEnabled ?? true else { return }
+        calculationHistory.insert(entry, at: 0)
     }
 
     // MARK: UI helpers

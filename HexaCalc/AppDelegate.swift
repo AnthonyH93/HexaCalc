@@ -53,7 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             copyActionIndex: loadedPreferences.copyActionIndex,
                             pasteActionIndex: loadedPreferences.pasteActionIndex,
                             historyButtonViewIndex: 0,
-                            defaultTabIndex: 3
+                            defaultTabIndex: 3,
+                            historyEnabled: loadedPreferences.historyEnabled
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
@@ -78,7 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             copyActionIndex: loadedPreferences.copyActionIndex,
                             pasteActionIndex: loadedPreferences.pasteActionIndex,
                             historyButtonViewIndex: 0,
-                            defaultTabIndex: 3
+                            defaultTabIndex: 3,
+                            historyEnabled: loadedPreferences.historyEnabled
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UITabBar.appearance().tintColor = UIColor.systemGreen

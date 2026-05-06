@@ -288,7 +288,7 @@ class DecimalViewController: CalculatorViewController {
                     if (Double(result)! > 999999999) {
                         let unaryCalculationResult = result == "" ? "0" : result
                         let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
-                        calculationHistory.insert(calculationData, at: 0)
+                        appendToHistory(calculationData)
                         leftValue = result
                         result = "\(Double(result)!.scientificFormatted)"
                         updateOutputLabel(value: result)
@@ -301,7 +301,7 @@ class DecimalViewController: CalculatorViewController {
 
                     let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
                     let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
-                    calculationHistory.insert(calculationData, at: 0)
+                    appendToHistory(calculationData)
                     leftValue = result
                     quickUpdateStateController()
                 }
@@ -335,7 +335,7 @@ class DecimalViewController: CalculatorViewController {
                 if (Double(result)! > 999999999) {
                     let unaryCalculationResult = result == "" ? "0" : result
                     let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
-                    calculationHistory.insert(calculationData, at: 0)
+                    appendToHistory(calculationData)
                     leftValue = result
                     result = "\(Double(result)!.scientificFormatted)"
                     updateOutputLabel(value: result)
@@ -348,7 +348,7 @@ class DecimalViewController: CalculatorViewController {
 
                 let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
                 let calculationData = CalculationData(leftValue: leftValue, rightValue: "", operation: .Sqrt, result: unaryCalculationResult, isUnaryOperation: true)
-                calculationHistory.insert(calculationData, at: 0)
+                appendToHistory(calculationData)
                 leftValue = result
                 quickUpdateStateController()
             }
@@ -481,7 +481,7 @@ class DecimalViewController: CalculatorViewController {
                 }
 
                 let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result, isUnaryOperation: false)
-                calculationHistory.insert(calculationData, at: 0)
+                appendToHistory(calculationData)
 
                 leftValue = result
 
