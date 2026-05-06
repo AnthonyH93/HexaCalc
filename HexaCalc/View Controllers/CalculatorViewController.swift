@@ -77,6 +77,8 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
         fatalError("Subclass must override updateThemeColour(_:)")
     }
 
+    var historyButtonAnchorLabel: UILabel? { outputLabel }
+
     var outputLabelAccessibilityIdentifier: String {
         fatalError("Subclass must override outputLabelAccessibilityIdentifier")
     }

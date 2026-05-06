@@ -18,6 +18,10 @@ import UIKit
 
 extension HistoryButtonHost where Self: UIViewController {
 
+    // Subclasses that own an output label can return it here so
+    // repositionHistoryButton can anchor below it on short screens.
+    var historyButtonAnchorLabel: UILabel? { nil }
+
     func presentHistory(calculationHistory: [CalculationData]) {
         guard let historyVC = storyboard?.instantiateViewController(withIdentifier: "CalculationHistoryViewController") as? CalculationHistoryViewController else { return }
         historyVC.calculationHistory = calculationHistory
@@ -65,6 +69,10 @@ extension HistoryButtonHost where Self: UIViewController {
         let topConstraint: NSLayoutConstraint
         if isLandscape {
             topConstraint = historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+        } else if size.height <= 736, let anchorLabel = historyButtonAnchorLabel {
+            // On short iPhones (≤736pt: iPhone 8, SE, 7/8 Plus) the output label sits
+            // high enough that view.topAnchor+60 lands inside it — anchor below instead.
+            topConstraint = historyButton.topAnchor.constraint(equalTo: anchorLabel.bottomAnchor, constant: 8)
         } else {
             topConstraint = historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
         }
