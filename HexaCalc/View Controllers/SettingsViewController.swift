@@ -155,6 +155,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
         return nil
     }
+
+    // Setup section footers
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 3 && !preferences.historyEnabled {
+            return "Enable Calculation History to configure the button appearance."
+        }
+        return nil
+    }
     
     // Build table cell layout
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
