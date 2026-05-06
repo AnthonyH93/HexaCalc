@@ -21,6 +21,7 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
     var historyButton: UIButton!
     var historyButtonWidthConstraint: NSLayoutConstraint?
     var historyButtonHorizontalConstraint: NSLayoutConstraint?
+    var historyButtonTopConstraint: NSLayoutConstraint?
 
     // MARK: Shared state
     var stateController: StateController?
@@ -107,6 +108,9 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
             NSLayoutConstraint.deactivate(currentConstraints)
             currentConstraints.removeAll()
         }
+        coordinator.animate(alongsideTransition: { _ in
+            self.repositionHistoryButton(for: size)
+        })
     }
 
     // MARK: viewWillAppear helper

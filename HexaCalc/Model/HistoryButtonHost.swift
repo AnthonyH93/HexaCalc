@@ -12,6 +12,7 @@ import UIKit
     var historyButton: UIButton! { get set }
     var historyButtonWidthConstraint: NSLayoutConstraint? { get set }
     var historyButtonHorizontalConstraint: NSLayoutConstraint? { get set }
+    var historyButtonTopConstraint: NSLayoutConstraint? { get set }
     func historyButtonTapped()
 }
 
@@ -44,13 +45,31 @@ extension HistoryButtonHost where Self: UIViewController {
         horizontalConstraint.isActive = true
         historyButtonHorizontalConstraint = horizontalConstraint
 
-        NSLayoutConstraint.activate([
-            historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            historyButton.heightAnchor.constraint(equalToConstant: 44)
-        ])
+        let topConstraint = historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
+        topConstraint.isActive = true
+        historyButtonTopConstraint = topConstraint
+
+        historyButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
 
         historyButton.accessibilityIdentifier = "History Button"
         historyButton.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
+    }
+
+    func repositionHistoryButton(for targetSize: CGSize? = nil) {
+        guard historyButton?.superview != nil else { return }
+
+        let size = targetSize ?? view.bounds.size
+        let isLandscape = size.width > size.height
+
+        historyButtonTopConstraint?.isActive = false
+        let topConstraint: NSLayoutConstraint
+        if isLandscape {
+            topConstraint = historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+        } else {
+            topConstraint = historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
+        }
+        topConstraint.isActive = true
+        historyButtonTopConstraint = topConstraint
     }
 
     func updateHistoryButton(stateController: StateController?) {
@@ -61,6 +80,8 @@ extension HistoryButtonHost where Self: UIViewController {
             historyButton.alpha = 1
             return
         }
+
+        repositionHistoryButton()
 
         let colour = stateController?.convValues.colour ?? .systemGreen
         let viewIndex = stateController?.convValues.historyButtonViewIndex ?? 0
