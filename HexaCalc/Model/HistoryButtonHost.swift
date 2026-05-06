@@ -45,31 +45,12 @@ extension HistoryButtonHost where Self: UIViewController {
         historyButtonHorizontalConstraint = horizontalConstraint
 
         NSLayoutConstraint.activate([
-            historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             historyButton.heightAnchor.constraint(equalToConstant: 44)
         ])
 
         historyButton.accessibilityIdentifier = "History Button"
         historyButton.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
-    }
-
-    // Moves the button to the leading edge on iPad landscape to avoid overlapping the output label.
-    func repositionHistoryButton(for targetSize: CGSize? = nil) {
-        guard historyButton?.superview != nil else { return }
-
-        let size = targetSize ?? view.bounds.size
-        let isIPadLandscape = UIDevice.current.userInterfaceIdiom == .pad && size.width > size.height
-
-        historyButtonHorizontalConstraint?.isActive = false
-
-        let newConstraint: NSLayoutConstraint
-        if isIPadLandscape {
-            newConstraint = historyButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
-        } else {
-            newConstraint = historyButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        }
-        newConstraint.isActive = true
-        historyButtonHorizontalConstraint = newConstraint
     }
 
     func updateHistoryButton(stateController: StateController?) {
@@ -80,8 +61,6 @@ extension HistoryButtonHost where Self: UIViewController {
             historyButton.alpha = 1
             return
         }
-
-        repositionHistoryButton()
 
         let colour = stateController?.convValues.colour ?? .systemGreen
         let viewIndex = stateController?.convValues.historyButtonViewIndex ?? 0
