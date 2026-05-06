@@ -33,8 +33,8 @@ class CalculationHistoryUITests: XCTestCase {
             historyButtonViewCell.tap()
             app.tables.staticTexts["Icon Image"].tap()
             // If already on Icon Image the selection screen won't auto-pop — go back manually
-            if app.tables.staticTexts["Icon Image"].waitForExistence(timeout: 1) {
-                app.navigationBars.buttons["Settings"].tap()
+            if app.navigationBars["History Button View"].waitForExistence(timeout: 1) {
+                app.navigationBars["History Button View"].buttons["Settings"].tap()
             }
         }
     }
