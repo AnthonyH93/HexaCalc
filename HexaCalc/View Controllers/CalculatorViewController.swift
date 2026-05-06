@@ -20,6 +20,7 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
     // MARK: HistoryButtonHost
     var historyButton: UIButton!
     var historyButtonWidthConstraint: NSLayoutConstraint?
+    var historyButtonHorizontalConstraint: NSLayoutConstraint?
 
     // MARK: Shared state
     var stateController: StateController?
@@ -105,6 +106,9 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
         if UIDevice.current.userInterfaceIdiom == .pad {
             NSLayoutConstraint.deactivate(currentConstraints)
             currentConstraints.removeAll()
+            coordinator.animate(alongsideTransition: { _ in
+                self.repositionHistoryButton(for: size)
+            })
         }
     }
 
