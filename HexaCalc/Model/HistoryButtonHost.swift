@@ -13,13 +13,14 @@ import UIKit
     var historyButtonWidthConstraint: NSLayoutConstraint? { get set }
     var historyButtonHorizontalConstraint: NSLayoutConstraint? { get set }
     var historyButtonTopConstraint: NSLayoutConstraint? { get set }
+    // Declared here (not just in the extension) so repositionHistoryButton
+    // gets dynamic dispatch and sees the CalculatorViewController override.
+    var historyButtonAnchorLabel: UILabel? { get }
     func historyButtonTapped()
 }
 
 extension HistoryButtonHost where Self: UIViewController {
 
-    // Subclasses that own an output label can return it here so
-    // repositionHistoryButton can anchor below it on short screens.
     var historyButtonAnchorLabel: UILabel? { nil }
 
     func presentHistory(calculationHistory: [CalculationData]) {
