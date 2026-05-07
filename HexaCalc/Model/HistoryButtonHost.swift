@@ -67,12 +67,7 @@ extension HistoryButtonHost where Self: UIViewController {
 
         historyButtonTopConstraint?.isActive = false
         let topConstraint: NSLayoutConstraint
-        if isLandscape && UIDevice.current.userInterfaceIdiom == .pad && size.height <= 768,
-           let anchorLabel = historyButtonAnchorLabel {
-            // iPad mini landscape (744–768pt tall) — label still sits near the top,
-            // same overlap as short iPhones; anchor below the label instead.
-            topConstraint = historyButton.topAnchor.constraint(equalTo: anchorLabel.bottomAnchor, constant: 8)
-        } else if isLandscape {
+        if isLandscape {
             topConstraint = historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
         } else if size.height <= 736, let anchorLabel = historyButtonAnchorLabel {
             // Short iPhones (≤736pt: iPhone 8, SE, 7/8 Plus) in portrait.
