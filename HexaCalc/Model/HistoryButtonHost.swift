@@ -13,15 +13,11 @@ import UIKit
     var historyButtonWidthConstraint: NSLayoutConstraint? { get set }
     var historyButtonHorizontalConstraint: NSLayoutConstraint? { get set }
     var historyButtonTopConstraint: NSLayoutConstraint? { get set }
-    // Declared here (not just in the extension) so repositionHistoryButton
-    // gets dynamic dispatch and sees the CalculatorViewController override.
-    var historyButtonAnchorLabel: UILabel? { get }
     func historyButtonTapped()
 }
 
 extension HistoryButtonHost where Self: UIViewController {
 
-    var historyButtonAnchorLabel: UILabel? { nil }
 
     func presentHistory(calculationHistory: [CalculationData]) {
         guard let historyVC = storyboard?.instantiateViewController(withIdentifier: "CalculationHistoryViewController") as? CalculationHistoryViewController else { return }
@@ -68,11 +64,12 @@ extension HistoryButtonHost where Self: UIViewController {
 
         historyButtonTopConstraint?.isActive = false
         let topConstraint: NSLayoutConstraint
-        if isLandscape {
+        if isLandscape || size.height <= 736 {
+            // Landscape (all devices) and short iPhone portrait (≤736pt: SE, 8, 7/8 Plus):
+            // anchor to safeAreaLayoutGuide so the button sits in the corner above the
+            // output label rather than through the middle of it (view.topAnchor+60) or
+            // below it (which would land inside the button grid on small screens).
             topConstraint = historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
-        } else if size.height <= 736, let anchorLabel = historyButtonAnchorLabel {
-            // Short iPhones (≤736pt: iPhone 8, SE, 7/8 Plus) in portrait.
-            topConstraint = historyButton.topAnchor.constraint(equalTo: anchorLabel.bottomAnchor, constant: 8)
         } else {
             topConstraint = historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
         }
