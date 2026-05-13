@@ -28,9 +28,47 @@ class BinaryHexaCalcUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func testOperationOrder() throws {
+        let app = XCUIApplication()
+
+        // 1010 | 0001 & 0011 = should give 1011 (AND binds tighter than OR)
+        // 0001 & 0011 = 0001, then 1010 | 0001 = 1011 (decimal 11)
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        UITestHelper.or(app: app)
+        app.buttons["0"].tap()
+        app.buttons["0"].tap()
+        app.buttons["0"].tap()
+        app.buttons["1"].tap()
+        UITestHelper.and(app: app)
+        app.buttons["0"].tap()
+        app.buttons["0"].tap()
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1011", calculator: 1))
+
+        UITestHelper.clear(app: app)
+
+        // 1010 & 1100 = should still give 1000 (regression)
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        UITestHelper.and(app: app)
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        app.buttons["0"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1000", calculator: 1))
+    }
+
     func testDeletion() throws {
         let app = XCUIApplication()
-        
+
         app.buttons["1"].tap()
         for _ in 0..<5 {
             app.buttons["0"].tap()

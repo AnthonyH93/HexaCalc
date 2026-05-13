@@ -28,9 +28,44 @@ class DecimalHexaCalcUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func testOperationOrder() throws {
+        let app = XCUIApplication()
+
+        // 1 + 2 * 3 = should give 7 (not 9)
+        app.buttons["1"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.multiply(app: app)
+        app.buttons["3"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "7", calculator: 2))
+
+        UITestHelper.clear(app: app)
+
+        // 1 + 2 * 3 + 4 = should give 11 (not 13)
+        app.buttons["1"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.multiply(app: app)
+        app.buttons["3"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["4"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 2))
+
+        UITestHelper.clear(app: app)
+
+        // 5 + 3 = should still give 8 (regression)
+        app.buttons["5"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["3"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "8", calculator: 2))
+    }
+
     func testDeletion() throws {
         let app = XCUIApplication()
-        
+
         app.buttons["1"].tap()
         for _ in 0..<5 {
             app.buttons["0"].tap()

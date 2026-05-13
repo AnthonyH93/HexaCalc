@@ -150,6 +150,7 @@ class HexadecimalViewController: CalculatorViewController {
                 leftValueHex = ""
                 rightValue = ""
                 currentOperation = .NULL
+                operationStack.removeAll()
             }
             else {
                 if (newLabelValue!.contains("-")) {
@@ -157,6 +158,7 @@ class HexadecimalViewController: CalculatorViewController {
                 }
                 runningNumber = newLabelValue ?? "0"
                 currentOperation = .NULL
+                operationStack.removeAll()
                 updateOutputLabel(value: newLabelValue ?? "0")
             }
         }
@@ -172,6 +174,7 @@ class HexadecimalViewController: CalculatorViewController {
         rightValue = ""
         result = ""
         currentOperation = .NULL
+        operationStack.removeAll()
         updateOutputLabel(value: "0")
 
         stateController?.convValues.largerThan64Bits = false
@@ -322,7 +325,7 @@ class HexadecimalViewController: CalculatorViewController {
     }
 
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        operation(operation: currentOperation)
+        operation(operation: currentOperation, isEquals: true)
 
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
         ReviewManager.incrementReviewWorthyCount()
@@ -330,7 +333,7 @@ class HexadecimalViewController: CalculatorViewController {
 
     //MARK: Private Functions
 
-    private func operation(operation: Operation) {
+    private func operation(operation: Operation, isEquals: Bool = false) {
 
         if currentOperation != .NULL {
 
@@ -340,6 +343,22 @@ class HexadecimalViewController: CalculatorViewController {
 
             let binRightValue = hexToBin(hexToConvert: runningNumber)
             if binRightValue != "" {
+
+                // Defer evaluation when the incoming operator has strictly higher precedence
+                if !isEquals && precedence(of: operation) > precedence(of: currentOperation) {
+                    operationStack.append((leftValue: leftValue, operation: currentOperation))
+                    if binRightValue.first == "1" && binRightValue.count == 64 {
+                        leftValue = String(Int64(bitPattern: UInt64(binRightValue, radix: 2)!))
+                    } else {
+                        leftValue = String(Int(binRightValue, radix: 2)!)
+                    }
+                    leftValueHex = runningNumber
+                    rightHexValue = runningNumber
+                    runningNumber = ""
+                    currentOperation = operation
+                    return
+                }
+
                 if (binRightValue.first == "1" && binRightValue.count == 64) {
                     rightValue = String(Int64(bitPattern: UInt64(binRightValue, radix: 2)!))
                 }
@@ -352,73 +371,45 @@ class HexadecimalViewController: CalculatorViewController {
 
                 case .Add:
                     let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
-                    if (overCheck.overflow) {
+                    if overCheck.overflow {
                         result = "Error! Integer Overflow!"
-                        updateOutputLabel(value: result)
-                        currentOperation = operation
-                        stateController?.convValues.largerThan64Bits = true
-                        stateController?.convValues.decimalVal = "0"
-                        return
-                    }
-                    else {
+                    } else {
                         result = "\(Int(leftValue)! + Int(rightValue)!)"
                     }
 
                 case .Subtract:
                     let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
-                    if (overCheck.overflow) {
+                    if overCheck.overflow {
                         result = "Error! Integer Overflow!"
-                        updateOutputLabel(value: result)
-                        currentOperation = operation
-                        stateController?.convValues.largerThan64Bits = true
-                        stateController?.convValues.decimalVal = "0"
-                        return
-                    }
-                    else {
+                    } else {
                         result = "\(Int(leftValue)! - Int(rightValue)!)"
                     }
 
                 case .Multiply:
                     let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
-                    if (overCheck.overflow) {
+                    if overCheck.overflow {
                         result = "Error! Integer Overflow!"
-                        updateOutputLabel(value: result)
-                        currentOperation = operation
-                        stateController?.convValues.largerThan64Bits = true
-                        stateController?.convValues.decimalVal = "0"
-                        return
-                    }
-                    else {
+                    } else {
                         result = "\(Int(leftValue)! * Int(rightValue)!)"
                     }
 
                 case .Modulus:
                     if Int(rightValue)! == 0 {
                         result = "Error!"
-                        updateOutputLabel(value: result)
-                        currentOperation = operation
-                        return
+                    } else {
+                        result = "\(Int(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!)))"
                     }
-                    result = "\(Int(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!)))"
 
                 case .Divide:
                     if Int(rightValue)! == 0 {
                         result = "Error!"
-                        updateOutputLabel(value: result)
-                        currentOperation = operation
-                        return
-                    }
-                    let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
-                    if (overCheck.overflow) {
-                        result = "Error! Integer Overflow!"
-                        updateOutputLabel(value: result)
-                        currentOperation = operation
-                        stateController?.convValues.largerThan64Bits = true
-                        stateController?.convValues.decimalVal = "0"
-                        return
-                    }
-                    else {
-                        result = "\(Int(leftValue)! / Int(rightValue)!)"
+                    } else {
+                        let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
+                        if overCheck.overflow {
+                            result = "Error! Integer Overflow!"
+                        } else {
+                            result = "\(Int(leftValue)! / Int(rightValue)!)"
+                        }
                     }
 
                 case .LeftShift:
@@ -450,6 +441,123 @@ class HexadecimalViewController: CalculatorViewController {
                     fatalError("Unexpected Operation...")
                 }
 
+                if result.contains("Error") {
+                    operationStack.removeAll()
+                    updateOutputLabel(value: result)
+                    currentOperation = isEquals ? .NULL : operation
+                    if result.contains("Overflow") {
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
+                    }
+                    return
+                }
+
+                leftValue = result
+
+                // Drain lower-or-equal-precedence stacked operations
+                let shouldDrain: (Operation) -> Bool = isEquals
+                    ? { _ in true }
+                    : { topOp in self.precedence(of: operation) <= self.precedence(of: topOp) }
+
+                while !operationStack.isEmpty && !result.contains("Error") {
+                    let top = operationStack.last!
+                    guard shouldDrain(top.operation) else { break }
+                    operationStack.removeLast()
+                    rightValue = result
+                    leftValue = top.leftValue
+
+                    switch (top.operation) {
+
+                    case .Add:
+                        let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
+                        if overCheck.overflow {
+                            result = "Error! Integer Overflow!"
+                        } else {
+                            result = "\(Int(leftValue)! + Int(rightValue)!)"
+                        }
+
+                    case .Subtract:
+                        let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
+                        if overCheck.overflow {
+                            result = "Error! Integer Overflow!"
+                        } else {
+                            result = "\(Int(leftValue)! - Int(rightValue)!)"
+                        }
+
+                    case .Multiply:
+                        let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
+                        if overCheck.overflow {
+                            result = "Error! Integer Overflow!"
+                        } else {
+                            result = "\(Int(leftValue)! * Int(rightValue)!)"
+                        }
+
+                    case .Modulus:
+                        if Int(rightValue)! == 0 {
+                            result = "Error!"
+                        } else {
+                            result = "\(Int(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!)))"
+                        }
+
+                    case .Divide:
+                        if Int(rightValue)! == 0 {
+                            result = "Error!"
+                        } else {
+                            let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
+                            if overCheck.overflow {
+                                result = "Error! Integer Overflow!"
+                            } else {
+                                result = "\(Int(leftValue)! / Int(rightValue)!)"
+                            }
+                        }
+
+                    case .LeftShift:
+                        result = "\(Int(leftValue)! << Int(rightValue)!)"
+
+                    case .RightShift:
+                        let leftInt = Int(leftValue)!
+                        let leftHexStr = leftInt < 0
+                            ? String(UInt64(bitPattern: Int64(leftInt)), radix: 16).uppercased()
+                            : String(leftInt, radix: 16).uppercased()
+                        let currValue = hexToBin(hexToConvert: leftHexStr)
+                        let rightShiftRight = Int(rightValue)!
+                        if rightShiftRight <= 0 {
+                            result = leftValue
+                        } else if rightShiftRight > currValue.count {
+                            result = "0"
+                        } else {
+                            result = String(Int(UInt64(currValue.dropLast(rightShiftRight), radix: 2)!))
+                        }
+
+                    case .AND:
+                        result = "\(Int(leftValue)! & Int(rightValue)!)"
+
+                    case .OR:
+                        result = "\(Int(leftValue)! | Int(rightValue)!)"
+
+                    case .XOR:
+                        result = "\(Int(leftValue)! ^ Int(rightValue)!)"
+
+                    default:
+                        fatalError("Unexpected Operation...")
+                    }
+
+                    if !result.contains("Error") {
+                        leftValue = result
+                    }
+                }
+
+                if result.contains("Error") {
+                    operationStack.removeAll()
+                    updateOutputLabel(value: result)
+                    currentOperation = isEquals ? .NULL : operation
+                    if result.contains("Overflow") {
+                        stateController?.convValues.largerThan64Bits = true
+                        stateController?.convValues.decimalVal = "0"
+                    }
+                    return
+                }
+
                 leftValue = result
                 setupStateControllerValues()
 
@@ -466,7 +574,8 @@ class HexadecimalViewController: CalculatorViewController {
 
                 rightHexValue = newLabelValue
             }
-            currentOperation = operation
+            currentOperation = isEquals ? .NULL : operation
+            if isEquals { operationStack.removeAll() }
         }
         else {
             rightHexValue = runningNumber

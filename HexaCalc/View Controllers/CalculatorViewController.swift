@@ -33,6 +33,7 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
     var currentConstraints: [NSLayoutConstraint] = []
     var currentlyRecognizingDoubleTap = false
     var calculationHistory: [CalculationData] = []
+    var operationStack: [(leftValue: String, operation: Operation)] = []
     let telemetryManager = TelemetryManager.sharedTelemetryManager
 
     // MARK: Abstract – subclasses must override
@@ -83,6 +84,21 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
 
     var defaultLabelValue: String {
         fatalError("Subclass must override defaultLabelValue")
+    }
+
+    // MARK: Operator precedence (shared by all calculator tabs)
+
+    func precedence(of op: Operation) -> Int {
+        switch op {
+        case .Multiply, .Divide, .Modulus: return 5
+        case .Add, .Subtract:              return 4
+        case .LeftShift, .RightShift:      return 3
+        case .AND:                         return 2
+        case .XOR:                         return 1
+        case .OR:                          return 0
+        case .Exp:                         return 5
+        default:                           return -1
+        }
     }
 
     // MARK: Common lifecycle
