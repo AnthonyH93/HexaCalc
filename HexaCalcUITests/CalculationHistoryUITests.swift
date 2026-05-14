@@ -93,7 +93,14 @@ class CalculationHistoryUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+        let tabBar = app.tabBars["Tab Bar"]
+
+        // Ensure history is enabled — UserDefaults may persist disabled state from prior runs
+        tabBar.buttons["Settings"].tap()
+        let historySw = app.switches["Calculation History"]
+        if (historySw.value as? String) == "0" { historySw.tap() }
+
+        tabBar.buttons["Hexadecimal"].tap()
 
         // Perform a calculation to ensure history is non-empty
         app.buttons["A"].tap()

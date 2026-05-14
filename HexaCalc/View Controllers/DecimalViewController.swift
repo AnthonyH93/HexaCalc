@@ -123,6 +123,7 @@ class DecimalViewController: CalculatorViewController {
         if (decimalLabelText != "0") {
             runningNumber = decimalLabelText ?? ""
             currentOperation = .NULL
+            operationStack.removeAll()
         }
         else {
             runningNumber = ""
@@ -130,6 +131,7 @@ class DecimalViewController: CalculatorViewController {
             rightValue = ""
             result = ""
             currentOperation = .NULL
+            operationStack.removeAll()
         }
 
         if ((Double(decimalLabelText ?? "0")! > 999999999 || Double(decimalLabelText ?? "0")! < -999999999) || (decimalLabelText ?? "0").contains("e")) {
@@ -184,6 +186,7 @@ class DecimalViewController: CalculatorViewController {
         rightValue = ""
         result = ""
         currentOperation = .NULL
+        operationStack.removeAll()
         updateOutputLabel(value: "0")
 
         stateController?.convValues.largerThan64Bits = false
@@ -259,7 +262,7 @@ class DecimalViewController: CalculatorViewController {
     }
 
     @IBAction func equalsPressed(_ sender: RoundButton) {
-        operation(operation: currentOperation)
+        operation(operation: currentOperation, isEquals: true)
 
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
         ReviewManager.incrementReviewWorthyCount()
@@ -434,10 +437,20 @@ class DecimalViewController: CalculatorViewController {
 
     //MARK: Private Functions
 
-    private func operation(operation: Operation) {
+    private func operation(operation: Operation, isEquals: Bool = false) {
 
         if currentOperation != .NULL {
             if runningNumber != "" {
+
+                // Defer evaluation when the incoming operator has strictly higher precedence
+                if !isEquals && precedence(of: operation) > precedence(of: currentOperation) {
+                    operationStack.append((leftValue: leftValue, operation: currentOperation))
+                    leftValue = runningNumber
+                    runningNumber = ""
+                    currentOperation = operation
+                    return
+                }
+
                 rightValue = runningNumber
                 runningNumber = ""
 
@@ -454,9 +467,6 @@ class DecimalViewController: CalculatorViewController {
                 case .Modulus:
                     if Double(rightValue)! == 0.0 {
                         result = "Error!"
-                        updateOutputLabel(value: result)
-                        currentOperation = operation
-                        return
                     }
                     else {
                         result = "\(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!))"
@@ -468,9 +478,6 @@ class DecimalViewController: CalculatorViewController {
                 case .Divide:
                     if Double(rightValue)! == 0.0 {
                         result = "Error!"
-                        updateOutputLabel(value: result)
-                        currentOperation = operation
-                        return
                     }
                     else {
                         result = "\(Double(leftValue)! / Double(rightValue)!)"
@@ -480,10 +487,64 @@ class DecimalViewController: CalculatorViewController {
                     fatalError("Unexpected Operation...")
                 }
 
-                let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result, isUnaryOperation: false)
-                appendToHistory(calculationData)
+                if result != "Error!" {
+                    let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result, isUnaryOperation: false)
+                    appendToHistory(calculationData)
+                    leftValue = result
+                }
 
-                leftValue = result
+                // Drain lower-or-equal-precedence stacked operations
+                let shouldDrain: (Operation) -> Bool = isEquals
+                    ? { _ in true }
+                    : { topOp in self.precedence(of: operation) <= self.precedence(of: topOp) }
+
+                while !operationStack.isEmpty && result != "Error!" {
+                    let top = operationStack.last!
+                    guard shouldDrain(top.operation) else { break }
+                    operationStack.removeLast()
+                    rightValue = result
+                    leftValue = top.leftValue
+
+                    switch (top.operation) {
+                    case .Add:
+                        result = "\(Double(leftValue)! + Double(rightValue)!)"
+                    case .Subtract:
+                        result = "\(Double(leftValue)! - Double(rightValue)!)"
+                    case .Multiply:
+                        result = "\(Double(leftValue)! * Double(rightValue)!)"
+                    case .Modulus:
+                        if Double(rightValue)! == 0.0 {
+                            result = "Error!"
+                        }
+                        else {
+                            result = "\(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!))"
+                        }
+                    case .Exp:
+                        result = "\(pow(Double(leftValue)!, Double(rightValue)!))"
+                    case .Divide:
+                        if Double(rightValue)! == 0.0 {
+                            result = "Error!"
+                        }
+                        else {
+                            result = "\(Double(leftValue)! / Double(rightValue)!)"
+                        }
+                    default:
+                        fatalError("Unexpected Operation...")
+                    }
+
+                    if result != "Error!" {
+                        let calcData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: top.operation, result: result, isUnaryOperation: false)
+                        appendToHistory(calcData)
+                        leftValue = result
+                    }
+                }
+
+                if result == "Error!" {
+                    operationStack.removeAll()
+                    updateOutputLabel(value: result)
+                    currentOperation = isEquals ? .NULL : operation
+                    return
+                }
 
                 if (Double(result)! >= Double(INT64_MAX) || Double(result)! <= Double((INT64_MAX * -1) - 1)) {
                     stateController?.convValues.largerThan64Bits = true
@@ -499,13 +560,14 @@ class DecimalViewController: CalculatorViewController {
                 if (Double(result)! > 999999999 || Double(result)! < -999999999) {
                     result = "\(Double(result)!.scientificFormatted)"
                     updateOutputLabel(value: result)
-                    currentOperation = operation
+                    currentOperation = isEquals ? .NULL : operation
                     return
                 }
                 formatResult()
             }
 
-            currentOperation = operation
+            currentOperation = isEquals ? .NULL : operation
+            if isEquals { operationStack.removeAll() }
         }
         else {
             if runningNumber == "" {

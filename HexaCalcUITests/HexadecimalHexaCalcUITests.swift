@@ -24,6 +24,30 @@ class HexadecimalHexaCalcUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func testOperationOrder() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+
+        // A + 2 * 3 = should give 10 (hex 16), not 24 (hex 18)
+        app.buttons["A"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.multiply(app: app)
+        app.buttons["3"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "10", calculator: 0))
+
+        UITestHelper.clear(app: app)
+
+        // A + 2 = should still give C (regression)
+        app.buttons["A"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "C", calculator: 0))
+    }
+
     func testDeletion() throws {
         let app = XCUIApplication()
         app.launch()
