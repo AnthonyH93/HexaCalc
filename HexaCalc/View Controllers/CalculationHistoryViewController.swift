@@ -64,10 +64,9 @@ extension CalculationHistoryViewController: UITableViewDelegate, UITableViewData
         
         present(alert, animated: true) {
             tableView.deselectRow(at: indexPath, animated: true)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            alert.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                alert.dismiss(animated: true, completion: nil)
+            }
         }
         
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Copy)
