@@ -16,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Initialize TelemetryDeck
-        
+        let telemetryEnabled = DataPersistence.loadPreferences()?.telemetryEnabled ?? true
+
         // Attempt to find App ID
         if let appID = Bundle.main.object(forInfoDictionaryKey: "HexaCalcAppID") {
             // Setup the singleton class
-            TelemetryManager.setup(TelemetryManager.TelemetryManagerConfig(appID: appID as! String))
+            TelemetryManager.setup(TelemetryManager.TelemetryManagerConfig(appID: appID as! String), enabled: telemetryEnabled)
         }
         
         // Override point for customization after application launch
@@ -54,7 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             pasteActionIndex: loadedPreferences.pasteActionIndex,
                             historyButtonViewIndex: 0,
                             defaultTabIndex: 3,
-                            historyEnabled: loadedPreferences.historyEnabled
+                            historyEnabled: loadedPreferences.historyEnabled,
+                            telemetryEnabled: loadedPreferences.telemetryEnabled
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
@@ -80,7 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             pasteActionIndex: loadedPreferences.pasteActionIndex,
                             historyButtonViewIndex: 0,
                             defaultTabIndex: 3,
-                            historyEnabled: loadedPreferences.historyEnabled
+                            historyEnabled: loadedPreferences.historyEnabled,
+                            telemetryEnabled: loadedPreferences.telemetryEnabled
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UITabBar.appearance().tintColor = UIColor.systemGreen
