@@ -576,7 +576,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @objc func telemetrySwitchChanged(_ sender: UISwitch) {
         preferences.telemetryEnabled = sender.isOn
         DataPersistence.savePreferences(userPreferences: preferences)
-        TelemetryManager.sharedTelemetryManager.userDisabled = !sender.isOn
+        TelemetryManager.sharedTelemetryManager.userTelemetryEnabled = sender.isOn
     }
 
     //MARK: Private functions
