@@ -17,6 +17,9 @@ class TelemetryManager {
     
     // Toggle for collecting telemetry data
     private static var telemetryOn: Bool?
+
+    // Set to true mid-session when the user toggles analytics off
+    var userDisabled: Bool = false
     
     // Structure for initializing the TelemetryManager
     struct TelemetryManagerConfig {
@@ -25,7 +28,11 @@ class TelemetryManager {
     
     private static var config: TelemetryManagerConfig?
     
-    class func setup(_ config: TelemetryManagerConfig) {
+    class func setup(_ config: TelemetryManagerConfig, enabled: Bool) {
+        guard enabled else {
+            telemetryOn = false
+            return
+        }
         TelemetryManager.config = config
     }
     
@@ -43,13 +50,13 @@ class TelemetryManager {
     }
     
     func sendCalculatorSignal(tab: TelemetryTab, action: TelemetryCalculatorAction) {
-        if TelemetryManager.telemetryOn ?? false {
+        if (TelemetryManager.telemetryOn ?? false) && !userDisabled {
             TelemetryDeck.signal(".\(tab).\(action)")
         }
     }
-    
+
     func sendSettingsSignal(section: TelemetrySettingsSection, action: TelemetrySettingsAction, parameters: [String : String]? = nil) {
-        if TelemetryManager.telemetryOn ?? false {
+        if (TelemetryManager.telemetryOn ?? false) && !userDisabled {
             if let params = parameters {
                 TelemetryDeck.signal(
                     ".\(TelemetryTab.Settings).\(section).\(action)",

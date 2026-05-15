@@ -40,6 +40,8 @@ class HexaCalcTabBarController: UITabBarController, StateControllerProtocol {
         stateController?.convValues.historyEnabled = savedPreferences.historyEnabled
         stateController?.convValues.defaultTabIndex = savedPreferences.defaultTabIndex
 
+        TelemetryManager.sharedTelemetryManager.userDisabled = !savedPreferences.telemetryEnabled
+
         // Remove disabled tabs before any child VC loads (avoids mutating viewControllers
         // from within a child VC's own viewDidLoad, which crashes on iOS 26+)
         if !savedPreferences.hexTabState { setTab(0, enabled: false) }

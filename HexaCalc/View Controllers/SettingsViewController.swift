@@ -20,8 +20,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                           "Customization",
                           "Calculation History",
                           "About the app",
-                          "Support" ]
-    let rowsPerSection = [4, 2, 2, 3, 4, 3]
+                          "Support",
+                          "Privacy" ]
+    let rowsPerSection = [4, 2, 2, 3, 4, 3, 1]
     
     let supportURLs = [ "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
                         "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
@@ -51,6 +52,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "BinarySwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "DecimalSwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "HistorySwitch")
+        table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "TelemetrySwitch")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "ColourSelection")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "CopyActionSelection")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "PasteActionSelection")
@@ -108,7 +110,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             self.preferences.colour = stateController?.convValues.colour ?? self.preferences.colour
             
             // Reload UI only when necessary
-            self.tableView.reloadSections([0,2,3,4], with: .none)
+            self.tableView.reloadSections([0,2,3,4,6], with: .none)
         }
         else if (self.preferences.copyActionIndex != stateController?.convValues.copyActionIndex) {
             self.preferences.copyActionIndex = stateController?.convValues.copyActionIndex ?? self.preferences.copyActionIndex
@@ -160,6 +162,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 3 && !preferences.historyEnabled {
             return "Enable Calculation History to configure the button appearance."
+        }
+        if section == 6 {
+            return "Analytics are completely anonymous and contain no personal or identifiable information. They help prioritize future improvements. You can opt out at any time."
         }
         return nil
     }
@@ -314,11 +319,18 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.textLabel?.textColor = preferences.colour
                 return cell
             }
+        // Privacy section
+        case 6:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TelemetrySwitch", for: indexPath) as! SwitchTableViewCell
+            cell.textLabel?.text = "Share Anonymous Analytics"
+            cell.configure(isOn: preferences.telemetryEnabled, colour: stateController?.convValues.colour ?? .systemGreen)
+            cell.cellSwitch.addTarget(self, action: #selector(telemetrySwitchChanged(_:)), for: .valueChanged)
+            return cell
         default:
             fatalError("Index out of range")
         }
     }
-    
+
     // method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Override default selected tab
@@ -559,6 +571,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 "switchState": "\(sender.isOn)"
             ]
         )
+    }
+
+    @objc func telemetrySwitchChanged(_ sender: UISwitch) {
+        preferences.telemetryEnabled = sender.isOn
+        DataPersistence.savePreferences(userPreferences: preferences)
+        TelemetryManager.sharedTelemetryManager.userDisabled = !sender.isOn
     }
 
     //MARK: Private functions

@@ -21,7 +21,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
     
     //Prepares and instance of a class for use
     init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool, copyActionIndex: Int32, pasteActionIndex: Int32,
-         historyButtonViewIndex: Int32, defaultTabIndex: Int32, historyEnabled: Bool = true) {
+         historyButtonViewIndex: Int32, defaultTabIndex: Int32, historyEnabled: Bool = true, telemetryEnabled: Bool = true) {
         //Initialize stored properties.
         self.colour = colour
         self.colourNum = colourNum
@@ -34,6 +34,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         self.historyButtonViewIndex = historyButtonViewIndex
         self.defaultTabIndex = defaultTabIndex
         self.historyEnabled = historyEnabled
+        self.telemetryEnabled = telemetryEnabled
     }
     
     //MARK: Properties
@@ -49,6 +50,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
     var historyButtonViewIndex: Int32
     var defaultTabIndex: Int32
     var historyEnabled: Bool
+    var telemetryEnabled: Bool
     
     //MARK: Archiving Paths
     
@@ -70,6 +72,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         static let historyButtonViewIndex = "historyButtonViewIndex"
         static let defaultTabIndex = "defaultTabIndex"
         static let historyEnabled = "historyEnabled"
+        static let telemetryEnabled = "telemetryEnabled"
     }
     
     //MARK: NSCoding
@@ -86,6 +89,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         aCoder.encode(historyButtonViewIndex, forKey: PropertyKey.historyButtonViewIndex)
         aCoder.encode(defaultTabIndex, forKey: PropertyKey.defaultTabIndex)
         aCoder.encode(historyEnabled, forKey: PropertyKey.historyEnabled)
+        aCoder.encode(telemetryEnabled, forKey: PropertyKey.telemetryEnabled)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -118,6 +122,14 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
             historyEnabled = true
         }
 
+        // Default true for users upgrading from a version before telemetryEnabled was added
+        let telemetryEnabled: Bool
+        if aDecoder.containsValue(forKey: PropertyKey.telemetryEnabled) {
+            telemetryEnabled = aDecoder.decodeBool(forKey: PropertyKey.telemetryEnabled)
+        } else {
+            telemetryEnabled = true
+        }
+
         //Must call designated initializer
         self.init(
             colour: colour,
@@ -130,7 +142,8 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
             pasteActionIndex: pasteActionIndex,
             historyButtonViewIndex: historyButtonViewIndex,
             defaultTabIndex: defaultTabIndex,
-            historyEnabled: historyEnabled
+            historyEnabled: historyEnabled,
+            telemetryEnabled: telemetryEnabled
         )
     }
     
