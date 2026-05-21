@@ -91,9 +91,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // Set custom back button text to navigationItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: nil, action: nil)
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        // Launching settings is a review worthy action, request a review if appropriate
-        ReviewManager.requestReviewIfAppropriate()
     }
     
     override func viewDidLayoutSubviews() {
