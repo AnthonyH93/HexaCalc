@@ -392,6 +392,8 @@ class BinaryViewController: CalculatorViewController {
 
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
         ReviewManager.incrementReviewWorthyCount()
+        ReviewManager.completedCalculation()
+        requestReviewAfterCalculation()
     }
 
     //MARK: Private Functions

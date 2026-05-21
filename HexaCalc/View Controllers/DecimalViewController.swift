@@ -266,6 +266,8 @@ class DecimalViewController: CalculatorViewController {
 
         telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Equals)
         ReviewManager.incrementReviewWorthyCount()
+        ReviewManager.completedCalculation()
+        requestReviewAfterCalculation()
     }
 
     @IBAction func plusPressed(_ sender: RoundButton) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 // Base class for all calculator tabs. Holds shared state, gesture handling,
 // clipboard actions, and lifecycle helpers. Subclasses provide the
@@ -114,7 +115,17 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
         )
         setupOutputLabelGestureRecognizers()
         overrideUserInterfaceStyle = .light
-        ReviewManager.requestReviewIfAppropriate()
+    }
+
+    func requestReviewAfterCalculation() {
+        guard ReviewManager.requestReviewIfAppropriate() else { return }
+        if #available(iOS 14.0, *) {
+            if let scene = view.window?.windowScene {
+                SKStoreReviewController.requestReview(in: scene)
+            }
+        } else {
+            SKStoreReviewController.requestReview()
+        }
     }
 
 

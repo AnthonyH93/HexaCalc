@@ -15,46 +15,59 @@ import StoreKit
 class ReviewManager {
 
     static let minimumReviewWorthyActionCount = 3
-    
+
     static let reviewCountKey = "ReviewWorthyActionCount"
     static let reviewRequestVersionKey = "LastVersionReviewRequested"
-    
+    static let completedCalculationKey = "HasCompletedCalculation"
+
     static let productURLString = "https://apps.apple.com/app/id1529225315"
 
     static func incrementReviewWorthyCount() {
         let defaults = UserDefaults.standard
 
         var actionCount = defaults.integer(forKey: reviewCountKey)
-        
-        // Limit for requesting a review is 2, so no need to count past 3
+
         if actionCount < 3 {
             actionCount += 1
             defaults.set(actionCount, forKey: reviewCountKey)
         }
     }
-    
-    static func requestReviewIfAppropriate() {
-      let defaults = UserDefaults.standard
-      let bundle = Bundle.main
 
-      let actionCount = defaults.integer(forKey: reviewCountKey)
+    static func completedCalculation() {
+        let defaults = UserDefaults.standard
+        if !defaults.bool(forKey: completedCalculationKey) {
+            defaults.set(true, forKey: completedCalculationKey)
+        }
+    }
 
-      guard actionCount >= minimumReviewWorthyActionCount else {
-        return
-      }
+    // Returns true and commits side effects (reset count, record version) when a
+    // review prompt should be shown. Callers are responsible for the actual
+    // SKStoreReviewController call so UIKit stays out of this model file.
+    static func requestReviewIfAppropriate() -> Bool {
+        let defaults = UserDefaults.standard
+        let bundle = Bundle.main
 
-      let bundleVersionKey = kCFBundleVersionKey as String
-      let currentVersion = bundle.object(forInfoDictionaryKey: bundleVersionKey) as? String
-      let lastVersion = defaults.string(forKey: reviewRequestVersionKey)
+        guard defaults.bool(forKey: completedCalculationKey) else {
+            return false
+        }
 
-      guard lastVersion == nil || lastVersion != currentVersion else {
-        return
-      }
+        let actionCount = defaults.integer(forKey: reviewCountKey)
 
-      SKStoreReviewController.requestReview()
+        guard actionCount >= minimumReviewWorthyActionCount else {
+            return false
+        }
 
-      defaults.set(0, forKey: reviewCountKey)
-      defaults.set(currentVersion, forKey: reviewRequestVersionKey)
+        let bundleVersionKey = kCFBundleVersionKey as String
+        let currentVersion = bundle.object(forInfoDictionaryKey: bundleVersionKey) as? String
+        let lastVersion = defaults.string(forKey: reviewRequestVersionKey)
+
+        guard lastVersion == nil || lastVersion != currentVersion else {
+            return false
+        }
+
+        defaults.set(0, forKey: reviewCountKey)
+        defaults.set(currentVersion, forKey: reviewRequestVersionKey)
+        return true
     }
     
     static func getProductURL() -> URL {
