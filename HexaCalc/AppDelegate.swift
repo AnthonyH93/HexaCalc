@@ -99,9 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // Increment review worthy count on launch
-        ReviewManager.incrementReviewWorthyCount()
-        
         return true
     }
 
