@@ -94,37 +94,55 @@ class BinaryViewController: CalculatorViewController {
         setupCommonViewDidLoad()
     }
 
-    override func viewDidLayoutSubviews() {
-        let screenWidth = view.bounds.width
-        let screenHeight = view.bounds.height
+    override func buildLayoutConstraints(width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
+        let safeInsets = view.safeAreaInsets
+        let safeHeight = height - safeInsets.top - safeInsets.bottom
+        let topReserve: CGFloat = 80
+        let layout = UIHelper.calculateLayout(width: width, height: safeHeight - topReserve,
+                                              rows: 5, cols: 4, labelType: .compact)
+        var c = [NSLayoutConstraint]()
 
-        let hStacks = [binHStack1!, binHStack2!, binHStack3!, binHStack4!, binHStack5!]
-        let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, XORBtn!, ORBtn!, ANDBtn!, NOTBtn!,
-                             ONESBtn!, TWOSBtn!, LSBtn!, RSBtn!, Btn0!, Btn1!, Btn00!, Btn11!]
-        let doubleButtons = [ACBtn!]
+        c += [
+            binVStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
+            binVStack.heightAnchor.constraint(equalToConstant: layout.vStackHeight),
+            binVStack.topAnchor.constraint(equalTo: outputLabel.bottomAnchor, constant: layout.labelToStackGap)
+        ]
 
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: binVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
-            currentConstraints.append(contentsOf: stackConstraints)
-
-            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
-            currentConstraints.append(contentsOf: buttonConstraints)
-
-            let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
-            currentConstraints.append(contentsOf: labelConstraints)
-
-            NSLayoutConstraint.activate(currentConstraints)
+        for hStack in [binHStack1, binHStack2, binHStack3, binHStack4, binHStack5] as [UIStackView] {
+            c += [
+                hStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
+                hStack.heightAnchor.constraint(equalToConstant: layout.hStackHeight)
+            ]
         }
-        else {
-            let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, outputLabel: outputLabel, screenWidth: screenWidth)
-            NSLayoutConstraint.activate(stackConstraints)
 
-            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, calculator: 2)
-            NSLayoutConstraint.activate(buttonConstraints)
+        c += [
+            outputLabel.widthAnchor.constraint(equalToConstant: layout.stackWidth),
+            outputLabel.heightAnchor.constraint(equalToConstant: layout.labelHeight),
+            outputLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topReserve)
+        ]
+        outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
 
-            let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
-            NSLayoutConstraint.activate(labelConstraints)
+        let singleBtns: [RoundButton] = [DIVBtn, MULTBtn, SUBBtn, PLUSBtn,
+                                         EQUALSBtn, DELBtn, XORBtn, ORBtn,
+                                         ANDBtn, NOTBtn, ONESBtn, TWOSBtn,
+                                         LSBtn, RSBtn, Btn0, Btn1, Btn00, Btn11]
+        for btn in singleBtns {
+            c += [
+                btn.widthAnchor.constraint(equalToConstant: layout.singleButtonWidth),
+                btn.heightAnchor.constraint(equalToConstant: layout.hStackHeight)
+            ]
+            btn.layer.cornerRadius = layout.cornerRadius
+            btn.titleLabel?.font = UIFont.systemFont(ofSize: layout.buttonFontSize, weight: .semibold)
         }
+
+        c += [
+            ACBtn.widthAnchor.constraint(equalToConstant: layout.doubleButtonWidth),
+            ACBtn.heightAnchor.constraint(equalToConstant: layout.hStackHeight)
+        ]
+        ACBtn.layer.cornerRadius = layout.cornerRadius
+        ACBtn.titleLabel?.font = UIFont.systemFont(ofSize: layout.buttonFontSize, weight: .semibold)
+
+        return c
     }
 
     // Load the current converted value from either of the other calculator screens
