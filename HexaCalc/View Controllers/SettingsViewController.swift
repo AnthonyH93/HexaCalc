@@ -22,7 +22,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                           "About the app",
                           "Support",
                           "Privacy" ]
-    let rowsPerSection = [4, 2, 2, 3, 4, 3, 1]
+    let rowsPerSection = [4, 2, 3, 3, 4, 3, 1]
     
     let supportURLs = [ "https://anthony55hopkins.wixsite.com/hexacalc/privacy-policy",
                         "https://anthony55hopkins.wixsite.com/hexacalc/terms-conditions" ]
@@ -53,6 +53,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "DecimalSwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "HistorySwitch")
         table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "TelemetrySwitch")
+        table.register(SwitchTableViewCell.nib(), forCellReuseIdentifier: "LiquidGlassSwitch")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "ColourSelection")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "CopyActionSelection")
         table.register(SelectionSummaryTableViewCell.self, forCellReuseIdentifier: "PasteActionSelection")
@@ -232,6 +233,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.configure(isOn: self.preferences.setCalculatorTextColour, colour: preferences.colour)
                 cell.textLabel?.text = "Set Calculator Text Colour"
                 cell.self.cellSwitch.addTarget(self, action: #selector(self.setCalculatorTextColourSwitchPressed), for: .touchUpInside)
+                return cell
+            }
+            // Liquid glass buttons toggle
+            else if indexPath.row == 2 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "LiquidGlassSwitch", for: indexPath) as! SwitchTableViewCell
+                cell.configure(isOn: self.preferences.liquidGlassButtons, colour: preferences.colour)
+                cell.textLabel?.text = "Liquid Glass Buttons"
+                cell.cellSwitch.addTarget(self, action: #selector(self.liquidGlassSwitchPressed), for: .touchUpInside)
                 return cell
             }
             // Select colour preference
@@ -471,7 +480,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled)
+                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(0, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -491,7 +500,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled)
+                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(1, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -511,7 +520,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled)
+                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(2, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -532,7 +541,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: sender.isOn,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled)
+                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = sender.isOn
         self.preferences = userPreferences
@@ -552,7 +561,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: sender.isOn)
+                                              historyEnabled: sender.isOn, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.historyEnabled = sender.isOn
         if !sender.isOn {
@@ -568,6 +577,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 "switchState": "\(sender.isOn)"
             ]
         )
+    }
+
+    @IBAction func liquidGlassSwitchPressed(_ sender: UISwitch) {
+        let userPreferences = UserPreferences(colour: preferences.colour, colourNum: (stateController?.convValues.colourNum)!,
+                                              hexTabState: preferences.hexTabState, binTabState: preferences.binTabState, decTabState: preferences.decTabState,
+                                              setCalculatorTextColour: preferences.setCalculatorTextColour,
+                                              copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
+                                              historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
+                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: sender.isOn)
+        DataPersistence.savePreferences(userPreferences: userPreferences)
+        stateController?.convValues.liquidGlassButtons = sender.isOn
+        RoundButton.liquidGlassEnabled = sender.isOn
+        self.preferences = userPreferences
     }
 
     @objc func telemetrySwitchChanged(_ sender: UISwitch) {

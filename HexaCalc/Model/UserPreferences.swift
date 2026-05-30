@@ -21,7 +21,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
     
     //Prepares and instance of a class for use
     init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool, copyActionIndex: Int32, pasteActionIndex: Int32,
-         historyButtonViewIndex: Int32, defaultTabIndex: Int32, historyEnabled: Bool = true, telemetryEnabled: Bool = true) {
+         historyButtonViewIndex: Int32, defaultTabIndex: Int32, historyEnabled: Bool = true, telemetryEnabled: Bool = true, liquidGlassButtons: Bool = false) {
         //Initialize stored properties.
         self.colour = colour
         self.colourNum = colourNum
@@ -35,6 +35,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         self.defaultTabIndex = defaultTabIndex
         self.historyEnabled = historyEnabled
         self.telemetryEnabled = telemetryEnabled
+        self.liquidGlassButtons = liquidGlassButtons
     }
     
     //MARK: Properties
@@ -51,6 +52,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
     var defaultTabIndex: Int32
     var historyEnabled: Bool
     var telemetryEnabled: Bool
+    var liquidGlassButtons: Bool
     
     //MARK: Archiving Paths
     
@@ -73,6 +75,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         static let defaultTabIndex = "defaultTabIndex"
         static let historyEnabled = "historyEnabled"
         static let telemetryEnabled = "telemetryEnabled"
+        static let liquidGlassButtons = "liquidGlassButtons"
     }
     
     //MARK: NSCoding
@@ -90,6 +93,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
         aCoder.encode(defaultTabIndex, forKey: PropertyKey.defaultTabIndex)
         aCoder.encode(historyEnabled, forKey: PropertyKey.historyEnabled)
         aCoder.encode(telemetryEnabled, forKey: PropertyKey.telemetryEnabled)
+        aCoder.encode(liquidGlassButtons, forKey: PropertyKey.liquidGlassButtons)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -130,6 +134,14 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
             telemetryEnabled = true
         }
 
+        // Default false for users upgrading from a version before liquidGlassButtons was added
+        let liquidGlassButtons: Bool
+        if aDecoder.containsValue(forKey: PropertyKey.liquidGlassButtons) {
+            liquidGlassButtons = aDecoder.decodeBool(forKey: PropertyKey.liquidGlassButtons)
+        } else {
+            liquidGlassButtons = false
+        }
+
         //Must call designated initializer
         self.init(
             colour: colour,
@@ -143,7 +155,8 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
             historyButtonViewIndex: historyButtonViewIndex,
             defaultTabIndex: defaultTabIndex,
             historyEnabled: historyEnabled,
-            telemetryEnabled: telemetryEnabled
+            telemetryEnabled: telemetryEnabled,
+            liquidGlassButtons: liquidGlassButtons
         )
     }
     
