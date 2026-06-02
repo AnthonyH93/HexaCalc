@@ -39,7 +39,9 @@ class HexaCalcTabBarController: UITabBarController, StateControllerProtocol {
         stateController?.convValues.historyButtonViewIndex = savedPreferences.historyButtonViewIndex
         stateController?.convValues.historyEnabled = savedPreferences.historyEnabled
         stateController?.convValues.defaultTabIndex = savedPreferences.defaultTabIndex
+        stateController?.convValues.liquidGlassButtons = savedPreferences.liquidGlassButtons
 
+        RoundButton.liquidGlassEnabled = savedPreferences.liquidGlassButtons
         TelemetryManager.sharedTelemetryManager.userTelemetryEnabled = savedPreferences.telemetryEnabled
 
         // Remove disabled tabs before any child VC loads (avoids mutating viewControllers
