@@ -111,6 +111,7 @@ enum TelemetrySettingsAction: String {
     // Customization actions
     case Colour = "colourChanged"
     case TextColour = "setCalculatorTextColourSwitchPressed"
+    case LiquidGlass = "liquidGlassButtonsSwitchPressed"
     // Calculation history actions
     case History = "historyButtonViewChanged"
     case ClearHistory = "clearLocalHistory"

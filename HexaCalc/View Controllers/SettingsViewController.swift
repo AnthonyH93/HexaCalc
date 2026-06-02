@@ -590,6 +590,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         stateController?.convValues.liquidGlassButtons = sender.isOn
         RoundButton.liquidGlassEnabled = sender.isOn
         self.preferences = userPreferences
+
+        telemetryManager.sendSettingsSignal(
+            section: TelemetrySettingsSection.Customization,
+            action: TelemetrySettingsAction.LiquidGlass,
+            parameters: ["switchState": "\(sender.isOn)"]
+        )
     }
 
     @objc func telemetrySwitchChanged(_ sender: UISwitch) {
