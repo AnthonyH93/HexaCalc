@@ -101,15 +101,22 @@ class HexadecimalViewController: CalculatorViewController {
     override func buildLayoutConstraints(width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
         let safeInsets = view.safeAreaInsets
         let safeHeight = height - safeInsets.top - safeInsets.bottom
-        let topReserve: CGFloat = 80
-        let layout = UIHelper.calculateLayout(width: width, height: safeHeight - topReserve,
-                                              rows: 6, cols: 5, labelType: .large)
+        let iPad = UIDevice.current.userInterfaceIdiom == .pad
+        // Use the grid height that Binary/Decimal naturally produce so all three tabs
+        // share the same total grid area for visual consistency when switching tabs.
+        let referenceLayout = UIHelper.calculateLayout(width: width, height: safeHeight,
+                                                       rows: 5, cols: 4, labelType: .large,
+                                                       isIPad: iPad)
+        let layout = UIHelper.calculateLayout(width: width, height: safeHeight,
+                                              rows: 6, cols: 5, labelType: .large,
+                                              targetGridHeight: referenceLayout.vStackHeight,
+                                              isIPad: iPad)
         var c = [NSLayoutConstraint]()
 
         c += [
             hexVStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
             hexVStack.heightAnchor.constraint(equalToConstant: layout.vStackHeight),
-            hexVStack.topAnchor.constraint(equalTo: outputLabel.bottomAnchor, constant: layout.labelToStackGap)
+            hexVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ]
 
         for hStack in [hexHStack1, hexHStack2, hexHStack3, hexHStack4, hexHStack5, hexHStack6] as [UIStackView] {
@@ -120,9 +127,10 @@ class HexadecimalViewController: CalculatorViewController {
         }
 
         c += [
-            outputLabel.widthAnchor.constraint(equalToConstant: layout.stackWidth),
+            outputLabel.widthAnchor.constraint(equalToConstant: layout.outputLabelWidth),
             outputLabel.heightAnchor.constraint(equalToConstant: layout.labelHeight),
-            outputLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topReserve)
+            outputLabel.bottomAnchor.constraint(equalTo: hexVStack.topAnchor, constant: -layout.labelToStackGap),
+            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
         ]
         outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
 

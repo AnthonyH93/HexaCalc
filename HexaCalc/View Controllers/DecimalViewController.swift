@@ -84,15 +84,15 @@ class DecimalViewController: CalculatorViewController {
     override func buildLayoutConstraints(width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
         let safeInsets = view.safeAreaInsets
         let safeHeight = height - safeInsets.top - safeInsets.bottom
-        let topReserve: CGFloat = 80
-        let layout = UIHelper.calculateLayout(width: width, height: safeHeight - topReserve,
-                                              rows: 5, cols: 4, labelType: .large)
+        let layout = UIHelper.calculateLayout(width: width, height: safeHeight,
+                                              rows: 5, cols: 4, labelType: .large,
+                                              isIPad: UIDevice.current.userInterfaceIdiom == .pad)
         var c = [NSLayoutConstraint]()
 
         c += [
             decVStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
             decVStack.heightAnchor.constraint(equalToConstant: layout.vStackHeight),
-            decVStack.topAnchor.constraint(equalTo: outputLabel.bottomAnchor, constant: layout.labelToStackGap)
+            decVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ]
 
         for hStack in [decHStack1, decHStack2, decHStack3, decHStack4, decHStack5] as [UIStackView] {
@@ -103,9 +103,10 @@ class DecimalViewController: CalculatorViewController {
         }
 
         c += [
-            outputLabel.widthAnchor.constraint(equalToConstant: layout.stackWidth),
+            outputLabel.widthAnchor.constraint(equalToConstant: layout.outputLabelWidth),
             outputLabel.heightAnchor.constraint(equalToConstant: layout.labelHeight),
-            outputLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topReserve)
+            outputLabel.bottomAnchor.constraint(equalTo: decVStack.topAnchor, constant: -layout.labelToStackGap),
+            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
         ]
         outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
 

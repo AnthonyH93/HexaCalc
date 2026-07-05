@@ -61,10 +61,12 @@ extension HistoryButtonHost where Self: UIViewController {
 
         let size = targetSize ?? view.bounds.size
         let isLandscape = size.width > size.height
+        let isIPad = UIDevice.current.userInterfaceIdiom == .pad
 
         historyButtonTopConstraint?.isActive = false
         let topConstraint: NSLayoutConstraint
-        if isLandscape {
+
+        if isIPad || isLandscape {
             topConstraint = historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
         } else if size.height <= 736 {
             // Short iPhone portrait (≤736pt: SE, 8, 7/8 Plus): tighter constant so the
