@@ -84,15 +84,17 @@ class DecimalViewController: CalculatorViewController {
     override func buildLayoutConstraints(width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
         let safeInsets = view.safeAreaInsets
         let safeHeight = height - safeInsets.top - safeInsets.bottom
+        let iPad = UIDevice.current.userInterfaceIdiom == .pad
         let layout = UIHelper.calculateLayout(width: width, height: safeHeight,
                                               rows: 5, cols: 4, labelType: .large,
-                                              isIPad: UIDevice.current.userInterfaceIdiom == .pad)
+                                              isIPad: iPad)
+        let (topOffset, bottomOffset) = UIHelper.verticalOffsets(safeHeight: safeHeight, layout: layout, isIPad: iPad)
         var c = [NSLayoutConstraint]()
 
         c += [
             decVStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
             decVStack.heightAnchor.constraint(equalToConstant: layout.vStackHeight),
-            decVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+            decVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -bottomOffset)
         ]
 
         for hStack in [decHStack1, decHStack2, decHStack3, decHStack4, decHStack5] as [UIStackView] {
@@ -106,7 +108,7 @@ class DecimalViewController: CalculatorViewController {
             outputLabel.widthAnchor.constraint(equalToConstant: layout.outputLabelWidth),
             outputLabel.heightAnchor.constraint(equalToConstant: layout.labelHeight),
             outputLabel.bottomAnchor.constraint(equalTo: decVStack.topAnchor, constant: -layout.labelToStackGap),
-            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: topOffset)
         ]
         outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
 

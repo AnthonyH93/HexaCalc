@@ -111,12 +111,13 @@ class HexadecimalViewController: CalculatorViewController {
                                               rows: 6, cols: 5, labelType: .large,
                                               targetGridHeight: referenceLayout.vStackHeight,
                                               isIPad: iPad)
+        let (topOffset, bottomOffset) = UIHelper.verticalOffsets(safeHeight: safeHeight, layout: layout, isIPad: iPad)
         var c = [NSLayoutConstraint]()
 
         c += [
             hexVStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
             hexVStack.heightAnchor.constraint(equalToConstant: layout.vStackHeight),
-            hexVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+            hexVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -bottomOffset)
         ]
 
         for hStack in [hexHStack1, hexHStack2, hexHStack3, hexHStack4, hexHStack5, hexHStack6] as [UIStackView] {
@@ -130,7 +131,7 @@ class HexadecimalViewController: CalculatorViewController {
             outputLabel.widthAnchor.constraint(equalToConstant: layout.outputLabelWidth),
             outputLabel.heightAnchor.constraint(equalToConstant: layout.labelHeight),
             outputLabel.bottomAnchor.constraint(equalTo: hexVStack.topAnchor, constant: -layout.labelToStackGap),
-            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: topOffset)
         ]
         outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
 

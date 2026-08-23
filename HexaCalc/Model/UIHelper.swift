@@ -25,6 +25,7 @@ struct CalculatorLayout {
     let labelToStackGap: CGFloat
     let buttonFontSize: CGFloat
     let cornerRadius: CGFloat
+    let topPadding: CGFloat
 }
 
 class UIHelper {
@@ -48,6 +49,18 @@ class UIHelper {
         if labelType == .large {
             labelFontSize = min(W * 0.32, H * 0.18)
             labelHeight = labelFontSize
+        } else if isIPad {
+            // iPad: Binary's text is now always exactly two lines of 32 bits each
+            // (see formatBinaryString), so the font can be sized to actually fill
+            // the label's width instead of the fixed ratio below, which was tuned
+            // for iPhone's much narrower screen and left iPad's text tiny.
+            let approxLabelWidth = max(W - 136, 20)
+            let sampleLine = "0000 0000 0000 0000 0000 0000 0000 0000"
+            let font = UIFont(name: "Avenir Next", size: 100) ?? UIFont.systemFont(ofSize: 100)
+            let measuredWidth = (sampleLine as NSString).size(withAttributes: [.font: font]).width
+            let widthFitSize = measuredWidth > 0 ? (approxLabelWidth * 0.97) / measuredWidth * 100 : 44
+            labelFontSize = min(widthFitSize, H * 0.14)
+            labelHeight = labelFontSize * 2.5
         } else {
             labelFontSize = min(W * 0.08, H * 0.045)
             labelHeight = labelFontSize * 2.5
@@ -55,7 +68,28 @@ class UIHelper {
 
         let labelToStackGap: CGFloat = 23
         let bottomPadding: CGFloat = 8
-        let topLabelPadding: CGFloat = 8
+        // Reserve enough room above the label so it clears the top-pinned history
+        // button (see HistoryButtonHost.repositionHistoryButton) instead of the grid
+        // simply filling all the way up to a flat 8pt floor. On iPad, and on iPhone in
+        // landscape or on short portrait screens (SE, 8, 7/8 Plus), the button sits
+        // right under the safe area (offset 8 on iPad/landscape, 4 on short portrait)
+        // — without this, a tall grid could push the label's fixed-height frame up
+        // underneath the button. Tall iPhone portraits pin the button well below the
+        // label already (view.topAnchor + 60), so the flat floor is left as-is there.
+        let topLabelPadding: CGFloat
+        if isIPad {
+            topLabelPadding = 56
+        } else {
+            let isLandscape = W > H
+            if isLandscape || H <= 736 {
+                let historyButtonTopOffset: CGFloat = isLandscape ? 8 : 4
+                let historyButtonHeight: CGFloat = 44
+                let gap: CGFloat = 8
+                topLabelPadding = historyButtonTopOffset + historyButtonHeight + gap
+            } else {
+                topLabelPadding = 8
+            }
+        }
         let availableH = H - labelHeight - labelToStackGap - bottomPadding - topLabelPadding
 
         let verticalSpacing = CGFloat(nRows - 1) * rowSpacing
@@ -117,7 +151,29 @@ class UIHelper {
             labelHeight: labelHeight,
             labelToStackGap: labelToStackGap,
             buttonFontSize: buttonFontSize,
-            cornerRadius: cornerRadius
+            cornerRadius: cornerRadius,
+            topPadding: topLabelPadding
         )
+    }
+
+    // On iPad, Binary/Decimal/Hex are forced to share one grid height so the button
+    // grids match, but each tab's own label height differs, so the leftover slack
+    // between the (label + gap + grid) block and the safe area varies per tab. Hex
+    // and Decimal size their own label with the same formula used to compute the
+    // shared grid height, so their content always fills the safe area exactly (zero
+    // slack) — the grid sits flush against bottomPadding regardless of this function.
+    // Binary's label uses a different (shorter, in tall/narrow windows) formula, so
+    // it alone can end up with real slack. Giving that slack to the bottom would
+    // pull Binary's grid away from the tab bar while Hex/Decimal's stays flush,
+    // visibly inconsistent between tabs — so all of it goes above the label instead,
+    // keeping the grid's bottom edge aligned with the other two tabs. iPhone is
+    // untouched — it always returns the original fixed padding.
+    static func verticalOffsets(safeHeight: CGFloat, layout: CalculatorLayout, isIPad: Bool) -> (top: CGFloat, bottom: CGFloat) {
+        let bottomPadding: CGFloat = 8
+        guard isIPad else { return (layout.topPadding, bottomPadding) }
+
+        let contentHeight = layout.labelHeight + layout.labelToStackGap + layout.vStackHeight
+        let slack = max(safeHeight - contentHeight - layout.topPadding - bottomPadding, 0)
+        return (layout.topPadding + slack, bottomPadding)
     }
 }

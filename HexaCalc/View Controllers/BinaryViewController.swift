@@ -11,7 +11,7 @@ import UIKit
 class BinaryViewController: CalculatorViewController {
 
     //MARK: Properties
-    let binaryDefaultLabel: String = "0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000"
+    let binaryDefaultLabel: String = "0000 0000 0000 0000 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000"
 
     @IBOutlet weak var binVStack: UIStackView!
     @IBOutlet weak var binHStack1: UIStackView!
@@ -62,7 +62,7 @@ class BinaryViewController: CalculatorViewController {
     override func copyTextFromLabel() -> String {
         if runningNumber == "" {
             var currentOutput = outputLabel.text ?? binaryDefaultLabel
-            currentOutput = currentOutput.replacingOccurrences(of: " ", with: "")
+            currentOutput = currentOutput.components(separatedBy: .whitespacesAndNewlines).joined()
             var end = false
             for char in currentOutput {
                 if char == "0" && !end {
@@ -97,15 +97,39 @@ class BinaryViewController: CalculatorViewController {
     override func buildLayoutConstraints(width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
         let safeInsets = view.safeAreaInsets
         let safeHeight = height - safeInsets.top - safeInsets.bottom
+        let iPad = UIDevice.current.userInterfaceIdiom == .pad
+        // On iPad, match Decimal/Hexadecimal's grid height (computed with the .large
+        // label reference) so all three tabs' button grids are the same size — Binary's
+        // own .compact label is shorter, which otherwise leaves it more room and makes
+        // its grid noticeably larger than the other two tabs.
+        //
+        // The .large reference and Binary's actual .compact label use different height
+        // formulas (the compact one fits two lines to the label's width), so they can
+        // diverge — in a short/wide window the real compact label ends up taller than
+        // what the reference budgeted for. Forcing the reference's (too-large) grid
+        // height in that case over-constrains the layout (fixed-height grid + fixed-height
+        // label demand more room than the safe area has), which Auto Layout resolves by
+        // breaking a required constraint — visible as overlapping button rows. Clamping
+        // to Binary's own natural (unforced) grid height guarantees the forced height
+        // never asks for more room than actually fits.
+        let referenceLayout = UIHelper.calculateLayout(width: width, height: safeHeight,
+                                                       rows: 5, cols: 4, labelType: .large,
+                                                       isIPad: iPad)
+        let naturalLayout = UIHelper.calculateLayout(width: width, height: safeHeight,
+                                                      rows: 5, cols: 4, labelType: .compact,
+                                                      isIPad: iPad)
+        let targetGridHeight = iPad ? min(referenceLayout.vStackHeight, naturalLayout.vStackHeight) : nil
         let layout = UIHelper.calculateLayout(width: width, height: safeHeight,
                                               rows: 5, cols: 4, labelType: .compact,
-                                              isIPad: UIDevice.current.userInterfaceIdiom == .pad)
+                                              targetGridHeight: targetGridHeight,
+                                              isIPad: iPad)
+        let (topOffset, bottomOffset) = UIHelper.verticalOffsets(safeHeight: safeHeight, layout: layout, isIPad: iPad)
         var c = [NSLayoutConstraint]()
 
         c += [
             binVStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
             binVStack.heightAnchor.constraint(equalToConstant: layout.vStackHeight),
-            binVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+            binVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -bottomOffset)
         ]
 
         for hStack in [binHStack1, binHStack2, binHStack3, binHStack4, binHStack5] as [UIStackView] {
@@ -119,7 +143,7 @@ class BinaryViewController: CalculatorViewController {
             outputLabel.widthAnchor.constraint(equalToConstant: layout.outputLabelWidth),
             outputLabel.heightAnchor.constraint(equalToConstant: layout.labelHeight),
             outputLabel.bottomAnchor.constraint(equalTo: binVStack.topAnchor, constant: -layout.labelToStackGap),
-            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: topOffset)
         ]
         outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
 
@@ -294,7 +318,7 @@ class BinaryViewController: CalculatorViewController {
             let binLeftValue = runningNumber
 
             let currLabel = outputLabel.text
-            let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+            let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
             let rightShifted = String(Int(UInt64(spacesRemoved.dropLast(), radix: 2)!))
 
             stateController?.convValues.decimalVal = rightShifted
@@ -325,7 +349,7 @@ class BinaryViewController: CalculatorViewController {
         let binLeftValue = runningNumber == "" ? "0" : runningNumber
 
         let currLabel = outputLabel.text
-        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+        let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
         let castInt = UInt64(spacesRemoved, radix: 2)!
         let onesComplimentInt = ~castInt
         let onesComplimentString = String(onesComplimentInt, radix: 2)
@@ -354,7 +378,7 @@ class BinaryViewController: CalculatorViewController {
         if (stateController?.convValues.largerThan64Bits == true || outputLabel.text == binaryDefaultLabel) { return }
 
         let currLabel = outputLabel.text
-        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+        let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
         let castInt = UInt64(spacesRemoved, radix: 2)!
         let twosComplimentInt = ~castInt + 1
         let twosComplimentString = String(twosComplimentInt, radix: 2)
@@ -630,7 +654,15 @@ class BinaryViewController: CalculatorViewController {
         while (manipulatedStringToConvert.count < 64) {
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
-        return manipulatedStringToConvert.separate(every: 4, with: " ")
+        // Split into two even halves (32 bits each) with a hard line break, rather
+        // than leaving the wrap point to the label's word-wrap — on a wide label
+        // (iPad) natural wrapping left far more digits on the first line than the
+        // second.
+        let groups = manipulatedStringToConvert.separate(every: 4, with: " ").components(separatedBy: " ")
+        let midpoint = groups.count / 2
+        let firstHalf = groups[0..<midpoint].joined(separator: " ")
+        let secondHalf = groups[midpoint...].joined(separator: " ")
+        return firstHalf + "\n" + secondHalf
     }
 
     func formatNegativeBinaryString(stringToConvert: String) -> String {
@@ -682,7 +714,7 @@ class BinaryViewController: CalculatorViewController {
         var decCurrentVal = ""
         if (outputLabel.text?.first == "1") {
             let currLabel = outputLabel.text
-            let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+            let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
             stateController?.convValues.binVal = spacesRemoved
             decCurrentVal = String(Int64(bitPattern: UInt64(spacesRemoved, radix: 2)!))
             hexCurrentVal = String(Int64(bitPattern: UInt64(spacesRemoved, radix: 2)!), radix: 16)
