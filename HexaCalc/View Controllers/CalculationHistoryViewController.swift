@@ -44,15 +44,10 @@ extension CalculationHistoryViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calculationHistoryCell", for: indexPath)
         let operation = calculationHistory[indexPath.row].generateEquation()
-        if #available(iOS 14.0, *) {
-            var contentConfiguration = cell.defaultContentConfiguration()
-            contentConfiguration.attributedText = NSAttributedString(string: operation, attributes: [.foregroundColor: UIColor.white])
-            cell.contentConfiguration = contentConfiguration
-        } else {
-            cell.textLabel?.textColor = .white
-            cell.textLabel?.text = operation
-        }
-        
+        var contentConfiguration = cell.defaultContentConfiguration()
+        contentConfiguration.attributedText = NSAttributedString(string: operation, attributes: [.foregroundColor: UIColor.white])
+        cell.contentConfiguration = contentConfiguration
+
         return cell
     }
     

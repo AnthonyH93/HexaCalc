@@ -23,7 +23,7 @@ xcodebuild -scheme HexaCalc -project HexaCalc.xcodeproj test -only-testing HexaC
 xcodebuild -scheme HexaCalc -project HexaCalc.xcodeproj test -only-testing HexaCalcUITests/SettingsHexaCalcUITests/testClearLocalHistory
 ```
 
-- Swift 5.0, iOS 13.0 deployment target
+- Swift 5.0, iOS 15.0 deployment target
 - No linter is configured
 
 ## Architecture

@@ -126,12 +126,8 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
 
     func requestReviewAfterCalculation() {
         guard ReviewManager.requestReviewIfAppropriate() else { return }
-        if #available(iOS 14.0, *) {
-            if let scene = view.window?.windowScene {
-                SKStoreReviewController.requestReview(in: scene)
-            }
-        } else {
-            SKStoreReviewController.requestReview()
+        if let scene = view.window?.windowScene {
+            SKStoreReviewController.requestReview(in: scene)
         }
     }
 
