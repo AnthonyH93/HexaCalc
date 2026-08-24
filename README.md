@@ -22,7 +22,7 @@ Note: All screenshots shown were taken on an iPhone X simulator.
 
 ## System Requirements
 
-This app is optimized to run and look amazing on all iPhones and iPads which are supported by iOS13/iPadOS13.
+This app is optimized to run and look amazing on all iPhones and iPads which are supported by iOS15/iPadOS15.
 
 For iPads this includes support for both landscape and portrait modes as well as support for any multitasking screen size and Slide Over.
 
