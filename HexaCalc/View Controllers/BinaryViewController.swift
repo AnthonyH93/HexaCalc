@@ -11,7 +11,13 @@ import UIKit
 class BinaryViewController: CalculatorViewController {
 
     //MARK: Properties
-    let binaryDefaultLabel: String = "0000 0000 0000 0000 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000"
+    // Number of lines formatBinaryString wraps the 64-bit string across — normally 2
+    // (32 bits each), but UIHelper can widen this on narrow windows where 2 lines
+    // would render illegibly small (see calculateLayout's compact/iPad branch).
+    // Updated from buildLayoutConstraints whenever the computed layout's own value
+    // changes, so it always matches what was actually laid out.
+    var binaryLineCount = 2
+    var binaryDefaultLabel: String { formatBinaryString(stringToConvert: "0") }
 
     @IBOutlet weak var binVStack: UIStackView!
     @IBOutlet weak var binHStack1: UIStackView!
@@ -124,6 +130,18 @@ class BinaryViewController: CalculatorViewController {
                                               targetGridHeight: targetGridHeight,
                                               isIPad: iPad)
         let (topOffset, bottomOffset) = UIHelper.verticalOffsets(safeHeight: safeHeight, layout: layout, isIPad: iPad)
+
+        // Resizing can change how many lines UIHelper wraps the binary string across
+        // (see calculateLayout's compact/iPad branch) — re-wrap whatever's currently
+        // shown to match, skipping error messages, which formatBinaryString can't parse.
+        if binaryLineCount != layout.binaryLineCount {
+            binaryLineCount = layout.binaryLineCount
+            if let current = outputLabel.text, !current.contains("Error") {
+                let digitsOnly = current.components(separatedBy: .whitespacesAndNewlines).joined()
+                updateOutputLabel(value: formatBinaryString(stringToConvert: digitsOnly))
+            }
+        }
+
         var c = [NSLayoutConstraint]()
 
         c += [
@@ -146,6 +164,10 @@ class BinaryViewController: CalculatorViewController {
             outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: topOffset)
         ]
         outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
+        // The storyboard hardcodes numberOfLines to 2 (Binary's old fixed line count) —
+        // with more lines now possible on narrow windows, that stale value truncates
+        // the extra lines with "…" instead of showing them.
+        outputLabel.numberOfLines = layout.binaryLineCount
 
         let singleBtns: [RoundButton] = [DIVBtn, MULTBtn, SUBBtn, PLUSBtn,
                                          EQUALSBtn, DELBtn, XORBtn, ORBtn,
@@ -654,15 +676,18 @@ class BinaryViewController: CalculatorViewController {
         while (manipulatedStringToConvert.count < 64) {
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
-        // Split into two even halves (32 bits each) with a hard line break, rather
-        // than leaving the wrap point to the label's word-wrap — on a wide label
-        // (iPad) natural wrapping left far more digits on the first line than the
-        // second.
+        // Split into binaryLineCount even chunks (32/16/8 bits each, depending on what
+        // UIHelper decided fits) with hard line breaks, rather than leaving the wrap
+        // point to the label's word-wrap — on a wide label (iPad) natural wrapping left
+        // far more digits on the first line than the rest.
         let groups = manipulatedStringToConvert.separate(every: 4, with: " ").components(separatedBy: " ")
-        let midpoint = groups.count / 2
-        let firstHalf = groups[0..<midpoint].joined(separator: " ")
-        let secondHalf = groups[midpoint...].joined(separator: " ")
-        return firstHalf + "\n" + secondHalf
+        let groupsPerLine = max(groups.count / binaryLineCount, 1)
+        var lines: [String] = []
+        for lineStart in stride(from: 0, to: groups.count, by: groupsPerLine) {
+            let lineEnd = min(lineStart + groupsPerLine, groups.count)
+            lines.append(groups[lineStart..<lineEnd].joined(separator: " "))
+        }
+        return lines.joined(separator: "\n")
     }
 
     func formatNegativeBinaryString(stringToConvert: String) -> String {

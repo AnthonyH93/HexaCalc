@@ -26,9 +26,25 @@ struct CalculatorLayout {
     let buttonFontSize: CGFloat
     let cornerRadius: CGFloat
     let topPadding: CGFloat
+    let binaryLineCount: Int
 }
 
 class UIHelper {
+
+    // The label's available width on iPad: clears the top-right history button (fixed
+    // 136pt clearance, negligible on a full-size iPad but a large fraction of a narrow
+    // resized window) without ever shrinking below 80% of the grid's own width
+    // (naturalStackWidth == the eventual stackWidth exactly, since the per-button width
+    // division has no remainder — see calculateLayout). Used both to size the label's
+    // actual width constraint and to fit Binary's compact-label font to that same width,
+    // so the two can never drift apart the way they did when the font fit a stale,
+    // narrower estimate while the box itself had already widened.
+    private static func iPadLabelWidthBudget(width W: CGFloat) -> CGFloat {
+        let stackWidth = W - 20
+        let cappedByHistoryButton = W - 136
+        let minLabelWidth = stackWidth * 0.80
+        return max(min(stackWidth, cappedByHistoryButton), minLabelWidth)
+    }
 
     static func calculateLayout(
         width W: CGFloat,
@@ -46,24 +62,47 @@ class UIHelper {
         // Label sizing for this tab
         let labelFontSize: CGFloat
         let labelHeight: CGFloat
+        let binaryLineCount: Int
         if labelType == .large {
             labelFontSize = min(W * 0.32, H * 0.18)
             labelHeight = labelFontSize
+            binaryLineCount = 2
         } else if isIPad {
-            // iPad: Binary's text is now always exactly two lines of 32 bits each
-            // (see formatBinaryString), so the font can be sized to actually fill
-            // the label's width instead of the fixed ratio below, which was tuned
-            // for iPhone's much narrower screen and left iPad's text tiny.
-            let approxLabelWidth = max(W - 136, 20)
-            let sampleLine = "0000 0000 0000 0000 0000 0000 0000 0000"
+            // iPad: Binary's 64-bit string is grouped into 4-bit nibbles ("0000") and
+            // can be split across more lines than the usual 2 (32 bits each) to fit
+            // narrow windows — halving the characters on a line roughly doubles the
+            // font size that still fits the available width. Stick with 2 lines as
+            // long as that stays legible; only split further once 2 lines would render
+            // below a readable size. Full-size iPads never come close to that floor
+            // (measured 29-40+pt even at 2 lines there), so their layout — and the
+            // traditional 2-line look — is completely unaffected; this only kicks in
+            // on windows narrow enough that 2 lines alone can't stay legible (e.g. an
+            // iPhone-width resized "Designed for iPad" window).
+            let approxLabelWidth = max(iPadLabelWidthBudget(width: W), 20)
             let font = UIFont(name: "Avenir Next", size: 100) ?? UIFont.systemFont(ofSize: 100)
-            let measuredWidth = (sampleLine as NSString).size(withAttributes: [.font: font]).width
-            let widthFitSize = measuredWidth > 0 ? (approxLabelWidth * 0.97) / measuredWidth * 100 : 44
-            labelFontSize = min(widthFitSize, H * 0.14)
-            labelHeight = labelFontSize * 2.5
+            let totalNibbles = 16
+            let minLegibleFontSize: CGFloat = 20
+            let lineCountCandidates = [2, 4, 8]
+            var candidateLineCount = lineCountCandidates.last!
+            var candidateFontSize: CGFloat = 44
+            for lineCount in lineCountCandidates {
+                let nibblesPerLine = totalNibbles / lineCount
+                let sampleLine = Array(repeating: "0000", count: nibblesPerLine).joined(separator: " ")
+                let measuredWidth = (sampleLine as NSString).size(withAttributes: [.font: font]).width
+                let widthFitSize = measuredWidth > 0 ? (approxLabelWidth * 0.97) / measuredWidth * 100 : 44
+                candidateFontSize = min(widthFitSize, H * 0.14)
+                candidateLineCount = lineCount
+                if candidateFontSize >= minLegibleFontSize {
+                    break
+                }
+            }
+            labelFontSize = candidateFontSize
+            labelHeight = labelFontSize * 1.25 * CGFloat(candidateLineCount)
+            binaryLineCount = candidateLineCount
         } else {
             labelFontSize = min(W * 0.08, H * 0.045)
             labelHeight = labelFontSize * 2.5
+            binaryLineCount = 2
         }
 
         let labelToStackGap: CGFloat = 23
@@ -102,14 +141,25 @@ class UIHelper {
         let buttonWidth: CGFloat
 
         if isIPad {
-            // iPad: fill available width and height independently, allowing rectangular buttons.
+            // iPad: fill available width and height independently, allowing rectangular
+            // buttons. Landscape windows naturally produce much wider-than-tall buttons
+            // (measured as low as ~0.4 height:width on a full-screen 13" iPad landscape)
+            // — that's normal and must stay unconstrained. But height stretching far past
+            // width is pathological: it's never seen in full-screen portrait or landscape
+            // (measured up to ~0.88 there), only in narrow/tall resized windows, and it's
+            // what makes buttons look like tall pills with tiny text (font size below
+            // tracks the smaller dimension). Cap only that one direction, with real
+            // headroom above the measured full-screen ceiling so no real device is affected.
+            let rawHeight: CGFloat
             if let target = targetGridHeight {
-                buttonHeight = max((target - verticalSpacing) / CGFloat(nRows), 20)
-                buttonWidth  = max(btnFromWidth, 20)
+                rawHeight = max((target - verticalSpacing) / CGFloat(nRows), 20)
             } else {
-                buttonHeight = max(btnFromHeight, 20)
-                buttonWidth  = max(btnFromWidth, 20)
+                rawHeight = max(btnFromHeight, 20)
             }
+            let rawWidth = max(btnFromWidth, 20)
+            let maxHeightOverWidth: CGFloat = 1.3
+            buttonWidth = rawWidth
+            buttonHeight = min(rawHeight, rawWidth * maxHeightOverWidth)
         } else {
             // iPhone: square buttons sized by the tighter dimension.
             if let target = targetGridHeight {
@@ -134,11 +184,14 @@ class UIHelper {
         // even when their buttons were the same size.
         let buttonFontSize = 27.0 * (min(buttonWidth, buttonHeight) / 67.0)
 
-        // On iPad the history button sits in the top-right corner (44pt wide, 16pt from safe
-        // trailing, 8pt gap). The label is centered in the view, so its right edge =
-        // W/2 + labelWidth/2. To clear the button: labelWidth = W - 2*safeRight - 136.
-        // We approximate safeRight ≈ 0 and use W - 136, capped at stackWidth.
-        let outputLabelWidth = isIPad ? min(stackWidth, W - 136) : stackWidth
+        // Hex/Decimal's right-aligned text should sit flush with the grid's true right
+        // edge (matching the button column above it), so their label always gets the
+        // full stackWidth — their font (the .large formula above) doesn't depend on
+        // label width at all, so widening the box is purely cosmetic here, no sizing
+        // side effects. Binary's compact-iPad font, by contrast, is fit directly to
+        // iPadLabelWidthBudget (see above) to choose its line count/font size, so its
+        // box width must keep matching that same budget or the two drift apart again.
+        let outputLabelWidth = (isIPad && labelType == .compact) ? iPadLabelWidthBudget(width: W) : stackWidth
 
         return CalculatorLayout(
             stackWidth: stackWidth,
@@ -152,7 +205,8 @@ class UIHelper {
             labelToStackGap: labelToStackGap,
             buttonFontSize: buttonFontSize,
             cornerRadius: cornerRadius,
-            topPadding: topLabelPadding
+            topPadding: topLabelPadding,
+            binaryLineCount: binaryLineCount
         )
     }
 
