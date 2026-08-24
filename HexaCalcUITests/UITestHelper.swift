@@ -185,7 +185,11 @@ class UITestHelper {
         while (manipulatedStringToConvert.count < 64){
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
-        return manipulatedStringToConvert.separate(every: 4, with: " ")
+        let groups = manipulatedStringToConvert.separate(every: 4, with: " ").components(separatedBy: " ")
+        let midpoint = groups.count / 2
+        let firstHalf = groups[0..<midpoint].joined(separator: " ")
+        let secondHalf = groups[midpoint...].joined(separator: " ")
+        return firstHalf + "\n" + secondHalf
     }
     
     static func formatDecimalString(stringToConvert: String) -> String {

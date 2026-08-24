@@ -32,6 +32,7 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
     var result = ""
     var currentOperation: Operation = .NULL
     var currentConstraints: [NSLayoutConstraint] = []
+    private var lastLayoutSize: CGSize = .zero
     var currentlyRecognizingDoubleTap = false
     var calculationHistory: [CalculationData] = []
     var operationStack: [(leftValue: String, operation: Operation)] = []
@@ -77,6 +78,12 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
     // VC-specific tinted views)
     func updateThemeColour(_ colour: UIColor) {
         fatalError("Subclass must override updateThemeColour(_:)")
+    }
+
+    // Build and return all programmatic layout constraints for the current bounds.
+    // Called from viewDidLayoutSubviews whenever the size changes.
+    func buildLayoutConstraints(width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
+        fatalError("Subclass must override buildLayoutConstraints(width:height:)")
     }
 
     var outputLabelAccessibilityIdentifier: String {
@@ -129,12 +136,20 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
     }
 
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let size = view.bounds.size
+        guard size != lastLayoutSize, size.width > 0, size.height > 0 else { return }
+        lastLayoutSize = size
+        NSLayoutConstraint.deactivate(currentConstraints)
+        currentConstraints.removeAll()
+        currentConstraints = buildLayoutConstraints(width: size.width, height: size.height)
+        NSLayoutConstraint.activate(currentConstraints)
+        repositionHistoryButton(for: size)
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            NSLayoutConstraint.deactivate(currentConstraints)
-            currentConstraints.removeAll()
-        }
         coordinator.animate(alongsideTransition: { _ in
             self.repositionHistoryButton(for: size)
         })

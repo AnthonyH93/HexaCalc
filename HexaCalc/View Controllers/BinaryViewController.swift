@@ -11,7 +11,13 @@ import UIKit
 class BinaryViewController: CalculatorViewController {
 
     //MARK: Properties
-    let binaryDefaultLabel: String = "0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000"
+    // Number of lines formatBinaryString wraps the 64-bit string across — normally 2
+    // (32 bits each), but UIHelper can widen this on narrow windows where 2 lines
+    // would render illegibly small (see calculateLayout's compact/iPad branch).
+    // Updated from buildLayoutConstraints whenever the computed layout's own value
+    // changes, so it always matches what was actually laid out.
+    var binaryLineCount = 2
+    var binaryDefaultLabel: String { formatBinaryString(stringToConvert: "0") }
 
     @IBOutlet weak var binVStack: UIStackView!
     @IBOutlet weak var binHStack1: UIStackView!
@@ -62,7 +68,7 @@ class BinaryViewController: CalculatorViewController {
     override func copyTextFromLabel() -> String {
         if runningNumber == "" {
             var currentOutput = outputLabel.text ?? binaryDefaultLabel
-            currentOutput = currentOutput.replacingOccurrences(of: " ", with: "")
+            currentOutput = currentOutput.components(separatedBy: .whitespacesAndNewlines).joined()
             var end = false
             for char in currentOutput {
                 if char == "0" && !end {
@@ -94,37 +100,96 @@ class BinaryViewController: CalculatorViewController {
         setupCommonViewDidLoad()
     }
 
-    override func viewDidLayoutSubviews() {
-        let screenWidth = view.bounds.width
-        let screenHeight = view.bounds.height
+    override func buildLayoutConstraints(width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
+        let safeInsets = view.safeAreaInsets
+        let safeHeight = height - safeInsets.top - safeInsets.bottom
+        let iPad = UIDevice.current.userInterfaceIdiom == .pad
+        // On iPad, match Decimal/Hexadecimal's grid height (computed with the .large
+        // label reference) so all three tabs' button grids are the same size — Binary's
+        // own .compact label is shorter, which otherwise leaves it more room and makes
+        // its grid noticeably larger than the other two tabs.
+        //
+        // The .large reference and Binary's actual .compact label use different height
+        // formulas (the compact one fits two lines to the label's width), so they can
+        // diverge — in a short/wide window the real compact label ends up taller than
+        // what the reference budgeted for. Forcing the reference's (too-large) grid
+        // height in that case over-constrains the layout (fixed-height grid + fixed-height
+        // label demand more room than the safe area has), which Auto Layout resolves by
+        // breaking a required constraint — visible as overlapping button rows. Clamping
+        // to Binary's own natural (unforced) grid height guarantees the forced height
+        // never asks for more room than actually fits.
+        let referenceLayout = UIHelper.calculateLayout(width: width, height: safeHeight,
+                                                       rows: 5, cols: 4, labelType: .large,
+                                                       isIPad: iPad)
+        let naturalLayout = UIHelper.calculateLayout(width: width, height: safeHeight,
+                                                      rows: 5, cols: 4, labelType: .compact,
+                                                      isIPad: iPad)
+        let targetGridHeight = iPad ? min(referenceLayout.vStackHeight, naturalLayout.vStackHeight) : nil
+        let layout = UIHelper.calculateLayout(width: width, height: safeHeight,
+                                              rows: 5, cols: 4, labelType: .compact,
+                                              targetGridHeight: targetGridHeight,
+                                              isIPad: iPad)
+        let (topOffset, bottomOffset) = UIHelper.verticalOffsets(safeHeight: safeHeight, layout: layout, isIPad: iPad)
 
-        let hStacks = [binHStack1!, binHStack2!, binHStack3!, binHStack4!, binHStack5!]
-        let singleButtons = [DIVBtn!, MULTBtn!, SUBBtn!, PLUSBtn!, EQUALSBtn!, DELBtn!, XORBtn!, ORBtn!, ANDBtn!, NOTBtn!,
-                             ONESBtn!, TWOSBtn!, LSBtn!, RSBtn!, Btn0!, Btn1!, Btn00!, Btn11!]
-        let doubleButtons = [ACBtn!]
-
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            let stackConstraints = UIHelper.iPadSetupStackConstraints(hStacks: hStacks, vStack: binVStack, outputLabel: outputLabel, screenWidth: screenWidth, screenHeight: screenHeight)
-            currentConstraints.append(contentsOf: stackConstraints)
-
-            let buttonConstraints = UIHelper.iPadSetupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
-            currentConstraints.append(contentsOf: buttonConstraints)
-
-            let labelConstraints = UIHelper.iPadSetupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, screenHeight: screenHeight, calculator: 2)
-            currentConstraints.append(contentsOf: labelConstraints)
-
-            NSLayoutConstraint.activate(currentConstraints)
+        // Resizing can change how many lines UIHelper wraps the binary string across
+        // (see calculateLayout's compact/iPad branch) — re-wrap whatever's currently
+        // shown to match, skipping error messages, which formatBinaryString can't parse.
+        if binaryLineCount != layout.binaryLineCount {
+            binaryLineCount = layout.binaryLineCount
+            if let current = outputLabel.text, !current.contains("Error") {
+                let digitsOnly = current.components(separatedBy: .whitespacesAndNewlines).joined()
+                updateOutputLabel(value: formatBinaryString(stringToConvert: digitsOnly))
+            }
         }
-        else {
-            let stackConstraints = UIHelper.setupStackConstraints(hStacks: hStacks, vStack: binVStack, outputLabel: outputLabel, screenWidth: screenWidth)
-            NSLayoutConstraint.activate(stackConstraints)
 
-            let buttonConstraints = UIHelper.setupButtonConstraints(singleButtons: singleButtons, doubleButtons: doubleButtons, screenWidth: screenWidth, calculator: 2)
-            NSLayoutConstraint.activate(buttonConstraints)
+        var c = [NSLayoutConstraint]()
 
-            let labelConstraints = UIHelper.setupLabelConstraints(label: outputLabel!, screenWidth: screenWidth, calculator: 2)
-            NSLayoutConstraint.activate(labelConstraints)
+        c += [
+            binVStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
+            binVStack.heightAnchor.constraint(equalToConstant: layout.vStackHeight),
+            binVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -bottomOffset)
+        ]
+
+        for hStack in [binHStack1, binHStack2, binHStack3, binHStack4, binHStack5] as [UIStackView] {
+            c += [
+                hStack.widthAnchor.constraint(equalToConstant: layout.stackWidth),
+                hStack.heightAnchor.constraint(equalToConstant: layout.hStackHeight)
+            ]
         }
+
+        c += [
+            outputLabel.widthAnchor.constraint(equalToConstant: layout.outputLabelWidth),
+            outputLabel.heightAnchor.constraint(equalToConstant: layout.labelHeight),
+            outputLabel.bottomAnchor.constraint(equalTo: binVStack.topAnchor, constant: -layout.labelToStackGap),
+            outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: topOffset)
+        ]
+        outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
+        // The storyboard hardcodes numberOfLines to 2 (Binary's old fixed line count) —
+        // with more lines now possible on narrow windows, that stale value truncates
+        // the extra lines with "…" instead of showing them.
+        outputLabel.numberOfLines = layout.binaryLineCount
+
+        let singleBtns: [RoundButton] = [DIVBtn, MULTBtn, SUBBtn, PLUSBtn,
+                                         EQUALSBtn, DELBtn, XORBtn, ORBtn,
+                                         ANDBtn, NOTBtn, ONESBtn, TWOSBtn,
+                                         LSBtn, RSBtn, Btn0, Btn1, Btn00, Btn11]
+        for btn in singleBtns {
+            c += [
+                btn.widthAnchor.constraint(equalToConstant: layout.singleButtonWidth),
+                btn.heightAnchor.constraint(equalToConstant: layout.hStackHeight)
+            ]
+            btn.layer.cornerRadius = layout.cornerRadius
+            btn.titleLabel?.font = UIFont.systemFont(ofSize: layout.buttonFontSize, weight: .semibold)
+        }
+
+        c += [
+            ACBtn.widthAnchor.constraint(equalToConstant: layout.doubleButtonWidth),
+            ACBtn.heightAnchor.constraint(equalToConstant: layout.hStackHeight)
+        ]
+        ACBtn.layer.cornerRadius = layout.cornerRadius
+        ACBtn.titleLabel?.font = UIFont.systemFont(ofSize: layout.buttonFontSize, weight: .semibold)
+
+        return c
     }
 
     // Load the current converted value from either of the other calculator screens
@@ -275,7 +340,7 @@ class BinaryViewController: CalculatorViewController {
             let binLeftValue = runningNumber
 
             let currLabel = outputLabel.text
-            let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+            let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
             let rightShifted = String(Int(UInt64(spacesRemoved.dropLast(), radix: 2)!))
 
             stateController?.convValues.decimalVal = rightShifted
@@ -306,7 +371,7 @@ class BinaryViewController: CalculatorViewController {
         let binLeftValue = runningNumber == "" ? "0" : runningNumber
 
         let currLabel = outputLabel.text
-        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+        let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
         let castInt = UInt64(spacesRemoved, radix: 2)!
         let onesComplimentInt = ~castInt
         let onesComplimentString = String(onesComplimentInt, radix: 2)
@@ -335,7 +400,7 @@ class BinaryViewController: CalculatorViewController {
         if (stateController?.convValues.largerThan64Bits == true || outputLabel.text == binaryDefaultLabel) { return }
 
         let currLabel = outputLabel.text
-        let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+        let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
         let castInt = UInt64(spacesRemoved, radix: 2)!
         let twosComplimentInt = ~castInt + 1
         let twosComplimentString = String(twosComplimentInt, radix: 2)
@@ -611,7 +676,18 @@ class BinaryViewController: CalculatorViewController {
         while (manipulatedStringToConvert.count < 64) {
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
-        return manipulatedStringToConvert.separate(every: 4, with: " ")
+        // Split into binaryLineCount even chunks (32/16/8 bits each, depending on what
+        // UIHelper decided fits) with hard line breaks, rather than leaving the wrap
+        // point to the label's word-wrap — on a wide label (iPad) natural wrapping left
+        // far more digits on the first line than the rest.
+        let groups = manipulatedStringToConvert.separate(every: 4, with: " ").components(separatedBy: " ")
+        let groupsPerLine = max(groups.count / binaryLineCount, 1)
+        var lines: [String] = []
+        for lineStart in stride(from: 0, to: groups.count, by: groupsPerLine) {
+            let lineEnd = min(lineStart + groupsPerLine, groups.count)
+            lines.append(groups[lineStart..<lineEnd].joined(separator: " "))
+        }
+        return lines.joined(separator: "\n")
     }
 
     func formatNegativeBinaryString(stringToConvert: String) -> String {
@@ -663,7 +739,7 @@ class BinaryViewController: CalculatorViewController {
         var decCurrentVal = ""
         if (outputLabel.text?.first == "1") {
             let currLabel = outputLabel.text
-            let spacesRemoved = (currLabel?.components(separatedBy: " ").joined(separator: ""))!
+            let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
             stateController?.convValues.binVal = spacesRemoved
             decCurrentVal = String(Int64(bitPattern: UInt64(spacesRemoved, radix: 2)!))
             hexCurrentVal = String(Int64(bitPattern: UInt64(spacesRemoved, radix: 2)!), radix: 16)
