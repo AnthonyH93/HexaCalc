@@ -11,10 +11,8 @@ import UIKit
 
 extension UIWindow {
     static var isLandscape: Bool {
-        UIApplication.shared.windows
-            .first?
-            .windowScene?
-            .interfaceOrientation
-            .isLandscape ?? false
+        let activeScene = UIApplication.shared.connectedScenes
+            .first { $0.activationState == .foregroundActive } as? UIWindowScene
+        return activeScene?.interfaceOrientation.isLandscape ?? false
     }
 }
