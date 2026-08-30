@@ -50,8 +50,10 @@ class HexadecimalViewController: CalculatorViewController {
 
     //MARK: Variables
     var leftValueHex = ""
-    var leftHexValue = ""
-    var rightHexValue = ""
+
+    // Operands of the calculation currently being built, in hexadecimal, used for history entries
+    var historyLeftValue = ""
+    var historyRightValue = ""
 
     var secondFunctionMode = false
 
@@ -178,6 +180,8 @@ class HexadecimalViewController: CalculatorViewController {
                 leftValue = ""
                 leftValueHex = ""
                 rightValue = ""
+                historyLeftValue = ""
+                historyRightValue = ""
                 currentOperation = .NULL
                 operationStack.removeAll()
             }
@@ -202,6 +206,8 @@ class HexadecimalViewController: CalculatorViewController {
         leftValueHex = ""
         rightValue = ""
         result = ""
+        historyLeftValue = ""
+        historyRightValue = ""
         currentOperation = .NULL
         operationStack.removeAll()
         updateOutputLabel(value: "0")
@@ -369,7 +375,7 @@ class HexadecimalViewController: CalculatorViewController {
         if currentOperation != .NULL {
 
             if runningNumber != "" {
-                leftHexValue = runningNumber
+                historyRightValue = runningNumber
             }
 
             let binRightValue = hexToBin(hexToConvert: runningNumber)
@@ -384,7 +390,7 @@ class HexadecimalViewController: CalculatorViewController {
                         leftValue = String(Int(binRightValue, radix: 2)!)
                     }
                     leftValueHex = runningNumber
-                    rightHexValue = runningNumber
+                    historyLeftValue = runningNumber
                     runningNumber = ""
                     currentOperation = operation
                     return
@@ -485,6 +491,11 @@ class HexadecimalViewController: CalculatorViewController {
 
                 leftValue = result
 
+                let firstResultHex = hexHistoryValue(fromDecimal: result)
+                appendToHistory(CalculationData(leftValue: historyLeftValue, rightValue: historyRightValue,
+                                                operation: currentOperation, result: firstResultHex, isUnaryOperation: false))
+                historyLeftValue = firstResultHex
+
                 // Drain lower-or-equal-precedence stacked operations
                 let shouldDrain: (Operation) -> Bool = isEquals
                     ? { _ in true }
@@ -574,6 +585,11 @@ class HexadecimalViewController: CalculatorViewController {
                     }
 
                     if !result.contains("Error") {
+                        let stackedResultHex = hexHistoryValue(fromDecimal: result)
+                        appendToHistory(CalculationData(leftValue: hexHistoryValue(fromDecimal: leftValue),
+                                                        rightValue: hexHistoryValue(fromDecimal: rightValue),
+                                                        operation: top.operation, result: stackedResultHex, isUnaryOperation: false))
+                        historyLeftValue = stackedResultHex
                         leftValue = result
                     }
                 }
@@ -600,25 +616,24 @@ class HexadecimalViewController: CalculatorViewController {
                 }
                 updateOutputLabel(value: newLabelValue)
 
-                let calculationData = CalculationData(leftValue: rightHexValue, rightValue: leftHexValue, operation: currentOperation, result: newLabelValue, isUnaryOperation: false)
-                appendToHistory(calculationData)
-
-                rightHexValue = newLabelValue
+                historyLeftValue = newLabelValue
             }
             currentOperation = isEquals ? .NULL : operation
             if isEquals { operationStack.removeAll() }
         }
         else {
-            rightHexValue = runningNumber
             let binLeftValue = hexToBin(hexToConvert: runningNumber)
             if (runningNumber == "") {
+                // Continuing from a previous result: keep it as the left operand
                 if (leftValue == "") {
                     leftValue = "0"
                     leftValueHex = "0"
+                    historyLeftValue = "0"
                 }
             }
             else {
                 leftValueHex = runningNumber
+                historyLeftValue = runningNumber
                 if (binLeftValue.first == "1" && binLeftValue.count == 64) {
                     leftValue = String(Int64(bitPattern: UInt64(binLeftValue, radix: 2)!))
                 }
@@ -713,6 +728,12 @@ class HexadecimalViewController: CalculatorViewController {
         }
 
         return result
+    }
+
+    private func hexHistoryValue(fromDecimal decimalValue: String) -> String {
+        guard let intValue = Int(decimalValue) else { return decimalValue }
+        let hexValue = String(intValue, radix: 16).uppercased()
+        return hexValue.contains("-") ? formatNegativeHex(hexToConvert: hexValue).uppercased() : hexValue
     }
 
     private func formatNegativeHex(hexToConvert: String) -> String {
@@ -821,6 +842,8 @@ class HexadecimalViewController: CalculatorViewController {
                 leftValueHex = ""
                 rightValue = ""
                 result = ""
+                historyLeftValue = ""
+                historyRightValue = ""
                 updateOutputLabel(value: "0")
                 stateController?.convValues.largerThan64Bits = false
                 stateController?.convValues.decimalVal = "0"

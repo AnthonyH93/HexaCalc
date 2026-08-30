@@ -511,7 +511,8 @@ class DecimalViewController: CalculatorViewController {
                 }
 
                 if result != "Error!" {
-                    let calculationData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: currentOperation, result: result, isUnaryOperation: false)
+                    let calculationData = CalculationData(leftValue: decimalHistoryValue(leftValue), rightValue: decimalHistoryValue(rightValue),
+                                                          operation: currentOperation, result: decimalHistoryValue(result), isUnaryOperation: false)
                     appendToHistory(calculationData)
                     leftValue = result
                 }
@@ -556,7 +557,8 @@ class DecimalViewController: CalculatorViewController {
                     }
 
                     if result != "Error!" {
-                        let calcData = CalculationData(leftValue: leftValue, rightValue: rightValue, operation: top.operation, result: result, isUnaryOperation: false)
+                        let calcData = CalculationData(leftValue: decimalHistoryValue(leftValue), rightValue: decimalHistoryValue(rightValue),
+                                                       operation: top.operation, result: decimalHistoryValue(result), isUnaryOperation: false)
                         appendToHistory(calcData)
                         leftValue = result
                     }
@@ -604,6 +606,13 @@ class DecimalViewController: CalculatorViewController {
             runningNumber = ""
             currentOperation = operation
         }
+    }
+
+    // Strips the trailing ".0" that Double arithmetic leaves on whole number values
+    private func decimalHistoryValue(_ value: String) -> String {
+        guard let doubleValue = Double(value), doubleValue.truncatingRemainder(dividingBy: 1) == 0,
+              doubleValue < Double(Int.max), doubleValue > Double(Int.min) else { return value }
+        return "\(Int(doubleValue))"
     }
 
     private func formatResult() {

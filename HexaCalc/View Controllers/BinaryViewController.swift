@@ -47,8 +47,9 @@ class BinaryViewController: CalculatorViewController {
     @IBOutlet weak var Btn11: RoundButton!
 
     //MARK: Variables
-    var leftBinValue = ""
-    var rightBinValue = ""
+    // Operands of the calculation currently being built, in binary, used for history entries
+    var historyLeftValue = ""
+    var historyRightValue = ""
 
     // MARK: Abstract overrides
 
@@ -208,6 +209,8 @@ class BinaryViewController: CalculatorViewController {
                 leftValue = ""
                 rightValue = ""
                 result = ""
+                historyLeftValue = ""
+                historyRightValue = ""
                 currentOperation = .NULL
                 operationStack.removeAll()
             }
@@ -260,6 +263,8 @@ class BinaryViewController: CalculatorViewController {
         leftValue = ""
         rightValue = ""
         result = ""
+        historyLeftValue = ""
+        historyRightValue = ""
         currentOperation = .NULL
         operationStack.removeAll()
         updateOutputLabel(value: binaryDefaultLabel)
@@ -475,12 +480,13 @@ class BinaryViewController: CalculatorViewController {
                     } else {
                         leftValue = String(Int(runningNumber, radix: 2)!)
                     }
+                    historyLeftValue = runningNumber
                     runningNumber = ""
                     currentOperation = operation
                     return
                 }
 
-                leftBinValue = runningNumber
+                historyRightValue = runningNumber
 
                 if (runningNumber.first == "1" && runningNumber.count == 64) {
                     rightValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
@@ -553,6 +559,11 @@ class BinaryViewController: CalculatorViewController {
 
                 leftValue = result
 
+                let firstResultBinary = binaryHistoryValue(fromDecimal: result)
+                appendToHistory(CalculationData(leftValue: historyLeftValue, rightValue: historyRightValue,
+                                                operation: currentOperation, result: firstResultBinary, isUnaryOperation: false))
+                historyLeftValue = firstResultBinary
+
                 // Drain lower-or-equal-precedence stacked operations
                 let shouldDrain: (Operation) -> Bool = isEquals
                     ? { _ in true }
@@ -616,6 +627,11 @@ class BinaryViewController: CalculatorViewController {
                     }
 
                     if !result.contains("Error") {
+                        let stackedResultBinary = binaryHistoryValue(fromDecimal: result)
+                        appendToHistory(CalculationData(leftValue: binaryHistoryValue(fromDecimal: leftValue),
+                                                        rightValue: binaryHistoryValue(fromDecimal: rightValue),
+                                                        operation: top.operation, result: stackedResultBinary, isUnaryOperation: false))
+                        historyLeftValue = stackedResultBinary
                         leftValue = result
                     }
                 }
@@ -643,22 +659,21 @@ class BinaryViewController: CalculatorViewController {
                 newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
                 updateOutputLabel(value: newLabelValue)
 
-                let calculationData = CalculationData(leftValue: leftBinValue, rightValue: rightBinValue, operation: currentOperation, result: labelValueBeforeSpaces, isUnaryOperation: false)
-                appendToHistory(calculationData)
-
-                rightBinValue = newLabelValue
+                historyLeftValue = labelValueBeforeSpaces
             }
             currentOperation = isEquals ? .NULL : operation
             if isEquals { operationStack.removeAll() }
         }
         else {
-            rightBinValue = runningNumber
             if runningNumber == "" {
+                // Continuing from a previous result: keep it as the left operand
                 if (leftValue == "") {
                     leftValue = "0"
+                    historyLeftValue = "0"
                 }
             }
             else {
+                historyLeftValue = runningNumber
                 if (runningNumber.first == "1" && runningNumber.count == 64) {
                     leftValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
                 }
@@ -688,6 +703,12 @@ class BinaryViewController: CalculatorViewController {
             lines.append(groups[lineStart..<lineEnd].joined(separator: " "))
         }
         return lines.joined(separator: "\n")
+    }
+
+    private func binaryHistoryValue(fromDecimal decimalValue: String) -> String {
+        guard let intValue = Int(decimalValue) else { return decimalValue }
+        let binaryValue = String(intValue, radix: 2)
+        return binaryValue.contains("-") ? formatNegativeBinaryString(stringToConvert: binaryValue) : binaryValue
     }
 
     func formatNegativeBinaryString(stringToConvert: String) -> String {
