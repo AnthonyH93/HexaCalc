@@ -370,4 +370,44 @@ class CalculationHistoryUITests: XCTestCase {
         assertHistoryContains(app, "15 × 2 = 30")
         app.buttons["close"].tap()
     }
+
+    func testBinaryNotHistoryUsesDisplayedValueAsOperand() throws {
+        let app = XCUIApplication()
+        app.launch()
+        enableHistoryAndOpenTab(app, tab: "Binary")
+
+        // 110 - 11 = 11, leaving the result on screen with nothing typed
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        UITestHelper.subtract(app: app)
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
+
+        // NOT applies to the displayed result, so the entry must name it, not 0
+        app.buttons[UITestHelper.ones].tap()
+
+        openHistory(app)
+        let complimentOfThree = String(repeating: "1", count: 62) + "00"
+        assertHistoryContains(app, "! 11 = \(complimentOfThree)")
+        app.buttons["close"].tap()
+    }
+
+    func testDecimalSquareRootHistoryUsesItsOwnOperand() throws {
+        let app = XCUIApplication()
+        app.launch()
+        enableHistoryAndOpenTab(app, tab: "Decimal")
+
+        // Square root of a freshly typed number, with no pending left operand
+        app.buttons["9"].tap()
+        UITestHelper.second(app: app)
+        app.buttons[UITestHelper.sqrt].tap()
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "3", calculator: 2))
+
+        openHistory(app)
+        assertHistoryContains(app, "√ 9 = 3")
+        app.buttons["close"].tap()
+    }
 }

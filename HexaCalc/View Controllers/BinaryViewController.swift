@@ -373,10 +373,13 @@ class BinaryViewController: CalculatorViewController {
 
         if (stateController?.convValues.largerThan64Bits == true) { return }
 
-        let binLeftValue = runningNumber == "" ? "0" : runningNumber
-
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
+
+        // The operand is whatever is on screen — after an equals nothing has been typed,
+        // so runningNumber is empty and the displayed value is the one being complimented
+        let binLeftValue = runningNumber == "" ? unpaddedBinaryValue(spacesRemoved) : runningNumber
+
         let castInt = UInt64(spacesRemoved, radix: 2)!
         let onesComplimentInt = ~castInt
         let onesComplimentString = String(onesComplimentInt, radix: 2)
@@ -703,6 +706,12 @@ class BinaryViewController: CalculatorViewController {
             lines.append(groups[lineStart..<lineEnd].joined(separator: " "))
         }
         return lines.joined(separator: "\n")
+    }
+
+    // The output label is zero padded to 64 bits, history entries show the value unpadded
+    private func unpaddedBinaryValue(_ binaryValue: String) -> String {
+        let unpadded = binaryValue.drop(while: { $0 == "0" })
+        return unpadded.isEmpty ? "0" : String(unpadded)
     }
 
     private func binaryHistoryValue(fromDecimal decimalValue: String) -> String {
