@@ -46,6 +46,37 @@ class UIHelper {
         return max(min(stackWidth, cappedByHistoryButton), minLabelWidth)
     }
 
+    // Line height multiple used for the compact (Binary) label's fixed-height box.
+    private static let compactLabelLineHeight: CGFloat = 1.25
+
+    // Vertical room the top-pinned history button needs on iPad: it sits 8pt below the
+    // safe area and is 44pt tall (see HistoryButtonHost.repositionHistoryButton), plus
+    // the same 8pt gap the iPhone padding formula leaves under it.
+    private static let historyButtonClearance: CGFloat = 8 + 44 + 8
+
+    // Fits Binary's 64-bit string to a label of the given width, picking the fewest
+    // lines (16 nibbles split 8/4/2 per line) whose resulting font still reads legibly.
+    private static func compactLabelFit(budget: CGFloat, maxHeight H: CGFloat) -> (fontSize: CGFloat, lineCount: Int) {
+        let font = UIFont(name: "Avenir Next", size: 100) ?? UIFont.systemFont(ofSize: 100)
+        let totalNibbles = 16
+        let minLegibleFontSize: CGFloat = 20
+        let lineCountCandidates = [2, 4, 8]
+        var candidateLineCount = lineCountCandidates.last!
+        var candidateFontSize: CGFloat = 44
+        for lineCount in lineCountCandidates {
+            let nibblesPerLine = totalNibbles / lineCount
+            let sampleLine = Array(repeating: "0000", count: nibblesPerLine).joined(separator: " ")
+            let measuredWidth = (sampleLine as NSString).size(withAttributes: [.font: font]).width
+            let widthFitSize = measuredWidth > 0 ? (budget * 0.97) / measuredWidth * 100 : 44
+            candidateFontSize = min(widthFitSize, H * 0.14)
+            candidateLineCount = lineCount
+            if candidateFontSize >= minLegibleFontSize {
+                break
+            }
+        }
+        return (candidateFontSize, candidateLineCount)
+    }
+
     static func calculateLayout(
         width W: CGFloat,
         height H: CGFloat,
@@ -78,27 +109,10 @@ class UIHelper {
             // traditional 2-line look — is completely unaffected; this only kicks in
             // on windows narrow enough that 2 lines alone can't stay legible (e.g. an
             // iPhone-width resized "Designed for iPad" window).
-            let approxLabelWidth = max(iPadLabelWidthBudget(width: W), 20)
-            let font = UIFont(name: "Avenir Next", size: 100) ?? UIFont.systemFont(ofSize: 100)
-            let totalNibbles = 16
-            let minLegibleFontSize: CGFloat = 20
-            let lineCountCandidates = [2, 4, 8]
-            var candidateLineCount = lineCountCandidates.last!
-            var candidateFontSize: CGFloat = 44
-            for lineCount in lineCountCandidates {
-                let nibblesPerLine = totalNibbles / lineCount
-                let sampleLine = Array(repeating: "0000", count: nibblesPerLine).joined(separator: " ")
-                let measuredWidth = (sampleLine as NSString).size(withAttributes: [.font: font]).width
-                let widthFitSize = measuredWidth > 0 ? (approxLabelWidth * 0.97) / measuredWidth * 100 : 44
-                candidateFontSize = min(widthFitSize, H * 0.14)
-                candidateLineCount = lineCount
-                if candidateFontSize >= minLegibleFontSize {
-                    break
-                }
-            }
-            labelFontSize = candidateFontSize
-            labelHeight = labelFontSize * 1.25 * CGFloat(candidateLineCount)
-            binaryLineCount = candidateLineCount
+            let fit = compactLabelFit(budget: max(iPadLabelWidthBudget(width: W), 20), maxHeight: H)
+            labelFontSize = fit.fontSize
+            labelHeight = fit.fontSize * compactLabelLineHeight * CGFloat(fit.lineCount)
+            binaryLineCount = fit.lineCount
         } else {
             labelFontSize = min(W * 0.08, H * 0.045)
             labelHeight = labelFontSize * 2.5
@@ -193,20 +207,55 @@ class UIHelper {
         // box width must keep matching that same budget or the two drift apart again.
         let outputLabelWidth = (isIPad && labelType == .compact) ? iPadLabelWidthBudget(width: W) : stackWidth
 
+        // iPadLabelWidthBudget gives up 136pt of width so the label can never run under
+        // the top-right history button. That only earns its keep when the label actually
+        // sits beside the button. Once the grid height is shared with the other tabs
+        // (targetGridHeight), Binary's comparatively short label leaves slack that
+        // verticalOffsets pushes above it, so the label lands far below the button —
+        // measured ~140pt down on a full-size iPad portrait, against the button's 52pt
+        // bottom edge. There the label can have the grid's full width, which is worth
+        // ~18% more font size (30pt -> 36pt on a 9.7" portrait).
+        //
+        // Only take the wider budget when it is unambiguously better and still fits:
+        //  - the same line count, because a wider budget can let 2 lines scrape past the
+        //    legibility floor in a narrow window where splitting to 4 lines would have
+        //    produced a much larger font overall (measured 37pt at 4 lines vs 23pt at 2)
+        //  - a larger font than the capped fit actually produced
+        //  - a taller label that still leaves the top clear of the history button, which
+        //    also guarantees it fits the safe area at all
+        // Any of those failing keeps the capped result, so this can only ever help.
+        var finalLabelFontSize = labelFontSize
+        var finalLabelHeight = labelHeight
+        var finalBinaryLineCount = binaryLineCount
+        var finalOutputLabelWidth = outputLabelWidth
+        if isIPad, labelType == .compact, targetGridHeight != nil {
+            let relaxed = compactLabelFit(budget: stackWidth, maxHeight: H)
+            let relaxedHeight = relaxed.fontSize * compactLabelLineHeight * CGFloat(relaxed.lineCount)
+            let relaxedLabelTop = H - vStackHeight - labelToStackGap - bottomPadding - relaxedHeight
+            if relaxed.lineCount == binaryLineCount,
+               relaxed.fontSize > labelFontSize,
+               relaxedLabelTop >= historyButtonClearance {
+                finalLabelFontSize = relaxed.fontSize
+                finalLabelHeight = relaxedHeight
+                finalBinaryLineCount = relaxed.lineCount
+                finalOutputLabelWidth = stackWidth
+            }
+        }
+
         return CalculatorLayout(
             stackWidth: stackWidth,
-            outputLabelWidth: outputLabelWidth,
+            outputLabelWidth: finalOutputLabelWidth,
             hStackHeight: buttonHeight,
             vStackHeight: vStackHeight,
             singleButtonWidth: buttonWidth,
             doubleButtonWidth: doubleButtonWidth,
-            labelFontSize: labelFontSize,
-            labelHeight: labelHeight,
+            labelFontSize: finalLabelFontSize,
+            labelHeight: finalLabelHeight,
             labelToStackGap: labelToStackGap,
             buttonFontSize: buttonFontSize,
             cornerRadius: cornerRadius,
             topPadding: topLabelPadding,
-            binaryLineCount: binaryLineCount
+            binaryLineCount: finalBinaryLineCount
         )
     }
 
