@@ -251,4 +251,163 @@ class CalculationHistoryUITests: XCTestCase {
         XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
         app.buttons["close"].tap()
     }
+
+    // MARK: Equation content
+
+    private func enableHistoryAndOpenTab(_ app: XCUIApplication, tab: String) {
+        let tabBar = app.tabBars["Tab Bar"]
+        tabBar.buttons["Settings"].tap()
+        let historySw = app.switches["Calculation History"]
+        if (historySw.value as? String) == "0" { historySw.tap() }
+        tabBar.buttons[tab].tap()
+        UITestHelper.clear(app: app)
+    }
+
+    private func openHistory(_ app: XCUIApplication) {
+        app.buttons["History Button"].tap()
+        XCTAssert(app.staticTexts["Calculation History"].waitForExistence(timeout: 2))
+    }
+
+    private func assertHistoryContains(_ app: XCUIApplication, _ equation: String) {
+        XCTAssert(app.tables.staticTexts[equation].waitForExistence(timeout: 2),
+                  "Expected calculation history to contain \"\(equation)\"")
+    }
+
+    func testHexadecimalHistoryUsesPreviousResultAsLeftOperand() throws {
+        let app = XCUIApplication()
+        app.launch()
+        enableHistoryAndOpenTab(app, tab: "Hexadecimal")
+
+        // A × B = 6E
+        app.buttons["A"].tap()
+        UITestHelper.multiply(app: app)
+        app.buttons["B"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "6E", calculator: 0))
+
+        // Continue from that result: 6E - B = 63
+        UITestHelper.subtract(app: app)
+        app.buttons["B"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "63", calculator: 0))
+
+        openHistory(app)
+        assertHistoryContains(app, "A × B = 6E")
+        assertHistoryContains(app, "6E - B = 63")
+        app.buttons["close"].tap()
+    }
+
+    func testHexadecimalHistoryRecordsEachStackedOperation() throws {
+        let app = XCUIApplication()
+        app.launch()
+        enableHistoryAndOpenTab(app, tab: "Hexadecimal")
+
+        // A + B × C = 8E, evaluated as A + (B × C)
+        app.buttons["A"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["B"].tap()
+        UITestHelper.multiply(app: app)
+        app.buttons["C"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "8E", calculator: 0))
+
+        openHistory(app)
+        assertHistoryContains(app, "B × C = 84")
+        assertHistoryContains(app, "A + 84 = 8E")
+        app.buttons["close"].tap()
+    }
+
+    func testBinaryHistoryOperandOrderAndChaining() throws {
+        let app = XCUIApplication()
+        app.launch()
+        enableHistoryAndOpenTab(app, tab: "Binary")
+
+        // 1010 - 11 = 111
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        UITestHelper.subtract(app: app)
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "111", calculator: 1))
+
+        // Continue from that result: 111 × 10 = 1110
+        UITestHelper.multiply(app: app)
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "1110", calculator: 1))
+
+        openHistory(app)
+        assertHistoryContains(app, "1010 - 11 = 111")
+        assertHistoryContains(app, "111 × 10 = 1110")
+        app.buttons["close"].tap()
+    }
+
+    func testDecimalHistoryChainedFromPreviousResult() throws {
+        let app = XCUIApplication()
+        app.launch()
+        enableHistoryAndOpenTab(app, tab: "Decimal")
+
+        // 10 + 5 = 15
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        UITestHelper.add(app: app)
+        app.buttons["5"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "15", calculator: 2))
+
+        // Continue from that result: 15 × 2 = 30
+        UITestHelper.multiply(app: app)
+        app.buttons["2"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "30", calculator: 2))
+
+        openHistory(app)
+        assertHistoryContains(app, "10 + 5 = 15")
+        assertHistoryContains(app, "15 × 2 = 30")
+        app.buttons["close"].tap()
+    }
+
+    func testBinaryNotHistoryUsesDisplayedValueAsOperand() throws {
+        let app = XCUIApplication()
+        app.launch()
+        enableHistoryAndOpenTab(app, tab: "Binary")
+
+        // 110 - 11 = 11, leaving the result on screen with nothing typed
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        UITestHelper.subtract(app: app)
+        app.buttons["1"].tap()
+        app.buttons["1"].tap()
+        UITestHelper.equals(app: app)
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "11", calculator: 1))
+
+        // NOT applies to the displayed result, so the entry must name it, not 0
+        app.buttons[UITestHelper.ones].tap()
+
+        openHistory(app)
+        let complimentOfThree = String(repeating: "1", count: 62) + "00"
+        assertHistoryContains(app, "! 11 = \(complimentOfThree)")
+        app.buttons["close"].tap()
+    }
+
+    func testDecimalSquareRootHistoryUsesItsOwnOperand() throws {
+        let app = XCUIApplication()
+        app.launch()
+        enableHistoryAndOpenTab(app, tab: "Decimal")
+
+        // Square root of a freshly typed number, with no pending left operand
+        app.buttons["9"].tap()
+        UITestHelper.second(app: app)
+        app.buttons[UITestHelper.sqrt].tap()
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "3", calculator: 2))
+
+        openHistory(app)
+        assertHistoryContains(app, "√ 9 = 3")
+        app.buttons["close"].tap()
+    }
 }
