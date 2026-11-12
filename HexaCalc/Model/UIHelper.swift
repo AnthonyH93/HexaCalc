@@ -175,15 +175,22 @@ class UIHelper {
             buttonWidth = rawWidth
             buttonHeight = min(rawHeight, rawWidth * maxHeightOverWidth)
         } else {
-            // iPhone: square buttons sized by the tighter dimension.
+            // iPhone: in portrait, button width fills the screen rather than being
+            // clamped to the button height — on short screens (SE, 8) height is the
+            // binding dimension, and square buttons left the grid ~20-27pt short of
+            // each edge on Hex and Decimal (GitHub issue #36). Tall iPhones are
+            // width-bound, so their sizes are unchanged. Width is still capped so
+            // buttons never flatten past a 0.75 height:width ratio; landscape keeps
+            // width clamped to height as before.
             if let target = targetGridHeight {
                 buttonHeight = max((target - verticalSpacing) / CGFloat(nRows), 20)
-                buttonWidth  = max(min(btnFromWidth, buttonHeight), 20)
             } else {
-                let size = max(min(btnFromWidth, btnFromHeight), 20)
-                buttonHeight = size
-                buttonWidth  = size
+                buttonHeight = max(min(btnFromWidth, btnFromHeight), 20)
             }
+            let isLandscape = W > H
+            let minHeightOverWidth: CGFloat = 0.75
+            let maxWidth = isLandscape ? buttonHeight : buttonHeight / minHeightOverWidth
+            buttonWidth = max(min(btnFromWidth, maxWidth), 20)
         }
 
         let vStackHeight = buttonHeight * CGFloat(nRows) + verticalSpacing
