@@ -59,24 +59,27 @@ extension HistoryButtonHost where Self: UIViewController {
     func repositionHistoryButton(for targetSize: CGSize? = nil) {
         guard historyButton?.superview != nil else { return }
 
-        let size = targetSize ?? view.bounds.size
+        historyButtonTopConstraint?.isActive = false
+        let topConstraint = topRowConstraint(for: historyButton, size: targetSize ?? view.bounds.size)
+        topConstraint.isActive = true
+        historyButtonTopConstraint = topConstraint
+    }
+
+    // Vertical placement shared by everything in the calculator's top row (the history
+    // button on the right, the word size button on the left) so they always line up.
+    func topRowConstraint(for item: UIView, size: CGSize) -> NSLayoutConstraint {
         let isLandscape = size.width > size.height
         let isIPad = UIDevice.current.userInterfaceIdiom == .pad
 
-        historyButtonTopConstraint?.isActive = false
-        let topConstraint: NSLayoutConstraint
-
         if isIPad || isLandscape {
-            topConstraint = historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+            return item.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
         } else if size.height <= 736 {
             // Short iPhone portrait (≤736pt: SE, 8, 7/8 Plus): tighter constant so the
-            // button sits flush in the top-right corner just below the status bar.
-            topConstraint = historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4)
+            // button sits flush in the top corner just below the status bar.
+            return item.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4)
         } else {
-            topConstraint = historyButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
+            return item.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
         }
-        topConstraint.isActive = true
-        historyButtonTopConstraint = topConstraint
     }
 
     func updateHistoryButton(stateController: StateController?) {

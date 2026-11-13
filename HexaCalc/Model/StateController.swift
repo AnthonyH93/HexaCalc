@@ -26,6 +26,8 @@ struct convVals{
     // Acts as a binary flag (1 bit for each calculator)
     var clearLocalHistory: Int32 = 0
     var defaultTabIndex: Int32 = 3
+    // Integer width shared by the Hexadecimal and Binary calculators
+    var wordSize: WordSize = WordSize.defaultSize
 }
 
 protocol StateControllerProtocol {

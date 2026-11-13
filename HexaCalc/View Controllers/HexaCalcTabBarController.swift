@@ -29,6 +29,8 @@ class HexaCalcTabBarController: UITabBarController, StateControllerProtocol {
         // Capture the full VC list before any tabs are removed
         allViewControllers = viewControllers ?? []
 
+        stateController?.convValues.wordSize = DataPersistence.loadWordSize()
+
         guard let savedPreferences = DataPersistence.loadPreferences() else { return }
 
         // Populate shared state so all child VCs have it when their viewDidLoad runs

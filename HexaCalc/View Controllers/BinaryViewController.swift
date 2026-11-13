@@ -11,9 +11,10 @@ import UIKit
 class BinaryViewController: CalculatorViewController {
 
     //MARK: Properties
-    // Number of lines formatBinaryString wraps the 64-bit string across — normally 2
-    // (32 bits each), but UIHelper can widen this on narrow windows where 2 lines
-    // would render illegibly small (see calculateLayout's compact/iPad branch).
+    // Number of lines formatBinaryString wraps the binary string across — normally 2
+    // (32 bits each) at 64 bits, but UIHelper can widen this on narrow windows where 2
+    // lines would render illegibly small (see calculateLayout's compact/iPad branch),
+    // and narrows it for smaller word sizes (see UIHelper.binaryLabelFit).
     // Updated from buildLayoutConstraints whenever the computed layout's own value
     // changes, so it always matches what was actually laid out.
     var binaryLineCount = 2
@@ -47,6 +48,9 @@ class BinaryViewController: CalculatorViewController {
     @IBOutlet weak var Btn11: RoundButton!
 
     //MARK: Variables
+    // Word size the label was last laid out for (see buildLayoutConstraints)
+    private var renderedWordSize = WordSize.defaultSize
+
     // Operands of the calculation currently being built, in binary, used for history entries
     var historyLeftValue = ""
     var historyRightValue = ""
@@ -83,6 +87,8 @@ class BinaryViewController: CalculatorViewController {
         }
         return runningNumber
     }
+
+    override var supportsWordSize: Bool { true }
 
     override var outputLabelAccessibilityIdentifier: String { "Binary Output Label" }
     override var defaultLabelValue: String { binaryDefaultLabel }
@@ -131,12 +137,16 @@ class BinaryViewController: CalculatorViewController {
                                               targetGridHeight: targetGridHeight,
                                               isIPad: iPad)
         let (topOffset, bottomOffset) = UIHelper.verticalOffsets(safeHeight: safeHeight, layout: layout, isIPad: iPad)
+        // Narrower word sizes have fewer digits to show in the same label box
+        let labelFit = UIHelper.binaryLabelFit(bitCount: wordSize.bits, layout: layout)
+        renderedWordSize = wordSize
 
-        // Resizing can change how many lines UIHelper wraps the binary string across
-        // (see calculateLayout's compact/iPad branch) — re-wrap whatever's currently
-        // shown to match, skipping error messages, which formatBinaryString can't parse.
-        if binaryLineCount != layout.binaryLineCount {
-            binaryLineCount = layout.binaryLineCount
+        // Resizing (or a word size change) can change how many lines the binary string
+        // wraps across (see calculateLayout's compact/iPad branch and binaryLabelFit) —
+        // re-wrap whatever's currently shown to match, skipping error messages, which
+        // formatBinaryString can't parse.
+        if binaryLineCount != labelFit.lineCount {
+            binaryLineCount = labelFit.lineCount
             if let current = outputLabel.text, !current.contains("Error") {
                 let digitsOnly = current.components(separatedBy: .whitespacesAndNewlines).joined()
                 updateOutputLabel(value: formatBinaryString(stringToConvert: digitsOnly))
@@ -164,11 +174,11 @@ class BinaryViewController: CalculatorViewController {
             outputLabel.bottomAnchor.constraint(equalTo: binVStack.topAnchor, constant: -layout.labelToStackGap),
             outputLabel.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: topOffset)
         ]
-        outputLabel.font = UIFont(name: "Avenir Next", size: layout.labelFontSize)
+        outputLabel.font = UIFont(name: "Avenir Next", size: labelFit.fontSize)
         // The storyboard hardcodes numberOfLines to 2 (Binary's old fixed line count) —
         // with more lines now possible on narrow windows, that stale value truncates
         // the extra lines with "…" instead of showing them.
-        outputLabel.numberOfLines = layout.binaryLineCount
+        outputLabel.numberOfLines = labelFit.lineCount
 
         let singleBtns: [RoundButton] = [DIVBtn, MULTBtn, SUBBtn, PLUSBtn,
                                          EQUALSBtn, DELBtn, XORBtn, ORBtn,
@@ -202,9 +212,11 @@ class BinaryViewController: CalculatorViewController {
             telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Overflow)
         }
         else {
-            var newLabelValue = stateController?.convValues.binVal
-            if (newLabelValue == "0") {
-                newLabelValue = binaryDefaultLabel
+            // The shared value may have been entered on another tab (or before the word
+            // size was reduced), so wrap it to the current word size before showing it
+            let sharedValue = loadSharedValue(stateController?.convValues.binVal ?? "0", radix: 2)
+            var newLabelValue = binaryDefaultLabel
+            if (sharedValue == 0) {
                 runningNumber = ""
                 leftValue = ""
                 rightValue = ""
@@ -215,15 +227,18 @@ class BinaryViewController: CalculatorViewController {
                 operationStack.removeAll()
             }
             else {
-                if (newLabelValue!.contains("-")) {
-                    newLabelValue = formatNegativeBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
-                }
-                runningNumber = newLabelValue ?? ""
+                runningNumber = wordSize.binaryString(sharedValue)
                 currentOperation = .NULL
                 operationStack.removeAll()
-                newLabelValue = formatBinaryString(stringToConvert: newLabelValue ?? binaryDefaultLabel)
+                newLabelValue = formatBinaryString(stringToConvert: runningNumber)
             }
-            updateOutputLabel(value: newLabelValue ?? binaryDefaultLabel)
+            updateOutputLabel(value: newLabelValue)
+        }
+
+        // The word size may have been changed on the Hexadecimal tab, which changes how
+        // many digits the label has to fit
+        if renderedWordSize != wordSize {
+            invalidateCalculatorLayout()
         }
 
         setupCommonViewWillAppear()
@@ -236,12 +251,12 @@ class BinaryViewController: CalculatorViewController {
             runningNumber = ""
         }
 
-        if runningNumber.count <= 63 {
+        if runningNumber.count < wordSize.bits {
             let digit = "\(sender.tag)"
             if ((digit == "0" || digit == "100") && (outputLabel.text == binaryDefaultLabel)) {
                 //if 0 is pressed and calculator is showing 0 then do nothing
             }
-            else if ((runningNumber.count == 63) && (digit == "100" || digit == "11")) {
+            else if ((runningNumber.count == wordSize.bits - 1) && (digit == "100" || digit == "11")) {
                 //if 00 or 11 is pressed and there is only 1 place left to fill then do nothing
             }
             else {
@@ -304,35 +319,12 @@ class BinaryViewController: CalculatorViewController {
 
         if (stateController?.convValues.largerThan64Bits == true) { return }
 
-        var currentValue = ""
-        if runningNumber != "" {
+        if runningNumber != "", let value = signedValue(ofBinary: runningNumber) {
             let binLeftValue = runningNumber
+            let shifted = wordSize.truncate(value << 1)
+            showUnaryResult(shifted)
 
-            if (runningNumber.first == "1" && runningNumber.count == 64) {
-                currentValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
-            }
-            else {
-                currentValue = String(Int(runningNumber, radix: 2)!)
-            }
-            currentValue = "\(Int(currentValue)! << 1)"
-
-            stateController?.convValues.decimalVal = currentValue
-            let hexConversion = String(Int64(currentValue)!, radix: 16)
-            let binConversion = String(Int64(currentValue)!, radix: 2)
-            stateController?.convValues.hexVal = hexConversion
-            stateController?.convValues.binVal = binConversion
-
-            var newLabelValue = binConversion
-            if (binConversion.contains("-")) {
-                newLabelValue = formatNegativeBinaryString(stringToConvert: binConversion)
-            }
-            runningNumber = newLabelValue
-            let labelValueBeforeSpaces = newLabelValue
-            newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-            updateOutputLabel(value: newLabelValue)
-
-            let unaryCalculationResult = labelValueBeforeSpaces == "" ? "0" : labelValueBeforeSpaces
-            let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .LeftShift, result: unaryCalculationResult, isUnaryOperation: false)
+            let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .LeftShift, result: runningNumber, isUnaryOperation: false)
             appendToHistory(calculationData)
         }
     }
@@ -341,30 +333,13 @@ class BinaryViewController: CalculatorViewController {
 
         if (stateController?.convValues.largerThan64Bits == true) { return }
 
-        if runningNumber != "" {
+        if runningNumber != "", let value = signedValue(ofBinary: runningNumber) {
             let binLeftValue = runningNumber
+            // Logical shift: the vacated top bit is always filled with 0
+            let shifted = wordSize.truncate(Int64(bitPattern: wordSize.pattern(value) >> 1))
+            showUnaryResult(shifted)
 
-            let currLabel = outputLabel.text
-            let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
-            let rightShifted = String(Int(UInt64(spacesRemoved.dropLast(), radix: 2)!))
-
-            stateController?.convValues.decimalVal = rightShifted
-            let hexConversion = String(Int64(rightShifted)!, radix: 16)
-            let binConversion = String(Int64(rightShifted)!, radix: 2)
-            stateController?.convValues.hexVal = hexConversion
-            stateController?.convValues.binVal = binConversion
-
-            var newLabelValue = binConversion
-            if (binConversion.contains("-")) {
-                newLabelValue = formatNegativeBinaryString(stringToConvert: binConversion)
-            }
-            runningNumber = newLabelValue
-            let labelValueBeforeSpaces = newLabelValue
-            newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-            updateOutputLabel(value: newLabelValue)
-
-            let unaryCalculationResult = labelValueBeforeSpaces == "" ? "0" : labelValueBeforeSpaces
-            let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .RightShift, result: unaryCalculationResult, isUnaryOperation: false)
+            let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "1", operation: .RightShift, result: runningNumber, isUnaryOperation: false)
             appendToHistory(calculationData)
         }
     }
@@ -376,31 +351,17 @@ class BinaryViewController: CalculatorViewController {
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
 
+        // The label can be showing an error message (e.g. after dividing by zero)
+        guard let value = signedValue(ofBinary: spacesRemoved) else { return }
+
         // The operand is whatever is on screen — after an equals nothing has been typed,
         // so runningNumber is empty and the displayed value is the one being complimented
         let binLeftValue = runningNumber == "" ? unpaddedBinaryValue(spacesRemoved) : runningNumber
 
-        let castInt = UInt64(spacesRemoved, radix: 2)!
-        let onesComplimentInt = ~castInt
-        let onesComplimentString = String(onesComplimentInt, radix: 2)
+        showUnaryResult(wordSize.truncate(~value))
 
-        if (onesComplimentString.first == "1" && onesComplimentString.count == 64) {
-            runningNumber = onesComplimentString
-        }
-        else {
-            let asInt = Int(onesComplimentString)
-            let removedLeadingZeroes = "\(asInt ?? 0)"
-            runningNumber = removedLeadingZeroes
-        }
-        var newLabelValue = onesComplimentString
-        newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-        updateOutputLabel(value: newLabelValue)
-
-        let unaryCalculationResult = onesComplimentString == "" ? "0" : onesComplimentString
-        let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "", operation: .Not, result: unaryCalculationResult, isUnaryOperation: true)
+        let calculationData = CalculationData(leftValue: binLeftValue, rightValue: "", operation: .Not, result: runningNumber, isUnaryOperation: true)
         appendToHistory(calculationData)
-
-        quickUpdateStateController()
     }
 
     @IBAction func twosCompPressed(_ sender: RoundButton) {
@@ -409,23 +370,9 @@ class BinaryViewController: CalculatorViewController {
 
         let currLabel = outputLabel.text
         let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
-        let castInt = UInt64(spacesRemoved, radix: 2)!
-        let twosComplimentInt = ~castInt + 1
-        let twosComplimentString = String(twosComplimentInt, radix: 2)
+        guard let value = signedValue(ofBinary: spacesRemoved) else { return }
 
-        if (twosComplimentString.first == "1" && twosComplimentString.count == 64) {
-            runningNumber = twosComplimentString
-        }
-        else {
-            let asInt = Int(twosComplimentString)
-            let removedLeadingZeroes = "\(asInt ?? 0)"
-            runningNumber = removedLeadingZeroes
-        }
-        var newLabelValue = twosComplimentString
-        newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-        updateOutputLabel(value: newLabelValue)
-
-        quickUpdateStateController()
+        showUnaryResult(wordSize.truncate(0 &- value))
     }
 
     @IBAction func XORPressed(_ sender: RoundButton) {
@@ -473,16 +420,12 @@ class BinaryViewController: CalculatorViewController {
 
     private func operation(operation: Operation, isEquals: Bool = false) {
         if currentOperation != .NULL {
-            if runningNumber != "" {
+            if runningNumber != "", let rightOperand = signedValue(ofBinary: runningNumber) {
 
                 // Defer evaluation when the incoming operator has strictly higher precedence
                 if !isEquals && precedence(of: operation) > precedence(of: currentOperation) {
                     operationStack.append((leftValue: leftValue, operation: currentOperation))
-                    if runningNumber.first == "1" && runningNumber.count == 64 {
-                        leftValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
-                    } else {
-                        leftValue = String(Int(runningNumber, radix: 2)!)
-                    }
+                    leftValue = String(rightOperand)
                     historyLeftValue = runningNumber
                     runningNumber = ""
                     currentOperation = operation
@@ -490,64 +433,10 @@ class BinaryViewController: CalculatorViewController {
                 }
 
                 historyRightValue = runningNumber
-
-                if (runningNumber.first == "1" && runningNumber.count == 64) {
-                    rightValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
-                }
-                else {
-                    rightValue = String(Int(runningNumber, radix: 2)!)
-                }
+                rightValue = String(rightOperand)
                 runningNumber = ""
 
-                switch (currentOperation) {
-                case .Add:
-                    let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
-                    if overCheck.overflow {
-                        result = "Error! Integer Overflow!"
-                    } else {
-                        result = "\(Int(leftValue)! + Int(rightValue)!)"
-                    }
-
-                case .Subtract:
-                    let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
-                    if overCheck.overflow {
-                        result = "Error! Integer Overflow!"
-                    } else {
-                        result = "\(Int(leftValue)! - Int(rightValue)!)"
-                    }
-
-                case .Multiply:
-                    let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
-                    if overCheck.overflow {
-                        result = "Error! Integer Overflow!"
-                    } else {
-                        result = "\(Int(leftValue)! * Int(rightValue)!)"
-                    }
-
-                case .Divide:
-                    if Int(rightValue)! == 0 {
-                        result = "Error!"
-                    } else {
-                        let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
-                        if overCheck.overflow {
-                            result = "Error! Integer Overflow!"
-                        } else {
-                            result = "\(Int(leftValue)! / Int(rightValue)!)"
-                        }
-                    }
-
-                case .AND:
-                    result = "\(Int(leftValue)! & Int(rightValue)!)"
-
-                case .OR:
-                    result = "\(Int(leftValue)! | Int(rightValue)!)"
-
-                case .XOR:
-                    result = "\(Int(leftValue)! ^ Int(rightValue)!)"
-
-                default:
-                    fatalError("Unexpected Operation...")
-                }
+                result = evaluateIntegerOperation(currentOperation, Int64(leftValue)!, rightOperand)
 
                 if result.contains("Error") {
                     operationStack.removeAll()
@@ -579,55 +468,7 @@ class BinaryViewController: CalculatorViewController {
                     rightValue = result
                     leftValue = top.leftValue
 
-                    switch (top.operation) {
-                    case .Add:
-                        let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
-                        if overCheck.overflow {
-                            result = "Error! Integer Overflow!"
-                        } else {
-                            result = "\(Int(leftValue)! + Int(rightValue)!)"
-                        }
-
-                    case .Subtract:
-                        let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
-                        if overCheck.overflow {
-                            result = "Error! Integer Overflow!"
-                        } else {
-                            result = "\(Int(leftValue)! - Int(rightValue)!)"
-                        }
-
-                    case .Multiply:
-                        let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
-                        if overCheck.overflow {
-                            result = "Error! Integer Overflow!"
-                        } else {
-                            result = "\(Int(leftValue)! * Int(rightValue)!)"
-                        }
-
-                    case .Divide:
-                        if Int(rightValue)! == 0 {
-                            result = "Error!"
-                        } else {
-                            let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
-                            if overCheck.overflow {
-                                result = "Error! Integer Overflow!"
-                            } else {
-                                result = "\(Int(leftValue)! / Int(rightValue)!)"
-                            }
-                        }
-
-                    case .AND:
-                        result = "\(Int(leftValue)! & Int(rightValue)!)"
-
-                    case .OR:
-                        result = "\(Int(leftValue)! | Int(rightValue)!)"
-
-                    case .XOR:
-                        result = "\(Int(leftValue)! ^ Int(rightValue)!)"
-
-                    default:
-                        fatalError("Unexpected Operation...")
-                    }
+                    result = evaluateIntegerOperation(top.operation, Int64(leftValue)!, Int64(rightValue)!)
 
                     if !result.contains("Error") {
                         let stackedResultBinary = binaryHistoryValue(fromDecimal: result)
@@ -653,16 +494,10 @@ class BinaryViewController: CalculatorViewController {
                 leftValue = result
                 setupStateControllerValues()
 
-                let binaryRepresentation = stateController?.convValues.binVal ?? binaryDefaultLabel
-                var newLabelValue = binaryRepresentation
-                if (binaryRepresentation.contains("-")) {
-                    newLabelValue = formatNegativeBinaryString(stringToConvert: binaryRepresentation)
-                }
-                let labelValueBeforeSpaces = newLabelValue
-                newLabelValue = formatBinaryString(stringToConvert: newLabelValue)
-                updateOutputLabel(value: newLabelValue)
+                let resultBinary = binaryHistoryValue(fromDecimal: result)
+                updateOutputLabel(value: formatBinaryString(stringToConvert: resultBinary))
 
-                historyLeftValue = labelValueBeforeSpaces
+                historyLeftValue = resultBinary
             }
             currentOperation = isEquals ? .NULL : operation
             if isEquals { operationStack.removeAll() }
@@ -675,23 +510,43 @@ class BinaryViewController: CalculatorViewController {
                     historyLeftValue = "0"
                 }
             }
-            else {
+            else if let leftOperand = signedValue(ofBinary: runningNumber) {
                 historyLeftValue = runningNumber
-                if (runningNumber.first == "1" && runningNumber.count == 64) {
-                    leftValue = String(Int64(bitPattern: UInt64(runningNumber, radix: 2)!))
-                }
-                else {
-                    leftValue = String(Int(runningNumber, radix: 2)!)
-                }
+                leftValue = String(leftOperand)
             }
             runningNumber = ""
             currentOperation = operation
         }
     }
 
+    override func wordSizeDidChange(from oldSize: WordSize) {
+        wrapPendingOperands()
+        historyRightValue = ""
+        if leftValue != "" {
+            historyLeftValue = binaryHistoryValue(fromDecimal: leftValue)
+        }
+
+        if runningNumber != "", let typed = oldSize.value(fromPattern: runningNumber, radix: 2) {
+            runningNumber = wordSize.binaryString(wordSize.truncate(typed))
+        }
+
+        // Error messages have nothing to wrap, but the label still needs re-fitting
+        let digits = (outputLabel.text ?? "0").components(separatedBy: .whitespacesAndNewlines).joined()
+        if stateController?.convValues.largerThan64Bits != true,
+           let shown = oldSize.value(fromPattern: digits, radix: 2) {
+            let wrapped = wordSize.truncate(shown)
+            updateOutputLabel(value: formatBinaryString(stringToConvert: wordSize.binaryString(wrapped)))
+            if wrapped != shown {
+                storeSharedValue(wrapped)
+            }
+        }
+
+        invalidateCalculatorLayout()
+    }
+
     func formatBinaryString(stringToConvert: String) -> String {
         var manipulatedStringToConvert = stringToConvert
-        while (manipulatedStringToConvert.count < 64) {
+        while (manipulatedStringToConvert.count < wordSize.bits) {
             manipulatedStringToConvert = "0" + manipulatedStringToConvert
         }
         // Split into binaryLineCount even chunks (32/16/8 bits each, depending on what
@@ -708,46 +563,28 @@ class BinaryViewController: CalculatorViewController {
         return lines.joined(separator: "\n")
     }
 
-    // The output label is zero padded to 64 bits, history entries show the value unpadded
+    // The output label is zero padded to the word size, history entries show the value unpadded
     private func unpaddedBinaryValue(_ binaryValue: String) -> String {
         let unpadded = binaryValue.drop(while: { $0 == "0" })
         return unpadded.isEmpty ? "0" : String(unpadded)
     }
 
     private func binaryHistoryValue(fromDecimal decimalValue: String) -> String {
-        guard let intValue = Int(decimalValue) else { return decimalValue }
-        let binaryValue = String(intValue, radix: 2)
-        return binaryValue.contains("-") ? formatNegativeBinaryString(stringToConvert: binaryValue) : binaryValue
+        guard let intValue = Int64(decimalValue) else { return decimalValue }
+        return wordSize.binaryString(intValue)
     }
 
-    func formatNegativeBinaryString(stringToConvert: String) -> String {
-        var manipulatedStringToConvert = stringToConvert
-        manipulatedStringToConvert.removeFirst()
-        var newString = ""
+    // The typed/displayed binary digits, interpreted as a signed value of the current word size
+    private func signedValue(ofBinary binary: String) -> Int64? {
+        wordSize.value(fromPattern: binary, radix: 2)
+    }
 
-        for i in 0..<manipulatedStringToConvert.count {
-            if (manipulatedStringToConvert[manipulatedStringToConvert.index(manipulatedStringToConvert.startIndex, offsetBy: i)] == "0") {
-                newString += "1"
-            }
-            else {
-                newString += "0"
-            }
-        }
-
-        let index = newString.lastIndex(of: "0") ?? (newString.endIndex)
-        var newSubString = String(newString.prefix(upTo: index))
-
-        if (newSubString.count < newString.count) {
-            newSubString = newSubString + "1"
-        }
-        while (newSubString.count < newString.count) {
-            newSubString = newSubString + "0"
-        }
-        while (newSubString.count < 64) {
-            newSubString = "1" + newSubString
-        }
-
-        return newSubString
+    // Shows the result of a unary operation (shift or complement) as the new typed value
+    private func showUnaryResult(_ value: Int64) {
+        runningNumber = wordSize.binaryString(value)
+        updateOutputLabel(value: formatBinaryString(stringToConvert: runningNumber))
+        stateController?.convValues.largerThan64Bits = false
+        storeSharedValue(value)
     }
 
     private func setupStateControllerValues() {
@@ -759,27 +596,9 @@ class BinaryViewController: CalculatorViewController {
     }
 
     private func quickUpdateStateController() {
-
-        if (runningNumber.count < 65) {
-            stateController?.convValues.largerThan64Bits = false
-        }
-
-        stateController?.convValues.binVal = runningNumber
-        var hexCurrentVal = ""
-        var decCurrentVal = ""
-        if (outputLabel.text?.first == "1") {
-            let currLabel = outputLabel.text
-            let spacesRemoved = (currLabel?.components(separatedBy: .whitespacesAndNewlines).joined())!
-            stateController?.convValues.binVal = spacesRemoved
-            decCurrentVal = String(Int64(bitPattern: UInt64(spacesRemoved, radix: 2)!))
-            hexCurrentVal = String(Int64(bitPattern: UInt64(spacesRemoved, radix: 2)!), radix: 16)
-        }
-        else {
-            hexCurrentVal = String(Int(runningNumber, radix: 2)!, radix: 16)
-            decCurrentVal = String(Int(runningNumber, radix: 2)!)
-        }
-        stateController?.convValues.hexVal = hexCurrentVal
-        stateController?.convValues.decimalVal = decCurrentVal
+        stateController?.convValues.largerThan64Bits = false
+        guard let value = signedValue(ofBinary: runningNumber) else { return }
+        storeSharedValue(value)
     }
 
     private func pasteFromClipboardToBinaryCalculator() {
@@ -790,8 +609,11 @@ class BinaryViewController: CalculatorViewController {
         let chars = CharacterSet(charactersIn: "01").inverted
         let strippedSpacesBinary = pastedInput.components(separatedBy: .whitespacesAndNewlines).joined()
         let isValidBinary = strippedSpacesBinary.uppercased().rangeOfCharacter(from: chars) == nil
-        if (isValidBinary && strippedSpacesBinary.count <= 64) {
-            if (pastedInput == "0") {
+        // Leading zeroes don't count towards the length, so a value copied from a wider
+        // word size's zero-padded label still pastes if it fits
+        let significantBinary = String(strippedSpacesBinary.drop(while: { $0 == "0" }))
+        if (isValidBinary && significantBinary.count <= wordSize.bits) {
+            if (significantBinary.isEmpty) {
                 runningNumber = ""
                 updateOutputLabel(value: binaryDefaultLabel)
                 stateController?.convValues.largerThan64Bits = false
@@ -800,7 +622,7 @@ class BinaryViewController: CalculatorViewController {
                 stateController?.convValues.binVal = "0"
             }
             else {
-                runningNumber = strippedSpacesBinary
+                runningNumber = significantBinary
                 let newLabelValue = formatBinaryString(stringToConvert: runningNumber)
                 updateOutputLabel(value: newLabelValue)
                 quickUpdateStateController()
@@ -809,7 +631,7 @@ class BinaryViewController: CalculatorViewController {
         else {
             var alertMessage = "Your clipboad did not contain a valid binary string."
             if (isValidBinary) {
-                alertMessage = "The binary string in your clipboard must have a length of 64 characters or less."
+                alertMessage = "The binary string in your clipboard must have a length of \(wordSize.bits) characters or less for the \(wordSize.title) word size."
             }
             let alert = UIAlertController(title: "Paste Failed", message: alertMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
