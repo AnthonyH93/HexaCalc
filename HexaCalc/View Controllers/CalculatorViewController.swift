@@ -404,11 +404,12 @@ class CalculatorViewController: UIViewController, HistoryButtonHost {
         stateController?.convValues.binVal = String(value, radix: 2)
     }
 
-    // Wraps the decimal operands of a calculation in progress to the current word size
-    func wrapPendingOperands() {
+    // Resizes the decimal operands of a calculation in progress from the previous word
+    // size to the current one (see WordSize.resized)
+    func resizePendingOperands(from oldSize: WordSize) {
         let wrap: (String) -> String = { value in
             guard let intValue = Int64(value) else { return value }
-            return String(self.wordSize.truncate(intValue))
+            return String(self.wordSize.resized(intValue, from: oldSize))
         }
         leftValue = wrap(leftValue)
         rightValue = wrap(rightValue)

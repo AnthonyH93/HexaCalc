@@ -520,21 +520,21 @@ class BinaryViewController: CalculatorViewController {
     }
 
     override func wordSizeDidChange(from oldSize: WordSize) {
-        wrapPendingOperands()
+        resizePendingOperands(from: oldSize)
         historyRightValue = ""
         if leftValue != "" {
             historyLeftValue = binaryHistoryValue(fromDecimal: leftValue)
         }
 
         if runningNumber != "", let typed = oldSize.value(fromPattern: runningNumber, radix: 2) {
-            runningNumber = wordSize.binaryString(wordSize.truncate(typed))
+            runningNumber = wordSize.binaryString(wordSize.resized(typed, from: oldSize))
         }
 
         // Error messages have nothing to wrap, but the label still needs re-fitting
         let digits = (outputLabel.text ?? "0").components(separatedBy: .whitespacesAndNewlines).joined()
         if stateController?.convValues.largerThan64Bits != true,
            let shown = oldSize.value(fromPattern: digits, radix: 2) {
-            let wrapped = wordSize.truncate(shown)
+            let wrapped = wordSize.resized(shown, from: oldSize)
             updateOutputLabel(value: formatBinaryString(stringToConvert: wordSize.binaryString(wrapped)))
             if wrapped != shown {
                 storeSharedValue(wrapped)

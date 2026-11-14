@@ -476,20 +476,20 @@ class HexadecimalViewController: CalculatorViewController {
     }
 
     override func wordSizeDidChange(from oldSize: WordSize) {
-        wrapPendingOperands()
+        resizePendingOperands(from: oldSize)
         historyRightValue = ""
         if leftValue != "" {
             historyLeftValue = hexHistoryValue(fromDecimal: leftValue)
         }
 
         if runningNumber != "", let typed = oldSize.value(fromPattern: runningNumber, radix: 16) {
-            runningNumber = wordSize.hexString(wordSize.truncate(typed))
+            runningNumber = wordSize.hexString(wordSize.resized(typed, from: oldSize))
         }
 
         // Error messages have nothing to wrap
         guard stateController?.convValues.largerThan64Bits != true,
               let shown = oldSize.value(fromPattern: outputLabel.text ?? "0", radix: 16) else { return }
-        let wrapped = wordSize.truncate(shown)
+        let wrapped = wordSize.resized(shown, from: oldSize)
         updateOutputLabel(value: wordSize.hexString(wrapped))
         if wrapped != shown {
             storeSharedValue(wrapped)

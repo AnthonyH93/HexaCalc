@@ -126,6 +126,21 @@ class WordSizeUITests: XCTestCase {
         XCTAssert(UITestHelper.assertResult(app: app, expected: "52", calculator: 2))
     }
 
+    func testGrowingKeepsBitPattern() throws {
+        let app = XCUIApplication()
+        selectWordSize(app: app, "8-bit")
+        type(app: app, "A5")
+
+        // Widening zero-extends: A5 stays A5 rather than becoming FFA5
+        selectWordSize(app: app, "16-bit")
+        XCTAssertEqual(hexLabel(app: app), "A5")
+
+        app.tabBars["Tab Bar"].buttons["Binary"].tap()
+        XCTAssertEqual(binaryDigits(app: app), "0000000010100101")
+        app.tabBars["Tab Bar"].buttons["Decimal"].tap()
+        XCTAssert(UITestHelper.assertResult(app: app, expected: "165", calculator: 2))
+    }
+
     func testBinaryLabelShowsWordSizeDigits() throws {
         let app = XCUIApplication()
         app.tabBars["Tab Bar"].buttons["Binary"].tap()

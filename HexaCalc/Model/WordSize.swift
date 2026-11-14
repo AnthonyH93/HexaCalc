@@ -35,6 +35,14 @@ enum WordSize: Int, CaseIterable {
         return (value << shift) >> shift
     }
 
+    // Converts a value held at another word size to this one by keeping its bit pattern:
+    // growing zero-extends (8-bit A5 becomes 16-bit 00A5, not FFA5) and shrinking keeps
+    // the low bits (16-bit 1234 becomes 8-bit 34). The bits are what the Hexadecimal and
+    // Binary tabs show, so they're what stays put — the signed value can change.
+    func resized(_ value: Int64, from oldSize: WordSize) -> Int64 {
+        truncate(Int64(bitPattern: oldSize.pattern(value)))
+    }
+
     // The unsigned `bits`-wide bit pattern of a value
     func pattern(_ value: Int64) -> UInt64 {
         UInt64(bitPattern: value) & mask
