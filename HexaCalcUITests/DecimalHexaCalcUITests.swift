@@ -15,7 +15,7 @@ class DecimalHexaCalcUITests: XCTestCase {
         // Navigate to the decimal tab before running each test
         
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         
         let tabBar = app.tabBars["Tab Bar"]
         tabBar.buttons["Decimal"].tap()

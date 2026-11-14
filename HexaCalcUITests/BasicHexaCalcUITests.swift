@@ -21,7 +21,7 @@ class BasicHexaCalcUITests: XCTestCase {
 
     func testBasicAppSetup() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         // Launched on Hexadecimal tab
@@ -54,7 +54,7 @@ class BasicHexaCalcUITests: XCTestCase {
     
     func testHexadecimalBasicCalculations() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["1"].tap()
@@ -117,7 +117,7 @@ class BasicHexaCalcUITests: XCTestCase {
     
     func testBinaryBasicCalculations() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         let tabBar = app.tabBars["Tab Bar"]
@@ -183,7 +183,7 @@ class BasicHexaCalcUITests: XCTestCase {
     
     func testDecimalBasicCalculations() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         let tabBar = app.tabBars["Tab Bar"]
@@ -244,7 +244,7 @@ class BasicHexaCalcUITests: XCTestCase {
     
     func testCopyPaste() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         let tabBar = app.tabBars["Tab Bar"]
@@ -308,7 +308,7 @@ class BasicHexaCalcUITests: XCTestCase {
 
     func testHexToBinaryConversion() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         // Enter FF (255 decimal) on hex tab
@@ -329,7 +329,7 @@ class BasicHexaCalcUITests: XCTestCase {
 
     func testDecimalToBinaryConversion() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         let tabBar = app.tabBars["Tab Bar"]
@@ -351,7 +351,7 @@ class BasicHexaCalcUITests: XCTestCase {
 
     func testNegativeValueConversion() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         let tabBar = app.tabBars["Tab Bar"]

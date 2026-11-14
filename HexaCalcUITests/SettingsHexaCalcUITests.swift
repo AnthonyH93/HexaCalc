@@ -15,7 +15,7 @@ class SettingsHexaCalcUITests: XCTestCase {
         // Navigate to the settings tab before running each test
 
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
 
         let tabBar = app.tabBars["Tab Bar"]
 
@@ -210,7 +210,7 @@ class SettingsHexaCalcUITests: XCTestCase {
 
         // Relaunch and verify Binary is the selected tab
         app.terminate()
-        app.launch()
+        UITestHelper.launch(app)
         XCTAssert(tabBar.buttons["Binary"].isSelected)
         XCTAssertFalse(tabBar.buttons["Hexadecimal"].isSelected)
 
@@ -220,7 +220,7 @@ class SettingsHexaCalcUITests: XCTestCase {
         app.tables.staticTexts["Decimal"].tap()
 
         app.terminate()
-        app.launch()
+        UITestHelper.launch(app)
         XCTAssert(tabBar.buttons["Decimal"].isSelected)
         XCTAssertFalse(tabBar.buttons["Binary"].isSelected)
 
@@ -230,7 +230,7 @@ class SettingsHexaCalcUITests: XCTestCase {
         app.tables.staticTexts["Off"].tap()
 
         app.terminate()
-        app.launch()
+        UITestHelper.launch(app)
         XCTAssert(tabBar.buttons["Hexadecimal"].isSelected)
     }
 }

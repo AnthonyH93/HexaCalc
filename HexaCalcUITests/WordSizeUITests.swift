@@ -13,25 +13,14 @@ class WordSizeUITests: XCTestCase {
 
     override func setUpWithError() throws {
         let app = XCUIApplication()
-        // ReviewManager shows the App Store review prompt after the third completed
-        // calculation, and that prompt swallows every tap until dismissed. A launch
-        // argument overrides the UserDefaults value it counts with, pinning it at 0.
-        app.launchArguments += ["-ReviewWorthyActionCount", "0"]
-        app.launch()
+        // Starts at 64 bits whatever an earlier test saved — no tearDown reset needed,
+        // so a test that fails at 8 bits can't leave other tests running at 8 bits
+        UITestHelper.launch(app)
 
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
-        // The word size is persisted, so start every test from the default
-        selectWordSize(app: app, "64-bit")
-        UITestHelper.clear(app: app)
+        XCTAssert(app.buttons["Word Size Button"].label.contains("64-bit"))
 
         continueAfterFailure = false
-    }
-
-    override func tearDownWithError() throws {
-        // Restore the default so other test classes run at 64 bits
-        let app = XCUIApplication()
-        app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
-        selectWordSize(app: app, "64-bit")
     }
 
     // MARK: Helpers
@@ -186,6 +175,25 @@ class WordSizeUITests: XCTestCase {
         // The Decimal tab has no word size
         app.tabBars["Tab Bar"].buttons["Decimal"].tap()
         XCTAssertFalse(app.buttons["Word Size Button"].exists)
+    }
+
+    func testWordSizePersistsAcrossLaunches() throws {
+        let app = XCUIApplication()
+        selectWordSize(app: app, "16-bit")
+        app.terminate()
+
+        // A plain launch, without UITestHelper's reset override, reads the saved value.
+        // It's left saved at 16 bits, which is safe: every other launch resets it.
+        let relaunched = XCUIApplication()
+        relaunched.launch()
+        relaunched.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+        XCTAssert(relaunched.buttons["Word Size Button"].label.contains("16-bit"))
+
+        // ...while a launch through the helper is back at the default
+        relaunched.terminate()
+        UITestHelper.launch(relaunched)
+        relaunched.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
+        XCTAssert(relaunched.buttons["Word Size Button"].label.contains("64-bit"))
     }
 
     func testOverflowStillReportedAt64Bit() throws {
