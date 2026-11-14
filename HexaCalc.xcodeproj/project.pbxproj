@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8DC73473DF154A1AB56A8AD4 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A663F08D8745E2B3469E80 /* CalculatorViewController.swift */; };
 		9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */; };
-		9DC0FFEE2A11000100000004 /* WordSizeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0FFEE2A11000100000003 /* WordSizeUITests.swift */; };
 		9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23DB291F6BE300151B44 /* UITestHelper.swift */; };
 		9D6199612D6D82B000F93648 /* DefaultTabViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */; };
 		9D6199632D6EE13A00F93648 /* HexaCalcTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199622D6EE13A00F93648 /* HexaCalcTabBarController.swift */; };
@@ -19,10 +18,11 @@
 		9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */; };
 		9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D979A9925E767D500357754 /* UIWindow+isLandscape.swift */; };
 		9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA0D7ED250B270800F72051 /* DataPersistence.swift */; };
-		9DC0FFEE2A11000100000002 /* WordSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0FFEE2A11000100000001 /* WordSize.swift */; };
 		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
+		9DC0FFEE2A11000100000002 /* WordSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0FFEE2A11000100000001 /* WordSize.swift */; };
+		9DC0FFEE2A11000100000004 /* WordSizeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0FFEE2A11000100000003 /* WordSizeUITests.swift */; };
 		9DC1BDD22F90ACC3003D5CB5 /* HistoryButtonHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC1BDD12F90ACC3003D5CB5 /* HistoryButtonHost.swift */; };
 		9DC242F225E1EE440038DD63 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC242F125E1EE440038DD63 /* UIHelper.swift */; };
 		9DC4DA182944367500D1652E /* BinaryHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */; };
@@ -119,7 +119,6 @@
 
 /* Begin PBXFileReference section */
 		9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexadecimalHexaCalcUITests.swift; sourceTree = "<group>"; };
-		9DC0FFEE2A11000100000003 /* WordSizeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSizeUITests.swift; sourceTree = "<group>"; };
 		9D3E23DB291F6BE300151B44 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
 		9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabViewConverter.swift; sourceTree = "<group>"; };
 		9D6199622D6EE13A00F93648 /* HexaCalcTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcTabBarController.swift; sourceTree = "<group>"; };
@@ -129,10 +128,11 @@
 		9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		9D979A9925E767D500357754 /* UIWindow+isLandscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+isLandscape.swift"; sourceTree = "<group>"; };
 		9DA0D7ED250B270800F72051 /* DataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistence.swift; sourceTree = "<group>"; };
-		9DC0FFEE2A11000100000001 /* WordSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSize.swift; sourceTree = "<group>"; };
 		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
+		9DC0FFEE2A11000100000001 /* WordSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSize.swift; sourceTree = "<group>"; };
+		9DC0FFEE2A11000100000003 /* WordSizeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSizeUITests.swift; sourceTree = "<group>"; };
 		9DC1BDD12F90ACC3003D5CB5 /* HistoryButtonHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryButtonHost.swift; sourceTree = "<group>"; };
 		9DC242F125E1EE440038DD63 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		9DC4DA172944367500D1652E /* BinaryHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHexaCalcUITests.swift; sourceTree = "<group>"; };
@@ -848,7 +848,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -856,7 +856,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.6;
+				MARKETING_VERSION = 1.6.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -870,7 +870,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = HexaCalc/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -878,7 +878,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.6;
+				MARKETING_VERSION = 1.6.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.HexaCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
