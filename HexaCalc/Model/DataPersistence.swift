@@ -47,4 +47,19 @@ struct DataPersistence {
         }
         return nil
     }
+
+    // The Hex/Binary word size lives in UserDefaults rather than UserPreferences: the
+    // Settings screens rebuild UserPreferences from a copy loaded once in viewDidLoad,
+    // so a value changed from a calculator tab would be silently overwritten by the
+    // next Settings change.
+    private static let wordSizeKey = "WordSizeBits"
+
+    static func loadWordSize() -> WordSize {
+        let stored = UserDefaults.standard.integer(forKey: wordSizeKey)
+        return WordSize(rawValue: stored) ?? WordSize.defaultSize
+    }
+
+    static func saveWordSize(_ wordSize: WordSize) {
+        UserDefaults.standard.set(wordSize.bits, forKey: wordSizeKey)
+    }
 }

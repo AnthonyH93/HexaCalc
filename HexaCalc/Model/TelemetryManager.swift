@@ -88,6 +88,7 @@ enum TelemetryCalculatorAction: String {
     case Overflow = "integerOverflow"
     case DeleteSwipe = "swipedToDelete"
     case Appeared = "appeared"
+    case WordSizeChanged = "wordSizeChanged"
 }
 
 enum TelemetrySettingsSection: String {

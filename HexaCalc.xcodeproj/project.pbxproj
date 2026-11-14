@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8DC73473DF154A1AB56A8AD4 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A663F08D8745E2B3469E80 /* CalculatorViewController.swift */; };
 		9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */; };
+		9DC0FFEE2A11000100000004 /* WordSizeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0FFEE2A11000100000003 /* WordSizeUITests.swift */; };
 		9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E23DB291F6BE300151B44 /* UITestHelper.swift */; };
 		9D6199612D6D82B000F93648 /* DefaultTabViewConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */; };
 		9D6199632D6EE13A00F93648 /* HexaCalcTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6199622D6EE13A00F93648 /* HexaCalcTabBarController.swift */; };
@@ -18,6 +19,7 @@
 		9D8F9A2B24E8DCE700F32A2C /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */; };
 		9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D979A9925E767D500357754 /* UIWindow+isLandscape.swift */; };
 		9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA0D7ED250B270800F72051 /* DataPersistence.swift */; };
+		9DC0FFEE2A11000100000002 /* WordSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0FFEE2A11000100000001 /* WordSize.swift */; };
 		9DAE268A24C68BEB0070B965 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268924C68BEB0070B965 /* RoundButton.swift */; };
 		9DAE268D24C68C300070B965 /* Formatter+ScientificNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */; };
 		9DAE269524C7F77A0070B965 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE269424C7F77A0070B965 /* StateController.swift */; };
@@ -117,6 +119,7 @@
 
 /* Begin PBXFileReference section */
 		9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexadecimalHexaCalcUITests.swift; sourceTree = "<group>"; };
+		9DC0FFEE2A11000100000003 /* WordSizeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSizeUITests.swift; sourceTree = "<group>"; };
 		9D3E23DB291F6BE300151B44 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
 		9D6199602D6D82A100F93648 /* DefaultTabViewConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabViewConverter.swift; sourceTree = "<group>"; };
 		9D6199622D6EE13A00F93648 /* HexaCalcTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexaCalcTabBarController.swift; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		9D979A9925E767D500357754 /* UIWindow+isLandscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+isLandscape.swift"; sourceTree = "<group>"; };
 		9DA0D7ED250B270800F72051 /* DataPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistence.swift; sourceTree = "<group>"; };
+		9DC0FFEE2A11000100000001 /* WordSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSize.swift; sourceTree = "<group>"; };
 		9DAE268924C68BEB0070B965 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		9DAE268C24C68C300070B965 /* Formatter+ScientificNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+ScientificNotation.swift"; sourceTree = "<group>"; };
 		9DAE269424C7F77A0070B965 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				9DAE269424C7F77A0070B965 /* StateController.swift */,
 				9D8F9A2A24E8DCE700F32A2C /* UserPreferences.swift */,
 				9DA0D7ED250B270800F72051 /* DataPersistence.swift */,
+				9DC0FFEE2A11000100000001 /* WordSize.swift */,
 				9DC242F125E1EE440038DD63 /* UIHelper.swift */,
 				9DC758262802A83500BB2953 /* ColourNumberConverter.swift */,
 				9DC7582A2803EDF200BB2953 /* CopyOrPasteActionConverter.swift */,
@@ -381,6 +386,7 @@
 				CAFE001234567890ABCDEF01 /* CalculationHistoryUITests.swift */,
 				9DC4DA1929457F2C00D1652E /* DecimalHexaCalcUITests.swift */,
 				9D3E23D9291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift */,
+				9DC0FFEE2A11000100000003 /* WordSizeUITests.swift */,
 				9D3E23DB291F6BE300151B44 /* UITestHelper.swift */,
 				9DF9A119294C30730074C07D /* SettingsHexaCalcUITests.swift */,
 			);
@@ -589,6 +595,7 @@
 				9DF9A11A294C30730074C07D /* SettingsHexaCalcUITests.swift in Sources */,
 				9DC4DA182944367500D1652E /* BinaryHexaCalcUITests.swift in Sources */,
 				9D3E23DA291F6B9700151B44 /* HexadecimalHexaCalcUITests.swift in Sources */,
+				9DC0FFEE2A11000100000004 /* WordSizeUITests.swift in Sources */,
 				9DE32E4028EA97AC00BB222C /* BasicHexaCalcUITests.swift in Sources */,
 				CAFE001234567890ABCDEF02 /* CalculationHistoryUITests.swift in Sources */,
 				9D3E23DC291F6BE300151B44 /* UITestHelper.swift in Sources */,
@@ -616,6 +623,7 @@
 				9DC7582428028CC600BB2953 /* SelectionTableViewCell.swift in Sources */,
 				9D979A9A25E767D500357754 /* UIWindow+isLandscape.swift in Sources */,
 				9DA0D7EE250B270800F72051 /* DataPersistence.swift in Sources */,
+				9DC0FFEE2A11000100000002 /* WordSize.swift in Sources */,
 				9DE9FB4828DC220E00705A4F /* Operation.swift in Sources */,
 				9DEF24A324C553F000701F5B /* HexaCalc.xcdatamodeld in Sources */,
 				9D8460252A46C182008C5A99 /* HistoryButtonViewConverter.swift in Sources */,

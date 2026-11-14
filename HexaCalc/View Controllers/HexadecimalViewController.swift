@@ -49,8 +49,6 @@ class HexadecimalViewController: CalculatorViewController {
     @IBOutlet weak var EQUALSBtn: RoundButton!
 
     //MARK: Variables
-    var leftValueHex = ""
-
     // Operands of the calculation currently being built, in hexadecimal, used for history entries
     var historyLeftValue = ""
     var historyRightValue = ""
@@ -78,6 +76,8 @@ class HexadecimalViewController: CalculatorViewController {
         }
         return runningNumber
     }
+
+    override var supportsWordSize: Bool { true }
 
     override var outputLabelAccessibilityIdentifier: String { "Hexadecimal Output Label" }
     override var defaultLabelValue: String { "0" }
@@ -172,13 +172,14 @@ class HexadecimalViewController: CalculatorViewController {
             telemetryManager.sendCalculatorSignal(tab: telemetryTab, action: TelemetryCalculatorAction.Overflow)
         }
         else {
-            var newLabelValue = stateController?.convValues.hexVal.uppercased()
+            // The shared value may have been entered on another tab (or before the word
+            // size was reduced), so wrap it to the current word size before showing it
+            let sharedValue = loadSharedValue(stateController?.convValues.hexVal ?? "0", radix: 16)
 
-            if (newLabelValue == "0") {
+            if (sharedValue == 0) {
                 updateOutputLabel(value: "0")
                 runningNumber = ""
                 leftValue = ""
-                leftValueHex = ""
                 rightValue = ""
                 historyLeftValue = ""
                 historyRightValue = ""
@@ -186,13 +187,11 @@ class HexadecimalViewController: CalculatorViewController {
                 operationStack.removeAll()
             }
             else {
-                if (newLabelValue!.contains("-")) {
-                    newLabelValue = formatNegativeHex(hexToConvert: newLabelValue ?? "0").uppercased()
-                }
-                runningNumber = newLabelValue ?? "0"
+                let newLabelValue = wordSize.hexString(sharedValue)
+                runningNumber = newLabelValue
                 currentOperation = .NULL
                 operationStack.removeAll()
-                updateOutputLabel(value: newLabelValue ?? "0")
+                updateOutputLabel(value: newLabelValue)
             }
         }
 
@@ -203,7 +202,6 @@ class HexadecimalViewController: CalculatorViewController {
     @IBAction func ACPressed(_ sender: RoundButton) {
         runningNumber = ""
         leftValue = ""
-        leftValueHex = ""
         rightValue = ""
         result = ""
         historyLeftValue = ""
@@ -262,7 +260,7 @@ class HexadecimalViewController: CalculatorViewController {
             runningNumber = ""
         }
 
-        if (runningNumber.count <= 15) {
+        if (runningNumber.count < wordSize.hexDigits) {
             let digit = "\(sender.tag)"
             if ((digit == "0") && (outputLabel.text == "0")) {
                 //if 0 is pressed and calculator is showing 0 then do nothing
@@ -302,10 +300,11 @@ class HexadecimalViewController: CalculatorViewController {
             currentValue = outputLabel.text ?? "0"
         }
 
-        let castInt = UInt64(currentValue, radix: 16)!
-        let onesComplimentInt = ~castInt
+        // The label can be showing an error message (e.g. after dividing by zero)
+        guard let value = signedValue(ofHex: currentValue) else { return }
+        let onesComplimentValue = wordSize.truncate(~value)
 
-        runningNumber = String(onesComplimentInt, radix: 16).uppercased()
+        runningNumber = wordSize.hexString(onesComplimentValue)
         updateOutputLabel(value: runningNumber)
 
         let unaryCalculationResult = runningNumber == "" ? "0" : runningNumber
@@ -320,10 +319,10 @@ class HexadecimalViewController: CalculatorViewController {
             // 2's complement pressed
             if (stateController?.convValues.largerThan64Bits == true || runningNumber == "") { return }
 
-            let castInt = UInt64(runningNumber, radix: 16)!
-            let twosComplimentInt = ~castInt + 1
+            guard let value = signedValue(ofHex: runningNumber) else { return }
+            let twosComplimentValue = wordSize.truncate(0 &- value)
 
-            runningNumber = String(twosComplimentInt, radix: 16).uppercased()
+            runningNumber = wordSize.hexString(twosComplimentValue)
             updateOutputLabel(value: runningNumber)
             quickUpdateStateController()
         }
@@ -378,105 +377,22 @@ class HexadecimalViewController: CalculatorViewController {
                 historyRightValue = runningNumber
             }
 
-            let binRightValue = hexToBin(hexToConvert: runningNumber)
-            if binRightValue != "" {
+            if let rightOperand = signedValue(ofHex: runningNumber) {
 
                 // Defer evaluation when the incoming operator has strictly higher precedence
                 if !isEquals && precedence(of: operation) > precedence(of: currentOperation) {
                     operationStack.append((leftValue: leftValue, operation: currentOperation))
-                    if binRightValue.first == "1" && binRightValue.count == 64 {
-                        leftValue = String(Int64(bitPattern: UInt64(binRightValue, radix: 2)!))
-                    } else {
-                        leftValue = String(Int(binRightValue, radix: 2)!)
-                    }
-                    leftValueHex = runningNumber
+                    leftValue = String(rightOperand)
                     historyLeftValue = runningNumber
                     runningNumber = ""
                     currentOperation = operation
                     return
                 }
 
-                if (binRightValue.first == "1" && binRightValue.count == 64) {
-                    rightValue = String(Int64(bitPattern: UInt64(binRightValue, radix: 2)!))
-                }
-                else {
-                    rightValue = String(Int(binRightValue, radix: 2)!)
-                }
+                rightValue = String(rightOperand)
                 runningNumber = ""
 
-                switch (currentOperation) {
-
-                case .Add:
-                    let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
-                    if overCheck.overflow {
-                        result = "Error! Integer Overflow!"
-                    } else {
-                        result = "\(Int(leftValue)! + Int(rightValue)!)"
-                    }
-
-                case .Subtract:
-                    let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
-                    if overCheck.overflow {
-                        result = "Error! Integer Overflow!"
-                    } else {
-                        result = "\(Int(leftValue)! - Int(rightValue)!)"
-                    }
-
-                case .Multiply:
-                    let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
-                    if overCheck.overflow {
-                        result = "Error! Integer Overflow!"
-                    } else {
-                        result = "\(Int(leftValue)! * Int(rightValue)!)"
-                    }
-
-                case .Modulus:
-                    if Int(rightValue)! == 0 {
-                        result = "Error!"
-                    } else {
-                        result = "\(Int(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!)))"
-                    }
-
-                case .Divide:
-                    if Int(rightValue)! == 0 {
-                        result = "Error!"
-                    } else {
-                        let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
-                        if overCheck.overflow {
-                            result = "Error! Integer Overflow!"
-                        } else {
-                            result = "\(Int(leftValue)! / Int(rightValue)!)"
-                        }
-                    }
-
-                case .LeftShift:
-                    result = "\(Int(leftValue)! << Int(rightValue)!)"
-
-                case .RightShift:
-                    let currValue = hexToBin(hexToConvert: leftValueHex)
-                    let rightShiftRight = Int(rightValue)!
-                    if (rightShiftRight <= 0) {
-                        result = leftValue
-                    }
-                    else if (rightShiftRight > currValue.count) {
-                        result = "0"
-                    }
-                    else {
-                        result = String(Int(UInt64(currValue.dropLast(rightShiftRight), radix: 2)!))
-                    }
-
-                case .AND:
-                    result = "\(Int(leftValue)! & Int(rightValue)!)"
-
-                case .OR:
-                    result = "\(Int(leftValue)! | Int(rightValue)!)"
-
-                case .XOR:
-                    result = "\(Int(leftValue)! ^ Int(rightValue)!)"
-
-                default:
-                    fatalError("Unexpected Operation...")
-                }
+                result = evaluateIntegerOperation(currentOperation, Int64(leftValue)!, rightOperand)
 
                 if result.contains("Error") {
                     operationStack.removeAll()
@@ -508,81 +424,7 @@ class HexadecimalViewController: CalculatorViewController {
                     rightValue = result
                     leftValue = top.leftValue
 
-                    switch (top.operation) {
-
-                    case .Add:
-                        let overCheck = Int64(leftValue)!.addingReportingOverflow(Int64(rightValue)!)
-                        if overCheck.overflow {
-                            result = "Error! Integer Overflow!"
-                        } else {
-                            result = "\(Int(leftValue)! + Int(rightValue)!)"
-                        }
-
-                    case .Subtract:
-                        let overCheck = Int64(leftValue)!.subtractingReportingOverflow(Int64(rightValue)!)
-                        if overCheck.overflow {
-                            result = "Error! Integer Overflow!"
-                        } else {
-                            result = "\(Int(leftValue)! - Int(rightValue)!)"
-                        }
-
-                    case .Multiply:
-                        let overCheck = Int64(leftValue)!.multipliedReportingOverflow(by: Int64(rightValue)!)
-                        if overCheck.overflow {
-                            result = "Error! Integer Overflow!"
-                        } else {
-                            result = "\(Int(leftValue)! * Int(rightValue)!)"
-                        }
-
-                    case .Modulus:
-                        if Int(rightValue)! == 0 {
-                            result = "Error!"
-                        } else {
-                            result = "\(Int(Double(leftValue)!.truncatingRemainder(dividingBy: Double(rightValue)!)))"
-                        }
-
-                    case .Divide:
-                        if Int(rightValue)! == 0 {
-                            result = "Error!"
-                        } else {
-                            let overCheck = Int64(leftValue)!.dividedReportingOverflow(by: Int64(rightValue)!)
-                            if overCheck.overflow {
-                                result = "Error! Integer Overflow!"
-                            } else {
-                                result = "\(Int(leftValue)! / Int(rightValue)!)"
-                            }
-                        }
-
-                    case .LeftShift:
-                        result = "\(Int(leftValue)! << Int(rightValue)!)"
-
-                    case .RightShift:
-                        let leftInt = Int(leftValue)!
-                        let leftHexStr = leftInt < 0
-                            ? String(UInt64(bitPattern: Int64(leftInt)), radix: 16).uppercased()
-                            : String(leftInt, radix: 16).uppercased()
-                        let currValue = hexToBin(hexToConvert: leftHexStr)
-                        let rightShiftRight = Int(rightValue)!
-                        if rightShiftRight <= 0 {
-                            result = leftValue
-                        } else if rightShiftRight > currValue.count {
-                            result = "0"
-                        } else {
-                            result = String(Int(UInt64(currValue.dropLast(rightShiftRight), radix: 2)!))
-                        }
-
-                    case .AND:
-                        result = "\(Int(leftValue)! & Int(rightValue)!)"
-
-                    case .OR:
-                        result = "\(Int(leftValue)! | Int(rightValue)!)"
-
-                    case .XOR:
-                        result = "\(Int(leftValue)! ^ Int(rightValue)!)"
-
-                    default:
-                        fatalError("Unexpected Operation...")
-                    }
+                    result = evaluateIntegerOperation(top.operation, Int64(leftValue)!, Int64(rightValue)!)
 
                     if !result.contains("Error") {
                         let stackedResultHex = hexHistoryValue(fromDecimal: result)
@@ -608,12 +450,7 @@ class HexadecimalViewController: CalculatorViewController {
                 leftValue = result
                 setupStateControllerValues()
 
-                let hexRepresentation = stateController?.convValues.hexVal ?? "0"
-                var newLabelValue = hexRepresentation.uppercased()
-                leftValueHex = newLabelValue
-                if (hexRepresentation.contains("-")) {
-                    newLabelValue = formatNegativeHex(hexToConvert: newLabelValue).uppercased()
-                }
+                let newLabelValue = hexHistoryValue(fromDecimal: result)
                 updateOutputLabel(value: newLabelValue)
 
                 historyLeftValue = newLabelValue
@@ -622,27 +459,40 @@ class HexadecimalViewController: CalculatorViewController {
             if isEquals { operationStack.removeAll() }
         }
         else {
-            let binLeftValue = hexToBin(hexToConvert: runningNumber)
             if (runningNumber == "") {
                 // Continuing from a previous result: keep it as the left operand
                 if (leftValue == "") {
                     leftValue = "0"
-                    leftValueHex = "0"
                     historyLeftValue = "0"
                 }
             }
-            else {
-                leftValueHex = runningNumber
+            else if let leftOperand = signedValue(ofHex: runningNumber) {
                 historyLeftValue = runningNumber
-                if (binLeftValue.first == "1" && binLeftValue.count == 64) {
-                    leftValue = String(Int64(bitPattern: UInt64(binLeftValue, radix: 2)!))
-                }
-                else {
-                    leftValue = String(Int(binLeftValue, radix: 2)!)
-                }
+                leftValue = String(leftOperand)
             }
             runningNumber = ""
             currentOperation = operation
+        }
+    }
+
+    override func wordSizeDidChange(from oldSize: WordSize) {
+        resizePendingOperands(from: oldSize)
+        historyRightValue = ""
+        if leftValue != "" {
+            historyLeftValue = hexHistoryValue(fromDecimal: leftValue)
+        }
+
+        if runningNumber != "", let typed = oldSize.value(fromPattern: runningNumber, radix: 16) {
+            runningNumber = wordSize.hexString(wordSize.resized(typed, from: oldSize))
+        }
+
+        // Error messages have nothing to wrap
+        guard stateController?.convValues.largerThan64Bits != true,
+              let shown = oldSize.value(fromPattern: outputLabel.text ?? "0", radix: 16) else { return }
+        let wrapped = wordSize.resized(shown, from: oldSize)
+        updateOutputLabel(value: wordSize.hexString(wrapped))
+        if wrapped != shown {
+            storeSharedValue(wrapped)
         }
     }
 
@@ -655,26 +505,14 @@ class HexadecimalViewController: CalculatorViewController {
     }
 
     private func quickUpdateStateController() {
+        stateController?.convValues.largerThan64Bits = false
+        guard let value = signedValue(ofHex: runningNumber) else { return }
+        storeSharedValue(value)
+    }
 
-        if (runningNumber.count < 17) {
-            stateController?.convValues.largerThan64Bits = false
-        }
-
-        stateController?.convValues.hexVal = runningNumber
-        var binCurrentVal = ""
-        var decCurrentVal = ""
-        if ((!outputLabel.text!.first!.isNumber || ((outputLabel.text!.first == "9") || (outputLabel.text!.first == "8"))) && (outputLabel.text!.count == 16)) {
-            var currentLabel = runningNumber
-            currentLabel = hexToBin(hexToConvert: currentLabel)
-            binCurrentVal = currentLabel
-            decCurrentVal = String(Int64(bitPattern: UInt64(currentLabel, radix: 2)!))
-        }
-        else {
-            binCurrentVal = String(Int(runningNumber, radix: 16)!, radix: 2)
-            decCurrentVal = String(Int(runningNumber, radix: 16)!)
-        }
-        stateController?.convValues.binVal = binCurrentVal
-        stateController?.convValues.decimalVal = decCurrentVal
+    // The typed/displayed hex digits, interpreted as a signed value of the current word size
+    private func signedValue(ofHex hex: String) -> Int64? {
+        wordSize.value(fromPattern: hex, radix: 16)
     }
 
     private func tagToHex(digitToConvert: String) -> String {
@@ -696,107 +534,9 @@ class HexadecimalViewController: CalculatorViewController {
         return result
     }
 
-    private func hexToBin(hexToConvert: String) -> String {
-        var result = ""
-        var copy = hexToConvert.uppercased()
-
-        if (hexToConvert == "") { return hexToConvert }
-
-        for _ in 0..<hexToConvert.count {
-            let currentDigit = copy.first
-            copy.removeFirst()
-
-            switch currentDigit {
-            case "0": result += "0000"
-            case "1": result += "0001"
-            case "2": result += "0010"
-            case "3": result += "0011"
-            case "4": result += "0100"
-            case "5": result += "0101"
-            case "6": result += "0110"
-            case "7": result += "0111"
-            case "8": result += "1000"
-            case "9": result += "1001"
-            case "A": result += "1010"
-            case "B": result += "1011"
-            case "C": result += "1100"
-            case "D": result += "1101"
-            case "E": result += "1110"
-            case "F": result += "1111"
-            default: fatalError("Unexpected Operation...")
-            }
-        }
-
-        return result
-    }
-
     private func hexHistoryValue(fromDecimal decimalValue: String) -> String {
-        guard let intValue = Int(decimalValue) else { return decimalValue }
-        let hexValue = String(intValue, radix: 16).uppercased()
-        return hexValue.contains("-") ? formatNegativeHex(hexToConvert: hexValue).uppercased() : hexValue
-    }
-
-    private func formatNegativeHex(hexToConvert: String) -> String {
-        var manipulatedString = hexToConvert
-        manipulatedString.removeFirst()
-
-        if (manipulatedString == "8000000000000000") {
-            return manipulatedString
-        }
-
-        let binaryInitial = String(Int(manipulatedString, radix: 16)!, radix: 2)
-        var invertedBinary = ""
-
-        for i in 0..<binaryInitial.count {
-            if (binaryInitial[binaryInitial.index(binaryInitial.startIndex, offsetBy: i)] == "0") {
-                invertedBinary += "1"
-            }
-            else {
-                invertedBinary += "0"
-            }
-        }
-
-        let index = invertedBinary.lastIndex(of: "0") ?? (invertedBinary.endIndex)
-        var newSubString = String(invertedBinary.prefix(upTo: index))
-
-        if (newSubString.count < invertedBinary.count) {
-            newSubString = newSubString + "1"
-        }
-        while (newSubString.count < invertedBinary.count) {
-            newSubString = newSubString + "0"
-        }
-        while (newSubString.count < 64) {
-            newSubString = "1" + newSubString
-        }
-
-        var hexResult = ""
-        for _ in 0..<16 {
-            let currentIndex = newSubString.index(newSubString.endIndex, offsetBy: -4)
-            let currentBinary = String(newSubString.suffix(from: currentIndex))
-            newSubString.removeLast(4)
-
-            switch currentBinary {
-            case "0000": hexResult = "0" + hexResult
-            case "0001": hexResult = "1" + hexResult
-            case "0010": hexResult = "2" + hexResult
-            case "0011": hexResult = "3" + hexResult
-            case "0100": hexResult = "4" + hexResult
-            case "0101": hexResult = "5" + hexResult
-            case "0110": hexResult = "6" + hexResult
-            case "0111": hexResult = "7" + hexResult
-            case "1000": hexResult = "8" + hexResult
-            case "1001": hexResult = "9" + hexResult
-            case "1010": hexResult = "a" + hexResult
-            case "1011": hexResult = "b" + hexResult
-            case "1100": hexResult = "c" + hexResult
-            case "1101": hexResult = "d" + hexResult
-            case "1110": hexResult = "e" + hexResult
-            case "1111": hexResult = "f" + hexResult
-            default: fatalError("Unexpected Operation...")
-            }
-        }
-
-        return hexResult
+        guard let intValue = Int64(decimalValue) else { return decimalValue }
+        return wordSize.hexString(intValue)
     }
 
     private func changeOperators(buttons: [RoundButton?], secondFunctionActive: Bool) {
@@ -835,11 +575,11 @@ class HexadecimalViewController: CalculatorViewController {
         if (strippedSpacesHexadecimal.hasPrefix("0")) {
             strippedSpacesHexadecimal = strippedSpacesHexadecimal.replacingOccurrences(of: "^0+", with: "", options: .regularExpression)
         }
-        if (isValidHexadecimal && strippedSpacesHexadecimal.count <= 16) {
-            if (pastedInput == "0") {
+        if (isValidHexadecimal && strippedSpacesHexadecimal.count <= wordSize.hexDigits) {
+            // Only zeroes were pasted (leading zeroes are stripped above)
+            if (strippedSpacesHexadecimal.isEmpty) {
                 runningNumber = ""
                 leftValue = ""
-                leftValueHex = ""
                 rightValue = ""
                 result = ""
                 historyLeftValue = ""
@@ -859,7 +599,7 @@ class HexadecimalViewController: CalculatorViewController {
         else {
             var alertMessage = "Your clipboad did not contain a valid hexadecimal string."
             if (isValidHexadecimal) {
-                alertMessage = "The hexadecimal string in your clipboard must have a length of 16 characters or less."
+                alertMessage = "The hexadecimal string in your clipboard must have a length of \(wordSize.hexDigits) characters or less for the \(wordSize.title) word size."
             }
             let alert = UIAlertController(title: "Paste Failed", message: alertMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

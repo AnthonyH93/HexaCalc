@@ -34,6 +34,29 @@ class UITestHelper {
     static let plusMinus = "±"
     static let sqrt = "√"
     
+    // A "-key value" launch argument overrides that UserDefaults key for the launch, so
+    // state saved by an earlier test — possibly one that failed before it could clean
+    // up — can't leak into the next.
+    static let resetLaunchArguments: [(key: String, value: String)] = [
+        // The word size is saved whenever it's changed on the Hexadecimal or Binary tab,
+        // and every other test expects the default 64 bits
+        ("-WordSizeBits", "64"),
+        // ReviewManager shows the App Store review prompt after the third completed
+        // calculation (on a simulator, every time), and the prompt swallows every tap
+        // until dismissed — failing whichever test happens to be running. Pinning the
+        // count it reads at 0 means the prompt never appears.
+        ("-ReviewWorthyActionCount", "0")
+    ]
+
+    // Launch (or relaunch) the app with the reset arguments above. Use this instead of
+    // calling app.launch() directly.
+    static func launch(_ app: XCUIApplication) {
+        for argument in resetLaunchArguments where !app.launchArguments.contains(argument.key) {
+            app.launchArguments += [argument.key, argument.value]
+        }
+        app.launch()
+    }
+
     // Button tap functions
     static func delete(app: XCUIApplication) {
         app.buttons[delete].tap()

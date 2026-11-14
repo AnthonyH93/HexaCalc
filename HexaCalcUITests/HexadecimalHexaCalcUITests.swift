@@ -26,7 +26,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testOperationOrder() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         // A + 2 * 3 = should give 10 (hex 16), not 24 (hex 18)
@@ -50,7 +50,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
 
     func testDeletion() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         // Launched on Hexadecimal tab
@@ -97,7 +97,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testIntegerOverflow() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         // Launched on Hexadecimal tab
@@ -121,7 +121,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testAllNumberButtons() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         let digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "0"]
@@ -135,7 +135,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testXOR() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["A"].tap()
@@ -157,7 +157,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testOR() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["A"].tap()
@@ -179,7 +179,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testAND() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["A"].tap()
@@ -201,7 +201,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testNOT() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         app.buttons["A"].tap()
@@ -230,7 +230,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testSecondFunctionsUI() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         let basicFunctions = [UITestHelper.divide, UITestHelper.multiply, UITestHelper.subtract, UITestHelper.add, UITestHelper.equals]
@@ -255,7 +255,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func test2sCompliment() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         UITestHelper.second(app: app)
@@ -281,7 +281,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testMOD() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         UITestHelper.second(app: app)
@@ -350,7 +350,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
     
     func testShifts() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
         
         UITestHelper.second(app: app)
@@ -387,7 +387,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
 
     func testHexShiftToZero() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         UITestHelper.second(app: app)
@@ -427,7 +427,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
 
     func testHexSecondFunctionCalculations() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         UITestHelper.second(app: app)
@@ -468,7 +468,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
 
     func testHexChainedArithmetic() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         // A + B = 15 (10 + 11 = 21 = 0x15)
@@ -502,7 +502,7 @@ class HexadecimalHexaCalcUITests: XCTestCase {
 
     func testHexDivisionByZero() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
 
         app.buttons["A"].tap()

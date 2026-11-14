@@ -67,3 +67,9 @@ Each calculator VC maintains a local `calculationHistory: [CalculationData]` arr
 ### UI tests
 
 All UI tests are in `HexaCalcUITests/`. `UITestHelper` contains static helpers for tapping operator buttons by name. Key accessibility identifiers used in tests: `"Hexadecimal Output Label"`, `"Binary Output Label"`, `"Decimal Output Label"`, `"History Button"`. Tests that disable tabs must re-enable them in `tearDownWithError` (not `tearDown`).
+
+Launch the app with `UITestHelper.launch(app)`, never `app.launch()` directly. It adds launch arguments that override `UserDefaults` keys for that launch (`UITestHelper.resetLaunchArguments`):
+- `-WordSizeBits 64` — a test that changes the Hex/Binary word size (or fails before cleaning up) can't leave later tests running at 8/16/32 bits
+- `-ReviewWorthyActionCount 0` — the App Store review prompt, which otherwise appears after the third completed calculation and blocks taps, never shows
+
+Add any new `UserDefaults`-backed state that could leak between tests to that list.

@@ -41,7 +41,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testCalculationHistoryButton() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
 
         // App may start on a non-Hex tab due to persisted UserDefaults from prior runs
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
@@ -59,7 +59,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testCalculationHistoryPopulatedAfterOperations() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
 
         // App may start on a non-Hex tab due to persisted UserDefaults from prior runs
         app.tabBars["Tab Bar"].buttons["Hexadecimal"].tap()
@@ -91,7 +91,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testCalculationHistoryCopyToClipboard() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
 
         let tabBar = app.tabBars["Tab Bar"]
 
@@ -125,7 +125,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testHistoryEnabledToggleHidesButton() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         let tabBar = app.tabBars["Tab Bar"]
 
         // Ensure history starts enabled
@@ -159,7 +159,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testDisablingHistoryClearsAndStopsRecording() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         let tabBar = app.tabBars["Tab Bar"]
 
         // Ensure history starts enabled
@@ -205,7 +205,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testHistoryButtonViewOnlyShowsTwoOptions() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
 
         app.tabBars["Tab Bar"].buttons["Settings"].tap()
 
@@ -226,7 +226,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testHistoryButtonViewTextLabel() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         let tabBar = app.tabBars["Tab Bar"]
 
         // Ensure history is enabled
@@ -275,7 +275,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testHexadecimalHistoryUsesPreviousResultAsLeftOperand() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         enableHistoryAndOpenTab(app, tab: "Hexadecimal")
 
         // A × B = 6E
@@ -299,7 +299,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testHexadecimalHistoryRecordsEachStackedOperation() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         enableHistoryAndOpenTab(app, tab: "Hexadecimal")
 
         // A + B × C = 8E, evaluated as A + (B × C)
@@ -319,7 +319,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testBinaryHistoryOperandOrderAndChaining() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         enableHistoryAndOpenTab(app, tab: "Binary")
 
         // 1010 - 11 = 111
@@ -348,7 +348,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testDecimalHistoryChainedFromPreviousResult() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         enableHistoryAndOpenTab(app, tab: "Decimal")
 
         // 10 + 5 = 15
@@ -373,7 +373,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testBinaryNotHistoryUsesDisplayedValueAsOperand() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         enableHistoryAndOpenTab(app, tab: "Binary")
 
         // 110 - 11 = 11, leaving the result on screen with nothing typed
@@ -397,7 +397,7 @@ class CalculationHistoryUITests: XCTestCase {
 
     func testDecimalSquareRootHistoryUsesItsOwnOperand() throws {
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         enableHistoryAndOpenTab(app, tab: "Decimal")
 
         // Square root of a freshly typed number, with no pending left operand

@@ -15,7 +15,7 @@ class BinaryHexaCalcUITests: XCTestCase {
         // Navigate to the binary tab before running each test
         
         let app = XCUIApplication()
-        app.launch()
+        UITestHelper.launch(app)
         
         let tabBar = app.tabBars["Tab Bar"]
         tabBar.buttons["Binary"].tap()

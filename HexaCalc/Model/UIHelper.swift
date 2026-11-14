@@ -77,6 +77,39 @@ class UIHelper {
         return (candidateFontSize, candidateLineCount)
     }
 
+    // Fits Binary's label text for a word size narrower than 64 bits into the label box
+    // already laid out for 64 bits. The box itself (and so the button grid) never changes
+    // with word size — fewer digits just get a larger font, and fewer lines where that
+    // reads bigger (e.g. 16 bits as one line of 4 nibbles rather than two lines of 2).
+    // At 64 bits the layout's own font and line count are returned untouched.
+    static func binaryLabelFit(bitCount: Int, layout: CalculatorLayout) -> (fontSize: CGFloat, lineCount: Int) {
+        guard bitCount < 64 else { return (layout.labelFontSize, layout.binaryLineCount) }
+
+        let font = UIFont(name: "Avenir Next", size: 100) ?? UIFont.systemFont(ofSize: 100)
+        let totalNibbles = max(bitCount / 4, 1)
+        var best: (fontSize: CGFloat, lineCount: Int) = (layout.labelFontSize, layout.binaryLineCount)
+        var bestFontSize: CGFloat = 0
+        for lineCount in [1, 2, 4, 8] where lineCount <= totalNibbles && totalNibbles % lineCount == 0 {
+            let nibblesPerLine = totalNibbles / lineCount
+            let sampleLine = Array(repeating: "0000", count: nibblesPerLine).joined(separator: " ")
+            let measuredWidth = (sampleLine as NSString).size(withAttributes: [.font: font]).width
+            guard measuredWidth > 0 else { continue }
+            let widthFitSize = (layout.outputLabelWidth * 0.97) / measuredWidth * 100
+            let heightFitSize = layout.labelHeight / (compactLabelLineHeight * CGFloat(lineCount))
+            let fontSize = min(widthFitSize, heightFitSize)
+            // Strictly greater, so a tie keeps the fewer lines
+            if fontSize > bestFontSize {
+                bestFontSize = fontSize
+                best = (fontSize, lineCount)
+            }
+        }
+        // Never render smaller than the 64-bit layout would
+        if best.fontSize < layout.labelFontSize {
+            return (layout.labelFontSize, best.lineCount)
+        }
+        return best
+    }
+
     static func calculateLayout(
         width W: CGFloat,
         height H: CGFloat,
