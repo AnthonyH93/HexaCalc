@@ -130,7 +130,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                                       historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                                      historyEnabled: preferences.historyEnabled)
+                                                      historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
                     
                     // Set tab bar icon colour to new colour
                     tabBarController?.tabBar.tintColor = colour
@@ -160,7 +160,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: Int32(index), pasteActionIndex: preferences.pasteActionIndex,
                                                       historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                                      historyEnabled: preferences.historyEnabled)
+                                                      historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
                     stateController?.convValues.copyActionIndex = Int32(index)
                     
                     telemetryManager.sendSettingsSignal(
@@ -180,7 +180,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: Int32(index),
                                                       historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                                      historyEnabled: preferences.historyEnabled)
+                                                      historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
                     stateController?.convValues.pasteActionIndex = Int32(index)
                     
                     telemetryManager.sendSettingsSignal(
@@ -200,7 +200,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                                       historyButtonViewIndex: Int32(index), defaultTabIndex: preferences.defaultTabIndex,
-                                                      historyEnabled: preferences.historyEnabled)
+                                                      historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
                     stateController?.convValues.historyButtonViewIndex = Int32(index)
                     
                     telemetryManager.sendSettingsSignal(
@@ -220,7 +220,7 @@ class SettingsSelectionViewController: UIViewController, UITableViewDelegate, UI
                                                       setCalculatorTextColour: preferences.setCalculatorTextColour,
                                                       copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                                       historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: Int32(index),
-                                                      historyEnabled: preferences.historyEnabled)
+                                                      historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
                     stateController?.convValues.defaultTabIndex = Int32(index)
                     
                     telemetryManager.sendSettingsSignal(

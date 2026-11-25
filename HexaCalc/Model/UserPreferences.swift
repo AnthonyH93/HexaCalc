@@ -21,7 +21,7 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
     
     //Prepares and instance of a class for use
     init(colour: UIColor, colourNum: Int64, hexTabState: Bool, binTabState: Bool, decTabState: Bool, setCalculatorTextColour: Bool, copyActionIndex: Int32, pasteActionIndex: Int32,
-         historyButtonViewIndex: Int32, defaultTabIndex: Int32, historyEnabled: Bool = true, telemetryEnabled: Bool = true, liquidGlassButtons: Bool = false) {
+         historyButtonViewIndex: Int32, defaultTabIndex: Int32, historyEnabled: Bool, telemetryEnabled: Bool, liquidGlassButtons: Bool) {
         //Initialize stored properties.
         self.colour = colour
         self.colourNum = colourNum
@@ -171,7 +171,10 @@ class UserPreferences : NSObject, NSCoding, NSSecureCoding {
             copyActionIndex: 0,
             pasteActionIndex: 0,
             historyButtonViewIndex: 0,
-            defaultTabIndex: 3
+            defaultTabIndex: 3,
+            historyEnabled: true,
+            telemetryEnabled: true,
+            liquidGlassButtons: false
         )
     }
 }

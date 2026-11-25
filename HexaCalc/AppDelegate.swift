@@ -56,7 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             historyButtonViewIndex: 0,
                             defaultTabIndex: 3,
                             historyEnabled: loadedPreferences.historyEnabled,
-                            telemetryEnabled: loadedPreferences.telemetryEnabled
+                            telemetryEnabled: loadedPreferences.telemetryEnabled,
+                            liquidGlassButtons: loadedPreferences.liquidGlassButtons
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UserDefaults.standard.set(appVersionNumber, forKey: "CurrentVersionNumber")
@@ -83,7 +84,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             historyButtonViewIndex: 0,
                             defaultTabIndex: 3,
                             historyEnabled: loadedPreferences.historyEnabled,
-                            telemetryEnabled: loadedPreferences.telemetryEnabled
+                            telemetryEnabled: loadedPreferences.telemetryEnabled,
+                            liquidGlassButtons: loadedPreferences.liquidGlassButtons
                         )
                         DataPersistence.savePreferences(userPreferences: userPreferences)
                         UITabBar.appearance().tintColor = UIColor.systemGreen

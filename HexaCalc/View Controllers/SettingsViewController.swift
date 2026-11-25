@@ -480,7 +480,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
+                                              historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(0, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -500,7 +500,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
+                                              historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(1, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -520,7 +520,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
+                                              historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         (tabBarController as? HexaCalcTabBarController)?.setTab(2, enabled: sender.isOn)
         self.preferences = userPreferences
@@ -541,7 +541,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: sender.isOn,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
+                                              historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.setCalculatorTextColour = sender.isOn
         self.preferences = userPreferences
@@ -561,7 +561,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: sender.isOn, liquidGlassButtons: preferences.liquidGlassButtons)
+                                              historyEnabled: sender.isOn, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: preferences.liquidGlassButtons)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.historyEnabled = sender.isOn
         if !sender.isOn {
@@ -585,7 +585,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                                               setCalculatorTextColour: preferences.setCalculatorTextColour,
                                               copyActionIndex: preferences.copyActionIndex, pasteActionIndex: preferences.pasteActionIndex,
                                               historyButtonViewIndex: preferences.historyButtonViewIndex, defaultTabIndex: preferences.defaultTabIndex,
-                                              historyEnabled: preferences.historyEnabled, liquidGlassButtons: sender.isOn)
+                                              historyEnabled: preferences.historyEnabled, telemetryEnabled: preferences.telemetryEnabled, liquidGlassButtons: sender.isOn)
         DataPersistence.savePreferences(userPreferences: userPreferences)
         stateController?.convValues.liquidGlassButtons = sender.isOn
         RoundButton.liquidGlassEnabled = sender.isOn
