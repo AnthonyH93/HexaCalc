@@ -112,7 +112,7 @@ extension HistoryButtonHost where Self: UIViewController {
 
         case 1:
             var config = UIButton.Configuration.plain()
-            config.title = "Calculation History"
+            config.title = "History"
             config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
                 var outgoing = incoming
                 outgoing.font = UIFont.boldSystemFont(ofSize: 17)
